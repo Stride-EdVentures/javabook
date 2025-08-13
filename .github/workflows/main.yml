@@ -24,7 +24,7 @@ jobs:
           make html
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.4.3
+        uses: JamesIves/github-pages-deploy-action@4.7.3
         with:
           branch: gh-pages
           folder: book_source/_build/html
