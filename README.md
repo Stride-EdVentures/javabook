@@ -76,6 +76,7 @@ permissions:
   contents: write
 ```
 
+## Important Note for First Time
 **Special note aboute deploying:**
 
 This will likely not matter, but is a bug we ran into a few times when setting up the book so I thought we should docunment it. 
