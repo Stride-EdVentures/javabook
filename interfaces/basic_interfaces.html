@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Topics &#8212; Practical Java </title>
+    <title>Basic Interfaces &#8212; Practical Java </title>
   
   
   
@@ -92,12 +92,12 @@ commentsRunWhenDOMLoaded(addUtterances);
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Topics/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'interfaces/basic_interfaces';</script>
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Code Quality Guide" href="java_conventions.html" />
-    <link rel="prev" title="Introduction" href="../index.html" />
+    <link rel="next" title="Custom Sorting" href="custom_sorting.html" />
+    <link rel="prev" title="Interfaces" href="index.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -229,15 +229,15 @@ commentsRunWhenDOMLoaded(addUtterances);
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><i class="fas fa-layer-group fa-fw"></i> Topics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="java_conventions.html">Code Quality Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installing_jgrasp.html">Installing jGrasp</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Topics/index.html"><i class="fas fa-layer-group fa-fw"></i> Topics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/java_conventions.html">Code Quality Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/installing_jgrasp.html">Installing jGrasp</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../interfaces/index.html"><i class="fas fa-layer-group fa-fw"></i> Interfaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/basic_interfaces.html">Basic Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/custom_sorting.html">Custom Sorting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/lambdas.html">Lambdas</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-layer-group fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Basic Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference external" href="https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching">Learn Git Branching</a></li>
@@ -312,7 +312,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/Topics/index.md" target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/interfaces/basic_interfaces.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -329,7 +329,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2FTopics/index.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Finterfaces/basic_interfaces.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -359,7 +359,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="../_sources/Topics/index.md" target="_blank"
+      <li><a href="../_sources/interfaces/basic_interfaces.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -430,7 +430,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -441,11 +443,28 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><i class="fas fa-layer-group fa-fw"></i> Topics</h1>
+    <h1>Basic Interfaces</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implements">Implements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-interface">Example Interface</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-vs-classes">Interface vs Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses-of-interfaces">Common Uses of Interfaces</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -455,15 +474,101 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="topics">
-<h1><i class="fas fa-layer-group fa-fw"></i> Topics<a class="headerlink" href="#topics" title="Link to this heading">#</a></h1>
-<p>This section will contain generic topics pertaining to Java programming in general.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="java_conventions.html">Code Quality Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installing_jgrasp.html">Installing jGrasp</a></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="basic-interfaces">
+<h1>Basic Interfaces<a class="headerlink" href="#basic-interfaces" title="Link to this heading">#</a></h1>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p><em>Interface</em>: A contract that promises a specific behavior.</p>
 </div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>In this lesson you will…<br />
+a. Understand the difference between an interface and inheritance.<br />
+b. Create an interface and a class that promises to implement it via the <code class="docutils literal notranslate"><span class="pre">implements</span></code> keyword.<br />
+c. Get access to interface methods via Casting.<br />
+d. Ask an object if it implements an interface via the <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> keyword.<br />
+e. Understand the <code class="docutils literal notranslate"><span class="pre">IS-A</span></code> relationship</p>
+</section>
+<section id="implements">
+<h2>Implements<a class="headerlink" href="#implements" title="Link to this heading">#</a></h2>
+<p>An <code class="docutils literal notranslate"><span class="pre">interface</span></code> is a list of methods that a class must implement.
+An interface is very much like a <code class="docutils literal notranslate"><span class="pre">class</span></code>, but the methods don’t have an implementation.<a href="#footnotes"><sup>[1]</sup></a> Methods that don’t have an implementation are called <code class="docutils literal notranslate"><span class="pre">abstract</span></code>.</p>
+<section id="example-interface">
+<h3>Example Interface<a class="headerlink" href="#example-interface" title="Link to this heading">#</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Electrician</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">installLights</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">room</span><span class="p">);</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addCircuitBreaker</span><span class="p">();</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fixLightSwitch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">light</span><span class="p">);</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getOverpricedServiceFee</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that the above definition makes use of the keywords <code class="docutils literal notranslate"><span class="pre">public</span></code> and <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. In an interface, all the methods are <strong>required</strong> to be public and are <em>implicitly</em> declared as such.  Furthermore, all the methods in an interface are <em>implicitly</em> declared as <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. We could have left out those keywords as we have done below.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// We leave out the implicit keywords, public abstract.</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Electrician</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">installLights</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">room</span><span class="p">);</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">addCircuitBreaker</span><span class="p">();</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">fixLightSwitch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">light</span><span class="p">);</span>
+<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="nf">getOverpricedServiceFee</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With the above code in its own file, we can then create a <code class="docutils literal notranslate"><span class="pre">class</span></code> that <code class="docutils literal notranslate"><span class="pre">implements</span></code> the <code class="docutils literal notranslate"><span class="pre">interface</span></code> as follows.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HandyGuy</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Electrician</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// must provide code for all the methods belonging</span>
+<span class="w">    </span><span class="c1">// to the interface Electrician</span>
+<span class="w">    </span><span class="c1">// Code is not shown.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">extends</span></code>: Classes can extend only one other class
+<code class="docutils literal notranslate"><span class="pre">implements</span></code>: Classes can implement any number of interfaces</p>
+</div>
+</section>
+</section>
+<section id="interface-vs-classes">
+<h2>Interface vs Classes<a class="headerlink" href="#interface-vs-classes" title="Link to this heading">#</a></h2>
+<p>Q: What’s the point of interfaces?<br />
+A: Several great reasons!!</p>
+<ol class="arabic simple">
+<li><p>They absolve us of the confining requirements of classes. For example, a class can only extend one other class.</p></li>
+<li><p>They can be implemented with <code class="docutils literal notranslate"><span class="pre">lambda</span></code> expressions or <code class="docutils literal notranslate"><span class="pre">inner</span> <span class="pre">anonymous</span> <span class="pre">classes</span></code> which give us a good amount of flexibility and power.</p></li>
+<li><p>Interfaces enable an imperative<a href="#footnotes"><sup>[2]</sup></a> language to offer some characteristics of a functional<a href="#footnotes"><sup>[3]</sup></a> language.</p></li>
+</ol>
+<section id="common-uses-of-interfaces">
+<h3>Common Uses of Interfaces<a class="headerlink" href="#common-uses-of-interfaces" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For Abstraction &amp; Extensibility</p></li>
+<li><p>Functional Programming</p>
+<ul>
+<li><p>Arguments are functions.</p></li>
+<li><p>Methods return functions.</p></li>
+</ul>
+</li>
+<li><p>Callbacks to handle Events</p>
+<ul>
+<li><p>GUI Programming is Event Driven</p></li>
+</ul>
+</li>
+<li><p>Customize functionality</p>
+<ul>
+<li><p>Sort a list in a specific order</p></li>
+</ul>
+</li>
+<li><p>Enable iteration via for-each</p></li>
+<li><p>Try-with-resources : auto close</p></li>
+<li><p>Streams</p></li>
+</ul>
+</section>
+</section>
+<section id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
+<p>[1] In reality, interfaces actually <em>can</em>, and often <em>do</em>, have implementation. An interface can have <code class="docutils literal notranslate"><span class="pre">default</span></code> and <code class="docutils literal notranslate"><span class="pre">static</span></code> methods, both of which are implemented. Methods that have no implementation are called <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. Interfaces almost always have at least one abstract method, but this is not required. In this lesson, we introduce <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> by saying that they have no implementation because this is a characteristic that helps us distinguish them from <code class="docutils literal notranslate"><span class="pre">classes</span></code>. However, confusingly enough, classes can <em>also</em> have <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods. It takes a seasoned developer to know when an <code class="docutils literal notranslate"><span class="pre">abstract</span> <span class="pre">class</span></code> is preferrable over an <code class="docutils literal notranslate"><span class="pre">interface</span></code> or vice versa.<br />
+[2] <strong>Imperative</strong> languages are …<br />
+[3] <strong>Functional</strong> languages are …</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -479,7 +584,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./Topics"
+            path: "./interfaces"
         },
         predefinedOutput: true
     }
@@ -497,20 +602,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../index.html"
+       href="index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><i class="fas fa-hand-sparkles fa-fw"></i> Introduction</p>
+        <p class="prev-next-title"><i class="fas fa-layer-group fa-fw"></i> Interfaces</p>
       </div>
     </a>
     <a class="right-next"
-       href="java_conventions.html"
+       href="custom_sorting.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Code Quality Guide</p>
+        <p class="prev-next-title">Custom Sorting</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -520,6 +625,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implements">Implements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-interface">Example Interface</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-vs-classes">Interface vs Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses-of-interfaces">Common Uses of Interfaces</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
