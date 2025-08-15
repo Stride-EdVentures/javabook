@@ -3,8 +3,12 @@ root: index
 chapters:
   - file: Topics/index
     sections:
-      - file: Topics/misc/index
-        sections:
-        - file: Topics/misc/java_conventions
+    - file: Topics/java_conventions
+    - file: Topics/installing_jgrasp
+  - file: interfaces/index
+    sections:
+    - file: interfaces/basic_interfaces
+    - file: interfaces/custom_sorting
+    - file: interfaces/lambdas
   - url: https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching
     title: Learn Git Branching
