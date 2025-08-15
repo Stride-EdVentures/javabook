@@ -5,10 +5,22 @@ chapters:
     sections:
     - file: Topics/java_conventions
     - file: Topics/installing_jgrasp
+    - file: Topics/git
+    - file: Topics/layout_managers
   - file: interfaces/index
     sections:
     - file: interfaces/basic_interfaces
     - file: interfaces/custom_sorting
     - file: interfaces/lambdas
+    - file: interfaces/anonymous_classes
+  - file: multithreading/index
+    sections:
+    - file: multithreading/intro_to_threads
+    - file: multithreading/conc_synch
+    - file: multithreading/tasks
+    - file: multithreading/parallel_streams
+  - file: frameworks/index
+    sections:
+    - file: frameworks/maven
   - url: https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching
     title: Learn Git Branching
