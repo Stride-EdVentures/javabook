@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Lambdas &#8212; Practical Java </title>
+    <title>Multithreading &#8212; Practical Java </title>
   
   
   
@@ -92,12 +92,12 @@ commentsRunWhenDOMLoaded(addUtterances);
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'interfaces/lambdas';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'multithreading/index';</script>
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Anonymous Classes" href="anonymous_classes.html" />
-    <link rel="prev" title="Custom Sorting" href="custom_sorting.html" />
+    <link rel="next" title="Introduction to Threads" href="intro_to_threads.html" />
+    <link rel="prev" title="Anonymous Classes" href="../interfaces/anonymous_classes.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -236,18 +236,18 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-layer-group fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="basic_interfaces.html">Basic Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Lambdas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interfaces/index.html"><i class="fas fa-layer-group fa-fw"></i> Interfaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/basic_interfaces.html">Basic Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/custom_sorting.html">Custom Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/lambdas.html">Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/anonymous_classes.html">Anonymous Classes</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conc_synch.html">Concurrency &amp; Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks in Parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_streams.html">Parallel Streams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-hand-sparkles fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -326,7 +326,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/interfaces/lambdas.md" target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/multithreading/index.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -343,7 +343,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Finterfaces/lambdas.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fmultithreading/index.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -373,7 +373,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="../_sources/interfaces/lambdas.md" target="_blank"
+      <li><a href="../_sources/multithreading/index.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -455,7 +455,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lambdas</h1>
+    <h1><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -469,10 +469,20 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lambdas">
-<h1>Lambdas<a class="headerlink" href="#lambdas" title="Link to this heading">#</a></h1>
-<p>In this lesson we will learn how to fulfill a Functional Interface with a Lambda Expression.
-And we will see how to apply this.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="multithreading">
+<h1><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading<a class="headerlink" href="#multithreading" title="Link to this heading">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Under Construction</p>
+<p>This site is under construction.</p>
+</div>
+<p>This section will cover the basics of multithreading: creating a thread, timers, and …?</p>
+<p>Resources include:</p>
+<ul class="simple">
+<li><p>Lesson: <a class="reference external" href="https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html">Concurrency (The Java™ Tutorials &gt; Essential Java Classes)</a></p></li>
+<li><p><a class="reference external" href="https://howtodoinjava.com/java/multi-threading/java-multi-threading-evolution-and-topics/">Java Multi-threading Evolution and Topics</a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -488,7 +498,7 @@ And we will see how to apply this.</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./interfaces"
+            path: "./multithreading"
         },
         predefinedOutput: true
     }
@@ -506,20 +516,20 @@ And we will see how to apply this.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="custom_sorting.html"
+       href="../interfaces/anonymous_classes.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Custom Sorting</p>
+        <p class="prev-next-title">Anonymous Classes</p>
       </div>
     </a>
     <a class="right-next"
-       href="anonymous_classes.html"
+       href="intro_to_threads.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Anonymous Classes</p>
+        <p class="prev-next-title">Introduction to Threads</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
