@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction to Threads &#8212; Practical Java </title>
+    <title>Practice: Basic Interfaces &#8212; Practical Java </title>
   
   
   
@@ -92,12 +92,12 @@ commentsRunWhenDOMLoaded(addUtterances);
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'multithreading/intro_to_threads';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'interfaces/practice_01';</script>
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Concurrency &amp; Synchronization" href="conc_synch.html" />
-    <link rel="prev" title="Multithreading" href="index.html" />
+    <link rel="next" title="Custom Sorting" href="custom_sorting.html" />
+    <link rel="prev" title="Basic Interfaces" href="basic_interfaces.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -236,19 +236,19 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../interfaces/index.html"><i class="fas fa-layer-group fa-fw"></i> Interfaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/basic_interfaces.html">Basic Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_01.html">Practice: Basic Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/custom_sorting.html">Custom Sorting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/lambdas.html">Lambdas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/anonymous_classes.html">Anonymous Classes</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-layer-group fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic_interfaces.html">Basic Interfaces</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Practice: Basic Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Introduction to Threads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conc_synch.html">Concurrency &amp; Synchronization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks in Parallel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel_streams.html">Parallel Streams</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-hand-sparkles fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -327,7 +327,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/multithreading/intro_to_threads.md" target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/interfaces/practice_01.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -344,7 +344,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fmultithreading/intro_to_threads.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Finterfaces/practice_01.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -374,7 +374,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="../_sources/multithreading/intro_to_threads.md" target="_blank"
+      <li><a href="../_sources/interfaces/practice_01.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -458,7 +458,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction to Threads</h1>
+    <h1>Practice: Basic Interfaces</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -468,9 +468,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-thread">What is a thread?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-threads">Why Use Threads?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-with-john">Coding with John</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-types">Implementation Types</a></li>
 </ul>
             </nav>
         </div>
@@ -482,102 +480,171 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-threads">
-<h1>Introduction to Threads<a class="headerlink" href="#introduction-to-threads" title="Link to this heading">#</a></h1>
-<section id="what-is-a-thread">
-<h2>What is a thread?<a class="headerlink" href="#what-is-a-thread" title="Link to this heading">#</a></h2>
-<p>A thread is like a small, lightweight process that runs within a larger program. Think of it as a single path of execution through your program. Multiple threads can run at the same time, allowing your program to perform multiple tasks simultaneously.</p>
-<p>A thread has its own “context”. It has its own stack. It started somewhere unique, has its own local variables, and will end in its own unique way.</p>
-<p>A thread shares the memory space with the rest of the process. Many threads can access the same objects simultaneously.</p>
-<p>Multiple threads does NOT necessarily mean faster execution. It depends on the specific task, resource contention, and the count of CPU cores.</p>
-<p>A process will consist of one or more threads.</p>
-<div class="note admonition">
-<p class="admonition-title">Definition</p>
-<p>A <em>thread</em> is a sequence of instructions that can be executed independently within a program. Threads enable multitasking and parallelism, allowing programs to perform multiple operations simultaneously.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="practice-basic-interfaces">
+<h1>Practice: Basic Interfaces<a class="headerlink" href="#practice-basic-interfaces" title="Link to this heading">#</a></h1>
+<p><strong>Question #1:</strong> Describe the difference between an <code class="docutils literal notranslate"><span class="pre">interface</span></code> and a <code class="docutils literal notranslate"><span class="pre">class</span></code>.</p>
+<details><summary>Click to see answer</summary>
+The differences between an interface and a class is summarized in this table with more a more detailed explanation below.  
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">interface</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">class</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Access modifier</p></td>
+<td><p>must be <code class="docutils literal notranslate"><span class="pre">public</span></code></p></td>
+<td><p>unbounded</p></td>
+</tr>
+<tr class="row-odd"><td><p>Abstract methods</p></td>
+<td><p><em>implicitly</em> <code class="docutils literal notranslate"><span class="pre">abstract</span></code></p></td>
+<td><p>May have <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods if the class is defined as <code class="docutils literal notranslate"><span class="pre">abstract</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Implementation allowed?</p></td>
+<td><p>Only in <code class="docutils literal notranslate"><span class="pre">static</span></code> and <code class="docutils literal notranslate"><span class="pre">default</span></code> methods</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hierarchy Keyword</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">extends</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">extends</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Has fields</p></td>
+<td><p><strong>NO</strong></p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Has Constructors</p></td>
+<td><p><strong>NO</strong></p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Implementation Type</p></td>
+<td><p><a href="#implementation-types">see below</a></p></td>
+<td><p><a href="#implementation-types">see below</a></p></td>
+</tr>
+</tbody>
+</table>
 </div>
-</section>
-<section id="why-use-threads">
-<h2>Why Use Threads?<a class="headerlink" href="#why-use-threads" title="Link to this heading">#</a></h2>
-<p>Threads are useful for:</p>
-<ul class="simple">
-<li><p><strong>Multitasking:</strong> Running multiple tasks at the same time, like downloading a file while updating the user interface.</p></li>
-<li><p><strong>Responsiveness:</strong> Keeping your program responsive, especially in applications with user interfaces, by performing long-running tasks in the background.</p></li>
-</ul>
-<p><strong>Example</strong>
-Imagine you have a program that needs to do two things: download a file and update a progress bar. You can create two threads:</p>
 <ol class="arabic simple">
-<li><p>Download Thread: Handles the file download.</p></li>
-<li><p>UI Thread: Updates the progress bar.<br />
-This way, the progress bar can update in real-time while the file is being downloaded, making your program more efficient and user-friendly.</p></li>
+<li><p><strong>Access modifiers</strong> include <code class="docutils literal notranslate"><span class="pre">public</span></code> and <code class="docutils literal notranslate"><span class="pre">private</span></code>.  All the methods in an interface must be <code class="docutils literal notranslate"><span class="pre">public</span></code> while a class can have any and all access modifiers.</p></li>
+<li><p><strong>Abstract methods</strong> have no implementation. A class can have abstract methods, but then the class must be defined as <code class="docutils literal notranslate"><span class="pre">abstract</span></code> and cannot be instantiated directly. An interface <em>implicitly</em> defines all its methods as <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. However, it is possible for an interface to also have <code class="docutils literal notranslate"><span class="pre">static</span></code> and <code class="docutils literal notranslate"><span class="pre">default</span></code> methods which have implemenations. <code class="docutils literal notranslate"><span class="pre">default</span></code> is a keyword that defines an <em>instance</em> method with implementation.</p></li>
+<li><p><strong>Hierarchy</strong> is defined with the <code class="docutils literal notranslate"><span class="pre">extends</span></code> keyword for both an interface and a class. This is because an interface can inherit the implementation of <code class="docutils literal notranslate"><span class="pre">default</span></code> methods. The <code class="docutils literal notranslate"><span class="pre">static</span></code> methods are not inherited and can only be accessed via the implementating class.</p></li>
+<li><p><strong>Fields</strong> are not allowed in interfaces and, therefore, interfaces themselves don’t have state. This gives the impression that interfaces don’t require state, however, a class that implements an interface may have state. Consider the <code class="docutils literal notranslate"><span class="pre">iterator</span></code> interface which as the method <code class="docutils literal notranslate"><span class="pre">boolean</span> <span class="pre">hasNext</span></code>. This means that the class that implements the interface must know the current whether another element is available. This is state.</p></li>
+<li><p><strong>Constructors</strong> appear only in classes, not in interfaces.</p></li>
+<li><p><strong>Implementation type</strong> is an andvanced concept. (<a href="#implementation-types">see below</a>) It is sufficient to know that both an <code class="docutils literal notranslate"><span class="pre">interface</span></code> and a <code class="docutils literal notranslate"><span class="pre">class</span></code> are implemented with similar, but not identical, flexibility and restrictions. They are generally defined in their own file, but this isn’t required.</p></li>
 </ol>
-<p><strong>Simple Code Example</strong>
-Here’s a basic example of creating and starting a thread in Java:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">MyTask</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Thread is running...&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
+</details>
+<hr>
+<p><strong>Question #2:</strong> Create an interface and a class that makes a promise via the <code class="docutils literal notranslate"><span class="pre">implements</span></code> keyword.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Click to see answer</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// define the interface in the file &quot;GoodStudent.java&quot;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">GoodStudent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">studyHard</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">bookTitle</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">goToOfficeHours</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">duration</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadExample</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">MyTask</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyTask</span><span class="p">();</span>
-<span class="w">        </span><span class="n">task</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w"> </span><span class="c1">// Start the thread</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="c1">// implement this class in the file &quot;CSSStudent.java&quot;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CSSStudent</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">GoodStudent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">takeExam</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">quarter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Code not shown */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Implement the interface GoodStudent</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">studyHard</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">bookTitle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">goToOfficeHours</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">duration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Code not shown */</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</section>
-<section id="coding-with-john">
-<h2>Coding with John<a class="headerlink" href="#coding-with-john" title="Link to this heading">#</a></h2>
-<p>Watch the following video. As you watch, takes notes on the following:</p>
-<ul class="simple">
-<li><p>How do we create a Thread?  (in 4+ different ways)</p></li>
-<li><p>What is the difference between creating and starting a thread?</p></li>
-<li><p>Which of the Thread API are (a)synchronous?</p></li>
-<li><p>How do we wait for a thread to complete?</p></li>
-<li><p>How are interfaces used?</p></li>
-</ul>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/r_MbozD32eo?si=5hTdi9iOCo59CI28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-</iframe>
+</div>
+</details>
+<hr>
+<p><strong>Question #3:</strong> Write code that illustrates how you can get access to interface methods via casting (aka <em>type casting</em>). Include code that will ask an object if it implements an interface.</p>
 <div class="dropdown admonition">
-<p class="admonition-title">Video Q &amp; A</p>
-<p><strong>Q: How do we create a Thread?</strong><br />
-<strong>A:</strong> There is a Thread object, which is different from a “thread of execution.”
-The easiest way to create a thread is to:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Thread t = new Thread() {
-    @Override
-    public void run() { }
-};
-t.start();
+<p class="admonition-title">Click to see answer</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">person</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Golfer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Golfer</span><span class="w"> </span><span class="n">golfer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Golfer</span><span class="p">)</span><span class="w"> </span><span class="n">person</span><span class="p">;</span>
+<span class="w">    </span><span class="n">golfer</span><span class="p">.</span><span class="na">play18Holes</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>Other ways to create threads are:</p>
+</div>
+<hr>  
+<p><strong>Question #4:</strong> Describe what the <code class="docutils literal notranslate"><span class="pre">IS-A</span></code> relationship means?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Click to see answer</p>
+<p>An <code class="docutils literal notranslate"><span class="pre">IS-A</span></code> relationship means that an object either <em>inherits</em> or <em>implements</em> something. For example, in the code beloce we can say all of the following:</p>
 <ul class="simple">
-<li><p>Create a thread by creating a <code class="docutils literal notranslate"><span class="pre">Timer()</span></code>.</p></li>
-<li><p>Call <code class="docutils literal notranslate"><span class="pre">SwingUtilities.invokeLater()</span></code>.</p></li>
-<li><p>Use other libraries or Frameworks like the <code class="docutils literal notranslate"><span class="pre">ForkJoin</span> <span class="pre">Framework</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lunchItem</span></code> IS-A Fruit</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lunchItem</span></code> IS-A Apple</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lunchItem</span></code> IS-A Edible</p></li>
 </ul>
-<p><strong>Q: What is the difference between creating and starting a thread?</strong><br />
-<strong>A:</strong> A Thread object can be created, but that doesn’t actually create a “thread of execution”.
-The “thread of execution” is created when we call <code class="docutils literal notranslate"><span class="pre">t1.start();</span></code></p>
-<p>Once a thread is created, it can also be suspended. (see below <strong>TODO</strong>)
-A suspended thread can be restarted.</p>
-<p><strong>Q: Which API are (a)synchronous?</strong><br />
-<strong>A:</strong><br />
-Synchronous:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Thread t1 = New Thread();  
-t1.run();  
-t1.join();  
+<p>Furthermore, because Apple IS-A Fruit, we don’t need to explicitly cast the new Apple into a Fruit identifier.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Edible</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Fruit</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">juiceMe</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">ripenOnCounter</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Apple</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Edible</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">slice</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Fruit</span><span class="w"> </span><span class="n">lunchItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>Asynchronous:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>t1.start();
-</pre></div>
 </div>
-<p><strong>Q: How to wait for a thread to complete?</strong><br />
-A: We simply need to call <code class="docutils literal notranslate"><span class="pre">t1.join();</span></code></p>
-<p><strong>Q: How are interfaces used?</strong><br />
-<strong>A:</strong> The Thread constructor takes a <code class="docutils literal notranslate"><span class="pre">Runnable</span></code> interface.</p>
+<p><a id="implementation-types"></a></p>
+<section id="implementation-types">
+<h2>Implementation Types<a class="headerlink" href="#implementation-types" title="Link to this heading">#</a></h2>
+<p>Students do not need to know about these implementation types.</p>
+<p>An “implementation type” describes where code is written. Where code is written will define its <em>scope</em> (where and how code can be referenced). These implemenation types leverage advanced techniques, and these lessons will only make use of Top-Level and Anonymous. We illustrate this simply to be more complete.</p>
+<p>While classes and interfaces have differences, they are mostly similar.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Class</p></th>
+<th class="head"><p>Interface</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Top-Level</p></td>
+<td><p>Defined in its own file</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Static Nested</p></td>
+<td><p>Statically defined inside another class</p></td>
+<td><p>Yes</p></td>
+<td><p><em>implicitly</em> static</p></td>
+</tr>
+<tr class="row-even"><td><p>Inner</p></td>
+<td><p>Non-static class inside another class</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interface Nested</p></td>
+<td><p>Defined inside an interface</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Local</p></td>
+<td><p>Class inside a method</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Anonymous</p></td>
+<td><p>Inline Implementation</p></td>
+<td><p>Creates an anonymous class</p></td>
+<td><p>Can anonymously extend an interface<br>Creates an anonymous class, not an interface</p></td>
+</tr>
+<tr class="row-even"><td><p>Package-Private</p></td>
+<td><p>Non-public class in the same file</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
 </section>
@@ -595,7 +662,7 @@ A: We simply need to call <code class="docutils literal notranslate"><span class
         },
         kernelOptions: {
             name: "python3",
-            path: "./multithreading"
+            path: "./interfaces"
         },
         predefinedOutput: true
     }
@@ -613,20 +680,20 @@ A: We simply need to call <code class="docutils literal notranslate"><span class
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="basic_interfaces.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading</p>
+        <p class="prev-next-title">Basic Interfaces</p>
       </div>
     </a>
     <a class="right-next"
-       href="conc_synch.html"
+       href="custom_sorting.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Concurrency &amp; Synchronization</p>
+        <p class="prev-next-title">Custom Sorting</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -646,9 +713,7 @@ A: We simply need to call <code class="docutils literal notranslate"><span class
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-thread">What is a thread?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-threads">Why Use Threads?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-with-john">Coding with John</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-types">Implementation Types</a></li>
 </ul>
   </nav></div>
 

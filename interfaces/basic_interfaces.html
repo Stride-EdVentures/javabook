@@ -96,7 +96,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Custom Sorting" href="custom_sorting.html" />
+    <link rel="next" title="Practice: Basic Interfaces" href="practice_01.html" />
     <link rel="prev" title="Interfaces" href="index.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -238,6 +238,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-layer-group fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Basic Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_01.html">Practice: Basic Interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
@@ -472,10 +473,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-interface">Example Interface</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-vs-classes">Interface vs Classes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses-of-interfaces">Common Uses of Interfaces</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implements-vs-extends">Implements vs Extends</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-an-interface">Why use an interface?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-implementations">Multiple Implementations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instanceof">instanceof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-in-uml">Interfaces in UML</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Implements vs Extends</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses-of-interfaces">Common Uses of Interfaces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
             </nav>
@@ -496,12 +500,14 @@ document.write(`
 </div>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>In this lesson you will…<br />
-a. Understand the difference between an interface and inheritance.<br />
-b. Create an interface and a class that promises to implement it via the <code class="docutils literal notranslate"><span class="pre">implements</span></code> keyword.<br />
-c. Get access to interface methods via Casting.<br />
-d. Ask an object if it implements an interface via the <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> keyword.<br />
-e. Understand the <code class="docutils literal notranslate"><span class="pre">IS-A</span></code> relationship</p>
+<p>In this lesson you will…</p>
+<ol class="arabic simple">
+<li><p>Understand the difference between an interface and a class.</p></li>
+<li><p>Create an interface and a class that makes a promise via the <code class="docutils literal notranslate"><span class="pre">implements</span></code> keyword.</p></li>
+<li><p>Get access to interface methods via casting (aka <em>type casting</em>).</p></li>
+<li><p>Ask an object if it implements an interface via the <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> keyword.</p></li>
+<li><p>Understand the <code class="docutils literal notranslate"><span class="pre">IS-A</span></code> relationship</p></li>
+</ol>
 </section>
 <section id="implements">
 <h2>Implements<a class="headerlink" href="#implements" title="Link to this heading">#</a></h2>
@@ -513,75 +519,345 @@ An interface is very much like a <code class="docutils literal notranslate"><spa
 <span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">installLights</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">room</span><span class="p">);</span>
 <span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addCircuitBreaker</span><span class="p">();</span>
 <span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fixLightSwitch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">light</span><span class="p">);</span>
-<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getOverpricedServiceFee</span><span class="p">();</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">chargeOverpricedServiceFee</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Note that the above definition makes use of the keywords <code class="docutils literal notranslate"><span class="pre">public</span></code> and <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. In an interface, all the methods are <strong>required</strong> to be public and are <em>implicitly</em> declared as such.  Furthermore, all the methods in an interface are <em>implicitly</em> declared as <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. We could have left out those keywords as we have done below.</p>
+<p>Note that the above code makes use of the keywords <code class="docutils literal notranslate"><span class="pre">public</span></code> and <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. In an interface, all the methods are <strong>required</strong> to be public and are <em>implicitly</em> declared as such.  Furthermore, all the methods in an interface are <em>implicitly</em> declared as <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. We could have left out those keywords as shown below.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// We leave out the implicit keywords, public abstract.</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Electrician</span><span class="w"> </span><span class="p">{</span>
 <span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">installLights</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">room</span><span class="p">);</span>
 <span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">addCircuitBreaker</span><span class="p">();</span>
 <span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">fixLightSwitch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">light</span><span class="p">);</span>
-<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="nf">getOverpricedServiceFee</span><span class="p">();</span>
+<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="nf">chargeOverpricedServiceFee</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>With the above code in its own file, we can then create a <code class="docutils literal notranslate"><span class="pre">class</span></code> that <code class="docutils literal notranslate"><span class="pre">implements</span></code> the <code class="docutils literal notranslate"><span class="pre">interface</span></code> as follows.</p>
+<p>With the above code in its own file, <code class="docutils literal notranslate"><span class="pre">Electrician.java</span></code>, we can then create a <code class="docutils literal notranslate"><span class="pre">class</span></code> that <code class="docutils literal notranslate"><span class="pre">implements</span></code> the <code class="docutils literal notranslate"><span class="pre">interface</span></code> as follows.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HandyGuy</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Electrician</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// must provide code for all the methods belonging</span>
-<span class="w">    </span><span class="c1">// to the interface Electrician</span>
-<span class="w">    </span><span class="c1">// Code is not shown.</span>
+<span class="w">    </span><span class="c1">// This class must provide code for all the methods belonging</span>
+<span class="w">    </span><span class="c1">// to the interface Electrician. The keyword `abstract` must now</span>
+<span class="w">    </span><span class="c1">// be omitted because we are implementing the methods.</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">installLights</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">room</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addCircuitBreaker</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fixLightSwitch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">light</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">chargeOverpricedServiceFee</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition-note admonition">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">extends</span></code>: Classes can extend only one other class
+<p><code class="docutils literal notranslate"><span class="pre">interface</span></code>: An interface is a <em>promise</em> or a <em>contract</em>.</p>
+</div>
+<p>When a class <code class="docutils literal notranslate"><span class="pre">implements</span></code> an interface, it is required to implement each method. <a href="#footnotes"><sup>[2]</sup></a> The class is effectively making a promise to <em>behave</em> like the interface.</p>
+<blockquote>
+<div><p>Interfaces are analogous to the idea of <em>roles</em> or <em>certifications</em>:</p>
+<blockquote>
+<div><p>“I’m certified as a Plumber. That means I can do all the things that you’d expect a plumber to do.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>“I’m certified as an Electrician. That means I can do all the things that you’d expected an electrician to do.”</p>
+</div></blockquote>
+</div></blockquote>
+</section>
+</section>
+<section id="implements-vs-extends">
+<h2>Implements vs Extends<a class="headerlink" href="#implements-vs-extends" title="Link to this heading">#</a></h2>
+<p>The keyword <code class="docutils literal notranslate"><span class="pre">implements</span></code> is quite a bit different from <code class="docutils literal notranslate"><span class="pre">extends</span></code>. The former is a promise to <strong>implement</strong> the required <em>behavior</em>. The latter is shamelessly <strong>inheriting</strong> the behavior from its <em>parent</em>.</p>
+<p><strong>Implements</strong>:<br />
+🔹 An interface is a list of methods that a <em>concrete</em> class must implement.<br />
+🔹 Classes may implement many different interfaces.<br />
+🔹 All methods are public.<br />
+🔹 An interface has no state (no instance fields).<br />
+🔹 An interface gives you an <strong>is-a</strong> relationship.<br />
+🔹 Often times there is no code reuse.<a href="#footnotes"><sup>[3]</sup></a></p>
+<p><strong>Extends:</strong><br />
+🔹 Classes may have only one parent.<br />
+🔹 Child classes inherit methods.<br />
+🔹 Methods can be private, protected, public.<br />
+🔹 Classes may have instance fields.<br />
+🔹 Inheritance gives you an <strong>is-a</strong> relationship with lots of code-reuse.</p>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">extends</span></code>: Classes can extend only one class
 <code class="docutils literal notranslate"><span class="pre">implements</span></code>: Classes can implement any number of interfaces</p>
 </div>
 </section>
+<section id="why-use-an-interface">
+<h2>Why use an interface?<a class="headerlink" href="#why-use-an-interface" title="Link to this heading">#</a></h2>
+<p>An interface allows you to uniformly treat objects that have a different class hierarchy because they implement the a required interface. In other words, we can have a method that takes an interface as an argument. This does not restrict the class type of the object because any class can implement any interface. It allows us to circumvent the limitation of single inheritance; it allows for greater flexibility in design and extensibility.</p>
+<p>Interfaces are very popular in the industry where there are many teams working on different components of a large system. The teams agree on interfaces and are free to implement however they want.</p>
+<p>Interfaces allow completely new implementations to be plugged into an existing system. It is easier to maintain and extend.</p>
+<p>Interfaces act as the <em>TYPE</em> of a function which opens up the ability to do <em>Functional Programming</em>.  Interfaces allow an imperative<a href="#footnotes"><sup>[4]</sup></a> language the ability to offer some characteristics of a functional<a href="#footnotes"><sup>[5]</sup></a> programming language.</p>
+<p>Interfaces are used to define Event Handlers or Callbacks that are used in GUI programming.  Furthermore, functional interfaces<a href="#footnotes"><sup>[6]</sup></a> can be implemented with <code class="docutils literal notranslate"><span class="pre">lambda</span></code> expressions or <code class="docutils literal notranslate"><span class="pre">inner</span> <span class="pre">anonymous</span> <span class="pre">classes</span></code> which give us a good amount of flexibility and power.</p>
+<p>Interfaces are used in Collection Classes, Streams, Unit Testing, parallel programming, and more!!</p>
 </section>
-<section id="interface-vs-classes">
-<h2>Interface vs Classes<a class="headerlink" href="#interface-vs-classes" title="Link to this heading">#</a></h2>
-<p>Q: What’s the point of interfaces?<br />
-A: Several great reasons!!</p>
-<ol class="arabic simple">
-<li><p>They absolve us of the confining requirements of classes. For example, a class can only extend one other class.</p></li>
-<li><p>They can be implemented with <code class="docutils literal notranslate"><span class="pre">lambda</span></code> expressions or <code class="docutils literal notranslate"><span class="pre">inner</span> <span class="pre">anonymous</span> <span class="pre">classes</span></code> which give us a good amount of flexibility and power.</p></li>
-<li><p>Interfaces enable an imperative<a href="#footnotes"><sup>[2]</sup></a> language to offer some characteristics of a functional<a href="#footnotes"><sup>[3]</sup></a> language.</p></li>
-</ol>
-<section id="common-uses-of-interfaces">
-<h3>Common Uses of Interfaces<a class="headerlink" href="#common-uses-of-interfaces" title="Link to this heading">#</a></h3>
+<section id="multiple-implementations">
+<h2>Multiple Implementations<a class="headerlink" href="#multiple-implementations" title="Link to this heading">#</a></h2>
+<p>Below is code that shows how a class can both extend a class and implement two interfaces. Notice how we use the keyword <code class="docutils literal notranslate"><span class="pre">implements</span></code> only once. Furthermore, we are still allowed to extend from a parent class.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HandyGuy</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Electrician</span><span class="p">,</span><span class="w"> </span><span class="n">Plumber</span><span class="w">  </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// implement methods in Electrician</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">installLights</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">room</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addCircuitBreaker</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fixLightSwitch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">switchNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">chargeOverpricedServiceFee</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span>
+<span class="w">   </span><span class="c1">// implement methods in Plumber</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">installPressureReliefValve</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">installDishwasher</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">installFaucet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fixLeak</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span><span class="w"> </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="instanceof">
+<h2>instanceof<a class="headerlink" href="#instanceof" title="Link to this heading">#</a></h2>
+<p>Let’s say that we have a program that wants to put various people to work. The method below <code class="docutils literal notranslate"><span class="pre">putPersonToWork</span></code> accepts any object that <code class="docutils literal notranslate"><span class="pre">is-a</span></code> <code class="docutils literal notranslate"><span class="pre">Person</span></code>. Perhaps this person has the certification to do the work of a Plumber or an Electrician. To determine this we need to ask the object <code class="docutils literal notranslate"><span class="pre">p</span></code> if it implements an interface using the keyword <code class="docutils literal notranslate"><span class="pre">instanceof</span></code>.</p>
+<p>Below you’ll see how we use <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> to determine if we can ask an identifier to behave as a Plumber. It is important to note that we must first <strong>cast</strong> p into a Plumber before using any of the Plumber behaviors. The compiler will attempt to protect the programmer from misusing a Person by not allowing a Person idenfier to call any methods it does implement or inherit.  Without the cast at line 11, the compiler will fail at line 14 (<code class="docutils literal notranslate"><span class="pre">error:</span> <span class="pre">cannot</span> <span class="pre">find</span> <span class="pre">symbol</span></code>).</p>
+<p>The nice thing about this code is that it will work with any <code class="docutils literal notranslate"><span class="pre">Person</span></code> object. If the person is a Plumber, it will do plumber work. It the person is an electrician, it will do electrician work. In either case, we know that we can get the person’s name.</p>
+<div class="note dropdown admonition">
+<p class="admonition-title">Dot Operator</p>
+<p>We can have idenfiers that references an <code class="docutils literal notranslate"><span class="pre">interface</span></code> or an instance of a <code class="docutils literal notranslate"><span class="pre">class</span></code>. In both cases, to invoke a method, we use the “dot operator”.</p>
+<p>For example:<br />
+Below we have <code class="docutils literal notranslate"><span class="pre">Person</span> <span class="pre">p</span></code>. If we wanted the name of the person, we would get access to it using: <code class="docutils literal notranslate"><span class="pre">p.getName();</span></code> Notice that the method <code class="docutils literal notranslate"><span class="pre">getName</span></code> is defined in the Person class.</p>
+<p>We cast <code class="docutils literal notranslate"><span class="pre">p</span></code> into a <code class="docutils literal notranslate"><span class="pre">Plumber</span></code> (an interface) with <code class="docutils literal notranslate"><span class="pre">Plumber</span> <span class="pre">joe</span> <span class="pre">=</span> <span class="pre">(Plumber)</span> <span class="pre">p</span></code>. To call any of the interface’s methods, we similarly use the “dot operator”. For example: <code class="docutils literal notranslate"><span class="pre">joe.fixLeak();</span></code></p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Mr. Stride&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">};</span>
+<span class="linenos"> 3</span><span class="p">}</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConstructionSite</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">putPersonToWork</span><span class="p">(</span><span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="c1">// ask the person if she can act like a Plumber</span>
+<span class="hll"><span class="linenos"> 9</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Plumber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="linenos">10</span><span class="w">            </span><span class="c1">// get access to Plumber methods by casting to a Plumber type.</span>
+<span class="hll"><span class="linenos">11</span><span class="w">            </span><span class="n">Plumber</span><span class="w"> </span><span class="n">joe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Plumber</span><span class="p">)</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+</span><span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">            </span><span class="c1">// Now that `joe` is-a Plumber, we can treat it as a Plumber</span>
+<span class="hll"><span class="linenos">14</span><span class="w">            </span><span class="n">joe</span><span class="p">.</span><span class="na">fixLeak</span><span class="p">();</span>
+</span><span class="linenos">15</span><span class="w">            </span><span class="n">joe</span><span class="p">.</span><span class="na">installFaucet</span><span class="p">();</span>
+<span class="linenos">16</span><span class="w">            </span><span class="n">joe</span><span class="p">.</span><span class="na">installDishwasher</span><span class="p">();</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s did Plumber work!\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="linenos">19</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="w">        </span><span class="c1">// ask the person if she can act like an Electrician</span>
+<span class="linenos">22</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Electrician</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">23</span><span class="w">            </span><span class="c1">// get access to Electrician methods by casting to an Electrician type.</span>
+<span class="linenos">24</span><span class="w">            </span><span class="n">Electrician</span><span class="w"> </span><span class="n">victor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Electrician</span><span class="p">)</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="w">            </span><span class="n">victor</span><span class="p">.</span><span class="na">addCircuitBreaker</span><span class="p">();</span>
+<span class="linenos">27</span><span class="w">            </span><span class="n">victor</span><span class="p">.</span><span class="na">fixLightSwitch</span><span class="p">(</span><span class="mi">23</span><span class="p">);</span>
+<span class="linenos">28</span><span class="w">            </span><span class="n">victor</span><span class="p">.</span><span class="na">installLights</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s did Electrician work!\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="linenos">31</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">32</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">33</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is a quick summary of the <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> keyword.</p>
+<div class="note admonition">
+<p class="admonition-title">instanceof syntax</p>
+<p><code class="docutils literal notranslate"><span class="pre">object</span> <span class="pre">instanceof</span> <span class="pre">ClassName</span></code></p>
 <ul class="simple">
-<li><p>For Abstraction &amp; Extensibility</p></li>
-<li><p>Functional Programming</p>
-<ul>
-<li><p>Arguments are functions.</p></li>
-<li><p>Methods return functions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object</span></code>: the identifier you want to test</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ClassName</span></code>: the class or interface you to test against</p></li>
 </ul>
-</li>
-<li><p>Callbacks to handle Events</p>
-<ul>
-<li><p>GUI Programming is Event Driven</p></li>
-</ul>
-</li>
-<li><p>Customize functionality</p>
-<ul>
-<li><p>Sort a list in a specific order</p></li>
-</ul>
-</li>
-<li><p>Enable iteration via for-each</p></li>
-<li><p>Try-with-resources : auto close</p></li>
-<li><p>Streams</p></li>
-</ul>
+<p>The expression returns a <code class="docutils literal notranslate"><span class="pre">boolean</span></code>. It returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">object</span></code> is an instance of ClassName.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HandyGuy</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Electrician</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </section>
+<section id="interfaces-in-uml">
+<h2>Interfaces in UML<a class="headerlink" href="#interfaces-in-uml" title="Link to this heading">#</a></h2>
+<p>Interfaces are drawn in a UML class diagram similar to how classes are drawn, but with a few alterations.</p>
+<ul class="simple">
+<li><p>The Interface box is decorated with <code class="docutils literal notranslate"><span class="pre">&lt;&lt;interface&gt;&gt;</span></code>.</p></li>
+<li><p>We use dashed lines to represent the <code class="docutils literal notranslate"><span class="pre">implements</span></code> relationship.</p></li>
+</ul>
+<p><img alt="Interface Diagram" src="../_images/interface_diagram.png" /></p>
+</section>
+<section id="id1">
+<h2>Implements vs Extends<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Let’s summarize the similarities and differences between the keywords.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">implements</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">extends</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Provides</p></td>
+<td><p>a promise</p></td>
+<td><p>inheritance</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Works with</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">interface</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">class</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Code reuse?</p></td>
+<td><p>limited<a href="#footnotes"><sup>[1]</sup></a></p></td>
+<td><p>Yes!</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Multiple?</p></td>
+<td><p>yes</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Is-a relationship?</p></td>
+<td><p>yes<br>(can-do, acts-like)</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>has state</p></td>
+<td><p>No state<br>No fields<br>Only methods</p></td>
+<td><p>Yes, may have state (fields)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Type cast?</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="common-uses-of-interfaces">
+<h2>Common Uses of Interfaces<a class="headerlink" href="#common-uses-of-interfaces" title="Link to this heading">#</a></h2>
+<p>Interfaces are powerful and common. Here is a list of ways interfaces are used. You are not expected to understand these example. Future lessons should add a lot of clarity.</p>
+<ul class="simple">
+<li><p><strong>For Abstraction &amp; Extensibility:</strong> Here we see a method that accepts a <code class="docutils literal notranslate"><span class="pre">List&lt;Integer&gt;</span></code> instead of an <code class="docutils literal notranslate"><span class="pre">ArrayList&lt;Integer&gt;</span></code>. This allows the caller to use a variety of datastructures so long as they implement <code class="docutils literal notranslate"><span class="pre">List</span></code>, an interface.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">calculateSumtin</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Functional Programming:</strong> It is powerful to pass around functions as arguments or to have functions return functions.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cherry&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;watermelon&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">behavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getBehavior</span><span class="p">(</span><span class="s">&quot;I have a&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">actOnEach</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">fruit</span><span class="p">),</span><span class="w"> </span><span class="n">behavior</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Return a Consumable function that prints out the argument using</span>
+<span class="cm"> * a given prefix. This makes use of a concept called &quot;closures&quot;. </span>
+<span class="cm"> */</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getBehavior</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">prefix</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actOnEach</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">consumer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// consume the elements in natural sorted order</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">consumer</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Callbacks that handle Events</strong> is a necessary and frequent in GUI Programming. This allows a program be be <em>Event Driven</em>, meaning that when the user of the application causes an event, code is triggered.  Here is example code for how callbacks can be implemented in a GUI application when setting up a menu.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createMenuBar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">JMenuBar</span><span class="w"> </span><span class="n">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenuBar</span><span class="p">();</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">setJMenuBar</span><span class="p">(</span><span class="n">bar</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">JMenu</span><span class="w"> </span><span class="n">menu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenu</span><span class="p">(</span><span class="s">&quot;Options&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">JMenu</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenuItem</span><span class="p">(</span><span class="s">&quot;Tickle&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Use a method pointer to fulfill the ActionListener interface</span>
+<span class="w">    </span><span class="n">item</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">myCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="n">menu</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bar</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">menu</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">myCallback</span><span class="p">(</span><span class="n">ActionEvent</span><span class="w"> </span><span class="n">ae</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;That tickles!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>We can <strong>Customize functionality</strong> such as how a list is sorted. We have a lesson dedicated to this activity.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cherry&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;watermelon&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">fruit</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// get a Comparator from the Collections class to allow us</span>
+<span class="w">    </span><span class="c1">// to sort this list in reverse order</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Collections</span><span class="p">.</span><span class="na">reverseSort</span><span class="p">());</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>We can <strong>enable iteration via for-each loop</strong> on an a class that didn’t inheritly support it. We do this by implementing the <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> and <code class="docutils literal notranslate"><span class="pre">Iterator</span></code> interfaces.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Dogs</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dogs</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// return the iterator as found on the List of dogs</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">iterator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dogs</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">demoForEach</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Dogs</span><span class="w"> </span><span class="n">myDogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dogs</span><span class="p">();</span>
+<span class="w">        </span><span class="cm">/* code that adds dogs not shown */</span>
+
+<span class="w">        </span><span class="c1">// Iterate over the Dogs class directly, NOT List&lt;Dog&gt;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Dog</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">myDogs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Try-with-resources</strong> is built into Java and it allows a programmer to easily and safely close resources. We often do this when working with files so that we don’t need to call the <code class="docutils literal notranslate"><span class="pre">close()</span></code> method. For example, the code below will create the <code class="docutils literal notranslate"><span class="pre">Scanner</span></code> in a try-with-resources clause. Whether the file is found or not, we are guaranteed to close the Scanner object correctly. Any class that implements <code class="docutils literal notranslate"><span class="pre">AutoCloseable</span></code> can be used this way.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">readFile</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Scanner</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">parser</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">parser</span><span class="p">.</span><span class="na">next</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="c1">// Let the user know the file wasn&#39;t found</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Streams</strong> are a powerful way to process data using functional programming. See future lessons on how to use Streams.</p></li>
+</ul>
 </section>
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
-<p>[1] In reality, interfaces actually <em>can</em>, and often <em>do</em>, have implementation. An interface can have <code class="docutils literal notranslate"><span class="pre">default</span></code> and <code class="docutils literal notranslate"><span class="pre">static</span></code> methods, both of which are implemented. Methods that have no implementation are called <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. Interfaces almost always have at least one abstract method, but this is not required. In this lesson, we introduce <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> by saying that they have no implementation because this is a characteristic that helps us distinguish them from <code class="docutils literal notranslate"><span class="pre">classes</span></code>. However, confusingly enough, classes can <em>also</em> have <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods. It takes a seasoned developer to know when an <code class="docutils literal notranslate"><span class="pre">abstract</span> <span class="pre">class</span></code> is preferrable over an <code class="docutils literal notranslate"><span class="pre">interface</span></code> or vice versa.<br />
-[2] <strong>Imperative</strong> languages are …<br />
-[3] <strong>Functional</strong> languages are …</p>
+<p>[1] In reality, interfaces actually <em>can</em>, and often <em>do</em>, have implementation. An interface can have <code class="docutils literal notranslate"><span class="pre">default</span></code> and <code class="docutils literal notranslate"><span class="pre">static</span></code> methods, both of which are implemented. Methods that have no implementation are called <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. Interfaces almost always have at least one abstract method, but this is not required. In this lesson, we introduce <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> by saying that they have no implementation because this is a characteristic that helps us distinguish them from <code class="docutils literal notranslate"><span class="pre">classes</span></code>. However, confusingly enough, classes can <em>also</em> have <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods. It takes a seasoned developer to know when an <code class="docutils literal notranslate"><span class="pre">abstract</span> <span class="pre">class</span></code> is preferrable over an <code class="docutils literal notranslate"><span class="pre">interface</span></code> or vice versa.</p>
+<p>[2] It is possible for a class to declare that it implements an interface and then, in reality, not implement all the methods. However, in this case, the class itself would be <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. When a class is <code class="docutils literal notranslate"><span class="pre">abstract</span></code>, one cannot create an instance of that direct class. Instead, one must create a subclass that implements all the <code class="docutils literal notranslate"><span class="pre">abstract</span></code> (unimplemented) methods. For example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AbstractElectrician</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Electrician</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">installLights</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">room</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addCircuitBreaker</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fixLightSwitch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">light</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">   </span><span class="cm">/* This class does NOT implement chargeOverpricedServiceFee </span>
+<span class="cm">    * and therefore cannot be instantiated. A subclass is required to</span>
+<span class="cm">    * to extend this class and implement the remaining abstract method */</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ActualElectrician</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractElectrician</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">chargeOverpricedServiceFee</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="cm">/* Now that we&#39;ve fully implemented all the abstract methods in the</span>
+<span class="cm">    * Electrician interface, this class can be instantiated. */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>[3] <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> have the ability to provide some code reuse by offering <code class="docutils literal notranslate"><span class="pre">default</span></code> or <code class="docutils literal notranslate"><span class="pre">static</span></code> methods.</p>
+<p>[4] <strong>Imperative</strong> languages provide sequential instructions that describe how to accomplish something. They emphasize step-by-step execution where the program’s state changes as commands are executed. Java is an <em>imperative</em> programming language. Let’s contrast this with <strong>declarative</strong> programming languages which focus on <em>what</em> the program should accomplish rather than <em>how</em> to achieve it. CSS is a <em>declarative</em> lanaguage as it describes element styles, not the steps. Similarly, SQL will describe the data it wants to retrieve from the database, not how to retrieve it.</p>
+<p>[5] <strong>Functional Languages</strong> have the key feature of allowing <em>functions</em> to be treated as values that can be passed as arguments or returned from other functions. Many languages, including Java, offer the ability to pass functions as an argument. A more academic and rigorous definition of a <em>functional programming language</em> is centralizing around the paradigm that treats computation as the evaluation of mathematical functions and avoids changing state or mutable data. It emphasizes immutability, first-class functions, and declarative programming. Functional Languages include <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/fsharp/">F#</a> and <a class="reference external" href="https://pl.cs.jhu.edu/fpse/">Ocaml</a>.</p>
+<p>[6] A <strong>Functional Interface</strong> is an interface that has only one <code class="docutils literal notranslate"><span class="pre">abstract</span></code> method. This means that only one method needs to be implemented. This allows for some nice shortcuts and syntactic sugar in implementation (to be seen in other lessons.)</p>
 </section>
 </section>
 
@@ -625,11 +901,11 @@ A: Several great reasons!!</p>
       </div>
     </a>
     <a class="right-next"
-       href="custom_sorting.html"
+       href="practice_01.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Custom Sorting</p>
+        <p class="prev-next-title">Practice: Basic Interfaces</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -654,10 +930,13 @@ A: Several great reasons!!</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-interface">Example Interface</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-vs-classes">Interface vs Classes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses-of-interfaces">Common Uses of Interfaces</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implements-vs-extends">Implements vs Extends</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-an-interface">Why use an interface?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-implementations">Multiple Implementations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instanceof">instanceof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-in-uml">Interfaces in UML</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Implements vs Extends</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses-of-interfaces">Common Uses of Interfaces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
   </nav></div>
