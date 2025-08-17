@@ -172,11 +172,11 @@ public class ConstructionSite {
 ```
 
 Here is a quick summary of the `instanceof` keyword.
-```{admonition} instanceof syntax
+```{admonition} instanceof Syntax
 :class: note
 `object instanceof ClassName`  
 * `object`: the identifier you want to test  
-* `ClassName`: the class or interface you to test against
+* `ClassName`: the class or interface you want to test against
 
 The expression returns a `boolean`. It returns `true` if `object` is an instance of ClassName.
 
@@ -211,7 +211,7 @@ Let's summarize the similarities and differences between the keywords.
 
 
 ## Common Uses of Interfaces
-Interfaces are powerful and common. Here is a list of ways interfaces are used. You are not expected to understand these example. Future lessons should add a lot of clarity.  
+Interfaces are powerful and common. Below is a list of ways interfaces are used. **You are not expected to understand these examples yet.** Future lessons should add a lot of clarity.  
 
 * **For Abstraction & Extensibility:** Here we see a method that accepts a `List<Integer>` instead of an `ArrayList<Integer>`. This allows the caller to use a variety of datastructures so long as they implement `List`, an interface. 
 ```java
@@ -231,6 +231,7 @@ public static void main(String[] args) {
  * a given prefix. This makes use of a concept called "closures". 
  */
 public Consumable<String> getBehavior(String prefix) {
+    // create a function using Lambda syntax
     return s -> System.out.printf("%s %s\n", prefix, s);
 }
 
@@ -273,12 +274,13 @@ public static void main(String[] args) {
     list.sort(Collections.reverseSort());
 ```
 
-* We can **enable iteration via for-each loop** on an a class that didn't inheritly support it. We do this by implementing the `Iterable` and `Iterator` interfaces.  
+* We can **enable iteration via for-each loop** on an a class that didn't inheritly support it. We do this by implementing the `Iterable` interface and supplying (or implementing) the`Iterator` interface.  
 ```java
 public class Dogs implements Iterable<Dog> {
     private List<Dog> dogs;
 
-    // return the iterator as found on the List of dogs
+    // Return the iterator provided by the List<Dog> object.
+    // We don't need to implement it directly. Whew!
     public Iterator<Dog> iterator() {
         return dogs.iterator();
     }

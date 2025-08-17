@@ -660,11 +660,11 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 </div>
 <p>Here is a quick summary of the <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> keyword.</p>
 <div class="note admonition">
-<p class="admonition-title">instanceof syntax</p>
+<p class="admonition-title">instanceof Syntax</p>
 <p><code class="docutils literal notranslate"><span class="pre">object</span> <span class="pre">instanceof</span> <span class="pre">ClassName</span></code></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">object</span></code>: the identifier you want to test</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ClassName</span></code>: the class or interface you to test against</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ClassName</span></code>: the class or interface you want to test against</p></li>
 </ul>
 <p>The expression returns a <code class="docutils literal notranslate"><span class="pre">boolean</span></code>. It returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">object</span></code> is an instance of ClassName.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HandyGuy</span><span class="p">();</span>
@@ -729,7 +729,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 </section>
 <section id="common-uses-of-interfaces">
 <h2>Common Uses of Interfaces<a class="headerlink" href="#common-uses-of-interfaces" title="Link to this heading">#</a></h2>
-<p>Interfaces are powerful and common. Here is a list of ways interfaces are used. You are not expected to understand these example. Future lessons should add a lot of clarity.</p>
+<p>Interfaces are powerful and common. Below is a list of ways interfaces are used. <strong>You are not expected to understand these examples yet.</strong> Future lessons should add a lot of clarity.</p>
 <ul class="simple">
 <li><p><strong>For Abstraction &amp; Extensibility:</strong> Here we see a method that accepts a <code class="docutils literal notranslate"><span class="pre">List&lt;Integer&gt;</span></code> instead of an <code class="docutils literal notranslate"><span class="pre">ArrayList&lt;Integer&gt;</span></code>. This allows the caller to use a variety of datastructures so long as they implement <code class="docutils literal notranslate"><span class="pre">List</span></code>, an interface.</p></li>
 </ul>
@@ -750,6 +750,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 <span class="cm"> * a given prefix. This makes use of a concept called &quot;closures&quot;. </span>
 <span class="cm"> */</span>
 <span class="kd">public</span><span class="w"> </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getBehavior</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">prefix</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// create a function using Lambda syntax</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -795,12 +796,13 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>We can <strong>enable iteration via for-each loop</strong> on an a class that didn’t inheritly support it. We do this by implementing the <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> and <code class="docutils literal notranslate"><span class="pre">Iterator</span></code> interfaces.</p></li>
+<li><p>We can <strong>enable iteration via for-each loop</strong> on an a class that didn’t inheritly support it. We do this by implementing the <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> interface and supplying (or implementing) the<code class="docutils literal notranslate"><span class="pre">Iterator</span></code> interface.</p></li>
 </ul>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Dogs</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dogs</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// return the iterator as found on the List of dogs</span>
+<span class="w">    </span><span class="c1">// Return the iterator provided by the List&lt;Dog&gt; object.</span>
+<span class="w">    </span><span class="c1">// We don&#39;t need to implement it directly. Whew!</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">iterator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dogs</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
