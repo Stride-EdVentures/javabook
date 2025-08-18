@@ -1,4 +1,4 @@
-# Basic Interfaces
+# Intro to Interfaces
 
 ```{admonition} Definition
 *Interface*: A contract that promises a specific behavior.
@@ -181,9 +181,43 @@ Here is a quick summary of the `instanceof` keyword.
 The expression returns a `boolean`. It returns `true` if `object` is an instance of ClassName.
 
 ```java
-Person p = new HandyGuy();
-if (p instanceof Electrician) {
+Person person = new HandyGuy();
+if (person instanceof Electrician) {
     ...
+}
+```
+
+## Abstraction & Extensibility
+Let's say that you have written a method that will identify which Person should be nominated for an award. You might have a method prototype as follows:  
+```java
+public Person findWinner(ArrayList<Person> scientists) {
+    /* Code not shown */
+}
+```
+This code works fine until one day you discover that you want to build your list as a `LinkedList` so that it can be faster with inserting new people on the fly. You'd then have to change your prototype to accept a LinkedList and potentially modify the API used within the method itself. However, the better way to write the code would be to use the `interface List<T>`.  
+
+```java
+public Person findWinner(List<Person> scientists) {
+    /* Code not shown */
+}
+```
+
+Now the caller of the method can store the list in several different concrete classes that implement `List` such as: `LinkedList`, `Stack` or `Vector`.  The following code works great:  
+```java
+public void demoUsage() {
+    List<Person> l1 = new ArrayList<Person>();
+    List<Person> l2 = new LinkedList<Person>();
+    List<Person> l3 = new Vector<Person>();
+    List<Person> l4 = new Stack<Person>();
+    /* populate each data structure with Person objects */
+    ...
+
+    // Find the winner in each data structure
+    Person winner;
+    winner = findWinner(l1);
+    winner = findWinner(l2);
+    winner = findWinner(l3);
+    winner = findWinner(l4);
 }
 ```
 
@@ -211,7 +245,7 @@ Let's summarize the similarities and differences between the keywords.
 
 
 ## Common Uses of Interfaces
-Interfaces are powerful and common. Below is a list of ways interfaces are used. **You are not expected to understand these examples yet.** Future lessons should add a lot of clarity.  
+Interfaces are powerful and common. Below is a list of ways interfaces are used. **You are not expected to understand all of these examples yet.** You should be familiar with these by the end of the lessons in this chapter.  
 
 * **For Abstraction & Extensibility:** Here we see a method that accepts a `List<Integer>` instead of an `ArrayList<Integer>`. This allows the caller to use a variety of datastructures so long as they implement `List`, an interface. 
 ```java
@@ -219,82 +253,12 @@ public int calculateSumtin(List<Integer> list) { }
 ```
 
 * **Functional Programming:** It is powerful to pass around functions as arguments or to have functions return functions. 
-```java
-public static void main(String[] args) {
-    String[] fruit = { "apple", "cherry", "watermelon" };
-    Consumable<String> behavior = getBehavior("I have a");
-    actOnEach(Arrays.asList(fruit), behavior);
-}
 
-/**
- * Return a Consumable function that prints out the argument using
- * a given prefix. This makes use of a concept called "closures". 
- */
-public Consumable<String> getBehavior(String prefix) {
-    // create a function using Lambda syntax
-    return s -> System.out.printf("%s %s\n", prefix, s);
-}
+* **Callbacks that handle Events** is necessary and frequent in GUI Programming. This allows a program be be *Event Driven*, meaning that when the user of the application causes an event, code is triggered.  
 
-public void actOnEach(List<String> list, Consumable<String> consumer) {
-    // consume the elements in natural sorted order
-    list.sort(null);
-    for (String s : list) {
-        consumer.accept(s);
-    }
-}
-```
+* We can **Customize functionality** such as how a list is sorted. The next lesson dedicated to this activity.  
 
-* **Callbacks that handle Events** is a necessary and frequent in GUI Programming. This allows a program be be *Event Driven*, meaning that when the user of the application causes an event, code is triggered.  Here is example code for how callbacks can be implemented in a GUI application when setting up a menu.  
-```java
-private void createMenuBar() {
-    JMenuBar bar = new JMenuBar();
-    this.setJMenuBar(bar);
-
-    JMenu menu = new JMenu("Options");
-    JMenu item = new JMenuItem("Tickle", 'T');
-
-    // Use a method pointer to fulfill the ActionListener interface
-    item.addActionListener(this::myCallback);
-    menu.add(item);
-    bar.add(menu);
-}
-private void myCallback(ActionEvent ae) {
-    System.out.println("That tickles!");
-}
-```
-
-* We can **Customize functionality** such as how a list is sorted. We have a lesson dedicated to this activity.  
-```java
-public static void main(String[] args) {
-    String[] fruit = { "apple", "cherry", "watermelon" };
-    List<String> list = Arrays.asList(fruit);
-
-    // get a Comparator from the Collections class to allow us
-    // to sort this list in reverse order
-    list.sort(Collections.reverseSort());
-```
-
-* We can **enable iteration via for-each loop** on an a class that didn't inheritly support it. We do this by implementing the `Iterable` interface and supplying (or implementing) the`Iterator` interface.  
-```java
-public class Dogs implements Iterable<Dog> {
-    private List<Dog> dogs;
-
-    // Return the iterator provided by the List<Dog> object.
-    // We don't need to implement it directly. Whew!
-    public Iterator<Dog> iterator() {
-        return dogs.iterator();
-    }
-
-    public static void demoForEach() {
-        Dogs myDogs = new Dogs();
-        /* code that adds dogs not shown */
-
-        // Iterate over the Dogs class directly, NOT List<Dog>
-        for (Dog dog : myDogs) { ... }
-    }
-}
-
-```
+* We can **enable iteration in a for-each loop**.
 
 * **Try-with-resources** is built into Java and it allows a programmer to easily and safely close resources. We often do this when working with files so that we don't need to call the `close()` method. For example, the code below will create the `Scanner` in a try-with-resources clause. Whether the file is found or not, we are guaranteed to close the Scanner object correctly. Any class that implements `AutoCloseable` can be used this way.
 ```java

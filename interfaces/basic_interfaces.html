@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Basic Interfaces &#8212; Practical Java </title>
+    <title>Intro to Interfaces &#8212; Practical Java </title>
   
   
   
@@ -237,11 +237,12 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-layer-group fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Basic Interfaces</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Intro to Interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_01.html">Practice: Basic Interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="full_review.html">Full Review</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -458,7 +459,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Basic Interfaces</h1>
+    <h1>Intro to Interfaces</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -477,6 +478,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-an-interface">Why use an interface?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-implementations">Multiple Implementations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instanceof">instanceof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-extensibility">Abstraction &amp; Extensibility</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-in-uml">Interfaces in UML</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Implements vs Extends</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses-of-interfaces">Common Uses of Interfaces</a></li>
@@ -492,8 +494,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="basic-interfaces">
-<h1>Basic Interfaces<a class="headerlink" href="#basic-interfaces" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="intro-to-interfaces">
+<h1>Intro to Interfaces<a class="headerlink" href="#intro-to-interfaces" title="Link to this heading">#</a></h1>
 <div class="admonition-definition admonition">
 <p class="admonition-title">Definition</p>
 <p><em>Interface</em>: A contract that promises a specific behavior.</p>
@@ -667,12 +669,45 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 <li><p><code class="docutils literal notranslate"><span class="pre">ClassName</span></code>: the class or interface you want to test against</p></li>
 </ul>
 <p>The expression returns a <code class="docutils literal notranslate"><span class="pre">boolean</span></code>. It returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">object</span></code> is an instance of ClassName.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HandyGuy</span><span class="p">();</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Electrician</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Person</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HandyGuy</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">person</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Electrician</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="p">...</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+</div>
+</section>
+<section id="abstraction-extensibility">
+<h2>Abstraction &amp; Extensibility<a class="headerlink" href="#abstraction-extensibility" title="Link to this heading">#</a></h2>
+<p>Let’s say that you have written a method that will identify which Person should be nominated for an award. You might have a method prototype as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="nf">findWinner</span><span class="p">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">scientists</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Code not shown */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This code works fine until one day you discover that you want to build your list as a <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> so that it can be faster with inserting new people on the fly. You’d then have to change your prototype to accept a LinkedList and potentially modify the API used within the method itself. However, the better way to write the code would be to use the <code class="docutils literal notranslate"><span class="pre">interface</span> <span class="pre">List&lt;T&gt;</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="nf">findWinner</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">scientists</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Code not shown */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now the caller of the method can store the list in several different concrete classes that implement <code class="docutils literal notranslate"><span class="pre">List</span></code> such as: <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code>, <code class="docutils literal notranslate"><span class="pre">Stack</span></code> or <code class="docutils literal notranslate"><span class="pre">Vector</span></code>.  The following code works great:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">demoUsage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">l1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">l3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">l4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="cm">/* populate each data structure with Person objects */</span>
+<span class="w">    </span><span class="p">...</span>
+
+<span class="w">    </span><span class="c1">// Find the winner in each data structure</span>
+<span class="w">    </span><span class="n">Person</span><span class="w"> </span><span class="n">winner</span><span class="p">;</span>
+<span class="w">    </span><span class="n">winner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findWinner</span><span class="p">(</span><span class="n">l1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">winner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findWinner</span><span class="p">(</span><span class="n">l2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">winner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findWinner</span><span class="p">(</span><span class="n">l3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">winner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findWinner</span><span class="p">(</span><span class="n">l4</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 </section>
 <section id="interfaces-in-uml">
@@ -729,7 +764,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 </section>
 <section id="common-uses-of-interfaces">
 <h2>Common Uses of Interfaces<a class="headerlink" href="#common-uses-of-interfaces" title="Link to this heading">#</a></h2>
-<p>Interfaces are powerful and common. Below is a list of ways interfaces are used. <strong>You are not expected to understand these examples yet.</strong> Future lessons should add a lot of clarity.</p>
+<p>Interfaces are powerful and common. Below is a list of ways interfaces are used. <strong>You are not expected to understand all of these examples yet.</strong> You should be familiar with these by the end of the lessons in this chapter.</p>
 <ul class="simple">
 <li><p><strong>For Abstraction &amp; Extensibility:</strong> Here we see a method that accepts a <code class="docutils literal notranslate"><span class="pre">List&lt;Integer&gt;</span></code> instead of an <code class="docutils literal notranslate"><span class="pre">ArrayList&lt;Integer&gt;</span></code>. This allows the caller to use a variety of datastructures so long as they implement <code class="docutils literal notranslate"><span class="pre">List</span></code>, an interface.</p></li>
 </ul>
@@ -738,86 +773,9 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 </div>
 <ul class="simple">
 <li><p><strong>Functional Programming:</strong> It is powerful to pass around functions as arguments or to have functions return functions.</p></li>
-</ul>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cherry&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;watermelon&quot;</span><span class="w"> </span><span class="p">};</span>
-<span class="w">    </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">behavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getBehavior</span><span class="p">(</span><span class="s">&quot;I have a&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">actOnEach</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">fruit</span><span class="p">),</span><span class="w"> </span><span class="n">behavior</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * Return a Consumable function that prints out the argument using</span>
-<span class="cm"> * a given prefix. This makes use of a concept called &quot;closures&quot;. </span>
-<span class="cm"> */</span>
-<span class="kd">public</span><span class="w"> </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getBehavior</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">prefix</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// create a function using Lambda syntax</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actOnEach</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">consumer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// consume the elements in natural sorted order</span>
-<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">consumer</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><strong>Callbacks that handle Events</strong> is a necessary and frequent in GUI Programming. This allows a program be be <em>Event Driven</em>, meaning that when the user of the application causes an event, code is triggered.  Here is example code for how callbacks can be implemented in a GUI application when setting up a menu.</p></li>
-</ul>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createMenuBar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">JMenuBar</span><span class="w"> </span><span class="n">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenuBar</span><span class="p">();</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">setJMenuBar</span><span class="p">(</span><span class="n">bar</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">JMenu</span><span class="w"> </span><span class="n">menu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenu</span><span class="p">(</span><span class="s">&quot;Options&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">JMenu</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenuItem</span><span class="p">(</span><span class="s">&quot;Tickle&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// Use a method pointer to fulfill the ActionListener interface</span>
-<span class="w">    </span><span class="n">item</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">myCallback</span><span class="p">);</span>
-<span class="w">    </span><span class="n">menu</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
-<span class="w">    </span><span class="n">bar</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">menu</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">myCallback</span><span class="p">(</span><span class="n">ActionEvent</span><span class="w"> </span><span class="n">ae</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;That tickles!&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>We can <strong>Customize functionality</strong> such as how a list is sorted. We have a lesson dedicated to this activity.</p></li>
-</ul>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cherry&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;watermelon&quot;</span><span class="w"> </span><span class="p">};</span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">fruit</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// get a Comparator from the Collections class to allow us</span>
-<span class="w">    </span><span class="c1">// to sort this list in reverse order</span>
-<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Collections</span><span class="p">.</span><span class="na">reverseSort</span><span class="p">());</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>We can <strong>enable iteration via for-each loop</strong> on an a class that didn’t inheritly support it. We do this by implementing the <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> interface and supplying (or implementing) the<code class="docutils literal notranslate"><span class="pre">Iterator</span></code> interface.</p></li>
-</ul>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Dogs</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dogs</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Return the iterator provided by the List&lt;Dog&gt; object.</span>
-<span class="w">    </span><span class="c1">// We don&#39;t need to implement it directly. Whew!</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">iterator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dogs</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">demoForEach</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Dogs</span><span class="w"> </span><span class="n">myDogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dogs</span><span class="p">();</span>
-<span class="w">        </span><span class="cm">/* code that adds dogs not shown */</span>
-
-<span class="w">        </span><span class="c1">// Iterate over the Dogs class directly, NOT List&lt;Dog&gt;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Dog</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">myDogs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<ul class="simple">
+<li><p><strong>Callbacks that handle Events</strong> is necessary and frequent in GUI Programming. This allows a program be be <em>Event Driven</em>, meaning that when the user of the application causes an event, code is triggered.</p></li>
+<li><p>We can <strong>Customize functionality</strong> such as how a list is sorted. The next lesson dedicated to this activity.</p></li>
+<li><p>We can <strong>enable iteration in a for-each loop</strong>.</p></li>
 <li><p><strong>Try-with-resources</strong> is built into Java and it allows a programmer to easily and safely close resources. We often do this when working with files so that we don’t need to call the <code class="docutils literal notranslate"><span class="pre">close()</span></code> method. For example, the code below will create the <code class="docutils literal notranslate"><span class="pre">Scanner</span></code> in a try-with-resources clause. Whether the file is found or not, we are guaranteed to close the Scanner object correctly. Any class that implements <code class="docutils literal notranslate"><span class="pre">AutoCloseable</span></code> can be used this way.</p></li>
 </ul>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">readFile</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -936,6 +894,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-an-interface">Why use an interface?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-implementations">Multiple Implementations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instanceof">instanceof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstraction-extensibility">Abstraction &amp; Extensibility</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-in-uml">Interfaces in UML</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Implements vs Extends</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses-of-interfaces">Common Uses of Interfaces</a></li>
