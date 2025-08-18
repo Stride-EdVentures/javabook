@@ -229,30 +229,31 @@ commentsRunWhenDOMLoaded(addUtterances);
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Topics/index.html"><i class="fas fa-layer-group fa-fw"></i> Topics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Topics/index.html"><i class="fas fa-book fa-fw"></i> Miscellaneous</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/java_conventions.html">Code Quality Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/installing_jgrasp.html">Installing jGrasp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/git.html">Git</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-layer-group fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basic_interfaces.html">Intro to Interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_01.html">Practice: Basic Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sorting_with_classes.html">Sorting with Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Full Review</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-hand-sparkles fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/maven.html">Maven</a></li>
 </ul>
 </details></li>
@@ -470,6 +471,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recall-the-uses-of-interfaces">Recall the Uses of Interfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-t-r">Function&lt;T, R&gt;</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-types">Implementation Types</a></li>
 </ul>
             </nav>
         </div>
@@ -591,6 +594,107 @@ document.write(`
 <li><p><strong>Streams</strong> are a powerful way to process data using functional programming. See future lessons on how to use Streams.</p></li>
 </ul>
 </section>
+<section id="function-t-r">
+<h2>Function&lt;T, R&gt;<a class="headerlink" href="#function-t-r" title="Link to this heading">#</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * The function TAKES something of type T</span>
+<span class="cm"> * The function RETURNS something of type R</span>
+<span class="cm"> */</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Applies this function to the given argument.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param t the function argument. The function TAKES something of type T</span>
+<span class="cm">     * @return the function result. The function RETURNS something of type R</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">R</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// The `Function&lt;T,R&gt;` interface has other methods such as `andThen` and `compose`. </span>
+<span class="w">    </span><span class="c1">// These other methods are `default` methods, meaning that the functionality is actually</span>
+<span class="w">    </span><span class="c1">// provided for you. The syntax can look pretty wonky!!  </span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">compose</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">before</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">before</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">before</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">v</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">andThen</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">after</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">after</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">after</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">apply</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="implementation-types">
+<h2>Implementation Types<a class="headerlink" href="#implementation-types" title="Link to this heading">#</a></h2>
+<p>Students do not need to know about these implementation types.</p>
+<p>An “implementation type” describes where code is written. Where code is written will define its <em>scope</em> (where and how code can be referenced). These implemenation types leverage advanced techniques, and these lessons will only make use of Top-Level and Anonymous. We illustrate this simply to be more complete.</p>
+<p>While classes and interfaces have differences, they are mostly similar.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Class</p></th>
+<th class="head"><p>Interface</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Top-Level</p></td>
+<td><p>Defined in its own file</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Static Nested</p></td>
+<td><p>Statically defined inside another class</p></td>
+<td><p>Yes</p></td>
+<td><p><em>implicitly</em> static</p></td>
+</tr>
+<tr class="row-even"><td><p>Inner</p></td>
+<td><p>Non-static class inside another class</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interface Nested</p></td>
+<td><p>Defined inside an interface</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Local</p></td>
+<td><p>Class inside a method</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Anonymous</p></td>
+<td><p>Inline Implementation</p></td>
+<td><p>Creates an anonymous class</p></td>
+<td><p>Can anonymously extend an interface<br>Creates an anonymous class, not an interface</p></td>
+</tr>
+<tr class="row-even"><td><p>Package-Private</p></td>
+<td><p>Non-public class in the same file</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>TODO: Example Implementation types for Interfaces</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Top-Level: in file MyInterface.java</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">MyInterface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">act</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Static Nested: in file MyClass.java</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">MyInterface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">act</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -637,7 +741,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading</p>
+        <p class="prev-next-title"><i class="fas fa-book fa-fw"></i> Multithreading</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -658,6 +762,8 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recall-the-uses-of-interfaces">Recall the Uses of Interfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-t-r">Function&lt;T, R&gt;</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-types">Implementation Types</a></li>
 </ul>
   </nav></div>
 

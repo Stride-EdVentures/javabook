@@ -1,4 +1,4 @@
-# <i class="fas fa-layer-group fa-fw"></i> Interfaces
+# <i class="fas fa-book fa-fw"></i> Interfaces
 
 This section will provide a thorough lesson on `interfaces`.
 

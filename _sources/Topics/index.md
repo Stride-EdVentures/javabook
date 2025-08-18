@@ -1,4 +1,4 @@
-# <i class="fas fa-layer-group fa-fw"></i> Topics
+# <i class="fas fa-book fa-fw"></i> Miscellaneous
 
 This section will contain generic topics pertaining to Java programming in general.
 

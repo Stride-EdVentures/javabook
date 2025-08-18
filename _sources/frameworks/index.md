@@ -1,4 +1,4 @@
-# <i class="fas fa-hand-sparkles fa-fw"></i> Frameworks
+# <i class="fas fa-book fa-fw"></i> Frameworks
 
 ```{admonition} Under Construction
 :class: note

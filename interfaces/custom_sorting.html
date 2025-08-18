@@ -97,7 +97,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Lambdas" href="lambdas.html" />
-    <link rel="prev" title="Practice: Basic Interfaces" href="practice_01.html" />
+    <link rel="prev" title="Sorting with Classes" href="sorting_with_classes.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -229,30 +229,31 @@ commentsRunWhenDOMLoaded(addUtterances);
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Topics/index.html"><i class="fas fa-layer-group fa-fw"></i> Topics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Topics/index.html"><i class="fas fa-book fa-fw"></i> Miscellaneous</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/java_conventions.html">Code Quality Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/installing_jgrasp.html">Installing jGrasp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/git.html">Git</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-layer-group fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basic_interfaces.html">Intro to Interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_01.html">Practice: Basic Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sorting_with_classes.html">Sorting with Classes</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Custom Sorting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="full_review.html">Full Review</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-hand-sparkles fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-hand-sparkles fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/maven.html">Maven</a></li>
 </ul>
 </details></li>
@@ -470,13 +471,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-kids">Sorting Kids</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-implements-comparator">Class Implements Comparator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-sorting-with-classes">Generalized Sorting with Classes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kids-sorting-themselves">Kids Sorting Themselves</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-this-stuff">Review this stuff</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-r-t">Function&lt;R, T&gt;</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-function-r-t">Implementing Function&lt;R, T&gt;</a></li>
 </ul>
@@ -494,191 +488,29 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="custom-sorting">
 <h1>Custom Sorting<a class="headerlink" href="#custom-sorting" title="Link to this heading">#</a></h1>
-<p>A method can be passed in as an argument.
-An interface is the <em>Type</em> of the argument that is a method.
-<code class="docutils literal notranslate"><span class="pre">Comparator</span></code> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> that allows one to customize sorting.</p>
+<p>Recall:<br />
+🔹 A method can be passed in as an argument.<br />
+🔹 An interface is the <em>Type</em> of the argument that is a method.<br />
+🔹 <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> that allows an object to set its own sort order.</p>
+<p>Arguments to a method can be:</p>
+<ul class="simple">
+<li><p>A primitive type (e.g. <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code>)</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">class</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">String</span></code>)</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">interface</span></code></p></li>
+</ul>
+<p>When an argument is a <code class="docutils literal notranslate"><span class="pre">class</span></code>, we can call methods on that class.<br />
+When an argument is an <code class="docutils literal notranslate"><span class="pre">interface</span></code>, we do the same thing!</p>
+<p>In this lesson you’ll see how using an <code class="docutils literal notranslate"><span class="pre">interface</span></code> affords us power and flexibility.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>The goals of this lesson are to:<br />
-🔹 Learn how an <code class="docutils literal notranslate"><span class="pre">interface</span></code> can be beneficial.<br />
-🔹 Learn how to pass a function (a <em>behavior</em>) to another method.<br />
-🔹 Learn how to create an interface with a <code class="docutils literal notranslate"><span class="pre">Method</span> <span class="pre">Pointer</span></code>.<br />
+🔹 Learn how to tersely pass a function (a <em>behavior</em>) to another method.<br />
+🔹 Learn how to create an interface using a <code class="docutils literal notranslate"><span class="pre">Method</span> <span class="pre">Pointer</span></code>.<br />
 🔹 Sort a List in multiple, custom ways.</p>
-</section>
-<section id="sorting-kids">
-<h2>Sorting Kids<a class="headerlink" href="#sorting-kids" title="Link to this heading">#</a></h2>
-<p>Let’s start off by sorting my kids. Let’s say that we have the following code:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"> </span><span class="c1">// in inches</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span><span class="w">    </span><span class="c1">// in years</span>
-<span class="p">}</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Kid</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cuteness</span><span class="p">;</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">gpa</span><span class="p">;</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">whinesTooMuch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">beLazy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pretendToStudy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Dad</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-
-<span class="w">  </span><span class="cm">/*</span>
-<span class="cm">   * returns true if kid at index i1 is less than kid at index i2</span>
-<span class="cm">   */</span><span class="w"> </span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">kidLessThan</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="cm">/* implementation not shown */</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="c1">// Sort using the insertion sort algorithm</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortKids</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">index</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// slide the nth kid into the correct place</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">kidLessThan</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="n">n</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">           </span><span class="c1">// swap kid n with (n - 1)</span>
-<span class="w">           </span><span class="n">Kid</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-<span class="w">           </span><span class="n">kids</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
-<span class="w">           </span><span class="n">kids</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">     </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>This code is pretty good in that it allows Dad to sort the kids according to the comparison code found in <code class="docutils literal notranslate"><span class="pre">kidLessThan</span></code>. Here are three different implementations:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">kidLessThan</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// compare by height</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i1</span><span class="p">).</span><span class="na">height</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i2</span><span class="p">).</span><span class="na">height</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">kidLessThan</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// compare by age</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i1</span><span class="p">).</span><span class="na">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i2</span><span class="p">).</span><span class="na">age</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">kidLessThan</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// compare by first by whining, secondarily by cuteness</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i1</span><span class="p">).</span><span class="na">whinesTooMuch</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i2</span><span class="p">).</span><span class="na">whinesTooMuch</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// if they whine the same amount, use the cuteness</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i1</span><span class="p">).</span><span class="na">cuteness</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i2</span><span class="p">).</span><span class="na">cuteness</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="w">  </span><span class="c1">// With different whining, the lesser kid whines too much.</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i1</span><span class="p">).</span><span class="na">whinesTooMuch</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>We can choose to sort our kids in any way, <strong>BUT</strong> in only <strong>one</strong> way. We can’t
-have three simultaneous implementations of <code class="docutils literal notranslate"><span class="pre">kidLessThan</span></code>. How can we get around this
-implementation?</p>
-<section id="class-implements-comparator">
-<h3>Class Implements Comparator<a class="headerlink" href="#class-implements-comparator" title="Link to this heading">#</a></h3>
-<p>We can pass in an object that implements the method <code class="docutils literal notranslate"><span class="pre">kidLessThan</span></code>. Let’s look at what that code.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CompareKids</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">kidLessThan</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">Kid</span><span class="w"> </span><span class="n">k2</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CompareByHeight</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">kidLessThan</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">Kid</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// compare by height</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">k1</span><span class="p">.</span><span class="na">height</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k2</span><span class="p">.</span><span class="na">height</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CompareByAge</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">kidLessThan</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">Kid</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// compare by age</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">k1</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k2</span><span class="p">.</span><span class="na">age</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Dad</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortKids</span><span class="p">(</span><span class="n">CompareKids</span><span class="w"> </span><span class="n">comparator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">index</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// slide the nth kid into the correct place</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">comparator</span><span class="p">.</span><span class="na">kidLessThan</span><span class="p">(</span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span><span class="w"> </span><span class="n">n</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">           </span><span class="c1">// swap kid n with (n - 1)</span>
-<span class="w">           </span><span class="n">Kid</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-<span class="w">           </span><span class="n">kids</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
-<span class="w">           </span><span class="n">kids</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">     </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span><span class="w">  </span>
-
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">exampleSortCall</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">sortKids</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CompareByAge</span><span class="p">());</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>In the above implementation we can see how we changed the <code class="docutils literal notranslate"><span class="pre">sortKids</span></code> method. It now takes an <code class="docutils literal notranslate"><span class="pre">abstract</span> <span class="pre">class</span> <span class="pre">CompareKids</span></code> as an argument. That class must implement the method <code class="docutils literal notranslate"><span class="pre">kidLessThan</span></code> that is called to determine the sort order. Furthermore, since these classes are external to <code class="docutils literal notranslate"><span class="pre">Dad</span></code>, we need to pass in the <code class="docutils literal notranslate"><span class="pre">Kid</span></code> and not just the index to the Kid. We can have lots of classes that derive from <code class="docutils literal notranslate"><span class="pre">CompareKids</span></code> and sort our kids in many different ways without having to recompile.</p>
-<p>While the current implementation works, it can’t be generalized to work with non-Kids. It can only sort Kids.</p>
-</section>
-<section id="generalized-sorting-with-classes">
-<h3>Generalized Sorting with Classes<a class="headerlink" href="#generalized-sorting-with-classes" title="Link to this heading">#</a></h3>
-<p>To generalize the above code, we can use <code class="docutils literal notranslate"><span class="pre">Generics</span></code> in the following way.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CompareThem</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">lessThan</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item1</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">item2</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CompareTheirAge</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CompareThem</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">lessThan</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">Kid</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="c1">// compare by age</span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">k1</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k2</span><span class="p">.</span><span class="na">age</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortList</span><span class="p">(</span><span class="n">CompareThem</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparator</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">index</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// slide the nth element into the correct place</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">comparator</span><span class="p">.</span><span class="na">lessThan</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span><span class="w"> </span><span class="n">n</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">           </span><span class="c1">// swap element at n with (n - 1)</span>
-<span class="w">           </span><span class="n">T</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-<span class="w">           </span><span class="n">list</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
-<span class="w">           </span><span class="n">list</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">     </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">exampleSort</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">sortList</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CompareTheirAge</span><span class="p">(),</span><span class="w"> </span><span class="n">kids</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span>
-</pre></div>
-</div>
-<p>With the above implementation, we can sort any list using any comparator method. And we did it without using interfaces!!</p>
-<p>What do interfaces offer us?</p>
-<ol class="arabic simple">
-<li><p>Interfaces allow the programmer to write shorter code, which we will illustrate further down.</p></li>
-<li><p>Interfaces allow us to write sorting code where the items sort themselves.</p></li>
-</ol>
-</section>
-<section id="kids-sorting-themselves">
-<h3>Kids Sorting Themselves<a class="headerlink" href="#kids-sorting-themselves" title="Link to this heading">#</a></h3>
-<p>Let’s rewrite the sorting algorithm so that the kids can sort themselves. In other words, let’s have the <code class="docutils literal notranslate"><span class="pre">lessThan</span></code> method belong to the Kids class and see how that works out.</p>
-<p>TODO:…</p>
-<p><strong>BUT</strong>,</p>
-<ol class="arabic simple">
-<li><p>The Kids can’t sort themselves.</p></li>
-<li><p>The sort code can’t work with</p></li>
-</ol>
-</section>
-</section>
-<section id="review-this-stuff">
-<h2>Review this stuff<a class="headerlink" href="#review-this-stuff" title="Link to this heading">#</a></h2>
-<p>the <code class="docutils literal notranslate"><span class="pre">sort</span></code> method as an argument so that we can fully customize the sorting behavior. Furthermore, passing in the <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> into the <code class="docutils literal notranslate"><span class="pre">sort</span></code> method allows us to sort objects that might otherwise not be <em>sortable</em>. Passing in the Comparator allows us to define how an object can be sorted.</p>
-<p>Arguments to a method can be:</p>
-<ul class="simple">
-<li><p>A Primitive type (e.g. <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code>)</p></li>
-<li><p>A Class (e.g. <code class="docutils literal notranslate"><span class="pre">String</span></code>)</p></li>
-<li><p>An Interface</p></li>
-</ul>
-<p>When an argument is a <code class="docutils literal notranslate"><span class="pre">class</span></code>, we can call methods on that class.
-When an argument is an <code class="docutils literal notranslate"><span class="pre">interface</span></code>, we can do the same thing!</p>
-<p>Using an interface affords us much more flexibility.</p>
 </section>
 <section id="function-r-t">
 <h2>Function&lt;R, T&gt;<a class="headerlink" href="#function-r-t" title="Link to this heading">#</a></h2>
-<p>Let’s look at an the <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">&lt;R,</span> <span class="pre">T&gt;</span></code> interface.</p>
+<p>Let’s look at an the generic <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">&lt;R,</span> <span class="pre">T&gt;</span></code> interface. This interface has one <code class="docutils literal notranslate"><span class="pre">abstract</span></code> method named <code class="docutils literal notranslate"><span class="pre">apply</span></code>. Because it has exactly one abstract method, we call it a <code class="docutils literal notranslate"><span class="pre">Functional</span> <span class="pre">Interface</span></code>. There are many interfaces that are Functional Interface.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * The function TAKES something of type T</span>
 <span class="cm"> * The function RETURNS something of type R</span>
@@ -696,25 +528,6 @@ When an argument is an <code class="docutils literal notranslate"><span class="p
 <span class="w">    </span><span class="c1">// Other stuff not shown as it is beyond the scope of this lesson</span>
 <span class="p">}</span>
 </pre></div>
-</div>
-<div class="dropdown seealso admonition">
-<p class="admonition-title">Other methods</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Function&lt;T,R&gt;</span></code> interface has other methods such as <code class="docutils literal notranslate"><span class="pre">andThen</span></code> and <code class="docutils literal notranslate"><span class="pre">compose</span></code>.
-These other methods are <code class="docutils literal notranslate"><span class="pre">default</span></code> methods, meaning that the functionality is actually
-provided for you. The syntax can look pretty wonky!!</p>
-<p>We will revisit this code before the end of this chapter, and, hopefully, by then
-you’ll be able to read and fully understand the code.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">compose</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">before</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">before</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">before</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">v</span><span class="p">));</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">andThen</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">after</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">after</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">after</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">apply</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
-<span class="w">    </span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <section id="implementing-function-r-t">
 <h3>Implementing Function&lt;R, T&gt;<a class="headerlink" href="#implementing-function-r-t" title="Link to this heading">#</a></h3>
@@ -744,7 +557,7 @@ you’ll be able to read and fully understand the code.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The code above is relatively straight forward. It doesn’t do anything fancy. We are simply invoking a method on an interface that is implemented by a class.</p>
+<p>The code above is relatively straight forward. It doesn’t do anything fancy. We are simply invoking a method on an interface that is implemented by <code class="docutils literal notranslate"><span class="pre">TempClass</span></code>.</p>
 <p>So, why use interfaces at all?</p>
 </section>
 </section>
@@ -781,12 +594,12 @@ you’ll be able to read and fully understand the code.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="practice_01.html"
+       href="sorting_with_classes.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Practice: Basic Interfaces</p>
+        <p class="prev-next-title">Sorting with Classes</p>
       </div>
     </a>
     <a class="right-next"
@@ -815,13 +628,6 @@ you’ll be able to read and fully understand the code.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-kids">Sorting Kids</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-implements-comparator">Class Implements Comparator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-sorting-with-classes">Generalized Sorting with Classes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kids-sorting-themselves">Kids Sorting Themselves</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-this-stuff">Review this stuff</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-r-t">Function&lt;R, T&gt;</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-function-r-t">Implementing Function&lt;R, T&gt;</a></li>
 </ul>
