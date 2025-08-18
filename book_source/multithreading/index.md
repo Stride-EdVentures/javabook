@@ -1,4 +1,4 @@
-# <i class="fas fa-hand-sparkles fa-fw"></i> Multithreading
+# <i class="fas fa-book fa-fw"></i> Multithreading
 
 ```{admonition} Under Construction
 :class: note

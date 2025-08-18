@@ -13,7 +13,6 @@ The differences between an interface and a class is summarized in this table wit
 |Hierarchy Keyword|`extends`|`extends`|
 |Has fields|**NO**|yes|
 |Has Constructors|**NO**|yes|
-|Implementation Type|<a href="#implementation-types">see below</a> |<a href="#implementation-types">see below</a>|
 
  
 1. **Access modifiers** include `public` and `private`.  All the methods in an interface must be `public` while a class can have any and all access modifiers.  
@@ -83,21 +82,3 @@ public static void main(String[] args) {
     Fruit lunchItem = new Apple();
 }
 ```
-
-<a id="implementation-types"></a>
-## Implementation Types
-Students do not need to know about these implementation types.  
-
-An "implementation type" describes where code is written. Where code is written will define its *scope* (where and how code can be referenced). These implemenation types leverage advanced techniques, and these lessons will only make use of Top-Level and Anonymous. We illustrate this simply to be more complete.     
-
-While classes and interfaces have differences, they are mostly similar.  
-
-|Type      |	Description|Class|Interface|
-|----------|---------------|---------|-----|
-|Top-Level|	Defined in its own file|Yes|Yes|
-|Static Nested|	Statically defined inside another class|Yes|*implicitly* static|
-|Inner|	Non-static class inside another class|Yes|No|
-|Interface Nested|Defined inside an interface|No|Yes|
-|Local|	Class inside a method|Yes|No|
-|Anonymous|	Inline Implementation |Creates an anonymous class|Can anonymously extend an interface<br>Creates an anonymous class, not an interface|
-|Package-Private|Non-public class in the same file|Yes|Yes|

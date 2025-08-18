@@ -11,6 +11,7 @@ chapters:
     sections:
     - file: interfaces/basic_interfaces
     - file: interfaces/practice_01.md
+    - file: interfaces/sorting_with_classes
     - file: interfaces/custom_sorting
     - file: interfaces/lambdas
     - file: interfaces/anonymous_classes

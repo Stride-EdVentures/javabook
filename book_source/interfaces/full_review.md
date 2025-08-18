@@ -100,3 +100,67 @@ public void readFile(String filename) {
 ```
 
 * **Streams** are a powerful way to process data using functional programming. See future lessons on how to use Streams.  
+
+## Function&lt;T, R&gt;
+```java
+/**
+ * The function TAKES something of type T
+ * The function RETURNS something of type R
+ */
+public interface Function<T, R> {
+
+    /**
+     * Applies this function to the given argument.
+     *
+     * @param t the function argument. The function TAKES something of type T
+     * @return the function result. The function RETURNS something of type R
+     */
+    R apply(T t);
+
+    // The `Function<T,R>` interface has other methods such as `andThen` and `compose`. 
+    // These other methods are `default` methods, meaning that the functionality is actually
+    // provided for you. The syntax can look pretty wonky!!  
+
+    default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
+        Objects.requireNonNull(before);
+        return (V v) -> apply(before.apply(v));
+    }
+
+    default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
+        Objects.requireNonNull(after);
+        return (T t) -> after.apply(apply(t));
+    }
+}
+```
+## Implementation Types
+Students do not need to know about these implementation types.  
+
+An "implementation type" describes where code is written. Where code is written will define its *scope* (where and how code can be referenced). These implemenation types leverage advanced techniques, and these lessons will only make use of Top-Level and Anonymous. We illustrate this simply to be more complete.     
+
+While classes and interfaces have differences, they are mostly similar.  
+
+|Type      |	Description|Class|Interface|
+|----------|---------------|---------|-----|
+|Top-Level|	Defined in its own file|Yes|Yes|
+|Static Nested|	Statically defined inside another class|Yes|*implicitly* static|
+|Inner|	Non-static class inside another class|Yes|No|
+|Interface Nested|Defined inside an interface|No|Yes|
+|Local|	Class inside a method|Yes|No|
+|Anonymous|	Inline Implementation |Creates an anonymous class|Can anonymously extend an interface<br>Creates an anonymous class, not an interface|
+|Package-Private|Non-public class in the same file|Yes|Yes|
+
+TODO: Example Implementation types for Interfaces
+```java
+// Top-Level: in file MyInterface.java
+public interface MyInterface {
+    void act();
+}
+
+// Static Nested: in file MyClass.java
+public class MyClass {
+
+    public interface MyInterface {
+        void act();
+    }
+}
+```
