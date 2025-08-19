@@ -10,9 +10,10 @@ chapters:
   - file: interfaces/index
     sections:
     - file: interfaces/basic_interfaces
-    - file: interfaces/practice_01.md
+    - file: interfaces/practice_01
     - file: interfaces/sorting_with_classes
     - file: interfaces/custom_sorting
+    - file: interfaces/practice_02
     - file: interfaces/lambdas
     - file: interfaces/anonymous_classes
     - file: interfaces/full_review

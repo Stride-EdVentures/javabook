@@ -51,7 +51,7 @@ public class Dad extends Person {
   }
 }
 ```
-This code is pretty good in that it allows Dad to sort the kids according to the comparison code found in `kidLessThan`. Here are three different implementations:  
+This code allows Dad to sort the kids according to the comparison code found in `kidLessThan`. Here are three different implementations of `kidLessThan`:  
 ```java
 private boolean kidLessThan(int i1, int i2) {
   // compare by height
@@ -78,7 +78,7 @@ have three simultaneous implementations of `kidLessThan`. How can we get around 
 implementation?  
 
 ### Class Implements Comparator
-We can pass in an object that implements the method `kidLessThan`. Let's look at what that code.  
+We can pass in an object that implements the method `kidLessThan`. Let's look at that code.  
 
 ```java
 public abstract class CompareKids {
