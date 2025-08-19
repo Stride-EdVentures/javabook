@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Multithreading &#8212; Practical Java </title>
+    <title>Practice Custom Sorting &#8212; Practical Java </title>
   
   
   
@@ -92,12 +92,12 @@ commentsRunWhenDOMLoaded(addUtterances);
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'multithreading/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'interfaces/practice_02';</script>
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction to Threads" href="intro_to_threads.html" />
-    <link rel="prev" title="Full Review" href="../interfaces/full_review.html" />
+    <link rel="next" title="Lambdas" href="lambdas.html" />
+    <link rel="prev" title="Custom Sorting" href="custom_sorting.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -236,22 +236,22 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../interfaces/index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/basic_interfaces.html">Intro to Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_01.html">Practice: Basic Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/sorting_with_classes.html">Sorting with Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/custom_sorting.html">Custom Sorting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_02.html">Practice Custom Sorting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/lambdas.html">Lambdas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/anonymous_classes.html">Anonymous Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interfaces/full_review.html">Full Review</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic_interfaces.html">Intro to Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_01.html">Practice: Basic Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sorting_with_classes.html">Sorting with Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Practice Custom Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="full_review.html">Full Review</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><i class="fas fa-book fa-fw"></i> Multithreading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro_to_threads.html">Introduction to Threads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conc_synch.html">Concurrency &amp; Synchronization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks in Parallel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel_streams.html">Parallel Streams</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -330,7 +330,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/multithreading/index.md" target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/interfaces/practice_02.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -347,7 +347,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fmultithreading/index.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Finterfaces/practice_02.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -377,7 +377,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="../_sources/multithreading/index.md" target="_blank"
+      <li><a href="../_sources/interfaces/practice_02.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -459,7 +459,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><i class="fas fa-book fa-fw"></i> Multithreading</h1>
+    <h1>Practice Custom Sorting</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -473,20 +473,39 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="multithreading">
-<h1><i class="fas fa-book fa-fw"></i> Multithreading<a class="headerlink" href="#multithreading" title="Link to this heading">#</a></h1>
-<div class="note admonition">
-<p class="admonition-title">Under Construction</p>
-<p>This site is under construction.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="practice-custom-sorting">
+<h1>Practice Custom Sorting<a class="headerlink" href="#practice-custom-sorting" title="Link to this heading">#</a></h1>
+<p><strong>Question #1:</strong> Examine the code below. Look at the method <code class="docutils literal notranslate"><span class="pre">runExample</span></code> to see three attempts to call <code class="docutils literal notranslate"><span class="pre">add</span></code>. Only one will succeed? Which one works?</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Recall how the Function interface is defined</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">R</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Quiz</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Fraction</span><span class="p">,</span><span class="w"> </span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">op</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Fraction</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Fraction</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Fraction</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">op</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">op</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">f2</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">runExample</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">add</span><span class="p">(</span><span class="n">Quiz</span><span class="p">::</span><span class="n">tryTwo</span><span class="p">);</span>
+<span class="w">        </span><span class="n">add</span><span class="p">(</span><span class="n">Quiz</span><span class="p">::</span><span class="n">threePee</span><span class="p">);</span>
+<span class="w">        </span><span class="n">add</span><span class="p">(</span><span class="n">Quiz</span><span class="p">::</span><span class="n">toDouble</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">tryTwo</span><span class="p">(</span><span class="n">Fraction</span><span class="w"> </span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="n">Fraction</span><span class="w"> </span><span class="n">f2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Fraction</span><span class="w"> </span><span class="nf">threePee</span><span class="p">(</span><span class="n">Double</span><span class="w"> </span><span class="n">d1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Double</span><span class="w"> </span><span class="nf">toDouble</span><span class="p">(</span><span class="n">Fraction</span><span class="w"> </span><span class="n">f1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<p>This section will cover the basics of multithreading: creating a thread, timers, and …?</p>
-<p>Resources include:</p>
-<ul class="simple">
-<li><p>Lesson: <a class="reference external" href="https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html">Concurrency (The Java™ Tutorials &gt; Essential Java Classes)</a></p></li>
-<li><p><a class="reference external" href="https://howtodoinjava.com/java/multi-threading/java-multi-threading-evolution-and-topics/">Java Multi-threading Evolution and Topics</a></p></li>
-</ul>
-<div class="toctree-wrapper compound">
+<div class="dropdown admonition">
+<p class="admonition-title">Click to see answer</p>
+<p><code class="docutils literal notranslate"><span class="pre">add(Quiz::toDouble)</span></code> will succeed because it has the correct signature.<br />
+<code class="docutils literal notranslate"><span class="pre">toDouble</span></code> takes a <code class="docutils literal notranslate"><span class="pre">Fraction</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">Double</span></code>.</p>
 </div>
+<p><strong>Question #2:</strong></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -502,7 +521,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./multithreading"
+            path: "./interfaces"
         },
         predefinedOutput: true
     }
@@ -520,20 +539,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../interfaces/full_review.html"
+       href="custom_sorting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Full Review</p>
+        <p class="prev-next-title">Custom Sorting</p>
       </div>
     </a>
     <a class="right-next"
-       href="intro_to_threads.html"
+       href="lambdas.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Threads</p>
+        <p class="prev-next-title">Lambdas</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

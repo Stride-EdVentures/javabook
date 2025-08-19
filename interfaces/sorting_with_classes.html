@@ -241,6 +241,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="practice_01.html">Practice: Basic Interfaces</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Sorting with Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_02.html">Practice Custom Sorting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="full_review.html">Full Review</a></li>
@@ -541,7 +542,7 @@ document.write(`
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>This code is pretty good in that it allows Dad to sort the kids according to the comparison code found in <code class="docutils literal notranslate"><span class="pre">kidLessThan</span></code>. Here are three different implementations:</p>
+<p>This code allows Dad to sort the kids according to the comparison code found in <code class="docutils literal notranslate"><span class="pre">kidLessThan</span></code>. Here are three different implementations of <code class="docutils literal notranslate"><span class="pre">kidLessThan</span></code>:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">kidLessThan</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// compare by height</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i1</span><span class="p">).</span><span class="na">height</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i2</span><span class="p">).</span><span class="na">height</span><span class="p">;</span>
@@ -568,7 +569,7 @@ have three simultaneous implementations of <code class="docutils literal notrans
 implementation?</p>
 <section id="class-implements-comparator">
 <h3>Class Implements Comparator<a class="headerlink" href="#class-implements-comparator" title="Link to this heading">#</a></h3>
-<p>We can pass in an object that implements the method <code class="docutils literal notranslate"><span class="pre">kidLessThan</span></code>. Let’s look at what that code.</p>
+<p>We can pass in an object that implements the method <code class="docutils literal notranslate"><span class="pre">kidLessThan</span></code>. Let’s look at that code.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CompareKids</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">kidLessThan</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">Kid</span><span class="w"> </span><span class="n">k2</span><span class="p">);</span>
 <span class="p">}</span>
