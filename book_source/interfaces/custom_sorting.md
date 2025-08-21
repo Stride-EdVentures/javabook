@@ -83,9 +83,9 @@ To answer this question, we must first learn about **method references**, someth
 ## Method Reference
 Java provides a shorthand way to refer to methods of functional interfaces. Method references allow the developer to tersely implement an interface by simply referencing an existing method with the correct signature.  
 
-```{admonition} Method Reference Syntax
+```{admonition} Static Method Reference
 :class: note
-`ClassName::staticMethodName`
+**Syntax:** `ClassName::staticMethodName`
 ```
 
 Let's rewrite the code found above using a `method reference`. The code behaves exactly the same as above, only now we don't have to create a whole new class that implements the desired interface. 
@@ -107,11 +107,11 @@ public class Example {
 }
 ```
 A few things to note:  
-* The code is cleaner and more concise.  
+* Using Method References allows for the code to be cleaner and more concise.  
 * On line 3: We created a reference to a static method using the `ClassName::methodName` syntax.  
 * On line 7: The method `getStringFromInt` has the same signature as the `apply` method in `Function<Integer, String>`. It takes a single `Integer` and returns a `String`.  
-* On line 7: The `apply` method is called exactly as before. The identifier `behavior` is an `interface` and we invoke methods on it that same way we would invoke a method on a class.  
-* On line 7: When the `apply` method is called, the method named `getStringFromInt` is invoked! It has a different name!  
+* On line 7: The `apply` method is called normally. There are no changes to the way we invoke a method in an interface, even if it is fulfilled by a method reference. The identifier `behavior` is an `interface` and we invoke its methods the same way we would invoke a method belonging to a class.  
+* On line 7: When the `apply` method is called, the method named `getStringFromInt` is invoked! Clearly it has a different name and `apply`!  
 
 The fact that `getStringFromInt` is invoked when we call `behavior.apply` can be mind blowing. Let's dig a little deeper into that.  
 
@@ -139,18 +139,19 @@ public void myMethod(TYPE interfase) {
 ```
 
 ## Using the Comparator
-A common use of interfaces is to customize sorting using the interface, `Comparator`.
+It is common to sort objects. The interface `Comparator` helps us to customize the order of the sort.  
 
 ```{admonition} Comparator
-A comparator is `interface` implemented by an _outsider_ that knows how to compare two objects.
+A comparator is an `interface` implemented by an _outsider_ that knows how to compare two objects.
 ![Comparator](../_static/comparator.jpg)  
+_"Yes, children. I am comparing you to one another. That's why they call me 'The Comparator!'"_  
 ```java
 public interface Comparator<T> {
    /**
-    * Compares its two arguments for order.  
-    * Returns a negative integer when the first argument is less than the second
-    * Returns zero when the arguments are equal
-    * Returns a positive integer when the first argument is greater than the second 
+    * Compares its two arguments to establish order.  
+    * Returns a negative integer when the first argument is less than the second.
+    * Returns zero when the arguments are equal.
+    * Returns a positive integer when the first argument is greater than the second.
     *
     * @param o1 the first object to be compared.
     * @param o2 the second object to be compared.
@@ -158,90 +159,250 @@ public interface Comparator<T> {
     */
    int compare(T o1, T o2);
 ```
+Let's discuss how this works using the most simple example possible. Let's implement a `Comparator<Integer>`.
 
+```java
+public class SimpleExample implements Comparator<Integer> {
+  public int compare(Integer i1, Integer i2) {
+    if (i1 < i2) {
+      return -1;  // any negative number will work
+    }
+    if (i1 > i2) {
+      return 1;   // any positive number will work
+    }
+    return 0;     // the Integers are equal
+  }
+}
+```
+While the above code works, we can implement it more concisely using an convenient property of arithmetic.  
+```java
+public class SimpleExample implements Comparator<Integer> {
+  // This method does the same job as the code above!
+  public int compare(Integer i1, Integer i2) {
+    // if i1 < i2, this results in a negative value
+    // if i1 > i2, this results in a positive value
+    return i1 - i2;
+  }
 
-## Four Types of Method References
-In these examples, we create an instance of an interface and then immediately invoke a method on the interface. This style of programming is contrived and is not practical. But, it does illustrate how an interface can be created with a `method reference`, which is the point!  
+  public void sortList(List<Integer> list) {
+    // Use the Comparator implemented in the class SimpleExample
+    // to sort the List of Integers.
+    list.sort(this::compare);
+  }
+} 
+```
+The implementation of `compare` is very concise! The implementation is the same as the `Natural Order` of Integers. In other words, we know that `1 < 2`, and comparing 1 to 2 should result in a negative value. Allowing Integers to order themselves will result in a list going from smallest to largest as we would expect. 
+
+```{admonition} Natural Order
+:class: Note
+The **Natural Order** of an object is, by definition, the ordering we would get by allowing the objects to order themselves. Objects can determine the order by implementing the `Comparable<T>` interface shown below. The `Integer` class implements this interface; the _Natural Order_ of Integers is implemented as shown below.  
+
+```java
+public interface Comparable<T> {
+  int compareTo(T other);
+}
+
+public class Integer implements Comparable<Integer> {
+  public int compareTo(Integer other) {
+    return this - other;
+  }
+}
+```
+
+### Reverse Comparator
+Let's illustrate how we can quickly sort a list of Integers in reverse order using a `method reference` that provides the `Comparator`. Note that all of the methods below are instance methods.   
+```java
+  public void sortListInReverse(List<Integer> list) {
+    // Provide the Comparator via a method reference
+    // These two lines effectively do the same thing
+    list.sort(this::inReverseOrder);
+    list.sort(this::oppositeNatural);
+  }
+
+  public int inReverseOrder(Integer i1, Integer i2) {
+    // Note that the natural order would be i1 - i2
+    return i2 - i1;
+  }
+
+  public int oppositeNatural(Integer i1, Integer i2) {
+    // Reverse the natural order by puting `i2` first.
+    // This method has the same results as the method `inReverseOrder`
+    return i2.compareTo(i1);
+  }
+```
+
+### Comparing Kids
+In the prior lesson, we used classes to sort `Kid` objects. Now let's use interfaces to sort kids. In the example code below, we will have kids provide their own order by implementing `Comparable`, and we'll sort them in multiple ways using multiple `Comparator`s fulfilled in various ways.  
+
+```java
+public class Person {
+  public int height; // in inches
+  public int age;    // in years
+}
+
+public class Kid extends Person implements Comparable<Kid> {
+  public int cuteness;
+  public double gpa;
+  public boolean whinesTooMuch() { ... }
+  public void beLazy() { ... }
+  public void pretendToStudy() { ... }
+
+  // Comparable: The Natural Order. Kids will order by age. 
+  public int compareTo(Kid other) {
+    return this.age - other.age;
+  }
+}
+
+public class Dad implements Comparator<Kid> {
+  // Let's implement the sorting method directly to see how it works internally.
+  public void sortKids(List<Kid> kids, Comparator<Kid> comparator) {
+    for (int index = 1; index < kids.size(); index++) {
+      // slide the nth kid into the correct place
+      for (int n = index; n > 0 && kidLessThan(kids.get(n), kids.get(n-1), comparator); n--) {
+        // swap kid n with (n - 1)
+        Kid temp = kids.get(n);
+        kids.set(n, kids.get(n - 1));
+        kids.set(n - 1, temp);
+      }
+    }
+  }  
+
+  // returns true if k1 < k2. Use natural order if comparator is null.
+  private boolean kidLessThan(Kid k1, Kid k2, Comparator<Kid> comparator) {
+    if (comparator == null) {
+      // Ask the first Kid to provide the order by calling Comparable.compareTo
+      return k1.compareTo(k2) < 0;
+    } else {
+      return comparator.compare(k1, k2) < 0;
+    }
+  }
+
+  // The class Dad implements Comparator<Kid>. Sort by cuteness.
+  public int compare(Kid k1, Kid k2) {
+    return k1.cuteness - k2.cuteness;
+  }
+
+  // sort the list of kids in 4 different ways
+  public void sortList(List<Kid> list) {
+    // Sort as Dad wants to, by cuteness.
+    // "this" IS-A comparator<Kid>. i.e. Dad implements Comparator<Kid>.
+    // By passing in "this", we are passing in the Comparator implemented by "this".
+    sortKids(list, this);
+
+    // Passing in null signals that we want to sort in the Kid's natural order (by age).
+    sortKids(list, null);
+
+    // Sort by height. Using an instance method reference.
+    sortKids(list, this::useHeight);
+
+    // Sort by whiney then by cuteness. Using a static method reference.
+    sortKids(list, Dad::useWhineyThenCuteness);
+  }
+
+  public int useHeight(Kid k1, Kid k2) {
+    return k1.height - k2.height;
+  }
+
+  public static int useWhineyThenCuteness(Kid k1, Kid k2) {
+    // Primarily, have the whiney Kid be "less than"
+    if (k1.whinesTooMuch() == k2.whinesTooMuch()) {
+      // They both whine or both don't whine.
+      // cannot determine by whineyness. Use Cuteness.
+      return k1.cuteness - k2.cuteness;
+    } else if (k1.whinesTooMuch()) {
+      // k1 is whiney and therefore "less than" k2.
+      return -1;
+    } else {
+      return 1;
+    }
+  }
+}
+```
+
+### Sorting Strings Strangely
+TODO: Write up code that shows how to sort a set of strings in weird ways.  
+
+## Methods that use Comparator
+
+| Method or Field | Description |
+|-----------------|-------------|
+| Arrays.binarySearch(array, value, comparator) | Returns the index of the given value, assuming the elements are sorted in the ordering of the comparator. |
+| Arrays.sort(array, comparator)|Sorts the array in the ordering of the comparator.|
+|Collections.binarySearch(list, value, comparator)| Returns the index of the given value, assuming the elements are sorted in the ordering of the comparator.|
+| Collections.sort(list, comparator) | Sorts the specified list according to the comparator. |
+| List.sort(comparator) | Sorts the list in-place using the provided comparator. |
+| Stream.sorted(comparator) | Returns a stream with elements sorted according to the comparator. |
+| Collections.reverseOrder() | Returns a Comparator that will sort items in reverse relativel to their natural ordering. |
+| Collections.reverseOrder(comparator) | Returns a Comparator that compares objects in the opposite order relative to the given comparator. |
+| String.CASE_INSENSITIVE_ORDER | A static field that provides a Comparator that is case-insensitive when comparing Strings. |
+| Collections.max(collection, comparator) | Returns the maximum element of the collection according to the comparator. |
+| Comparator.thenComparing(Comparator) | Returns a Comparator that first uses the current comparator, then uses the specified one if values are equal. |
+
+## Types of Method References
+While there are four ways to reference a method, here we look at only the two most common.   
 
 1. **Static Method Reference**  
 
-Syntax: `ClassName::staticMethodName`
-Used to refer to a static method of a class.
+**Syntax:** `ClassName::staticMethodName`  
+
+This syntax is used to refer to a static method of a class.
 ```java
 public class Example {
   public static void main(String[] args) {
-    Function<String, Integer> parseInt = Integer::parseInt;
-    System.out.println(parseInt.apply("123")); // Output: 123
+    callIt(Integer::parseInt);
+  }
+
+  public static callIt(Function<String, Integer> fn) {
+    // This will output the integer value: 125
+    System.out.println(fn.apply("123") + 2);
   }
 }
 ```
 
 2. **Instance Method Reference** (of a particular object)  
 
-Syntax: `instance::instanceMethodName`  
-Used to refer to an instance method of a specific object. Note that `this` can be the specific object! The example code below shows two object instances.   
-* The first instance is `System.out`, a static instance of a `PrintStream` on the `System` class.  
-* The second instance is `this`, an instance of `Example`.     
+**Syntax:** `instance::instanceMethodName`  
+
+This syntax is used to refer to an instance method of a specific object. Note that `this` can be the specific object! The example code below shows three object instances.   
+* An instance of `Example` class. The instance is the identfier `ex`.  
+* An instance of `this`, an instance of `Example`.  
+* An instance of a `PrintStream` on the `System` class. Note that `System.out` is a static instance of `PrintStream`.    
+   
 ```java
 public class Example {
   private int n;
 
-  public static void main(String[] args) {
-    String message = "Hello, World!";
-    Consumer<String> print = System.out::println;
-    print.accept(message); // Output: Hello, World!
-
-    Example ex = new Example(5);
-    ex.useSelf();
-  }
-
+  // Constructor setting the instance field
   public Example(int n) {
     this.n = n;
   }
 
-  public int useSelf() {
-    Function<Integer, String> getString = this::convert;
-    System.out.println(getString.apply(20)); // Output: Sum is 25
+  // Note that `example` is an instance method. "this" exists.
+  public int example() {
+    this.n = 1;
+    Example ex = new Example(5);    // create another instance of Example
+
+    // reference "this" instance and the instance `ex`.
+    callIt(this::convert);          // prints "Sum is 21"
+    callIt(ex::convert);            // prints "Sum is 25"
+
+    // `out` is a static instance of PrintStream on the System class.
+    // Therefore, System.out::println references an instance method.
+    consumeIt(System.out::println);
+  }
+
+  public static consumeIt(Consumer<String> fn) {
+    fn.accept("In our example, this will be printed");
+  }
+
+  public static callIt(Function<Integer, String> fn) {
+    System.out.println(fn.apply(20));
   }
 
   private String convert(Integer x) {
+    // add the argument to "this" instance's n-value
     return "Sum is " + (x + this.n);
   }
-}
-```
-
-3. **Instance Method Reference** (of an arbitrary object of a class)  
-
-Syntax: `ClassName::instanceMethodName`  
-Used when the method is called on an arbitrary instance of a class.  
-This will only work when the object on which the method is called is the first parameter of the functional interface.
-```java
-public class Example {
-    public static void main(String[] args) {
-      Function<String, String> toUpperCase = String::toUpperCase;
-      System.out.println(toUpperCase.apply("hello")); // Output: HELLO
-    }
-}
-```
- In the example above, the string `"hello"` is the argument passed into `apply`. When `apply` is called, Java is effectively making the following call.
- ```java
- "hello".toUpperCase();
- ```
-This type of method reference works only when the first argument to the method defined in the interface matches the object type needed. In our example, `String::toUpperCase` is an instance method on the `String` class. Therefore, the signature must accept a `String` as the first argument.  
-
-This type of method reference is useful when the one wants to define the interface "early" and define the object instance "later." If you know the object, it can be more clear to simply use the object then.  
-
-4. Constructor Reference  
-
-Syntax: `ClassName::new`  
-Used to refer to a constructor. (This is rarely used.)   
-```java
-public class Example {
-    public static void main(String[] args) {
-        Supplier<StringBuilder> createStringBuilder = StringBuilder::new;
-        StringBuilder sb = createStringBuilder.get();
-        System.out.println(sb.append("Hello, Constructor Reference!")); // Output: Hello, Constructor Reference!
-    }
 }
 ```
 
