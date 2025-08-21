@@ -21,7 +21,7 @@ public static void main(String[] args) {
  * a given prefix. This makes use of a concept called "closures". 
  */
 public Consumable<String> getBehavior(String prefix) {
-    // create a function using Lambda syntax
+    // create a function using the Lambda syntax
     return s -> System.out.printf("%s %s\n", prefix, s);
 }
 
@@ -101,7 +101,101 @@ public void readFile(String filename) {
 
 * **Streams** are a powerful way to process data using functional programming. See future lessons on how to use Streams.  
 
+## More Types of Method References
+We saw two types of method references <a href="./custom_sorting.html#types-of-method-references">here</a>. Let's look at two more. 
+3. **Instance Method Reference** (of an arbitrary object of a class)  
+
+**Syntax:** `ClassName::instanceMethodName`  
+
+Used when the method is called on an arbitrary instance of a class.  
+This will only work when the object on which the method is called is the first parameter of the functional interface.
+```java
+public class Example {
+    public void showTwoExamples(List<Kid> kids) {
+        // `toUpperCase` requires an instance object, and the method takes zero arguments.
+        // Function<String, String> will provide one argument which gets turned into the instance.
+        Function<String, String> toUpperCase = String::toUpperCase;
+        System.out.println(toUpperCase.apply("hello")); // Output: HELLO
+
+        // List has a method named `sort` that takes a Comparator.
+        // The Kid class implements Comparable<Kid>, not Comparator.
+        // Comparable.compareTo requires an instance of a Kid and one argument of type Kid.
+        // When we use the following syntax and call Comparator.compare(k1, k2), we will
+        // use the k1 as the instance, and k2 as the argument to compareTo.
+        // In short, `Kid::comareTo` matches the signature of Comparator.
+        kids.sort(Kid::compareTo);
+    }
+}
+```
+ In the first example above, the string `"hello"` is the argument passed into `apply`. When `apply` is called, Java is effectively making the following call.
+ ```java
+ "hello".toUpperCase();
+ ```
+This type of method reference works only when the first argument to the method defined in the interface matches the object type needed. In our example, `String::toUpperCase` is an instance method on the `String` class. Therefore, the signature must accept a `String` as the first argument.  
+
+This type of method reference is useful when the one wants to define the interface "early" and define the object instance "later." If you know the object, it can be more clear to simply use the object then.  
+
+In the second example, when Comparable is invoked, it get _conceptually converted_ to work with compareTo.
+```java
+// the following call
+comparable.compare(kid1, kid2);
+//  gets converted to
+kid1.compareTo(kid2);
+```
+
+In _reality_, this works because, under the covers, every instance method actually has a hidden, implicit `this` argument.
+
+```{admonition} Implicit _this_ Argument
+:class: note dropdown
+
+In our Java code, when we want to call an instance method, we use the following syntax. `obj.method(args)`  
+In reality, the method gets invoked like: `method(obj, args)`  
+Java will allow us to write an instance method prototype that will explicitly identify the implicit `this`. Here is perfectly valid, working code to illustrate:
+
+```java
+public class ExplicitThis {
+    private int x = 0;
+
+    public static void main(String[] args) {
+        ExplicitThis et = new ExplicitThis();
+        et.implicitPrint("This makes sense.");
+        et.printMsg("How does this work?!");
+    }
+
+    public void printMsg(ExplicitThis this, String msg) {
+        System.out.println(msg);
+        // this is still the reserved keyword this!
+        this.x = 5;
+    }
+
+    public void implicitPrint(String msg) {
+        System.out.println(msg);
+        this.x = 5;
+    }
+}
+```
+
+
+4. **Constructor Reference**  
+
+**Syntax:** `ClassName::new`  
+
+Used to refer to a constructor. (This is rarely used.)   
+```java
+public class Example {
+    public static void main(String[] args) {
+        Supplier<StringBuilder> createStringBuilder = StringBuilder::new;
+        StringBuilder sb = createStringBuilder.get();
+        System.out.println(sb.append("Hello, Constructor Reference!")); // Output: Hello, Constructor Reference!
+    }
+}
+```
+
+
+
 ## Function&lt;T, R&gt;
+Let's look at this generic interface more closely. We will look at two `default` methods.  
+
 ```java
 /**
  * The function TAKES something of type T

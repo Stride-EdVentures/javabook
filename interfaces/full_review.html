@@ -238,10 +238,10 @@ commentsRunWhenDOMLoaded(addUtterances);
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basic_interfaces.html">Intro to Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_01.html">Practice: Basic Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Basic Interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sorting_with_classes.html">Sorting with Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_02.html">Practice Custom Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Full Review</a></li>
@@ -472,6 +472,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recall-the-uses-of-interfaces">Recall the Uses of Interfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-types-of-method-references">More Types of Method References</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-t-r">Function&lt;T, R&gt;</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-types">Implementation Types</a></li>
 </ul>
@@ -510,7 +511,7 @@ document.write(`
 <span class="cm"> * a given prefix. This makes use of a concept called &quot;closures&quot;. </span>
 <span class="cm"> */</span>
 <span class="kd">public</span><span class="w"> </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getBehavior</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">prefix</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// create a function using Lambda syntax</span>
+<span class="w">    </span><span class="c1">// create a function using the Lambda syntax</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -595,8 +596,91 @@ document.write(`
 <li><p><strong>Streams</strong> are a powerful way to process data using functional programming. See future lessons on how to use Streams.</p></li>
 </ul>
 </section>
+<section id="more-types-of-method-references">
+<h2>More Types of Method References<a class="headerlink" href="#more-types-of-method-references" title="Link to this heading">#</a></h2>
+<p>We saw two types of method references <a href="./custom_sorting.html#types-of-method-references">here</a>. Let’s look at two more.
+3. <strong>Instance Method Reference</strong> (of an arbitrary object of a class)</p>
+<p><strong>Syntax:</strong> <code class="docutils literal notranslate"><span class="pre">ClassName::instanceMethodName</span></code></p>
+<p>Used when the method is called on an arbitrary instance of a class.<br />
+This will only work when the object on which the method is called is the first parameter of the functional interface.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">showTwoExamples</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// `toUpperCase` requires an instance object, and the method takes zero arguments.</span>
+<span class="w">        </span><span class="c1">// Function&lt;String, String&gt; will provide one argument which gets turned into the instance.</span>
+<span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toUpperCase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">::</span><span class="n">toUpperCase</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">toUpperCase</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// Output: HELLO</span>
+
+<span class="w">        </span><span class="c1">// List has a method named `sort` that takes a Comparator.</span>
+<span class="w">        </span><span class="c1">// The Kid class implements Comparable&lt;Kid&gt;, not Comparator.</span>
+<span class="w">        </span><span class="c1">// Comparable.compareTo requires an instance of a Kid and one argument of type Kid.</span>
+<span class="w">        </span><span class="c1">// When we use the following syntax and call Comparator.compare(k1, k2), we will</span>
+<span class="w">        </span><span class="c1">// use the k1 as the instance, and k2 as the argument to compareTo.</span>
+<span class="w">        </span><span class="c1">// In short, `Kid::comareTo` matches the signature of Comparator.</span>
+<span class="w">        </span><span class="n">kids</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Kid</span><span class="p">::</span><span class="n">compareTo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the first example above, the string <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code> is the argument passed into <code class="docutils literal notranslate"><span class="pre">apply</span></code>. When <code class="docutils literal notranslate"><span class="pre">apply</span></code> is called, Java is effectively making the following call.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;hello&quot;</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This type of method reference works only when the first argument to the method defined in the interface matches the object type needed. In our example, <code class="docutils literal notranslate"><span class="pre">String::toUpperCase</span></code> is an instance method on the <code class="docutils literal notranslate"><span class="pre">String</span></code> class. Therefore, the signature must accept a <code class="docutils literal notranslate"><span class="pre">String</span></code> as the first argument.</p>
+<p>This type of method reference is useful when the one wants to define the interface “early” and define the object instance “later.” If you know the object, it can be more clear to simply use the object then.</p>
+<p>In the second example, when Comparable is invoked, it get <em>conceptually converted</em> to work with compareTo.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// the following call</span>
+<span class="n">comparable</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">kid1</span><span class="p">,</span><span class="w"> </span><span class="n">kid2</span><span class="p">);</span>
+<span class="c1">//  gets converted to</span>
+<span class="n">kid1</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">kid2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In <em>reality</em>, this works because, under the covers, every instance method actually has a hidden, implicit <code class="docutils literal notranslate"><span class="pre">this</span></code> argument.</p>
+<div class="note dropdown admonition">
+<p class="admonition-title">Implicit <em>this</em> Argument</p>
+<p>In our Java code, when we want to call an instance method, we use the following syntax. <code class="docutils literal notranslate"><span class="pre">obj.method(args)</span></code><br />
+In reality, the method gets invoked like: <code class="docutils literal notranslate"><span class="pre">method(obj,</span> <span class="pre">args)</span></code><br />
+Java will allow us to write an instance method prototype that will explicitly identify the implicit <code class="docutils literal notranslate"><span class="pre">this</span></code>. Here is perfectly valid, working code to illustrate:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExplicitThis</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ExplicitThis</span><span class="w"> </span><span class="n">et</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExplicitThis</span><span class="p">();</span>
+<span class="w">        </span><span class="n">et</span><span class="p">.</span><span class="na">implicitPrint</span><span class="p">(</span><span class="s">&quot;This makes sense.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">et</span><span class="p">.</span><span class="na">printMsg</span><span class="p">(</span><span class="s">&quot;How does this work?!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">printMsg</span><span class="p">(</span><span class="n">ExplicitThis</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// this is still the reserved keyword this!</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">implicitPrint</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Constructor Reference</strong></p></li>
+</ol>
+<p><strong>Syntax:</strong> <code class="docutils literal notranslate"><span class="pre">ClassName::new</span></code></p>
+<p>Used to refer to a constructor. (This is rarely used.)</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">StringBuilder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createStringBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">::</span><span class="k">new</span><span class="p">;</span>
+<span class="w">        </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">sb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createStringBuilder</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;Hello, Constructor Reference!&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// Output: Hello, Constructor Reference!</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 <section id="function-t-r">
 <h2>Function&lt;T, R&gt;<a class="headerlink" href="#function-t-r" title="Link to this heading">#</a></h2>
+<p>Let’s look at this generic interface more closely. We will look at two <code class="docutils literal notranslate"><span class="pre">default</span></code> methods.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * The function TAKES something of type T</span>
 <span class="cm"> * The function RETURNS something of type R</span>
@@ -763,6 +847,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recall-the-uses-of-interfaces">Recall the Uses of Interfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-types-of-method-references">More Types of Method References</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-t-r">Function&lt;T, R&gt;</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-types">Implementation Types</a></li>
 </ul>

@@ -238,10 +238,10 @@ commentsRunWhenDOMLoaded(addUtterances);
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basic_interfaces.html">Intro to Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_01.html">Practice: Basic Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Basic Interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sorting_with_classes.html">Sorting with Classes</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Custom Sorting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_02.html">Practice Custom Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="full_review.html">Full Review</a></li>
@@ -481,8 +481,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remember-interfaces-are-types">Remember: Interfaces are <em>Types</em></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-comparator">Using the Comparator</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-types-of-method-references">Four Types of Method References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-comparator">Using the Comparator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-comparator">Reverse Comparator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-kids">Comparing Kids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-strings-strangely">Sorting Strings Strangely</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-that-use-comparator">Methods that use Comparator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-method-references">Types of Method References</a></li>
 </ul>
             </nav>
         </div>
@@ -574,8 +580,8 @@ When an argument is an <code class="docutils literal notranslate"><span class="p
 <h2>Method Reference<a class="headerlink" href="#method-reference" title="Link to this heading">#</a></h2>
 <p>Java provides a shorthand way to refer to methods of functional interfaces. Method references allow the developer to tersely implement an interface by simply referencing an existing method with the correct signature.</p>
 <div class="note admonition">
-<p class="admonition-title">Method Reference Syntax</p>
-<p><code class="docutils literal notranslate"><span class="pre">ClassName::staticMethodName</span></code></p>
+<p class="admonition-title">Static Method Reference</p>
+<p><strong>Syntax:</strong> <code class="docutils literal notranslate"><span class="pre">ClassName::staticMethodName</span></code></p>
 </div>
 <p>Let’s rewrite the code found above using a <code class="docutils literal notranslate"><span class="pre">method</span> <span class="pre">reference</span></code>. The code behaves exactly the same as above, only now we don’t have to create a whole new class that implements the desired interface.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
@@ -595,11 +601,11 @@ When an argument is an <code class="docutils literal notranslate"><span class="p
 </div>
 <p>A few things to note:</p>
 <ul class="simple">
-<li><p>The code is cleaner and more concise.</p></li>
+<li><p>Using Method References allows for the code to be cleaner and more concise.</p></li>
 <li><p>On line 3: We created a reference to a static method using the <code class="docutils literal notranslate"><span class="pre">ClassName::methodName</span></code> syntax.</p></li>
 <li><p>On line 7: The method <code class="docutils literal notranslate"><span class="pre">getStringFromInt</span></code> has the same signature as the <code class="docutils literal notranslate"><span class="pre">apply</span></code> method in <code class="docutils literal notranslate"><span class="pre">Function&lt;Integer,</span> <span class="pre">String&gt;</span></code>. It takes a single <code class="docutils literal notranslate"><span class="pre">Integer</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">String</span></code>.</p></li>
-<li><p>On line 7: The <code class="docutils literal notranslate"><span class="pre">apply</span></code> method is called exactly as before. The identifier <code class="docutils literal notranslate"><span class="pre">behavior</span></code> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> and we invoke methods on it that same way we would invoke a method on a class.</p></li>
-<li><p>On line 7: When the <code class="docutils literal notranslate"><span class="pre">apply</span></code> method is called, the method named <code class="docutils literal notranslate"><span class="pre">getStringFromInt</span></code> is invoked! It has a different name!</p></li>
+<li><p>On line 7: The <code class="docutils literal notranslate"><span class="pre">apply</span></code> method is called normally. There are no changes to the way we invoke a method in an interface, even if it is fulfilled by a method reference. The identifier <code class="docutils literal notranslate"><span class="pre">behavior</span></code> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> and we invoke its methods the same way we would invoke a method belonging to a class.</p></li>
+<li><p>On line 7: When the <code class="docutils literal notranslate"><span class="pre">apply</span></code> method is called, the method named <code class="docutils literal notranslate"><span class="pre">getStringFromInt</span></code> is invoked! Clearly it has a different name and <code class="docutils literal notranslate"><span class="pre">apply</span></code>!</p></li>
 </ul>
 <p>The fact that <code class="docutils literal notranslate"><span class="pre">getStringFromInt</span></code> is invoked when we call <code class="docutils literal notranslate"><span class="pre">behavior.apply</span></code> can be mind blowing. Let’s dig a little deeper into that.</p>
 <section id="conceptual-code">
@@ -629,17 +635,18 @@ The supplied function must match the arguments and return types as defined in th
 </section>
 <section id="using-the-comparator">
 <h2>Using the Comparator<a class="headerlink" href="#using-the-comparator" title="Link to this heading">#</a></h2>
-<p>A common use of interfaces is to customize sorting using the interface, <code class="docutils literal notranslate"><span class="pre">Comparator</span></code>.</p>
+<p>It is common to sort objects. The interface <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> helps us to customize the order of the sort.</p>
 <div class="admonition-comparator admonition">
 <p class="admonition-title">Comparator</p>
-<p>A comparator is <code class="docutils literal notranslate"><span class="pre">interface</span></code> implemented by an <em>outsider</em> that knows how to compare two objects.
-<img alt="Comparator" src="../_images/comparator.jpg" /></p>
+<p>A comparator is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> implemented by an <em>outsider</em> that knows how to compare two objects.
+<img alt="Comparator" src="../_images/comparator.jpg" /><br />
+<em>“Yes, children. I am comparing you to one another. That’s why they call me ‘The Comparator!’”</em></p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">   </span><span class="cm">/**</span>
-<span class="cm">    * Compares its two arguments for order.  </span>
-<span class="cm">    * Returns a negative integer when the first argument is less than the second</span>
-<span class="cm">    * Returns zero when the arguments are equal</span>
-<span class="cm">    * Returns a positive integer when the first argument is greater than the second </span>
+<span class="cm">    * Compares its two arguments to establish order.  </span>
+<span class="cm">    * Returns a negative integer when the first argument is less than the second.</span>
+<span class="cm">    * Returns zero when the arguments are equal.</span>
+<span class="cm">    * Returns a positive integer when the first argument is greater than the second.</span>
 <span class="cm">    *</span>
 <span class="cm">    * @param o1 the first object to be compared.</span>
 <span class="cm">    * @param o2 the second object to be compared.</span>
@@ -649,19 +656,231 @@ The supplied function must match the arguments and return types as defined in th
 </pre></div>
 </div>
 </div>
+<p>Let’s discuss how this works using the most simple example possible. Let’s implement a <code class="docutils literal notranslate"><span class="pre">Comparator&lt;Integer&gt;</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleExample</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w">  </span><span class="c1">// any negative number will work</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">   </span><span class="c1">// any positive number will work</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">     </span><span class="c1">// the Integers are equal</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>While the above code works, we can implement it more concisely using an convenient property of arithmetic.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SimpleExample</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// This method does the same job as the code above!</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// if i1 &lt; i2, this results in a negative value</span>
+<span class="w">    </span><span class="c1">// if i1 &gt; i2, this results in a positive value</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i2</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Use the Comparator implemented in the class SimpleExample</span>
+<span class="w">    </span><span class="c1">// to sort the List of Integers.</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">compare</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>The implementation of <code class="docutils literal notranslate"><span class="pre">compare</span></code> is very concise! The implementation is the same as the <code class="docutils literal notranslate"><span class="pre">Natural</span> <span class="pre">Order</span></code> of Integers. In other words, we know that <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">&lt;</span> <span class="pre">2</span></code>, and comparing 1 to 2 should result in a negative value. Allowing Integers to order themselves will result in a list going from smallest to largest as we would expect.</p>
+<div class="note admonition">
+<p class="admonition-title">Natural Order</p>
+<p>The <strong>Natural Order</strong> of an object is, by definition, the ordering we would get by allowing the objects to order themselves. Objects can determine the order by implementing the <code class="docutils literal notranslate"><span class="pre">Comparable&lt;T&gt;</span></code> interface shown below. The <code class="docutils literal notranslate"><span class="pre">Integer</span></code> class implements this interface; the <em>Natural Order</em> of Integers is implemented as shown below.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="nf">compareTo</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">other</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Integer</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compareTo</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">other</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<section id="reverse-comparator">
+<h3>Reverse Comparator<a class="headerlink" href="#reverse-comparator" title="Link to this heading">#</a></h3>
+<p>Let’s illustrate how we can quickly sort a list of Integers in reverse order using a <code class="docutils literal notranslate"><span class="pre">method</span> <span class="pre">reference</span></code> that provides the <code class="docutils literal notranslate"><span class="pre">Comparator</span></code>. Note that all of the methods below are instance methods.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortListInReverse</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Provide the Comparator via a method reference</span>
+<span class="w">    </span><span class="c1">// These two lines effectively do the same thing</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">inReverseOrder</span><span class="p">);</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">oppositeNatural</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">inReverseOrder</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Note that the natural order would be i1 - i2</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">i2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">oppositeNatural</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Reverse the natural order by puting `i2` first.</span>
+<span class="w">    </span><span class="c1">// This method has the same results as the method `inReverseOrder`</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">i2</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">i1</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
 </section>
-<section id="four-types-of-method-references">
-<h2>Four Types of Method References<a class="headerlink" href="#four-types-of-method-references" title="Link to this heading">#</a></h2>
-<p>In these examples, we create an instance of an interface and then immediately invoke a method on the interface. This style of programming is contrived and is not practical. But, it does illustrate how an interface can be created with a <code class="docutils literal notranslate"><span class="pre">method</span> <span class="pre">reference</span></code>, which is the point!</p>
+<section id="comparing-kids">
+<h3>Comparing Kids<a class="headerlink" href="#comparing-kids" title="Link to this heading">#</a></h3>
+<p>In the prior lesson, we used classes to sort <code class="docutils literal notranslate"><span class="pre">Kid</span></code> objects. Now let’s use interfaces to sort kids. In the example code below, we will have kids provide their own order by implementing <code class="docutils literal notranslate"><span class="pre">Comparable</span></code>, and we’ll sort them in multiple ways using multiple <code class="docutils literal notranslate"><span class="pre">Comparator</span></code>s fulfilled in various ways.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"> </span><span class="c1">// in inches</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span><span class="w">    </span><span class="c1">// in years</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Kid</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cuteness</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">gpa</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">whinesTooMuch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">beLazy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pretendToStudy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Comparable: The Natural Order. Kids will order by age. </span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compareTo</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">age</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Dad</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Let&#39;s implement the sorting method directly to see how it works internally.</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortKids</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kids</span><span class="p">,</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">index</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// slide the nth kid into the correct place</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">kidLessThan</span><span class="p">(</span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">comparator</span><span class="p">);</span><span class="w"> </span><span class="n">n</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// swap kid n with (n - 1)</span>
+<span class="w">        </span><span class="n">Kid</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="w">        </span><span class="n">kids</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="w">        </span><span class="n">kids</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span><span class="w">  </span>
+
+<span class="w">  </span><span class="c1">// returns true if k1 &lt; k2. Use natural order if comparator is null.</span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">kidLessThan</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">Kid</span><span class="w"> </span><span class="n">k2</span><span class="p">,</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">comparator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Ask the first Kid to provide the order by calling Comparable.compareTo</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">k1</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">comparator</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// The class Dad implements Comparator&lt;Kid&gt;. Sort by cuteness.</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">Kid</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">k1</span><span class="p">.</span><span class="na">cuteness</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">k2</span><span class="p">.</span><span class="na">cuteness</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// sort the list of kids in 4 different ways</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Sort as Dad wants to, by cuteness.</span>
+<span class="w">    </span><span class="c1">// &quot;this&quot; IS-A comparator&lt;Kid&gt;. i.e. Dad implements Comparator&lt;Kid&gt;.</span>
+<span class="w">    </span><span class="c1">// By passing in &quot;this&quot;, we are passing in the Comparator implemented by &quot;this&quot;.</span>
+<span class="w">    </span><span class="n">sortKids</span><span class="p">(</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Passing in null signals that we want to sort in the Kid&#39;s natural order (by age).</span>
+<span class="w">    </span><span class="n">sortKids</span><span class="p">(</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Sort by height. Using an instance method reference.</span>
+<span class="w">    </span><span class="n">sortKids</span><span class="p">(</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">::</span><span class="n">useHeight</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Sort by whiney then by cuteness. Using a static method reference.</span>
+<span class="w">    </span><span class="n">sortKids</span><span class="p">(</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">Dad</span><span class="p">::</span><span class="n">useWhineyThenCuteness</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">useHeight</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">Kid</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">k1</span><span class="p">.</span><span class="na">height</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">k2</span><span class="p">.</span><span class="na">height</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">useWhineyThenCuteness</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">Kid</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Primarily, have the whiney Kid be &quot;less than&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k1</span><span class="p">.</span><span class="na">whinesTooMuch</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k2</span><span class="p">.</span><span class="na">whinesTooMuch</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// They both whine or both don&#39;t whine.</span>
+<span class="w">      </span><span class="c1">// cannot determine by whineyness. Use Cuteness.</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">k1</span><span class="p">.</span><span class="na">cuteness</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">k2</span><span class="p">.</span><span class="na">cuteness</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k1</span><span class="p">.</span><span class="na">whinesTooMuch</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// k1 is whiney and therefore &quot;less than&quot; k2.</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sorting-strings-strangely">
+<h3>Sorting Strings Strangely<a class="headerlink" href="#sorting-strings-strangely" title="Link to this heading">#</a></h3>
+<p>TODO: Write up code that shows how to sort a set of strings in weird ways.</p>
+</section>
+</section>
+<section id="methods-that-use-comparator">
+<h2>Methods that use Comparator<a class="headerlink" href="#methods-that-use-comparator" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method or Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Arrays.binarySearch(array, value, comparator)</p></td>
+<td><p>Returns the index of the given value, assuming the elements are sorted in the ordering of the comparator.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Arrays.sort(array, comparator)</p></td>
+<td><p>Sorts the array in the ordering of the comparator.</p></td>
+</tr>
+<tr class="row-even"><td><p>Collections.binarySearch(list, value, comparator)</p></td>
+<td><p>Returns the index of the given value, assuming the elements are sorted in the ordering of the comparator.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Collections.sort(list, comparator)</p></td>
+<td><p>Sorts the specified list according to the comparator.</p></td>
+</tr>
+<tr class="row-even"><td><p>List.sort(comparator)</p></td>
+<td><p>Sorts the list in-place using the provided comparator.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stream.sorted(comparator)</p></td>
+<td><p>Returns a stream with elements sorted according to the comparator.</p></td>
+</tr>
+<tr class="row-even"><td><p>Collections.reverseOrder()</p></td>
+<td><p>Returns a Comparator that will sort items in reverse relativel to their natural ordering.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Collections.reverseOrder(comparator)</p></td>
+<td><p>Returns a Comparator that compares objects in the opposite order relative to the given comparator.</p></td>
+</tr>
+<tr class="row-even"><td><p>String.CASE_INSENSITIVE_ORDER</p></td>
+<td><p>A static field that provides a Comparator that is case-insensitive when comparing Strings.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Collections.max(collection, comparator)</p></td>
+<td><p>Returns the maximum element of the collection according to the comparator.</p></td>
+</tr>
+<tr class="row-even"><td><p>Comparator.thenComparing(Comparator)</p></td>
+<td><p>Returns a Comparator that first uses the current comparator, then uses the specified one if values are equal.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="types-of-method-references">
+<h2>Types of Method References<a class="headerlink" href="#types-of-method-references" title="Link to this heading">#</a></h2>
+<p>While there are four ways to reference a method, here we look at only the two most common.</p>
 <ol class="arabic simple">
 <li><p><strong>Static Method Reference</strong></p></li>
 </ol>
-<p>Syntax: <code class="docutils literal notranslate"><span class="pre">ClassName::staticMethodName</span></code>
-Used to refer to a static method of a class.</p>
+<p><strong>Syntax:</strong> <code class="docutils literal notranslate"><span class="pre">ClassName::staticMethodName</span></code></p>
+<p>This syntax is used to refer to a static method of a class.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">parseInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">::</span><span class="n">parseInt</span><span class="p">;</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">parseInt</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// Output: 123</span>
+<span class="w">    </span><span class="n">callIt</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">parseInt</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="nf">callIt</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// This will output the integer value: 125</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fn</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -669,70 +888,47 @@ Used to refer to a static method of a class.</p>
 <ol class="arabic simple" start="2">
 <li><p><strong>Instance Method Reference</strong> (of a particular object)</p></li>
 </ol>
-<p>Syntax: <code class="docutils literal notranslate"><span class="pre">instance::instanceMethodName</span></code><br />
-Used to refer to an instance method of a specific object. Note that <code class="docutils literal notranslate"><span class="pre">this</span></code> can be the specific object! The example code below shows two object instances.</p>
+<p><strong>Syntax:</strong> <code class="docutils literal notranslate"><span class="pre">instance::instanceMethodName</span></code></p>
+<p>This syntax is used to refer to an instance method of a specific object. Note that <code class="docutils literal notranslate"><span class="pre">this</span></code> can be the specific object! The example code below shows three object instances.</p>
 <ul class="simple">
-<li><p>The first instance is <code class="docutils literal notranslate"><span class="pre">System.out</span></code>, a static instance of a <code class="docutils literal notranslate"><span class="pre">PrintStream</span></code> on the <code class="docutils literal notranslate"><span class="pre">System</span></code> class.</p></li>
-<li><p>The second instance is <code class="docutils literal notranslate"><span class="pre">this</span></code>, an instance of <code class="docutils literal notranslate"><span class="pre">Example</span></code>.</p></li>
+<li><p>An instance of <code class="docutils literal notranslate"><span class="pre">Example</span></code> class. The instance is the identfier <code class="docutils literal notranslate"><span class="pre">ex</span></code>.</p></li>
+<li><p>An instance of <code class="docutils literal notranslate"><span class="pre">this</span></code>, an instance of <code class="docutils literal notranslate"><span class="pre">Example</span></code>.</p></li>
+<li><p>An instance of a <code class="docutils literal notranslate"><span class="pre">PrintStream</span></code> on the <code class="docutils literal notranslate"><span class="pre">System</span></code> class. Note that <code class="docutils literal notranslate"><span class="pre">System.out</span></code> is a static instance of <code class="docutils literal notranslate"><span class="pre">PrintStream</span></code>.</p></li>
 </ul>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, World!&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">print</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">;</span>
-<span class="w">    </span><span class="n">print</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">message</span><span class="p">);</span><span class="w"> </span><span class="c1">// Output: Hello, World!</span>
-
-<span class="w">    </span><span class="n">Example</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Example</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-<span class="w">    </span><span class="n">ex</span><span class="p">.</span><span class="na">useSelf</span><span class="p">();</span>
-<span class="w">  </span><span class="p">}</span>
-
+<span class="w">  </span><span class="c1">// Constructor setting the instance field</span>
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">Example</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
 <span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">useSelf</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">getString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">::</span><span class="n">convert</span><span class="p">;</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">getString</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="mi">20</span><span class="p">));</span><span class="w"> </span><span class="c1">// Output: Sum is 25</span>
+<span class="w">  </span><span class="c1">// Note that `example` is an instance method. &quot;this&quot; exists.</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">example</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Example</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Example</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w">    </span><span class="c1">// create another instance of Example</span>
+
+<span class="w">    </span><span class="c1">// reference &quot;this&quot; instance and the instance `ex`.</span>
+<span class="w">    </span><span class="n">callIt</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">convert</span><span class="p">);</span><span class="w">          </span><span class="c1">// prints &quot;Sum is 21&quot;</span>
+<span class="w">    </span><span class="n">callIt</span><span class="p">(</span><span class="n">ex</span><span class="p">::</span><span class="n">convert</span><span class="p">);</span><span class="w">            </span><span class="c1">// prints &quot;Sum is 25&quot;</span>
+
+<span class="w">    </span><span class="c1">// `out` is a static instance of PrintStream on the System class.</span>
+<span class="w">    </span><span class="c1">// Therefore, System.out::println references an instance method.</span>
+<span class="w">    </span><span class="n">consumeIt</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="nf">consumeIt</span><span class="p">(</span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">fn</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="s">&quot;In our example, this will be printed&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="nf">callIt</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fn</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="mi">20</span><span class="p">));</span>
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// add the argument to &quot;this&quot; instance&#39;s n-value</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Sum is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">n</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="3">
-<li><p><strong>Instance Method Reference</strong> (of an arbitrary object of a class)</p></li>
-</ol>
-<p>Syntax: <code class="docutils literal notranslate"><span class="pre">ClassName::instanceMethodName</span></code><br />
-Used when the method is called on an arbitrary instance of a class.<br />
-This will only work when the object on which the method is called is the first parameter of the functional interface.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toUpperCase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">::</span><span class="n">toUpperCase</span><span class="p">;</span>
-<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">toUpperCase</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// Output: HELLO</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>In the example above, the string <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code> is the argument passed into <code class="docutils literal notranslate"><span class="pre">apply</span></code>. When <code class="docutils literal notranslate"><span class="pre">apply</span></code> is called, Java is effectively making the following call.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;hello&quot;</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
-</pre></div>
-</div>
-<p>This type of method reference works only when the first argument to the method defined in the interface matches the object type needed. In our example, <code class="docutils literal notranslate"><span class="pre">String::toUpperCase</span></code> is an instance method on the <code class="docutils literal notranslate"><span class="pre">String</span></code> class. Therefore, the signature must accept a <code class="docutils literal notranslate"><span class="pre">String</span></code> as the first argument.</p>
-<p>This type of method reference is useful when the one wants to define the interface “early” and define the object instance “later.” If you know the object, it can be more clear to simply use the object then.</p>
-<ol class="arabic simple" start="4">
-<li><p>Constructor Reference</p></li>
-</ol>
-<p>Syntax: <code class="docutils literal notranslate"><span class="pre">ClassName::new</span></code><br />
-Used to refer to a constructor. (This is rarely used.)</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">StringBuilder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createStringBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">::</span><span class="k">new</span><span class="p">;</span>
-<span class="w">        </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">sb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createStringBuilder</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;Hello, Constructor Reference!&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// Output: Hello, Constructor Reference!</span>
-<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -783,7 +979,7 @@ Used to refer to a constructor. (This is rarely used.)</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Practice Custom Sorting</p>
+        <p class="prev-next-title"><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -813,8 +1009,14 @@ Used to refer to a constructor. (This is rarely used.)</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remember-interfaces-are-types">Remember: Interfaces are <em>Types</em></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-comparator">Using the Comparator</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-types-of-method-references">Four Types of Method References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-comparator">Using the Comparator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-comparator">Reverse Comparator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-kids">Comparing Kids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-strings-strangely">Sorting Strings Strangely</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-that-use-comparator">Methods that use Comparator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-method-references">Types of Method References</a></li>
 </ul>
   </nav></div>
 

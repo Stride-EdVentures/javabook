@@ -238,10 +238,10 @@ commentsRunWhenDOMLoaded(addUtterances);
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basic_interfaces.html">Intro to Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_01.html">Practice: Basic Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Basic Interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sorting_with_classes.html">Sorting with Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Practice Custom Sorting</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="full_review.html">Full Review</a></li>
@@ -459,7 +459,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Practice Custom Sorting</h1>
+    <h1><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -474,7 +474,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="practice-custom-sorting">
-<h1>Practice Custom Sorting<a class="headerlink" href="#practice-custom-sorting" title="Link to this heading">#</a></h1>
+<h1><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting<a class="headerlink" href="#practice-custom-sorting" title="Link to this heading">#</a></h1>
 <p><strong>Question #1:</strong> Examine the code below. Look at the method <code class="docutils literal notranslate"><span class="pre">runExample</span></code> to see three attempts to call <code class="docutils literal notranslate"><span class="pre">add</span></code>. Only one will succeed? Which one works?</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Recall how the Function interface is defined</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
@@ -505,7 +505,36 @@ document.write(`
 <p><code class="docutils literal notranslate"><span class="pre">add(Quiz::toDouble)</span></code> will succeed because it has the correct signature.<br />
 <code class="docutils literal notranslate"><span class="pre">toDouble</span></code> takes a <code class="docutils literal notranslate"><span class="pre">Fraction</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">Double</span></code>.</p>
 </div>
-<p><strong>Question #2:</strong></p>
+<p><strong>Question #2:</strong> Write a method to sort an integer array in its <em>Natural Order</em>.</p>
+<p><strong>Question #3:</strong> Write a method to sort an integer in reverse. Accomplish this in three different ways:</p>
+<ol class="arabic simple">
+<li><p>Have the hosting <code class="docutils literal notranslate"><span class="pre">class</span></code> implement the Comparator that does the arithmetic directly.</p></li>
+<li><p>Use a method reference to a function calls an Integer’s Comparable backwards.</p></li>
+<li><p>Use Collections.reverseOrder.</p></li>
+</ol>
+<div class="admonition-click-to-see-answer admonition">
+<p class="admonition-title">Click to see answer</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO code</span>
+</pre></div>
+</div>
+</div>
+<p><strong>Question #4:</strong> Write a method to sort an integer array by its 1’s digit.<br />
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">46</span> <span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">46</span> <span class="p">]</span>
+<span class="o">//</span> <span class="n">One</span><span class="s1">&#39;s digits in the sorted list are: 0, 1, 5, 6</span>
+</pre></div>
+</div>
+<p><strong>Question #5:</strong> Write a method to sort an integer array as follows:</p>
+<ol class="arabic simple">
+<li><p>Even numbers before all Odd numbers</p></li>
+<li><p>1’s digits are used as the secondary sort</p></li>
+<li><p>The value of the number is used as the tertiary sort</p></li>
+</ol>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Orig</span><span class="p">:</span>  <span class="p">[</span><span class="mi">44</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">74</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
+<span class="n">After</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">74</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">79</span><span class="p">]</span>
+</pre></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">

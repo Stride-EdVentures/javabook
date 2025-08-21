@@ -1,4 +1,4 @@
-# Practice: Basic Interfaces
+# <i class="fas fa-pen-square fa-fw"></i> Practice: Basic Interfaces
 
 **Question #1:** Describe the difference between an `interface` and a `class`.  
 
