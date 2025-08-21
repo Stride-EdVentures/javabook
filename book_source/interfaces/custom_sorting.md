@@ -366,7 +366,7 @@ public class Example {
 This syntax is used to refer to an instance method of a specific object. Note that `this` can be the specific object! The example code below shows three object instances.   
 * An instance of `Example` class. The instance is the identfier `ex`.  
 * An instance of `this`, an instance of `Example`.  
-* An instance of a `PrintStream` on the `System` class. Note that `System.out` is a static instance of `PrintStream`.    
+* An instance of a `PrintStream` on the `System` class. Note that `System.out` is a static field of `PrintStream`.    
    
 ```java
 public class Example {
@@ -386,7 +386,7 @@ public class Example {
     callIt(this::convert);          // prints "Sum is 21"
     callIt(ex::convert);            // prints "Sum is 25"
 
-    // `out` is a static instance of PrintStream on the System class.
+    // `out` is a static field of PrintStream on the System class.
     // Therefore, System.out::println references an instance method.
     consumeIt(System.out::println);
   }
