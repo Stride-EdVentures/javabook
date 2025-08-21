@@ -502,38 +502,202 @@ document.write(`
 </div>
 <div class="dropdown admonition">
 <p class="admonition-title">Click to see answer</p>
-<p><code class="docutils literal notranslate"><span class="pre">add(Quiz::toDouble)</span></code> will succeed because it has the correct signature.<br />
+<p><code class="docutils literal notranslate"><span class="pre">add(Quiz::toDouble)</span></code> will succeed because it has the correct method signature.<br />
 <code class="docutils literal notranslate"><span class="pre">toDouble</span></code> takes a <code class="docutils literal notranslate"><span class="pre">Fraction</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">Double</span></code>.</p>
 </div>
-<p><strong>Question #2:</strong> Write a method to sort an integer array in its <em>Natural Order</em>.</p>
-<p><strong>Question #3:</strong> Write a method to sort an integer in reverse. Accomplish this in three different ways:</p>
+<p><strong>Question #2:</strong> Write code to sort a List of Integers in its <em>Natural Order</em>.</p>
+<p>Don’t write the sort method. Use a library and one line of code.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Click to see answer</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortArray</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p><strong>Question #3:</strong> Write code to sort a list of integers in reverse. Accomplish this in three different ways:</p>
 <ol class="arabic simple">
 <li><p>Have the hosting <code class="docutils literal notranslate"><span class="pre">class</span></code> implement the Comparator that does the arithmetic directly.</p></li>
-<li><p>Use a method reference to a function calls an Integer’s Comparable backwards.</p></li>
+<li><p>Use a method reference to a function that calls the Integer’s <code class="docutils literal notranslate"><span class="pre">Comparable.compareTo</span></code>.</p></li>
 <li><p>Use Collections.reverseOrder.</p></li>
 </ol>
-<div class="admonition-click-to-see-answer admonition">
+<div class="dropdown admonition">
 <p class="admonition-title">Click to see answer</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO code</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sort3Ways</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// #1: Use the Comparator that this class implements</span>
+<span class="w">        </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="k">this</span><span class="p">);</span><span class="w"> </span>
+
+<span class="w">        </span><span class="c1">// #2: Use the instance method reference</span>
+<span class="w">        </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">reverse</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// #3: Use the Collections comparator</span>
+<span class="w">        </span><span class="c1">// Notice the dot &amp; parentheses. This is a method invocation.</span>
+<span class="w">        </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Collections</span><span class="p">.</span><span class="na">reverseOrder</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// reverse order arithmetic</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">i2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">reverse</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">i2</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">i1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<p><strong>Question #4:</strong> Write a method to sort an integer array by its 1’s digit.<br />
+<p><strong>Question #4:</strong> Write code to sort an integer array by its 1’s digit.<br />
 For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">46</span> <span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">46</span> <span class="p">]</span>
-<span class="o">//</span> <span class="n">One</span><span class="s1">&#39;s digits in the sorted list are: 0, 1, 5, 6</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">46</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">46</span><span class="w"> </span><span class="o">]</span>
+<span class="c1">// One&#39;s digits in the sorted list are: 0, 1, 5, 6</span>
 </pre></div>
 </div>
-<p><strong>Question #5:</strong> Write a method to sort an integer array as follows:</p>
-<ol class="arabic simple">
-<li><p>Even numbers before all Odd numbers</p></li>
-<li><p>1’s digits are used as the secondary sort</p></li>
-<li><p>The value of the number is used as the tertiary sort</p></li>
-</ol>
-<p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Orig</span><span class="p">:</span>  <span class="p">[</span><span class="mi">44</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">74</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
-<span class="n">After</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">74</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">79</span><span class="p">]</span>
+<div class="dropdown admonition">
+<p class="admonition-title">Click to see answer</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortBy1</span><span class="p">(</span><span class="n">Integer</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="n">Example</span><span class="p">::</span><span class="n">by1sLonger</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="n">Example</span><span class="p">::</span><span class="n">by1sBetter</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">by1sLonger</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">o2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">d1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o1</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">d2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o2</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">d1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">d2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">d1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">d2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">by1sBetter</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">o2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">o1</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">o2</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
+</div>
+</div>
+<p><strong>Question #5:</strong> Write code to sort an array of Strings in the following four ways:</p>
+<ol class="arabic simple">
+<li><p>Default sort order</p></li>
+<li><p>Reversing sort order</p></li>
+<li><p>Ignoring the case of the String</p></li>
+<li><p>Using this custom order that will reverse the String and also ignore the case</p></li>
+</ol>
+<p>Note that a regular sort is case-sensitive and will result in Upper-Case letters coming first.
+Here is sample output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Original</span><span class="p">:</span> <span class="p">[</span><span class="n">Too</span> <span class="n">Small</span><span class="p">,</span> <span class="n">One</span><span class="p">,</span> <span class="n">Two</span><span class="p">,</span> <span class="n">Three</span><span class="p">,</span> <span class="n">four</span><span class="p">,</span> <span class="n">five</span><span class="p">,</span> <span class="n">six</span><span class="p">,</span> <span class="n">seven</span><span class="p">,</span> <span class="n">Eight</span><span class="p">,</span> <span class="n">Nine</span><span class="p">,</span> <span class="n">ten</span><span class="p">,</span> <span class="n">bigger</span><span class="p">]</span>
+<span class="n">Default</span><span class="p">:</span>  <span class="p">[</span><span class="n">Eight</span><span class="p">,</span> <span class="n">Nine</span><span class="p">,</span> <span class="n">One</span><span class="p">,</span> <span class="n">Three</span><span class="p">,</span> <span class="n">Too</span> <span class="n">Small</span><span class="p">,</span> <span class="n">Two</span><span class="p">,</span> <span class="n">bigger</span><span class="p">,</span> <span class="n">five</span><span class="p">,</span> <span class="n">four</span><span class="p">,</span> <span class="n">seven</span><span class="p">,</span> <span class="n">six</span><span class="p">,</span> <span class="n">ten</span><span class="p">]</span>
+<span class="n">Reverse</span><span class="p">:</span>  <span class="p">[</span><span class="n">ten</span><span class="p">,</span> <span class="n">six</span><span class="p">,</span> <span class="n">seven</span><span class="p">,</span> <span class="n">four</span><span class="p">,</span> <span class="n">five</span><span class="p">,</span> <span class="n">bigger</span><span class="p">,</span> <span class="n">Two</span><span class="p">,</span> <span class="n">Too</span> <span class="n">Small</span><span class="p">,</span> <span class="n">Three</span><span class="p">,</span> <span class="n">One</span><span class="p">,</span> <span class="n">Nine</span><span class="p">,</span> <span class="n">Eight</span><span class="p">]</span>
+<span class="n">No</span><span class="o">-</span><span class="n">Case</span><span class="p">:</span>  <span class="p">[</span><span class="n">bigger</span><span class="p">,</span> <span class="n">Eight</span><span class="p">,</span> <span class="n">five</span><span class="p">,</span> <span class="n">four</span><span class="p">,</span> <span class="n">Nine</span><span class="p">,</span> <span class="n">One</span><span class="p">,</span> <span class="n">seven</span><span class="p">,</span> <span class="n">six</span><span class="p">,</span> <span class="n">ten</span><span class="p">,</span> <span class="n">Three</span><span class="p">,</span> <span class="n">Too</span> <span class="n">Small</span><span class="p">,</span> <span class="n">Two</span><span class="p">]</span>
+<span class="n">Custom</span><span class="p">:</span>   <span class="p">[</span><span class="n">Three</span><span class="p">,</span> <span class="n">Nine</span><span class="p">,</span> <span class="n">One</span><span class="p">,</span> <span class="n">five</span><span class="p">,</span> <span class="n">Too</span> <span class="n">Small</span><span class="p">,</span> <span class="n">ten</span><span class="p">,</span> <span class="n">seven</span><span class="p">,</span> <span class="n">Two</span><span class="p">,</span> <span class="n">bigger</span><span class="p">,</span> <span class="n">four</span><span class="p">,</span> <span class="n">Eight</span><span class="p">,</span> <span class="n">six</span><span class="p">]</span>
+
+<span class="n">In</span> <span class="n">the</span> <span class="n">custom</span> <span class="n">sort</span><span class="p">,</span> <span class="n">see</span> <span class="n">how</span> <span class="n">we</span> <span class="nb">sorted</span> <span class="n">by</span> <span class="n">the</span> <span class="n">reverse</span> <span class="n">of</span> <span class="n">the</span> <span class="n">string</span><span class="p">:</span>  
+          <span class="p">[</span><span class="n">eerht</span><span class="p">,</span> <span class="n">enin</span><span class="p">,</span> <span class="n">eno</span><span class="p">,</span> <span class="n">evif</span><span class="p">,</span> <span class="n">llams</span> <span class="n">oot</span><span class="p">,</span> <span class="n">net</span><span class="p">,</span> <span class="n">neves</span><span class="p">,</span> <span class="n">owt</span><span class="p">,</span> <span class="n">reggib</span><span class="p">,</span> <span class="n">ruof</span><span class="p">,</span> <span class="n">thgie</span><span class="p">,</span> <span class="n">xis</span><span class="p">]</span> 
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Click to see answer</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">demoSorting</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Too Small&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;One&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Two&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Three&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;four&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">            </span><span class="s">&quot;five&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;six&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;seven&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Eight&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Nine&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ten&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bigger&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="w">      </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">words</span><span class="p">));</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Original: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">arr</span><span class="p">);</span>
+<span class="w">      </span>
+<span class="w">      </span><span class="c1">// use the default comparator which calls objects .equals</span>
+<span class="w">      </span><span class="c1">// Note the case-sensitive comparison</span>
+<span class="w">      </span><span class="n">arr</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Default:  &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">arr</span><span class="p">);</span>
+<span class="w">      </span>
+<span class="w">      </span><span class="c1">// provide a &quot;reverseOrder&quot; comparator</span>
+<span class="w">      </span><span class="n">arr</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Collections</span><span class="p">.</span><span class="na">reverseOrder</span><span class="p">());</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Reverse  :&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">arr</span><span class="p">);</span>
+<span class="w">      </span>
+<span class="w">      </span><span class="c1">// provide a case-insensitive comparator</span>
+<span class="w">      </span><span class="c1">// Notice the dot operator and no parentheses. </span>
+<span class="w">      </span><span class="c1">// We are using a static field, not calling a method, not referencing a method</span>
+<span class="w">      </span><span class="n">arr</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">CASE_INSENSITIVE_ORDER</span><span class="p">);</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;No-Case:  &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">arr</span><span class="p">);</span>
+<span class="w">      </span>
+<span class="w">      </span><span class="c1">// provide a custom comparator</span>
+<span class="w">      </span><span class="n">arr</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">Example</span><span class="p">::</span><span class="n">myCompare</span><span class="p">);</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Custom:   &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">arr</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">myCompare</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">s2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// reverse each string, lower-case it, and compare those</span>
+<span class="w">      </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reverseString</span><span class="p">(</span><span class="n">s1</span><span class="p">).</span><span class="na">toLowerCase</span><span class="p">();</span>
+<span class="w">      </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reverseString</span><span class="p">(</span><span class="n">s2</span><span class="p">).</span><span class="na">toLowerCase</span><span class="p">();</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">reverseString</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">reverseString</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+<span class="w">   </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p><strong>Question #6:</strong> Write a method to sort an integer array using primary, secondary &amp; tertiary sorting rules as follows:</p>
+<ol class="arabic simple">
+<li><p><strong>Primary:</strong> All positive numbers before all negative numbers. If signs are equal, use…</p></li>
+<li><p><strong>Secondary:</strong> 10’s digits. If the 10’s digiti is the same, use…</p></li>
+<li><p><strong>Tertiary:</strong> Reverse <em>Natural Order</em> (larger first).</p></li>
+</ol>
+<p>For example, the array below shows how all the positive values come first. Then, we see that since [7, 3, 2] all have 0 as their 10’s digit, they come first. The order of these three number is due to 7 &gt; 3 &gt; 2. The last three numbers [-47, -49, -49] all have 4 as their 10’s digit, and -47 &gt; -49.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Before</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="o">-</span><span class="mi">23</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">47</span><span class="p">,</span> <span class="o">-</span><span class="mi">39</span><span class="p">,</span> <span class="o">-</span><span class="mi">27</span><span class="p">,</span> <span class="o">-</span><span class="mi">49</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="o">-</span><span class="mi">49</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">34</span><span class="p">]</span>
+ <span class="n">After</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">23</span><span class="p">,</span> <span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="o">-</span><span class="mi">27</span><span class="p">,</span> <span class="o">-</span><span class="mi">39</span><span class="p">,</span> <span class="o">-</span><span class="mi">47</span><span class="p">,</span> <span class="o">-</span><span class="mi">49</span><span class="p">,</span> <span class="o">-</span><span class="mi">49</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Click to see answer</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">tertiarySort</span><span class="p">(</span><span class="n">Integer</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Before: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">arr</span><span class="p">));</span>
+<span class="w">        </span><span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="n">Example</span><span class="p">::</span><span class="n">tertiaryComp</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot; After: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">arr</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">tertiaryComp</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">o2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">posIsLessThan</span><span class="p">(</span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">o2</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">test</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">test</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tensDigit</span><span class="p">(</span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">o2</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">test</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">test</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">numberButRev</span><span class="p">(</span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">o2</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">tensDigit</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">o2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">o1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">o2</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">numberButRev</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">o2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">o2</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">o1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">posIsLessThan</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">o2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">o1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">o2</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// different sign. Use the sign of o2.</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">o2</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// same sign.</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </section>
 

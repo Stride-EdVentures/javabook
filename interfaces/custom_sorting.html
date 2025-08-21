@@ -893,7 +893,7 @@ The supplied function must match the arguments and return types as defined in th
 <ul class="simple">
 <li><p>An instance of <code class="docutils literal notranslate"><span class="pre">Example</span></code> class. The instance is the identfier <code class="docutils literal notranslate"><span class="pre">ex</span></code>.</p></li>
 <li><p>An instance of <code class="docutils literal notranslate"><span class="pre">this</span></code>, an instance of <code class="docutils literal notranslate"><span class="pre">Example</span></code>.</p></li>
-<li><p>An instance of a <code class="docutils literal notranslate"><span class="pre">PrintStream</span></code> on the <code class="docutils literal notranslate"><span class="pre">System</span></code> class. Note that <code class="docutils literal notranslate"><span class="pre">System.out</span></code> is a static instance of <code class="docutils literal notranslate"><span class="pre">PrintStream</span></code>.</p></li>
+<li><p>An instance of a <code class="docutils literal notranslate"><span class="pre">PrintStream</span></code> on the <code class="docutils literal notranslate"><span class="pre">System</span></code> class. Note that <code class="docutils literal notranslate"><span class="pre">System.out</span></code> is a static field of <code class="docutils literal notranslate"><span class="pre">PrintStream</span></code>.</p></li>
 </ul>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
@@ -912,7 +912,7 @@ The supplied function must match the arguments and return types as defined in th
 <span class="w">    </span><span class="n">callIt</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">convert</span><span class="p">);</span><span class="w">          </span><span class="c1">// prints &quot;Sum is 21&quot;</span>
 <span class="w">    </span><span class="n">callIt</span><span class="p">(</span><span class="n">ex</span><span class="p">::</span><span class="n">convert</span><span class="p">);</span><span class="w">            </span><span class="c1">// prints &quot;Sum is 25&quot;</span>
 
-<span class="w">    </span><span class="c1">// `out` is a static instance of PrintStream on the System class.</span>
+<span class="w">    </span><span class="c1">// `out` is a static field of PrintStream on the System class.</span>
 <span class="w">    </span><span class="c1">// Therefore, System.out::println references an instance method.</span>
 <span class="w">    </span><span class="n">consumeIt</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
