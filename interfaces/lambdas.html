@@ -243,6 +243,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Lambdas</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Anonymous Classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="full_review.html">Full Review</a></li>
 </ul>
@@ -448,7 +449,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -464,6 +467,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lambdas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -477,6 +490,67 @@ document.write(`
 <h1>Lambdas<a class="headerlink" href="#lambdas" title="Link to this heading">#</a></h1>
 <p>In this lesson we will learn how to fulfill a Functional Interface with a Lambda Expression.
 And we will see how to apply this.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<p>So far we’ve seen how a Method Reference can be used to fulfill a <code class="docutils literal notranslate"><span class="pre">Functional</span> <span class="pre">Interface.</span></code></p>
+<div class="note admonition">
+<p class="admonition-title">Functional Interface</p>
+<p><strong>Functional Interface</strong>: An interface that has exactly one <code class="docutils literal notranslate"><span class="pre">abstract</span></code> method.</p>
+<p>An interface can have many <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods as well as <code class="docutils literal notranslate"><span class="pre">default</span></code> and <code class="docutils literal notranslate"><span class="pre">static</span></code> methods.</p>
+</div>
+<p>The general syntax for a Method Reference is: <code class="docutils literal notranslate"><span class="pre">context::methodName</span></code>.  The context can be <code class="docutils literal notranslate"><span class="pre">this</span></code>, the class name, or the instance identifier.</p>
+<p>While this does allow some concise code, we can make it even better with <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">expressions</span></code>.</p>
+<div class="note admonition">
+<p class="admonition-title">Lambda Expression</p>
+<p>A <strong>Lambda Expression</strong> is shorthand notation that defines an anonymous method that acts as a <code class="docutils literal notranslate"><span class="pre">functional</span> <span class="pre">interface.</span></code></p>
+<p>For example, if we want to fulfill the <code class="docutils literal notranslate"><span class="pre">Comparator&lt;Integer&gt;</span></code> functional interface, we can do the following:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">((</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">i1</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">i2</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>A Lambda Expression has several valid syntaxes.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// The most common syntax using a single argument with a 1-liner method body.</span>
+<span class="w">    </span><span class="c1">// Note that `return` is implied</span>
+<span class="w">    </span><span class="n">arg</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">arg</span><span class="o">-</span><span class="n">expression</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Multiple arguments. Method body is one line.</span>
+<span class="w">    </span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span><span class="w"> </span><span class="n">arg2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">arg</span><span class="o">-</span><span class="n">expression</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Typed arguments. It is optional to provide types for the arguments.</span>
+<span class="w">    </span><span class="c1">// If { curly-braces } are provided, then the body can be multiple lines</span>
+<span class="w">    </span><span class="c1">// AND it must explicitly use the `return` keyword.</span>
+<span class="w">    </span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="n">arg1</span><span class="p">,</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="n">arg2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="n">statement</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">statement</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>A lambda expression is shorthand to create a method. In the table below you’ll see identical method in both columns. The Lambda Expression in the right column creates a method that has no name. This is why it is called an <code class="docutils literal notranslate"><span class="pre">anonymous</span> <span class="pre">method</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Full Method</p></th>
+<th class="head"><p>Lambda Expression</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>public int add(int x, int y) {<br>   return x + y;<br>}</p></td>
+<td><p>(x, y) -&gt; x + y</p></td>
+</tr>
+<tr class="row-odd"><td><p>public int sub(int a, int b) {<br>   return a - b;<br>}</p></td>
+<td><p>(n, m) -&gt; n - m</p></td>
+</tr>
+<tr class="row-even"><td><p>public double exp(int x, int n){<br>   return Math.pow(x, n);<br>}</p></td>
+<td><p>(x, n) -&gt; Math.pow(x, n)</p></td>
+</tr>
+<tr class="row-odd"><td><p>public int printSumTwo(int[] arr){<br>   int sum = arr[0] + arr[1];<br>   System.out.println(sum);<br>   return sum;<br>}</p></td>
+<td><p>(arr) -&gt; { System.out.println(arr[0] + arr[1]); return arr[0] + arr[1]; }</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -533,6 +607,23 @@ And we will see how to apply this.</p>
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lambdas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
