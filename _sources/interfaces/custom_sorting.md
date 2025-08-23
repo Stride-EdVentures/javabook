@@ -43,7 +43,7 @@ public interface Function<T, R> {
     // Other stuff not shown as it is beyond the scope of this lesson
 }
 ```
-### Implementing Function&lt;R, T&gt;
+### Implementing Function&lt;T, R&gt;
 
 The code below shows two classes.  
 
