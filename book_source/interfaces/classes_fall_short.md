@@ -1,11 +1,12 @@
-# Sorting with Classes
+# Classes Fall Short
 
-This lesson is dedicated to showing how classes are not good enough. Interfaces are needed to do some powerful things that classes cannot.  
+This lesson is dedicated to showing that classes are pretty good at allowing us to customize the sort order of a list. However, classes are not good enough. Interfaces are needed to sort a generic list of objects that define their own sort order.  
+
+We will demonstrate this by sorting lists exclusively using classes, continually increasing the demand until we discover what classes cannot do.   
 
 ## Overview
 
-The goals of this lesson are to:  
-🔹 Demonstrate that classes are unable to generically sort a list where the objects define the sort order.  
+The goals of this lesson is to demonstrate that classes are unable to generically sort a list where the objects define their own sort order.  
 
 As we accomplish this goal, we will also:
 🔹 Learn how to pass a function (a *behavior*) to another method.  
@@ -153,10 +154,6 @@ To generalize the above code, we can use `Generics` in the following way.
 ```
 With the above implementation, we can sort any list using any comparator method. And we did it without using interfaces!! 
 
-If we can do all the above with classes, **what do interfaces offer us?**  
-1. Interfaces allow the programmer to write shorter code, which we will illustrate in a bit.  
-2. Interfaces allow us to write sorting code where the items sort themselves.  
-
 ### Kids Sorting Themselves
 Let's rewrite the sorting algorithm so that the kids can sort themselves. In other words, let's have the `lessThan` method belong to the Kid class. This is what we call `Natural Sort Order`.
 
@@ -177,6 +174,7 @@ public class Kid extends Person {
     return this.age - other.age;
   }
 }
+
 public class Dad {
   public void sortKids() {
      for (int index = 1; index < kids.size(); index++) {
@@ -214,6 +212,8 @@ We could attempt to get around this problem by casting the object to a `Kid` cla
 
 We could require that objects inherit from a base class that implements the method. Let's see what that looks like.
 ```java
+  // Note: we are creating this **class** to illustrate a point.
+  // There is an interface named Comparable<T> that we will get to later.
   public abstract class Comparable<T> {
     public abstract int compareTo(T other);
   }

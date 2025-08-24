@@ -1,4 +1,4 @@
-# <i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting
+# <i class="fas fa-pen-square fa-fw"></i> Practice: Method References
 
 **Question #1:** Examine the code below. Look at the method `runExample` to see three attempts to call `add`. Only one will succeed? Which one works?
 

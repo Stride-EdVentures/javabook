@@ -9,10 +9,10 @@ chapters:
     - file: Topics/layout_managers
   - file: interfaces/index
     sections:
-    - file: interfaces/basic_interfaces
+    - file: interfaces/interfaces_101
     - file: interfaces/practice_01
-    - file: interfaces/sorting_with_classes
-    - file: interfaces/custom_sorting
+    - file: interfaces/classes_fall_short
+    - file: interfaces/method_references
     - file: interfaces/practice_02
     - file: interfaces/lambdas
     - file: interfaces/practice_03

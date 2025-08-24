@@ -1,4 +1,4 @@
-# Intro to Interfaces
+# Interfaces 101
 
 ```{admonition} Definition
 *Interface*: A contract that promises a specific behavior.
@@ -92,9 +92,9 @@ Interfaces allow completely new implementations to be plugged into an existing s
 
 Interfaces act as the *TYPE* of a function which opens up the ability to do *Functional Programming*.  Interfaces allow an imperative<a href="#footnotes"><sup>[4]</sup></a> language the ability to offer some characteristics of a functional<a href="#footnotes"><sup>[5]</sup></a> programming language.
 
-Interfaces are used to define Event Handlers or Callbacks that are used in GUI programming.  Furthermore, functional interfaces<a href="#footnotes"><sup>[6]</sup></a> can be implemented with `lambda` expressions or `inner anonymous classes` which give us a good amount of flexibility and power.  
+Interfaces are used to define **event handlers** or **callbacks** that are used in GUI programming.  Furthermore, `functional interfaces`<a href="#footnotes"><sup>[6]</sup></a> can be implemented with `lambda` expressions or `method references` which give us a good amount of flexibility and power.  
 
-Interfaces are used in Collection Classes, Streams, Unit Testing, parallel programming, and more!!  
+Interfaces are used in Collection Classes, Streams, unit testing, parallel programming, and more!!  
 
 ## Multiple Implementations
 Below is code that shows how a class can both extend a class and implement two interfaces. Notice how we use the keyword `implements` only once. Furthermore, we are still allowed to extend from a parent class.  
