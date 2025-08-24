@@ -237,11 +237,11 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="basic_interfaces.html">Intro to Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Basic Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sorting_with_classes.html">Sorting with Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces_101.html">Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes_fall_short.html">Classes Fall Short</a></li>
+<li class="toctree-l2"><a class="reference internal" href="method_references.html">Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Method References</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_03.html"><i class="fas fa-pen-square fa-fw"></i> Practice Lambdas</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Applied Interfaces</a></li>
@@ -473,8 +473,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterable">Iterable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterable">Iterable</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-the-for-each-work">How does the for-each work?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-have-two-interfaces">Why have two interfaces?</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocloseable">AutoCloseable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#listeners">Listeners</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important-summary">What’s so important?  (Summary)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
             </nav>
         </div>
@@ -488,10 +495,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="applied-interfaces">
 <h1>Applied Interfaces<a class="headerlink" href="#applied-interfaces" title="Link to this heading">#</a></h1>
-<p>In this lesson we will examine how interfaces are baked into the Java Language. We will examine <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> and <code class="docutils literal notranslate"><span class="pre">AutoCloseable</span></code>.</p>
+<p>In this lesson we will examine how interfaces are baked into the Java Language. We will examine <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> and <code class="docutils literal notranslate"><span class="pre">AutoCloseable</span></code>. We will also take a look at <code class="docutils literal notranslate"><span class="pre">Listeners</span></code> in GUI programming.</p>
 <section id="iterable">
 <h2>Iterable<a class="headerlink" href="#iterable" title="Link to this heading">#</a></h2>
-<p>All classes that are in the <code class="docutils literal notranslate"><span class="pre">Collection</span></code> classes will inherit from <code class="docutils literal notranslate"><span class="pre">Collection</span></code> and therefore will implement <code class="docutils literal notranslate"><span class="pre">Iterable</span></code>.</p>
+<p>All classes that are in the <code class="docutils literal notranslate"><span class="pre">Collection</span></code> classes will inherit from <code class="docutils literal notranslate"><span class="pre">Collection</span></code> and therefore will implement <code class="docutils literal notranslate"><span class="pre">Iterable</span></code>. This allows the objects to be used in a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop.</p>
+<p>Let’s look at the two relevant interfaces.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">iterator</span><span class="p">();</span>
 <span class="p">}</span>
@@ -503,7 +511,55 @@ document.write(`
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>TODO: Discuss this more.</strong></p>
+<p>The generic interface, <code class="docutils literal notranslate"><span class="pre">List</span></code> extends <code class="docutils literal notranslate"><span class="pre">Collection</span></code> (another interface) and therefore must implement <code class="docutils literal notranslate"><span class="pre">Iterable</span></code>. It turns out that not only can you use a List in a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop, but any object that implements <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> can be used in a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop. You can create your own custom class to do this.</p>
+<p>There are <strong>two questions</strong> we will answer:</p>
+<section id="how-does-the-for-each-work">
+<h3>How does the for-each work?<a class="headerlink" href="#how-does-the-for-each-work" title="Link to this heading">#</a></h3>
+<p>How is it that just because an object implements an interface that it can then be put into a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop? This woeks because the compiler will translate a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop into a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop in the following way:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Beforehand, the &quot;sugar&quot; code looks like this:</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// The compiler verifies at compile time that `iter` is-a `Iterable&lt;T&gt;`.</span>
+<span class="c1">// If not, then the compiler will throw an error. </span>
+<span class="c1">// </span>
+<span class="c1">// If all is good, the &quot;unsugared&quot; code looks like this.</span>
+<span class="c1">// When running, this is the actual code that gets executed. </span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="na">hasNext</span><span class="p">();</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The compiler gets the <code class="docutils literal notranslate"><span class="pre">Iterator</span></code> only if the object can provide an iterator. If the object does not implement <code class="docutils literal notranslate"><span class="pre">Iterable&lt;T&gt;</span></code>, then it cannot give an iterator and the compiler will throw an exception (fail to compile).</p>
+<p>With the iterator, the newly created for-loop will continually get items until <code class="docutils literal notranslate"><span class="pre">hasNext</span></code> returns false.</p>
+</section>
+<section id="why-have-two-interfaces">
+<h3>Why have two interfaces?<a class="headerlink" href="#why-have-two-interfaces" title="Link to this heading">#</a></h3>
+<p>It might seem plausible to simply have the iterable object implement <code class="docutils literal notranslate"><span class="pre">Iterator</span></code> directly and circumvent the need for the <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> interface altogether. We could eliminate the need to call <code class="docutils literal notranslate"><span class="pre">iterator</span></code>. This <em>could</em> work except that we want to be able have nested loops where each loop iterates independently. Consider:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// This inner loop has no dependency on the outer loop</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Inner: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Outer: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the object didn’t have a way to request a fresh instance of <code class="docutils literal notranslate"><span class="pre">Iterator</span></code> then the code above would not behave like a nested loop at all. The nested iterator would not have the ability to maintain its own, independent state. This is because there is only one object implementing the itertor. The <code class="docutils literal notranslate"><span class="pre">unsugared</span></code> code would look like this <em>buggy</em> code:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">iter</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Type</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">iter</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Type</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Inner: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t2</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Outer: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Having the <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> interface and calling <code class="docutils literal notranslate"><span class="pre">iterator()</span></code> to get a new instance of an object that implements <code class="docutils literal notranslate"><span class="pre">Iterator</span></code> allows us to have nested loops that iterate independently.</p>
+</section>
 </section>
 <section id="autocloseable">
 <h2>AutoCloseable<a class="headerlink" href="#autocloseable" title="Link to this heading">#</a></h2>
@@ -541,6 +597,64 @@ document.write(`
 <span class="p">}</span>
 </pre></div>
 </div>
+</section>
+<section id="listeners">
+<h2>Listeners<a class="headerlink" href="#listeners" title="Link to this heading">#</a></h2>
+<p>Listeners are interfaces that are <em>registered</em> with objects. <a href="#footnotes"><sup>[1]</sup></a> We add a listener to a component so that when the user clicks on the component, we are informed and can react. When an event occurs on the component, the event information is dispatched to all listeners. The methods that are invoked (those that receive notifications) are called <code class="docutils literal notranslate"><span class="pre">Event</span> <span class="pre">Handlers</span></code>.</p>
+<p>In Java GUI applications, several listener interfaces are commonly used to handle various types of events. Here are some of the most frequently used ones:</p>
+<ol class="arabic simple">
+<li><p><strong>ActionListener:</strong> Used for handling action events, such as button clicks and menu selections.</p></li>
+<li><p><strong>MouseListener:</strong> Handles mouse events like clicks, presses, releases, and entering/exiting a component.</p></li>
+<li><p><strong>MouseMotionListener:</strong> Deals with mouse movement events, such as dragging and moving the mouse.</p></li>
+<li><p><strong>KeyListener:</strong> Manages keyboard events, including key presses, releases, and typing.</p></li>
+<li><p><strong>WindowListener:</strong> Handles window events like opening, closing, iconifying (minimize), and deiconifying (restore) windows.</p></li>
+<li><p><strong>FocusListener:</strong> Manages focus events, such as gaining or losing focus on a component.</p></li>
+<li><p><strong>ItemListener:</strong> Used for handling item events, typically in components like checkboxes and radio buttons.</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloDialog</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JPanel</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ActionListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actionPerformed</span><span class="p">(</span><span class="n">ActionEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Button %s was pressed!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getActionCommand</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">HelloDialog</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btnHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">btnHello</span><span class="p">);</span>
+<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btnSecond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">&quot;Surprise!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">btnSecond</span><span class="p">;)</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="c1">// use a lambda expression to fulfill the ActionListener interface.</span>
+<span class="w">        </span><span class="c1">// The method accepts an ActionEvent object that we ignore.</span>
+<span class="w">        </span><span class="n">btnHello</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// use a reference to &quot;this&quot; dialog that implements ActionListener</span>
+<span class="w">        </span><span class="n">btnSecond</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="what-s-so-important-summary">
+<h2>What’s so important?  (Summary)<a class="headerlink" href="#what-s-so-important-summary" title="Link to this heading">#</a></h2>
+<iframe width="280" height="190" src="https://www.youtube.com/embed/7qVlNiAYshQ?si=nndqiBeEeDHqN8fu&start=140&end=150" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>   
+<p><a class="reference external" href="https://www.youtube.com/embed/7qVlNiAYshQ?si=nndqiBeEeDHqN8fu">Click here</a> to see the full video reference.</p>
+<ul class="simple">
+<li><p>Interfaces are used to leverage language extensions:</p>
+<ul>
+<li><p>AutoCloseable in a try-with-resources</p></li>
+<li><p>Iterable &amp; Iterator in For-Each loops</p></li>
+</ul>
+</li>
+<li><p>We use interfaces to define methods that handle events.</p></li>
+<li><p>We can use Method Pointers and Lambdas for Functional Interfaces.</p></li>
+<li><p>Add a listener to a component to handle events triggered by the user and dispatched by the Event Dispatch Thread.</p></li>
+</ul>
+<p><a id="footnotes"></a></p>
+</section>
+<section id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
+<p>[1] When a object registers for events, this follows the <code class="docutils literal notranslate"><span class="pre">Observer</span> <span class="pre">Pattern</span></code>. (TODO: put a link to this pattern, once created in this site)</p>
 </section>
 </section>
 
@@ -608,8 +722,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterable">Iterable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterable">Iterable</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-the-for-each-work">How does the for-each work?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-have-two-interfaces">Why have two interfaces?</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocloseable">AutoCloseable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#listeners">Listeners</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important-summary">What’s so important?  (Summary)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
   </nav></div>
 

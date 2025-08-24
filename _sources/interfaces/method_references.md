@@ -1,11 +1,6 @@
-# Custom Sorting
+# Method References
 
-Recall:  
-🔹 A method can be passed in as an argument.  
-🔹 When an argument is a method, its *Type* is an `interface`.    
-🔹 `Comparable` is an `interface` that allows an object to set its own sort order.  
-
-Arguments to a method can be:
+Recall that arguments to a method can be:
 * A primitive type (e.g. `int`, `double`)  
 * A `class` (e.g. `String`)  
 * An `interface` 
@@ -13,17 +8,19 @@ Arguments to a method can be:
 When an argument is a `class`, we can call methods on that class.  
 When an argument is an `interface`, we do the same thing!
 
-In this lesson you'll see how using an `interface` affords us power and flexibility.
+In this lesson you'll see how using an `interface` affords us power and flexibility. We will create `functional interfaces` very easily using a `Method Reference`. We will practice by sorting lists in a customized order.  
 
 ## Overview
 
-The goals of this lesson are to:  
-🔹 Learn how to _tersely_ pass a function (a *behavior*) to another method.  
-🔹 Learn how to create an interface using a `Method Pointer`.  
-🔹 Sort a List in multiple, custom ways.   
+The goals of this lesson are:  
+🔹 Learn how to create an interface using a `Method Reference`.  
+🔹 Learn how to pass a function (a *behavior*) to another method.  
+🔹 Learn that when an argument to a method is a function, its *Type* is an `interface`.    
+🔹 Learn how objects can set their own sort order by implementing `Comparable`.  
+🔹 Learn how to sort a List in multiple, custom ways.   
 
 ## Function&lt;R, T&gt;
-Let's look at an the generic interface, `Function <R, T>`. This interface has one `abstract` method named `apply`. Because it has exactly one abstract method, we call it a `Functional Interface`. There are many interfaces that are Functional Interfaces. 
+Let's start by looking at a generic interface, `Function <R, T>`. This interface has one `abstract` method named `apply`. Because it has exactly one abstract method, we call it a `Functional Interface`. There are many interfaces that are Functional Interfaces. 
 
 ```java
 /**
@@ -111,7 +108,7 @@ A few things to note:
 * On line 3: We created a reference to a static method using the `ClassName::methodName` syntax.  
 * On line 7: The method `getStringFromInt` has the same signature as the `apply` method in `Function<Integer, String>`. It takes a single `Integer` and returns a `String`.  
 * On line 7: The `apply` method is called normally. There are no changes to the way we invoke a method in an interface, even if it is fulfilled by a method reference. The identifier `behavior` is an `interface` and we invoke its methods the same way we would invoke a method belonging to a class.  
-* On line 7: When the `apply` method is called, the method named `getStringFromInt` is invoked! Clearly it has a different name and `apply`!  
+* On line 7: When the `apply` method is called, the method named `getStringFromInt` is invoked! Clearly it has a different name than `apply`!  
 
 The fact that `getStringFromInt` is invoked when we call `behavior.apply` can be mind blowing. Let's dig a little deeper into that.  
 

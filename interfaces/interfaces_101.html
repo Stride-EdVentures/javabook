@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Intro to Interfaces &#8212; Practical Java </title>
+    <title>Interfaces 101 &#8212; Practical Java </title>
   
   
   
@@ -92,11 +92,11 @@ commentsRunWhenDOMLoaded(addUtterances);
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'interfaces/basic_interfaces';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'interfaces/interfaces_101';</script>
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Practice: Basic Interfaces" href="practice_01.html" />
+    <link rel="next" title="Practice: Interfaces 101" href="practice_01.html" />
     <link rel="prev" title="Interfaces" href="index.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -237,11 +237,11 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Intro to Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Basic Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sorting_with_classes.html">Sorting with Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_sorting.html">Custom Sorting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes_fall_short.html">Classes Fall Short</a></li>
+<li class="toctree-l2"><a class="reference internal" href="method_references.html">Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Method References</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_03.html"><i class="fas fa-pen-square fa-fw"></i> Practice Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="applied.html">Applied Interfaces</a></li>
@@ -332,7 +332,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/interfaces/basic_interfaces.md" target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/interfaces/interfaces_101.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -349,7 +349,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Finterfaces/basic_interfaces.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Finterfaces/interfaces_101.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -379,7 +379,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="../_sources/interfaces/basic_interfaces.md" target="_blank"
+      <li><a href="../_sources/interfaces/interfaces_101.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -463,7 +463,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Intro to Interfaces</h1>
+    <h1>Interfaces 101</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -498,8 +498,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="intro-to-interfaces">
-<h1>Intro to Interfaces<a class="headerlink" href="#intro-to-interfaces" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="interfaces-101">
+<h1>Interfaces 101<a class="headerlink" href="#interfaces-101" title="Link to this heading">#</a></h1>
 <div class="admonition-definition admonition">
 <p class="admonition-title">Definition</p>
 <p><em>Interface</em>: A contract that promises a specific behavior.</p>
@@ -595,8 +595,8 @@ An interface is very much like a <code class="docutils literal notranslate"><spa
 <p>Interfaces are very popular in the industry where there are many teams working on different components of a large system. The teams agree on interfaces and are free to implement however they want.</p>
 <p>Interfaces allow completely new implementations to be plugged into an existing system. It is easier to maintain and extend.</p>
 <p>Interfaces act as the <em>TYPE</em> of a function which opens up the ability to do <em>Functional Programming</em>.  Interfaces allow an imperative<a href="#footnotes"><sup>[4]</sup></a> language the ability to offer some characteristics of a functional<a href="#footnotes"><sup>[5]</sup></a> programming language.</p>
-<p>Interfaces are used to define Event Handlers or Callbacks that are used in GUI programming.  Furthermore, functional interfaces<a href="#footnotes"><sup>[6]</sup></a> can be implemented with <code class="docutils literal notranslate"><span class="pre">lambda</span></code> expressions or <code class="docutils literal notranslate"><span class="pre">inner</span> <span class="pre">anonymous</span> <span class="pre">classes</span></code> which give us a good amount of flexibility and power.</p>
-<p>Interfaces are used in Collection Classes, Streams, Unit Testing, parallel programming, and more!!</p>
+<p>Interfaces are used to define <strong>event handlers</strong> or <strong>callbacks</strong> that are used in GUI programming.  Furthermore, <code class="docutils literal notranslate"><span class="pre">functional</span> <span class="pre">interfaces</span></code><a href="#footnotes"><sup>[6]</sup></a> can be implemented with <code class="docutils literal notranslate"><span class="pre">lambda</span></code> expressions or <code class="docutils literal notranslate"><span class="pre">method</span> <span class="pre">references</span></code> which give us a good amount of flexibility and power.</p>
+<p>Interfaces are used in Collection Classes, Streams, unit testing, parallel programming, and more!!</p>
 </section>
 <section id="multiple-implementations">
 <h2>Multiple Implementations<a class="headerlink" href="#multiple-implementations" title="Link to this heading">#</a></h2>
@@ -869,7 +869,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><i class="fas fa-pen-square fa-fw"></i> Practice: Basic Interfaces</p>
+        <p class="prev-next-title"><i class="fas fa-pen-square fa-fw"></i> Practice: Interfaces 101</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

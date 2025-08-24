@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Custom Sorting &#8212; Practical Java </title>
+    <title>Method References &#8212; Practical Java </title>
   
   
   
@@ -92,12 +92,12 @@ commentsRunWhenDOMLoaded(addUtterances);
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'interfaces/custom_sorting';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'interfaces/method_references';</script>
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Practice Custom Sorting" href="practice_02.html" />
-    <link rel="prev" title="Sorting with Classes" href="sorting_with_classes.html" />
+    <link rel="next" title="Practice: Method References" href="practice_02.html" />
+    <link rel="prev" title="Classes Fall Short" href="classes_fall_short.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -237,11 +237,11 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="basic_interfaces.html">Intro to Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Basic Interfaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sorting_with_classes.html">Sorting with Classes</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Custom Sorting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces_101.html">Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes_fall_short.html">Classes Fall Short</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Method References</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_03.html"><i class="fas fa-pen-square fa-fw"></i> Practice Lambdas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="applied.html">Applied Interfaces</a></li>
@@ -332,7 +332,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/interfaces/custom_sorting.md" target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/interfaces/method_references.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -349,7 +349,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Finterfaces/custom_sorting.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Finterfaces/method_references.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -379,7 +379,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="../_sources/interfaces/custom_sorting.md" target="_blank"
+      <li><a href="../_sources/interfaces/method_references.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -463,7 +463,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Custom Sorting</h1>
+    <h1>Method References</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -502,13 +502,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="custom-sorting">
-<h1>Custom Sorting<a class="headerlink" href="#custom-sorting" title="Link to this heading">#</a></h1>
-<p>Recall:<br />
-🔹 A method can be passed in as an argument.<br />
-🔹 When an argument is a method, its <em>Type</em> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code>.<br />
-🔹 <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> that allows an object to set its own sort order.</p>
-<p>Arguments to a method can be:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="method-references">
+<h1>Method References<a class="headerlink" href="#method-references" title="Link to this heading">#</a></h1>
+<p>Recall that arguments to a method can be:</p>
 <ul class="simple">
 <li><p>A primitive type (e.g. <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code>)</p></li>
 <li><p>A <code class="docutils literal notranslate"><span class="pre">class</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">String</span></code>)</p></li>
@@ -516,17 +512,19 @@ document.write(`
 </ul>
 <p>When an argument is a <code class="docutils literal notranslate"><span class="pre">class</span></code>, we can call methods on that class.<br />
 When an argument is an <code class="docutils literal notranslate"><span class="pre">interface</span></code>, we do the same thing!</p>
-<p>In this lesson you’ll see how using an <code class="docutils literal notranslate"><span class="pre">interface</span></code> affords us power and flexibility.</p>
+<p>In this lesson you’ll see how using an <code class="docutils literal notranslate"><span class="pre">interface</span></code> affords us power and flexibility. We will create <code class="docutils literal notranslate"><span class="pre">functional</span> <span class="pre">interfaces</span></code> very easily using a <code class="docutils literal notranslate"><span class="pre">Method</span> <span class="pre">Reference</span></code>. We will practice by sorting lists in a customized order.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>The goals of this lesson are to:<br />
-🔹 Learn how to <em>tersely</em> pass a function (a <em>behavior</em>) to another method.<br />
-🔹 Learn how to create an interface using a <code class="docutils literal notranslate"><span class="pre">Method</span> <span class="pre">Pointer</span></code>.<br />
-🔹 Sort a List in multiple, custom ways.</p>
+<p>The goals of this lesson are:<br />
+🔹 Learn how to create an interface using a <code class="docutils literal notranslate"><span class="pre">Method</span> <span class="pre">Reference</span></code>.<br />
+🔹 Learn how to pass a function (a <em>behavior</em>) to another method.<br />
+🔹 Learn that when an argument to a method is a function, its <em>Type</em> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code>.<br />
+🔹 Learn how objects can set their own sort order by implementing <code class="docutils literal notranslate"><span class="pre">Comparable</span></code>.<br />
+🔹 Learn how to sort a List in multiple, custom ways.</p>
 </section>
 <section id="function-r-t">
 <h2>Function&lt;R, T&gt;<a class="headerlink" href="#function-r-t" title="Link to this heading">#</a></h2>
-<p>Let’s look at an the generic interface, <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">&lt;R,</span> <span class="pre">T&gt;</span></code>. This interface has one <code class="docutils literal notranslate"><span class="pre">abstract</span></code> method named <code class="docutils literal notranslate"><span class="pre">apply</span></code>. Because it has exactly one abstract method, we call it a <code class="docutils literal notranslate"><span class="pre">Functional</span> <span class="pre">Interface</span></code>. There are many interfaces that are Functional Interfaces.</p>
+<p>Let’s start by looking at a generic interface, <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">&lt;R,</span> <span class="pre">T&gt;</span></code>. This interface has one <code class="docutils literal notranslate"><span class="pre">abstract</span></code> method named <code class="docutils literal notranslate"><span class="pre">apply</span></code>. Because it has exactly one abstract method, we call it a <code class="docutils literal notranslate"><span class="pre">Functional</span> <span class="pre">Interface</span></code>. There are many interfaces that are Functional Interfaces.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * The function TAKES something of type T</span>
 <span class="cm"> * The function RETURNS something of type R</span>
@@ -607,7 +605,7 @@ When an argument is an <code class="docutils literal notranslate"><span class="p
 <li><p>On line 3: We created a reference to a static method using the <code class="docutils literal notranslate"><span class="pre">ClassName::methodName</span></code> syntax.</p></li>
 <li><p>On line 7: The method <code class="docutils literal notranslate"><span class="pre">getStringFromInt</span></code> has the same signature as the <code class="docutils literal notranslate"><span class="pre">apply</span></code> method in <code class="docutils literal notranslate"><span class="pre">Function&lt;Integer,</span> <span class="pre">String&gt;</span></code>. It takes a single <code class="docutils literal notranslate"><span class="pre">Integer</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">String</span></code>.</p></li>
 <li><p>On line 7: The <code class="docutils literal notranslate"><span class="pre">apply</span></code> method is called normally. There are no changes to the way we invoke a method in an interface, even if it is fulfilled by a method reference. The identifier <code class="docutils literal notranslate"><span class="pre">behavior</span></code> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> and we invoke its methods the same way we would invoke a method belonging to a class.</p></li>
-<li><p>On line 7: When the <code class="docutils literal notranslate"><span class="pre">apply</span></code> method is called, the method named <code class="docutils literal notranslate"><span class="pre">getStringFromInt</span></code> is invoked! Clearly it has a different name and <code class="docutils literal notranslate"><span class="pre">apply</span></code>!</p></li>
+<li><p>On line 7: When the <code class="docutils literal notranslate"><span class="pre">apply</span></code> method is called, the method named <code class="docutils literal notranslate"><span class="pre">getStringFromInt</span></code> is invoked! Clearly it has a different name than <code class="docutils literal notranslate"><span class="pre">apply</span></code>!</p></li>
 </ul>
 <p>The fact that <code class="docutils literal notranslate"><span class="pre">getStringFromInt</span></code> is invoked when we call <code class="docutils literal notranslate"><span class="pre">behavior.apply</span></code> can be mind blowing. Let’s dig a little deeper into that.</p>
 <section id="conceptual-code">
@@ -968,12 +966,12 @@ The supplied function must match the arguments and return types as defined in th
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="sorting_with_classes.html"
+       href="classes_fall_short.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Sorting with Classes</p>
+        <p class="prev-next-title">Classes Fall Short</p>
       </div>
     </a>
     <a class="right-next"
@@ -981,7 +979,7 @@ The supplied function must match the arguments and return types as defined in th
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><i class="fas fa-pen-square fa-fw"></i> Practice Custom Sorting</p>
+        <p class="prev-next-title"><i class="fas fa-pen-square fa-fw"></i> Practice: Method References</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
