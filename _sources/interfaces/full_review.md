@@ -101,6 +101,7 @@ public void readFile(String filename) {
 
 * **Streams** are a powerful way to process data using functional programming. See future lessons on how to use Streams.  
 
+<a id="arbitrary"></a>
 ## More Types of Method References
 We saw two types of method references <a href="./custom_sorting.html#types-of-method-references">here</a>. Let's look at two more. 
 3. **Instance Method Reference** (of an arbitrary object of a class)  
