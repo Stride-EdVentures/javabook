@@ -275,8 +275,14 @@ public void readFile(String filename) {
 
 * **Streams** are a powerful way to process data using functional programming. See future lessons on how to use Streams.  
 
-
-
+## What's so important? ![Billy](../_static/whats_so_important.png)  
+* An `interface` has a lot of similarities to a class with a few key differences:  
+    * Methods are typically `abstract`, meaning that they have no implementation and, therefore, do not offer code reuse to classes that implement the interfaces.  
+    * Methods are required to be `public` and are implicitly `public abstract`.  
+    * Fields are required to be `public static final` (no instance fields).  
+* Classes can implement _many_ interfaces. This is one important property (of several) that makes interfaces powerful and popular.  
+* Interfaces retain the `IS-A` relationship. If a class implements `X`, than an instance of that class is-a `X`. Classes have the same behavior. If a class extends `A`, then an instance of that class is-a `A`.   
+* We can ask an object if it implements an interface by using the `instanceof` keyword.  
 
 ## Footnotes
 [1] In reality, interfaces actually *can*, and often *do*, have implementation. An interface can have `default` and `static` methods, both of which are implemented. Methods that have no implementation are called `abstract`. Interfaces almost always have at least one abstract method, but this is not required. In this lesson, we introduce `interfaces` by saying that they have no implementation because this is a characteristic that helps us distinguish them from `classes`. However, confusingly enough, classes can *also* have `abstract` methods. It takes a seasoned developer to know when an `abstract class` is preferrable over an `interface` or vice versa.   

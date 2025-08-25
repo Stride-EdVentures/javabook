@@ -112,7 +112,7 @@ public class CloseableWork implements AutoCloseable {
 ```
 
 ## Listeners
-Listeners are interfaces that are _registered_ with objects. <a href="#footnotes"><sup>[1]</sup></a> We add a listener to a component so that when the user clicks on the component, we are informed and can react. When an event occurs on the component, the event information is dispatched to all listeners. The methods that are invoked (those that receive notifications) are called `Event Handlers`.
+Listeners are interfaces that are _registered_ with objects. <a href="#footnotes"><sup>[1]</sup></a> We add a listener to a component so that when the user clicks on the component, we are informed and can react. When any event occurs on the component, the event information is dispatched to all listeners. The methods that are invoked (those that receive notifications in the Listener interface) are called `Event Handlers`.
 
 In Java GUI applications, several listener interfaces are commonly used to handle various types of events. Here are some of the most frequently used ones:  
 1. **ActionListener:** Used for handling action events, such as button clicks and menu selections.  
@@ -147,20 +147,16 @@ public class HelloDialog extends JPanel implements ActionListener {
 }
 ```
 
-## What's so important?  (Summary)
+## What's so important? ![Billy](../_static/whats_so_important.png)
 
-<iframe width="280" height="190" src="https://www.youtube.com/embed/7qVlNiAYshQ?si=nndqiBeEeDHqN8fu&start=140&end=150" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>   
-
-[Click here](https://www.youtube.com/embed/7qVlNiAYshQ?si=nndqiBeEeDHqN8fu) to see the full video reference.  
-
-* Interfaces are used to leverage language extensions:  
-    * AutoCloseable in a try-with-resources  
-    * Iterable & Iterator in For-Each loops   
-* We use interfaces to define methods that handle events.  
-* We can use Method Pointers and Lambdas for Functional Interfaces.  
-* Add a listener to a component to handle events triggered by the user and dispatched by the Event Dispatch Thread.  
+* Interfaces are used to offer extensions to the language itself:  
+    * AutoCloseable is used to implement a `try-with-resources`  
+    * `Iterable` & `Iterator` are used to implement `for-each` loops   
+* We use interfaces to create **callbacks** or **event handlers**.  
+* We can use either Method References or Lambdas to fulfill a Functional Interfaces.  
+* We can add a _listener_ to a `Component` to handle events triggered by the user.    
 
 <a id="footnotes"></a>
 
 ## Footnotes
-[1] When a object registers for events, this follows the `Observer Pattern`. (TODO: put a link to this pattern, once created in this site)
+[1] When a object registers for events, this follows the `Observer Pattern`. (**TODO:** put a link to this pattern, once created in this site)

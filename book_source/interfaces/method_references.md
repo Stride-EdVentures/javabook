@@ -317,7 +317,33 @@ public class Dad implements Comparator<Kid> {
 ```
 
 ### Sorting Strings Strangely
-TODO: Write up code that shows how to sort a set of strings in weird ways.  
+Now that we've seen how to sort Kid objects, let's show how we can sort Strings in a different way. The code below illustrates how we can use a Method Reference to provide a Comparator to sort Strings. The Comparator has a primary and secondary sort. It primarily sorts by the length of the string. If the lengths are identical, it does a case-insensitive string comparison using the static Comparator provided on the String class.  
+
+```{admonition} String Comparator
+Note that `String.CASE_INSENSITIVE_ORDER` is static field that provides a `Comparator<String>` that does case-insensitive comparison.
+```
+
+```java
+public class StringSortExample {
+
+  // Sort the list of strings first by their length
+  // Secondarily, sort by their natural order, but case-insensitive
+  public static void sortIt(List<String> list) {
+    list.sort(StringSortExample::byLength)
+  }
+
+  public static int byLength(String s1, String s2) {
+    if (s1.length() == s2.length()) {
+      // if the lengths are the same, use the case-insensitive
+      // Comparator method provided by the String class
+      return String.CASE_INSENSITIVE_ORDER.compare(s1, s2);
+    }
+
+    // If string lengths are different, use that
+    return s1.length() - s2.length();
+  }
+}
+```
 
 ## Methods that use Comparator
 
@@ -331,14 +357,13 @@ TODO: Write up code that shows how to sort a set of strings in weird ways.
 | Stream.sorted(comparator) | Returns a stream with elements sorted according to the comparator. |
 | Collections.reverseOrder() | Returns a Comparator that will sort items in reverse relativel to their natural ordering. |
 | Collections.reverseOrder(comparator) | Returns a Comparator that compares objects in the opposite order relative to the given comparator. |
-| String.CASE_INSENSITIVE_ORDER | A static field that provides a Comparator that is case-insensitive when comparing Strings. |
 | Collections.max(collection, comparator) | Returns the maximum element of the collection according to the comparator. |
 | Comparator.thenComparing(Comparator) | Returns a Comparator that first uses the current comparator, then uses the specified one if values are equal. |
 
 ## Types of Method References
 While there are four ways to reference a method, here we look at only the two most common.   
 
-1. **Static Method Reference**  
+### **#1: Static Method Reference**  
 
 **Syntax:** `ClassName::staticMethodName`  
 
@@ -356,7 +381,7 @@ public class Example {
 }
 ```
 
-2. **Instance Method Reference** (of a particular object)  
+### **#2: Instance Method Reference** (of a particular object)  
 
 **Syntax:** `instance::instanceMethodName`  
 
@@ -403,3 +428,7 @@ public class Example {
 }
 ```
 
+## What's so important? ![Billy](../_static/whats_so_important.png)  
+
+* We can fulfill a `Functional Interface` with a `Method Reference`.  
+* This is a powerful behavior that interfaces offer, but classes do not.  
