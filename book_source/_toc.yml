@@ -18,6 +18,7 @@ chapters:
     - file: interfaces/practice_03
     - file: interfaces/applied
     - file: interfaces/anonymous_classes
+    - file: interfaces/default_methods
     - file: interfaces/full_review
   - file: multithreading/index
     sections:
