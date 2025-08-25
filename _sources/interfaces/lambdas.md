@@ -1,7 +1,7 @@
 # Lambdas
 
 In this lesson we will learn how to fulfill a Functional Interface with a Lambda Expression.
-And we will see how to apply this.
+And we will see how to practically apply lambdas in several ways.
 
 ## Introduction
 In the prior lesson we learned how a Method Reference can be used to fulfill an interface that has exactly one `abstract` method.  
@@ -198,3 +198,9 @@ public List<Comparator<Integer>> getComparators() {
     return list;
 }
 ```
+
+## What's so important? ![Billy](../_static/whats_so_important.png)  
+
+* A Lambda expression is a shorthand way to create a method that has no name, an _anonymous method_.  
+* You can use a Lambda to fulfill a functional interface, an interface with exactly one abstract method.  
+* Lambdas are often used to return a function from a method.  

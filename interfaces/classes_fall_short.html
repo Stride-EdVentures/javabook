@@ -480,7 +480,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kids-sorting-themselves">Kids Sorting Themselves</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
 </ul>
             </nav>
         </div>
@@ -495,11 +495,11 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="classes-fall-short">
 <h1>Classes Fall Short<a class="headerlink" href="#classes-fall-short" title="Link to this heading">#</a></h1>
 <p>This lesson is dedicated to showing that classes are pretty good at allowing us to customize the sort order of a list. However, classes are not good enough. Interfaces are needed to sort a generic list of objects that define their own sort order.</p>
-<p>We will demonstrate this by sorting lists exclusively using classes, continually increasing the demand until we discover what classes cannot do.</p>
+<p>We will demonstrate this by sorting lists in various ways using classes exclusively. We will continually increase the demand of our code until we discover what classes cannot do, but interfaces can.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>The goals of this lesson is to demonstrate that classes are unable to generically sort a list where the objects define their own sort order.</p>
-<p>As we accomplish this goal, we will also:
+<p>As we accomplish this goal, we will also:<br />
 🔹 Learn how to pass a function (a <em>behavior</em>) to another method.<br />
 🔹 Sort a List in multiple, custom ways.</p>
 </section>
@@ -751,20 +751,21 @@ implementation?</p>
 </div>
 </section>
 </section>
-<section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<section id="what-s-so-important">
+<h2>What’s so important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
 <p>We showed we could do the following when using only classes:<br />
 🔹 Customize the sort order by passing in a class that implements a comparison method<br />
 🔹 Sort a generic list of objects while also customizing the sort order<br />
 🔹 Sort a list of Kids where the kids sort themselves</p>
-<p>We showed that classes are <strong>UNABLE</strong> to sort a generic list of objects that sort themselves because classes can extend only one other class.</p>
-<p>We showed that by using interfaces, we can successfully sort a generic list of objects that sort themselves.</p>
-<p>The code in this lesson showed:<br />
-🔹 By passing in a class/interface, a function is effectively passed in as an argument. The function was <em>“wrapped”</em> inside of the class/interface.<br />
-🔹 The <em>Type</em> of the argument that is a function is an <code class="docutils literal notranslate"><span class="pre">interface</span></code>.<br />
-🔹 <code class="docutils literal notranslate"><span class="pre">Comparable</span></code> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> that allows objects to define their own sort order.</p>
+<p>We showed that classes are <strong>UNABLE</strong> to sort a generic list of objects that sort themselves because classes can extend only one other class. But, by using interfaces, we can successfully sort a generic list of objects that sort themselves.</p>
+<p>The code in this lesson showed:</p>
+<ul class="simple">
+<li><p>By passing in a class/interface, a function is effectively passed in as an argument. The function was <em>“wrapped”</em> inside of the class/interface.</p></li>
+<li><p>The <em>Type</em> of the argument that is a function is an <code class="docutils literal notranslate"><span class="pre">interface</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Comparable</span></code> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> that allows objects to define their own sort order.</p></li>
+</ul>
 <p>While we <em>can</em> use classes to represent a function, we’ve seen how there are shortcomings to using classes. Therefore, from here on out, we will always represent a function with an <code class="docutils literal notranslate"><span class="pre">interface</span></code>.</p>
-<p>Future lessons will show added benefits to using an <code class="docutils literal notranslate"><span class="pre">interface</span></code>. Classes cannot do all that we want them to do.</p>
+<p>Future lessons will show even more benefits to using an <code class="docutils literal notranslate"><span class="pre">interface</span></code>. Classes fall even further behind!</p>
 </section>
 </section>
 
@@ -839,7 +840,7 @@ implementation?</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kids-sorting-themselves">Kids Sorting Themselves</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
 </ul>
   </nav></div>
 

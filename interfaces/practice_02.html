@@ -502,14 +502,14 @@ document.write(`
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="dropdown admonition">
+<div class="tip dropdown admonition">
 <p class="admonition-title">Click to see answer</p>
 <p><code class="docutils literal notranslate"><span class="pre">add(Quiz::toDouble)</span></code> will succeed because it has the correct method signature.<br />
 <code class="docutils literal notranslate"><span class="pre">toDouble</span></code> takes a <code class="docutils literal notranslate"><span class="pre">Fraction</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">Double</span></code>.</p>
 </div>
 <p><strong>Question #2:</strong> Write code to sort a List of Integers in its <em>Natural Order</em>.</p>
 <p>Don’t write the sort method. Use a library and one line of code.</p>
-<div class="dropdown admonition">
+<div class="tip dropdown admonition">
 <p class="admonition-title">Click to see answer</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortArray</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
@@ -523,7 +523,7 @@ document.write(`
 <li><p>Use a method reference to a function that calls the Integer’s <code class="docutils literal notranslate"><span class="pre">Comparable.compareTo</span></code>.</p></li>
 <li><p>Use Collections.reverseOrder.</p></li>
 </ol>
-<div class="dropdown admonition">
+<div class="tip dropdown admonition">
 <p class="admonition-title">Click to see answer</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
@@ -557,7 +557,7 @@ For example:</p>
 <span class="c1">// One&#39;s digits in the sorted list are: 0, 1, 5, 6</span>
 </pre></div>
 </div>
-<div class="dropdown admonition">
+<div class="tip dropdown admonition">
 <p class="admonition-title">Click to see answer</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortBy1</span><span class="p">(</span><span class="n">Integer</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -603,7 +603,7 @@ Here is sample output:</p>
           <span class="p">[</span><span class="n">eerht</span><span class="p">,</span> <span class="n">enin</span><span class="p">,</span> <span class="n">eno</span><span class="p">,</span> <span class="n">evif</span><span class="p">,</span> <span class="n">llams</span> <span class="n">oot</span><span class="p">,</span> <span class="n">net</span><span class="p">,</span> <span class="n">neves</span><span class="p">,</span> <span class="n">owt</span><span class="p">,</span> <span class="n">reggib</span><span class="p">,</span> <span class="n">ruof</span><span class="p">,</span> <span class="n">thgie</span><span class="p">,</span> <span class="n">xis</span><span class="p">]</span> 
 </pre></div>
 </div>
-<div class="dropdown admonition">
+<div class="tip dropdown admonition">
 <p class="admonition-title">Click to see answer</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
 <span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">demoSorting</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -659,7 +659,7 @@ Here is sample output:</p>
  <span class="n">After</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">23</span><span class="p">,</span> <span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="o">-</span><span class="mi">27</span><span class="p">,</span> <span class="o">-</span><span class="mi">39</span><span class="p">,</span> <span class="o">-</span><span class="mi">47</span><span class="p">,</span> <span class="o">-</span><span class="mi">49</span><span class="p">,</span> <span class="o">-</span><span class="mi">49</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="dropdown admonition">
+<div class="tip dropdown admonition">
 <p class="admonition-title">Click to see answer</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">tertiarySort</span><span class="p">(</span><span class="n">Integer</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>

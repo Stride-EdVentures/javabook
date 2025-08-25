@@ -100,3 +100,6 @@ A: We simply need to call `t1.join();`
 **A:** The Thread constructor takes a `Runnable` interface.
 ```
 
+
+## What's so important? ![Billy](../_static/whats_so_important.png)
+* TODO: ...

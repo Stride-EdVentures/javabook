@@ -28,7 +28,7 @@ public class Quiz {
 ```
 
 ```{admonition} Click to see answer
-:class: dropdown
+:class: tip dropdown
 `add(Quiz::toDouble)` will succeed because it has the correct method signature.  
 `toDouble` takes a `Fraction` and returns a `Double`. 
 ```
@@ -37,7 +37,7 @@ public class Quiz {
 
 Don't write the sort method. Use a library and one line of code.  
 ```{admonition} Click to see answer
-:class: dropdown
+:class: tip dropdown
 ```java
 public static void sortArray(List<Integer> list) {
     list.sort(null);
@@ -50,7 +50,7 @@ public static void sortArray(List<Integer> list) {
 3) Use Collections.reverseOrder.  
 
 ```{admonition} Click to see answer
-:class: dropdown
+:class: tip dropdown
 ```java
 public class Example implements Comparator<Integer> {
 
@@ -83,7 +83,7 @@ For example:
 // One's digits in the sorted list are: 0, 1, 5, 6
 ``` 
 ```{admonition} Click to see answer
-:class: dropdown
+:class: tip dropdown
 
 ```java
 public class Example {
@@ -130,7 +130,7 @@ In the custom sort, see how we sorted by the reverse of the string:
 ```
 
 ```{admonition} Click to see answer
-:class: dropdown
+:class: tip dropdown
 
 ```java
 public class Example {
@@ -187,7 +187,7 @@ Before: [36, -23, 25, -24, 3, -47, -39, -27, -49, 7, 2, 44, 28, -49, -1, -2, 45,
 ```
 
 ```{admonition} Click to see answer
-:class: dropdown
+:class: tip dropdown
 
 ```java
 public class Example {

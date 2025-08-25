@@ -480,7 +480,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocloseable">AutoCloseable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#listeners">Listeners</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important-summary">What’s so important?  (Summary)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
             </nav>
@@ -600,7 +600,7 @@ document.write(`
 </section>
 <section id="listeners">
 <h2>Listeners<a class="headerlink" href="#listeners" title="Link to this heading">#</a></h2>
-<p>Listeners are interfaces that are <em>registered</em> with objects. <a href="#footnotes"><sup>[1]</sup></a> We add a listener to a component so that when the user clicks on the component, we are informed and can react. When an event occurs on the component, the event information is dispatched to all listeners. The methods that are invoked (those that receive notifications) are called <code class="docutils literal notranslate"><span class="pre">Event</span> <span class="pre">Handlers</span></code>.</p>
+<p>Listeners are interfaces that are <em>registered</em> with objects. <a href="#footnotes"><sup>[1]</sup></a> We add a listener to a component so that when the user clicks on the component, we are informed and can react. When any event occurs on the component, the event information is dispatched to all listeners. The methods that are invoked (those that receive notifications in the Listener interface) are called <code class="docutils literal notranslate"><span class="pre">Event</span> <span class="pre">Handlers</span></code>.</p>
 <p>In Java GUI applications, several listener interfaces are commonly used to handle various types of events. Here are some of the most frequently used ones:</p>
 <ol class="arabic simple">
 <li><p><strong>ActionListener:</strong> Used for handling action events, such as button clicks and menu selections.</p></li>
@@ -635,26 +635,24 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="what-s-so-important-summary">
-<h2>What’s so important?  (Summary)<a class="headerlink" href="#what-s-so-important-summary" title="Link to this heading">#</a></h2>
-<iframe width="280" height="190" src="https://www.youtube.com/embed/7qVlNiAYshQ?si=nndqiBeEeDHqN8fu&start=140&end=150" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>   
-<p><a class="reference external" href="https://www.youtube.com/embed/7qVlNiAYshQ?si=nndqiBeEeDHqN8fu">Click here</a> to see the full video reference.</p>
+<section id="what-s-so-important">
+<h2>What’s so important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Interfaces are used to leverage language extensions:</p>
+<li><p>Interfaces are used to offer extensions to the language itself:</p>
 <ul>
-<li><p>AutoCloseable in a try-with-resources</p></li>
-<li><p>Iterable &amp; Iterator in For-Each loops</p></li>
+<li><p>AutoCloseable is used to implement a <code class="docutils literal notranslate"><span class="pre">try-with-resources</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Iterable</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Iterator</span></code> are used to implement <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loops</p></li>
 </ul>
 </li>
-<li><p>We use interfaces to define methods that handle events.</p></li>
-<li><p>We can use Method Pointers and Lambdas for Functional Interfaces.</p></li>
-<li><p>Add a listener to a component to handle events triggered by the user and dispatched by the Event Dispatch Thread.</p></li>
+<li><p>We use interfaces to create <strong>callbacks</strong> or <strong>event handlers</strong>.</p></li>
+<li><p>We can use either Method References or Lambdas to fulfill a Functional Interfaces.</p></li>
+<li><p>We can add a <em>listener</em> to a <code class="docutils literal notranslate"><span class="pre">Component</span></code> to handle events triggered by the user.</p></li>
 </ul>
 <p><a id="footnotes"></a></p>
 </section>
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
-<p>[1] When a object registers for events, this follows the <code class="docutils literal notranslate"><span class="pre">Observer</span> <span class="pre">Pattern</span></code>. (TODO: put a link to this pattern, once created in this site)</p>
+<p>[1] When a object registers for events, this follows the <code class="docutils literal notranslate"><span class="pre">Observer</span> <span class="pre">Pattern</span></code>. (<strong>TODO:</strong> put a link to this pattern, once created in this site)</p>
 </section>
 </section>
 
@@ -729,7 +727,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocloseable">AutoCloseable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#listeners">Listeners</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important-summary">What’s so important?  (Summary)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
   </nav></div>

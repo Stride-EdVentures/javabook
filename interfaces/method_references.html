@@ -490,7 +490,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-that-use-comparator">Methods that use Comparator</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-method-references">Types of Method References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-method-references">Types of Method References</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method-reference"><strong>#1: Static Method Reference</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-method-reference-of-a-particular-object"><strong>#2: Instance Method Reference</strong> (of a particular object)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
 </ul>
             </nav>
         </div>
@@ -816,7 +821,32 @@ The supplied function must match the arguments and return types as defined in th
 </section>
 <section id="sorting-strings-strangely">
 <h3>Sorting Strings Strangely<a class="headerlink" href="#sorting-strings-strangely" title="Link to this heading">#</a></h3>
-<p>TODO: Write up code that shows how to sort a set of strings in weird ways.</p>
+<p>Now that we’ve seen how to sort Kid objects, let’s show how we can sort Strings in a different way. The code below illustrates how we can use a Method Reference to provide a Comparator to sort Strings. The Comparator has a primary and secondary sort. It primarily sorts by the length of the string. If the lengths are identical, it does a case-insensitive string comparison using the static Comparator provided on the String class.</p>
+<div class="admonition-string-comparator admonition">
+<p class="admonition-title">String Comparator</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">String.CASE_INSENSITIVE_ORDER</span></code> is static field that provides a <code class="docutils literal notranslate"><span class="pre">Comparator&lt;String&gt;</span></code> that does case-insensitive comparison.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StringSortExample</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// Sort the list of strings first by their length</span>
+<span class="w">  </span><span class="c1">// Secondarily, sort by their natural order, but case-insensitive</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortIt</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">StringSortExample</span><span class="p">::</span><span class="n">byLength</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">byLength</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">s2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">s2</span><span class="p">.</span><span class="na">length</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// if the lengths are the same, use the case-insensitive</span>
+<span class="w">      </span><span class="c1">// Comparator method provided by the String class</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">CASE_INSENSITIVE_ORDER</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">s2</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// If string lengths are different, use that</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">s2</span><span class="p">.</span><span class="na">length</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="methods-that-use-comparator">
@@ -852,13 +882,10 @@ The supplied function must match the arguments and return types as defined in th
 <tr class="row-odd"><td><p>Collections.reverseOrder(comparator)</p></td>
 <td><p>Returns a Comparator that compares objects in the opposite order relative to the given comparator.</p></td>
 </tr>
-<tr class="row-even"><td><p>String.CASE_INSENSITIVE_ORDER</p></td>
-<td><p>A static field that provides a Comparator that is case-insensitive when comparing Strings.</p></td>
-</tr>
-<tr class="row-odd"><td><p>Collections.max(collection, comparator)</p></td>
+<tr class="row-even"><td><p>Collections.max(collection, comparator)</p></td>
 <td><p>Returns the maximum element of the collection according to the comparator.</p></td>
 </tr>
-<tr class="row-even"><td><p>Comparator.thenComparing(Comparator)</p></td>
+<tr class="row-odd"><td><p>Comparator.thenComparing(Comparator)</p></td>
 <td><p>Returns a Comparator that first uses the current comparator, then uses the specified one if values are equal.</p></td>
 </tr>
 </tbody>
@@ -868,9 +895,8 @@ The supplied function must match the arguments and return types as defined in th
 <section id="types-of-method-references">
 <h2>Types of Method References<a class="headerlink" href="#types-of-method-references" title="Link to this heading">#</a></h2>
 <p>While there are four ways to reference a method, here we look at only the two most common.</p>
-<ol class="arabic simple">
-<li><p><strong>Static Method Reference</strong></p></li>
-</ol>
+<section id="static-method-reference">
+<h3><strong>#1: Static Method Reference</strong><a class="headerlink" href="#static-method-reference" title="Link to this heading">#</a></h3>
 <p><strong>Syntax:</strong> <code class="docutils literal notranslate"><span class="pre">ClassName::staticMethodName</span></code></p>
 <p>This syntax is used to refer to a static method of a class.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
@@ -885,9 +911,9 @@ The supplied function must match the arguments and return types as defined in th
 <span class="p">}</span>
 </pre></div>
 </div>
-<ol class="arabic simple" start="2">
-<li><p><strong>Instance Method Reference</strong> (of a particular object)</p></li>
-</ol>
+</section>
+<section id="instance-method-reference-of-a-particular-object">
+<h3><strong>#2: Instance Method Reference</strong> (of a particular object)<a class="headerlink" href="#instance-method-reference-of-a-particular-object" title="Link to this heading">#</a></h3>
 <p><strong>Syntax:</strong> <code class="docutils literal notranslate"><span class="pre">instance::instanceMethodName</span></code></p>
 <p>This syntax is used to refer to an instance method of a specific object. Note that <code class="docutils literal notranslate"><span class="pre">this</span></code> can be the specific object! The example code below shows three object instances.</p>
 <ul class="simple">
@@ -932,6 +958,14 @@ The supplied function must match the arguments and return types as defined in th
 <span class="p">}</span>
 </pre></div>
 </div>
+</section>
+</section>
+<section id="what-s-so-important">
+<h2>What’s so important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>We can fulfill a <code class="docutils literal notranslate"><span class="pre">Functional</span> <span class="pre">Interface</span></code> with a <code class="docutils literal notranslate"><span class="pre">Method</span> <span class="pre">Reference</span></code>.</p></li>
+<li><p>This is a powerful behavior that interfaces offer, but classes do not.</p></li>
+</ul>
 </section>
 </section>
 
@@ -1016,7 +1050,12 @@ The supplied function must match the arguments and return types as defined in th
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-that-use-comparator">Methods that use Comparator</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-method-references">Types of Method References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-method-references">Types of Method References</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#static-method-reference"><strong>#1: Static Method Reference</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-method-reference-of-a-particular-object"><strong>#2: Instance Method Reference</strong> (of a particular object)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
 </ul>
   </nav></div>
 

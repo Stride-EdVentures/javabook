@@ -26,7 +26,7 @@ The differences between an interface and a class is summarized in this table wit
 
 **Question #2:** Create an interface and a class that makes a promise via the `implements` keyword. 
 ```{admonition} Click to see answer
-:class: dropdown
+:class: tip dropdown
 ```java
 // define the interface in the file "GoodStudent.java"
 public interface GoodStudent {
@@ -48,7 +48,7 @@ public class CSSStudent implements GoodStudent {
 
 **Question #3:** Write code that illustrates how you can get access to interface methods via casting (aka *type casting*). Include code that will ask an object if it implements an interface. 
 ```{admonition} Click to see answer
-:class: dropdown
+:class: tip dropdown
 ```java
 if (person instanceof Golfer) {
     Golfer golfer = (Golfer) person;
@@ -60,7 +60,7 @@ if (person instanceof Golfer) {
 
 **Question #4:** Describe what the `IS-A` relationship means?  
 ```{admonition} Click to see answer
-:class: dropdown
+:class: tip dropdown
 An `IS-A` relationship means that an object either *inherits* or *implements* something. For example, in the code beloce we can say all of the following:   
 * `lunchItem` IS-A Fruit  
 * `lunchItem` IS-A Apple  

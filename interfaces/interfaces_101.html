@@ -486,6 +486,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-in-uml">Interfaces in UML</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Implements vs Extends</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses-of-interfaces">Common Uses of Interfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
             </nav>
@@ -797,6 +798,21 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 <li><p><strong>Streams</strong> are a powerful way to process data using functional programming. See future lessons on how to use Streams.</p></li>
 </ul>
 </section>
+<section id="what-s-so-important">
+<h2>What’s so important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>An <code class="docutils literal notranslate"><span class="pre">interface</span></code> has a lot of similarities to a class with a few key differences:</p>
+<ul>
+<li><p>Methods are typically <code class="docutils literal notranslate"><span class="pre">abstract</span></code>, meaning that they have no implementation and, therefore, do not offer code reuse to classes that implement the interfaces.</p></li>
+<li><p>Methods are required to be <code class="docutils literal notranslate"><span class="pre">public</span></code> and are implicitly <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">abstract</span></code>.</p></li>
+<li><p>Fields are required to be <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">static</span> <span class="pre">final</span></code> (no instance fields).</p></li>
+</ul>
+</li>
+<li><p>Classes can implement <em>many</em> interfaces. This is one important property (of several) that makes interfaces powerful and popular.</p></li>
+<li><p>Interfaces retain the <code class="docutils literal notranslate"><span class="pre">IS-A</span></code> relationship. If a class implements <code class="docutils literal notranslate"><span class="pre">X</span></code>, than an instance of that class is-a <code class="docutils literal notranslate"><span class="pre">X</span></code>. Classes have the same behavior. If a class extends <code class="docutils literal notranslate"><span class="pre">A</span></code>, then an instance of that class is-a <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p></li>
+<li><p>We can ask an object if it implements an interface by using the <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> keyword.</p></li>
+</ul>
+</section>
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
 <p>[1] In reality, interfaces actually <em>can</em>, and often <em>do</em>, have implementation. An interface can have <code class="docutils literal notranslate"><span class="pre">default</span></code> and <code class="docutils literal notranslate"><span class="pre">static</span></code> methods, both of which are implemented. Methods that have no implementation are called <code class="docutils literal notranslate"><span class="pre">abstract</span></code>. Interfaces almost always have at least one abstract method, but this is not required. In this lesson, we introduce <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> by saying that they have no implementation because this is a characteristic that helps us distinguish them from <code class="docutils literal notranslate"><span class="pre">classes</span></code>. However, confusingly enough, classes can <em>also</em> have <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods. It takes a seasoned developer to know when an <code class="docutils literal notranslate"><span class="pre">abstract</span> <span class="pre">class</span></code> is preferrable over an <code class="docutils literal notranslate"><span class="pre">interface</span></code> or vice versa.</p>
@@ -902,6 +918,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-in-uml">Interfaces in UML</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Implements vs Extends</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses-of-interfaces">Common Uses of Interfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
   </nav></div>

@@ -2,13 +2,13 @@
 
 This lesson is dedicated to showing that classes are pretty good at allowing us to customize the sort order of a list. However, classes are not good enough. Interfaces are needed to sort a generic list of objects that define their own sort order.  
 
-We will demonstrate this by sorting lists exclusively using classes, continually increasing the demand until we discover what classes cannot do.   
+We will demonstrate this by sorting lists in various ways using classes exclusively. We will continually increase the demand of our code until we discover what classes cannot do, but interfaces can.   
 
 ## Overview
 
 The goals of this lesson is to demonstrate that classes are unable to generically sort a list where the objects define their own sort order.  
 
-As we accomplish this goal, we will also:
+As we accomplish this goal, we will also:  
 🔹 Learn how to pass a function (a *behavior*) to another method.  
 🔹 Sort a List in multiple, custom ways.   
 
@@ -264,21 +264,19 @@ By using interfaces, the code works just fine.
   /* Sort method remains unchanged */
 ```
 
-## Summary
+## What's so important? ![Billy](../_static/whats_so_important.png)
 We showed we could do the following when using only classes:    
 🔹 Customize the sort order by passing in a class that implements a comparison method   
 🔹 Sort a generic list of objects while also customizing the sort order   
 🔹 Sort a list of Kids where the kids sort themselves  
 
-We showed that classes are **UNABLE** to sort a generic list of objects that sort themselves because classes can extend only one other class. 
-
-We showed that by using interfaces, we can successfully sort a generic list of objects that sort themselves.  
+We showed that classes are **UNABLE** to sort a generic list of objects that sort themselves because classes can extend only one other class. But, by using interfaces, we can successfully sort a generic list of objects that sort themselves.  
 
 The code in this lesson showed:  
-🔹 By passing in a class/interface, a function is effectively passed in as an argument. The function was _"wrapped"_ inside of the class/interface.  
-🔹 The *Type* of the argument that is a function is an `interface`.  
-🔹 `Comparable` is an `interface` that allows objects to define their own sort order.
+* By passing in a class/interface, a function is effectively passed in as an argument. The function was _"wrapped"_ inside of the class/interface.  
+* The *Type* of the argument that is a function is an `interface`.  
+* `Comparable` is an `interface` that allows objects to define their own sort order.
 
 While we _can_ use classes to represent a function, we've seen how there are shortcomings to using classes. Therefore, from here on out, we will always represent a function with an `interface`.  
 
-Future lessons will show added benefits to using an `interface`. Classes cannot do all that we want them to do.   
+Future lessons will show even more benefits to using an `interface`. Classes fall even further behind!   
