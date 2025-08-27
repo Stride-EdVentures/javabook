@@ -6,7 +6,16 @@ chapters:
     - file: Topics/java_conventions
     - file: Topics/installing_jgrasp
     - file: Topics/git
+    - file: Topics/generics
     - file: Topics/layout_managers
+  - file: generics/index
+    sections:
+    - file: generics/array_list
+    - file: generics/stack_queue
+    - file: generics/collections
+    - file: generics/generics
+    - file: generics/constraint_typing
+    - file: generics/type_erasure
   - file: interfaces/index
     sections:
     - file: interfaces/interfaces_101
