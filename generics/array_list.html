@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Concurrency &amp; Synchronization &#8212; Practical Java </title>
+    <title>ArrayList &#8212; Practical Java </title>
   
   
   
@@ -92,12 +92,12 @@ commentsRunWhenDOMLoaded(addUtterances);
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'multithreading/conc_synch';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'generics/array_list';</script>
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tasks in Parallel" href="tasks.html" />
-    <link rel="prev" title="Introduction to Threads" href="intro_to_threads.html" />
+    <link rel="next" title="Stack &amp; Queue" href="stack_queue.html" />
+    <link rel="prev" title="Generics" href="index.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -236,13 +236,13 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../generics/index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../generics/array_list.html">ArrayList</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/stack_queue.html">Stack &amp; Queue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/collections.html">Collections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/generics.html">Generics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/constraint_typing.html">Constraint Typing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/type_erasure.html">Type Erasure</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_queue.html">Stack &amp; Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collections.html">Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generics.html">Generics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constraint_typing.html">Constraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_erasure.html">Type Erasure</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../interfaces/index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -259,11 +259,11 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="../interfaces/full_review.html">Full Review</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="intro_to_threads.html">Introduction to Threads</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Concurrency &amp; Synchronization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks in Parallel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel_streams.html">Parallel Streams</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -342,7 +342,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/multithreading/conc_synch.md" target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/generics/array_list.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -359,7 +359,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fmultithreading/conc_synch.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fgenerics/array_list.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -389,7 +389,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="../_sources/multithreading/conc_synch.md" target="_blank"
+      <li><a href="../_sources/generics/array_list.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -473,7 +473,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Concurrency & Synchronization</h1>
+    <h1>ArrayList</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,14 +483,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency">Concurrency</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency-vs-parallelism">Concurrency vs Parallelism</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency-issues">Concurrency Issues</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deadlock">Deadlock</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-api">More API</a></li>
 </ul>
             </nav>
         </div>
@@ -502,53 +496,85 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="concurrency-synchronization">
-<h1>Concurrency &amp; Synchronization<a class="headerlink" href="#concurrency-synchronization" title="Link to this heading">#</a></h1>
-<p>Resources:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://learning.oreilly.com/videos/java-concurrency-and/9781789806410/9781789806410-video4_1/">Threads: Thread Lifecycle | Java Concurrency and Multithreading in Practice</a></p></li>
-</ul>
-<section id="concurrency">
-<h2>Concurrency<a class="headerlink" href="#concurrency" title="Link to this heading">#</a></h2>
-<section id="concurrency-vs-parallelism">
-<h3>Concurrency vs Parallelism<a class="headerlink" href="#concurrency-vs-parallelism" title="Link to this heading">#</a></h3>
-<p>TODO: Define</p>
-</section>
-<section id="concurrency-issues">
-<h3>Concurrency Issues<a class="headerlink" href="#concurrency-issues" title="Link to this heading">#</a></h3>
-<p><strong>Deadlock:</strong> A situation where two or more threads are unable to proceed because each is waiting for the other to release a resource. Ex: Two threads each holding a lock the other needs, causing both to wait indefinitely.</p>
-<p><strong>Race Condition:</strong> Occurs when multiple threads access shared resources simultaneously, leading to unpredictable outcomes. Ex: Two threads incrementing a shared counter without synchronization, resulting in incorrect values.</p>
-<p><strong>Starvation:</strong> A situation where a thread is perpetually denied access to resources, preventing it from making progress. Ex: A low-priority thread never getting CPU time because high-priority threads are always running.</p>
-<p><strong>Fairness:</strong> Ensuring that all threads get a fair chance to execute, preventing starvation. Ex: Using fair locks that ensure threads acquire locks in the order they requested them.</p>
-<section id="deadlock">
-<h4>Deadlock<a class="headerlink" href="#deadlock" title="Link to this heading">#</a></h4>
-<p>Deadlock occurs when two or more threads are unable to proceed because each is waiting for the other to release a resource.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DeadlockExample</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">lock1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="p">();</span>
-<span class="w">      </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">lock2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="p">();</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="arraylist">
+<h1>ArrayList<a class="headerlink" href="#arraylist" title="Link to this heading">#</a></h1>
+<p>The class <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is a special type of class called a <code class="docutils literal notranslate"><span class="pre">Generic</span></code>. In this lesson, we won’t go into the details of how generics work. Instead, we will focus on why and how to use the class <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> class provides <em>array like</em> behavior with some added benefits. It also introduces a new syntax that involves <strong>&amp;lt|angle brackets&amp;gt|</strong>. The easiest way to figure this stuff out is by example.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// We create a new ArrayList capable of holding Strings.</span>
+<span class="c1">// We must have `&lt;String&gt;` added to the class name.</span>
+<span class="c1">// The constructor must have &lt;&gt;. </span>
+<span class="c1">// As all constructors must have, the constructor also has ().</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">()</span><span class="o">|</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;At index 0&quot;</span><span class="p">)</span><span class="o">|</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;At index 1&quot;</span><span class="p">)</span><span class="o">|</span>
 
-<span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">lock1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">              </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Thread 1: Holding lock 1...&quot;</span><span class="p">);</span>
-<span class="w">              </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">lock2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Thread 1: Holding lock 2...&quot;</span><span class="p">);</span>
-<span class="w">              </span><span class="p">}</span>
-<span class="w">          </span><span class="p">}</span>
-<span class="w">      </span><span class="p">}</span>
-
-<span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">lock2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">              </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Thread 2: Holding lock 2...&quot;</span><span class="p">);</span>
-<span class="w">              </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">lock1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Thread 2: Holding lock 1...&quot;</span><span class="p">);</span>
-<span class="w">              </span><span class="p">}</span>
-<span class="w">          </span><span class="p">}</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="c1">// arrays use `.length`. ArrayList uses `.size()`</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;The size of our list is %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">size</span><span class="p">())</span><span class="o">|</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;The first item in our list is %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">|</span>
 </pre></div>
 </div>
+<p>A few things to note:</p>
+<ul class="simple">
+<li><p>The declaration requires that we provide the type of object in the ArrayList</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> can hold any type of object we want, but it <strong>must</strong> be an <code class="docutils literal notranslate"><span class="pre">Object</span></code>.</p></li>
+<li><p>We don’t provide the size of the array in the constructor. Instead, the size of the list will grow automatically.</p></li>
+<li><p>We don’t index into the list like an array. We do <strong>not</strong> use <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Instead, we use API such as <code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">get</span></code>.</p></li>
+</ul>
 </section>
-</section>
+<section id="more-api">
+<h2>More API<a class="headerlink" href="#more-api" title="Link to this heading">#</a></h2>
+<p>There are many cool things about an <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>:</p>
+<ol class="arabic simple">
+<li><p>it holds any <code class="docutils literal notranslate"><span class="pre">Object</span></code> type</p></li>
+<li><p>it grows and shrinks automatically for us</p></li>
+<li><p>it has utility API that provide many useful behaviors</p></li>
+</ol>
+<p>Here are some popular API:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>API</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>arr.add(object)</p></td>
+<td><p>// adds an object at the end</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr.get(index)</p></td>
+<td><p>// gets the object at index</p></td>
+</tr>
+<tr class="row-even"><td><p>arr.set(index, object)</p></td>
+<td><p>// set the value at index</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr.add(index, object)</p></td>
+<td><p>// insert an object at index</p></td>
+</tr>
+<tr class="row-even"><td><p>arr.remove(index)</p></td>
+<td><p>// removes the object at index</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr.remove(object)</p></td>
+<td><p>// removes the object from arr</p></td>
+</tr>
+<tr class="row-even"><td><p>arr.size()</p></td>
+<td><p>// get the size of the array</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr.clear()</p></td>
+<td><p>// removes ALL elements from the array</p></td>
+</tr>
+<tr class="row-even"><td><p>arr.contains(object)</p></td>
+<td><p>// asks if an object is in array<br>// using .equals()</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr.indexOf(object)</p></td>
+<td><p>// finds index of the object</p></td>
+</tr>
+<tr class="row-even"><td><p>arr.isEmpty()</p></td>
+<td><p>// asks if the array is empty</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 
@@ -565,7 +591,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./multithreading"
+            path: "./generics"
         },
         predefinedOutput: true
     }
@@ -583,20 +609,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro_to_threads.html"
+       href="index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to Threads</p>
+        <p class="prev-next-title"><i class="fas fa-book fa-fw"></i> Generics</p>
       </div>
     </a>
     <a class="right-next"
-       href="tasks.html"
+       href="stack_queue.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tasks in Parallel</p>
+        <p class="prev-next-title">Stack &amp; Queue</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -616,14 +642,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency">Concurrency</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency-vs-parallelism">Concurrency vs Parallelism</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency-issues">Concurrency Issues</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deadlock">Deadlock</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-api">More API</a></li>
 </ul>
   </nav></div>
 
