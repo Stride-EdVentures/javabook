@@ -47,7 +47,7 @@ Here are some popular API:
 |arr.isEmpty()|				// asks if the array is empty|
 
 ## Practical Exploration
-We can create an `ArrayList` in various ways.  
+Here are just a few ways create an `ArrayList`.  
 ```java
 // repeat the object type in the constructor
 ArrayList<Integer> list = new ArrayList<Integer>();
@@ -58,7 +58,8 @@ ArrayList<Integer> list = new ArrayList<>();
 // assign the ArrayList to the List interface
 List<Integer> list = new ArrayList<>();
 
-// Use the Arrays helper
+// Use the Arrays helper to create a FIXED sized List
+// This is technically not an ArrayList
 List<String> list = Arrays.asList("Hello", "World!");
 ```
 
