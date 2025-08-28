@@ -486,6 +486,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-api">More API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-exploration">Practical Exploration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
 </ul>
             </nav>
         </div>
@@ -502,35 +504,35 @@ document.write(`
 <p>The class <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is a special type of class called a <code class="docutils literal notranslate"><span class="pre">Generic</span></code>. In this lesson, we won’t go into the details of how generics work. Instead, we will focus on why and how to use the class <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> class provides <em>array like</em> behavior with some added benefits. It also introduces a new syntax that involves <strong>&amp;lt|angle brackets&amp;gt|</strong>. The easiest way to figure this stuff out is by example.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> class provides <em>array like</em> behavior with some added benefits. It also introduces a new syntax that involves <strong>&lt;angle brackets&gt;</strong>. The easiest way to figure this stuff out is by example.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// We create a new ArrayList capable of holding Strings.</span>
 <span class="c1">// We must have `&lt;String&gt;` added to the class name.</span>
 <span class="c1">// The constructor must have &lt;&gt;. </span>
 <span class="c1">// As all constructors must have, the constructor also has ().</span>
 <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">()</span><span class="o">|</span>
-<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;At index 0&quot;</span><span class="p">)</span><span class="o">|</span>
-<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;At index 1&quot;</span><span class="p">)</span><span class="o">|</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;At index 0&quot;</span><span class="p">);</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;At index 1&quot;</span><span class="p">);</span>
 
 <span class="c1">// arrays use `.length`. ArrayList uses `.size()`</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;The size of our list is %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">size</span><span class="p">())</span><span class="o">|</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;The first item in our list is %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">|</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;The size of our list is %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;The first item in our list is %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>A few things to note:</p>
 <ul class="simple">
 <li><p>The declaration requires that we provide the type of object in the ArrayList</p></li>
 <li><p>An <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> can hold any type of object we want, but it <strong>must</strong> be an <code class="docutils literal notranslate"><span class="pre">Object</span></code>.</p></li>
-<li><p>We don’t provide the size of the array in the constructor. Instead, the size of the list will grow automatically.</p></li>
-<li><p>We don’t index into the list like an array. We do <strong>not</strong> use <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Instead, we use API such as <code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">get</span></code>.</p></li>
+<li><p>We don’t provide the size of the array in the constructor. Instead, the size of the list will grow &amp; shrink automatically.</p></li>
+<li><p>We don’t index into the list as we do in an array. We do <strong>not</strong> use <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Instead, we use API such as <code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">get</span></code>.</p></li>
 </ul>
 </section>
 <section id="more-api">
 <h2>More API<a class="headerlink" href="#more-api" title="Link to this heading">#</a></h2>
 <p>There are many cool things about an <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>:</p>
 <ol class="arabic simple">
-<li><p>it holds any <code class="docutils literal notranslate"><span class="pre">Object</span></code> type</p></li>
-<li><p>it grows and shrinks automatically for us</p></li>
-<li><p>it has utility API that provide many useful behaviors</p></li>
+<li><p>It holds any <code class="docutils literal notranslate"><span class="pre">Object</span></code> type</p></li>
+<li><p>It grows and shrinks automatically for us</p></li>
+<li><p>It has utility API that provide many useful behaviors</p></li>
 </ol>
 <p>Here are some popular API:</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -547,7 +549,7 @@ document.write(`
 <td><p>// gets the object at index</p></td>
 </tr>
 <tr class="row-even"><td><p>arr.set(index, object)</p></td>
-<td><p>// set the value at index</p></td>
+<td><p>// sets the value at index</p></td>
 </tr>
 <tr class="row-odd"><td><p>arr.add(index, object)</p></td>
 <td><p>// insert an object at index</p></td>
@@ -559,13 +561,13 @@ document.write(`
 <td><p>// removes the object from arr</p></td>
 </tr>
 <tr class="row-even"><td><p>arr.size()</p></td>
-<td><p>// get the size of the array</p></td>
+<td><p>// gets the size of the array</p></td>
 </tr>
 <tr class="row-odd"><td><p>arr.clear()</p></td>
 <td><p>// removes ALL elements from the array</p></td>
 </tr>
 <tr class="row-even"><td><p>arr.contains(object)</p></td>
-<td><p>// asks if an object is in array<br>// using .equals()</p></td>
+<td><p>// asks if an object is in array using .equals()</p></td>
 </tr>
 <tr class="row-odd"><td><p>arr.indexOf(object)</p></td>
 <td><p>// finds index of the object</p></td>
@@ -576,6 +578,31 @@ document.write(`
 </tbody>
 </table>
 </div>
+</section>
+<section id="practical-exploration">
+<h2>Practical Exploration<a class="headerlink" href="#practical-exploration" title="Link to this heading">#</a></h2>
+<p>We can create an <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> in various ways.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// repeat the object type in the constructor</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="c1">// allow the compiler to infer the object type at the constructor</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="c1">// assign the ArrayList to the List interface</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="c1">// Use the Arrays helper</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World!&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="what-s-so-important">
+<h2>What’s so Important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
+<p>Things to remember:</p>
+<ul class="simple">
+<li><p>one</p></li>
+<li><p>two</p></li>
+</ul>
 </section>
 </section>
 
@@ -645,6 +672,8 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-api">More API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-exploration">Practical Exploration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
 </ul>
   </nav></div>
 

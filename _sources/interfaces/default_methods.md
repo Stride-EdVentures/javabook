@@ -4,7 +4,7 @@ We've been focusing on the `abstract` methods of an interface, those methods tha
 
 Furthermore, an interface can provide `static` _utility_ methods that have access to other static methods or fields, but not to any of the instance methods because a static method does not have access to `this`.   
 
-In other words, interfaces can have implementation!
+In other words, **interfaces can have implementation!**
 
 ## Interfaces with Implementation
 An interface can include methods with implementation. 
@@ -30,8 +30,8 @@ public interface MyInterface {
 ```
 Default methods will leverage and extend the interface.  
 
-## Comparator<T>
-Let's look at some of the `default` and `static` methods found in the `Comparator` interface. There are actually quite a few of these method. The reason there are so many is because there is a lot of overloading to provide better type safety and convenience. Below are just four methods in the interface.    
+## Comparator
+Let's look at some of the `default` and `static` methods found in the `Comparator` interface. There are actually quite a few of these methods. The reason there are so many is because there is a lot of overloading to provide better type safety and convenience. Below are just four methods in the interface.    
 
 ```java
 public interface Comparator<T> {

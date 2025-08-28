@@ -485,7 +485,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-with-implementation">Interfaces with Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparator">Comparator<t></t></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparator">Comparator</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reversed">reversed()</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thencomparing">thenComparing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing">comparing</a></li>
@@ -507,7 +507,7 @@ document.write(`
 <h1>Default Methods<a class="headerlink" href="#default-methods" title="Link to this heading">#</a></h1>
 <p>We’ve been focusing on the <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods of an interface, those methods that have no implementation. It is common that an interface can add beneficial behavior simply by leveraging the other <code class="docutils literal notranslate"><span class="pre">abstract</span></code> instance methods it knows about. These <em>additive</em> instance methods are called <code class="docutils literal notranslate"><span class="pre">default</span></code> methods.</p>
 <p>Furthermore, an interface can provide <code class="docutils literal notranslate"><span class="pre">static</span></code> <em>utility</em> methods that have access to other static methods or fields, but not to any of the instance methods because a static method does not have access to <code class="docutils literal notranslate"><span class="pre">this</span></code>.</p>
-<p>In other words, interfaces can have implementation!</p>
+<p>In other words, <strong>interfaces can have implementation!</strong></p>
 <section id="interfaces-with-implementation">
 <h2>Interfaces with Implementation<a class="headerlink" href="#interfaces-with-implementation" title="Link to this heading">#</a></h2>
 <p>An interface can include methods with implementation.
@@ -533,8 +533,8 @@ For example:</p>
 <p>Default methods will leverage and extend the interface.</p>
 </section>
 <section id="comparator">
-<h2>Comparator<T><a class="headerlink" href="#comparator" title="Link to this heading">#</a></h2>
-<p>Let’s look at some of the <code class="docutils literal notranslate"><span class="pre">default</span></code> and <code class="docutils literal notranslate"><span class="pre">static</span></code> methods found in the <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> interface. There are actually quite a few of these method. The reason there are so many is because there is a lot of overloading to provide better type safety and convenience. Below are just four methods in the interface.</p>
+<h2>Comparator<a class="headerlink" href="#comparator" title="Link to this heading">#</a></h2>
+<p>Let’s look at some of the <code class="docutils literal notranslate"><span class="pre">default</span></code> and <code class="docutils literal notranslate"><span class="pre">static</span></code> methods found in the <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> interface. There are actually quite a few of these methods. The reason there are so many is because there is a lot of overloading to provide better type safety and convenience. Below are just four methods in the interface.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// The only `public abstract` method in the interface</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">o2</span><span class="p">);</span>
@@ -821,7 +821,7 @@ In Java’s functional programming (e.g., lambdas), you might want a lambda that
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-with-implementation">Interfaces with Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparator">Comparator<t></t></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparator">Comparator</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reversed">reversed()</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thencomparing">thenComparing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing">comparing</a></li>

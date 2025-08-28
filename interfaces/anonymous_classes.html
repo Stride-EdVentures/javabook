@@ -484,8 +484,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-methods">Default Methods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-methods">Static Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-vs-interface">Class vs Interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-usage">Common Usage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
 </ul>
             </nav>
@@ -500,40 +502,154 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="anonymous-classes">
 <h1>Anonymous Classes<a class="headerlink" href="#anonymous-classes" title="Link to this heading">#</a></h1>
-<section id="default-methods">
-<h2>Default Methods<a class="headerlink" href="#default-methods" title="Link to this heading">#</a></h2>
-<p>An interface can include a method with implementation. If an interface has only one abstract method, it is a Functional Interface. A Functional Interface can be implemented with Lambdas and method pointers. Note: an unimplemented method is called an abstract method.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">MyInterface</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">countStuff</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">);</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">defaultMethod</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// an instance method that has access to “this”</span>
-<span class="w">        </span><span class="n">countStuff</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<p>We’ve seen how lambda expressions is shorthand for creating a function that has no name. It is anonymous.</p>
+<p>Now, we will see how to create a single instance of a class that has no name.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Anonymous Classes are usually refered to as <strong>Anonymous Inner Classes</strong> because they are declared inside another class or method. They are most commonly used to implement an interface with multiple <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods without the overhead of creating a dedicated class for the implementation.</p>
+<div class="admonition-benefits admonition">
+<p class="admonition-title"><strong>Benefits</strong></p>
+<p><em>Anonymous Inner Classes</em>:</p>
+<ul class="simple">
+<li><p>Help to reduce code clutter</p></li>
+<li><p>Keep related code together</p></li>
+<li><p>Eliminate the need for single-use class files</p></li>
+</ul>
+</div>
+</section>
+<section id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Link to this heading">#</a></h2>
+<p>The syntax can be strange at first. Here is an overly generic description of the syntax:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">ClassOrInterface</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClassOrInterface</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// code that implements needed methods   </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When we create an <em>Anonymous Inner Class</em>, we create a single instance that can be referenced with an identifier of type <em>ClassOrInterface</em>, the same type that the <em>Anonymous Inner Class</em> extended.</p>
+<p>Let’s look at an example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">go</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// declare an identier to reference our anonymous class.</span>
+<span class="w">        </span><span class="c1">// The type of the idenifier is the &quot;supertype&quot; of the anonymous class.</span>
+<span class="w">        </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">            </span><span class="c1">// The anonymous inner class creation starts now.</span>
+<span class="w">            </span><span class="c1">// We create an instance of the class that has the nested code</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i2</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">};</span><span class="w">  </span><span class="c1">// &lt;-- this semi-colon belongs to the assignment statement</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>In the above code we have created a single instance of a class that has no class name; it is <em>anonymous</em>. We assigned the object instance to the identifier <code class="docutils literal notranslate"><span class="pre">comparator</span></code>.</p>
+<div class="admonition-new-an-interface admonition">
+<p class="admonition-title">new an interface?!</p>
+<p>It looks like the code instantiated an instance of an <code class="docutils literal notranslate"><span class="pre">interface</span></code>. But, we’ve learned that you cannot <code class="docutils literal notranslate"><span class="pre">new</span></code> an interface. In reality, while an interface appears directly after <code class="docutils literal notranslate"><span class="pre">new</span></code>, we created an instance of a class that implemented the interface. In the nested code segment, the developer is required to implement all <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods.</p>
+</div>
+<p>We can create equivalent code using familiar, named classes as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NamedClass</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="nd">@Override</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i2</span><span class="p">;</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="linenos"> 6</span><span class="p">}</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">go</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">10</span><span class="w">        </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NamedClass</span><span class="p">();</span>
+<span class="linenos">11</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">12</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>In the above code we created an instance of <code class="docutils literal notranslate"><span class="pre">NamedClass</span></code> that implements <code class="docutils literal notranslate"><span class="pre">Comparator&lt;Integer&gt;</span></code>. We can convert this to an anonymous implementation by:</p>
+<ul class="simple">
+<li><p>Taking the body of the NamedClass on <strong>Lines 2-5</strong> and move them to come after the constructor found on <strong>Line 10</strong>.</p></li>
+<li><p>Modify the <code class="docutils literal notranslate"><span class="pre">NamedClass()</span></code> constructor to be <code class="docutils literal notranslate"><span class="pre">Comparator&lt;&gt;</span></code>.</p></li>
+</ul>
 </section>
-<section id="static-methods">
-<h2>Static Methods<a class="headerlink" href="#static-methods" title="Link to this heading">#</a></h2>
-<p>An interface can statics methods with implementation.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">MyInterface</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">countStuff</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">);</span>
+<section id="class-vs-interface">
+<h2>Class vs Interface<a class="headerlink" href="#class-vs-interface" title="Link to this heading">#</a></h2>
+<p>We can create an <em>Anonymous Inner Class</em> from a <em>Concrete Class</em>, an <em>Abstract Class</em>, or an <em>Interface</em>. All that is required is that the anonymous class implements all <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods. An anonymous inner class cannot be abstract.</p>
+<p>All of the following work:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// MouseAdapter is a concrete class</span>
+<span class="w">    </span><span class="n">MouseAdapter</span><span class="w"> </span><span class="n">ma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MouseAdapter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code */</span><span class="w"> </span><span class="p">};</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">utilityMethod</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;This is a static method.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// InputStream is an abstract class</span>
+<span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InputStream</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code */</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// Comparator is an interface</span>
+<span class="w">    </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code */</span><span class="w"> </span><span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="common-usage">
+<h2>Common Usage<a class="headerlink" href="#common-usage" title="Link to this heading">#</a></h2>
+<p>The most common usage is to create <strong>Event Handlers</strong> in a GUI application. Many Event Handlers are established using a <code class="docutils literal notranslate"><span class="pre">Functional</span> <span class="pre">Interface</span></code>, but not all events work this way. For example, here is code that sets up two listeners (Event Handlers).</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExampleDialog</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JPane</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createComponents</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">&quot;Tickle Me&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// set up an event handler using lambda expression</span>
+<span class="w">        </span><span class="c1">// This works because the ActionListener is a Functional Interface</span>
+<span class="w">        </span><span class="n">btn</span><span class="p">.</span><span class="na">setActionListener</span><span class="p">(</span><span class="w"> </span><span class="n">ae</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;That tickles!&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">btn</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Create a MouseListener with implementation for all abstract methods</span>
+<span class="w">        </span><span class="n">MouseListener</span><span class="w"> </span><span class="n">ml</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MouseListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mouseClicked</span><span class="p">(</span><span class="n">MouseEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mousePressed</span><span class="p">(</span><span class="n">MouseEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mouseReleased</span><span class="p">(</span><span class="n">MouseEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mouseEntered</span><span class="p">(</span><span class="n">MouseEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mouseExited</span><span class="p">(</span><span class="n">MouseEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">addMouseListener</span><span class="p">(</span><span class="n">ml</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</div>
+<p>Even with the <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">code</span> <span class="pre">not</span> <span class="pre">shown</span> <span class="pre">*/</span></code>, the above code is pretty long. If fully implemented, the code would likely not be all that easy to read. This is especially unfortunate because it is common to need only one method such as <code class="docutils literal notranslate"><span class="pre">mouseClicked</span></code>. Luckily, there is support to make the code more readable.</p>
+<p>The Java Libraries offer a class called <code class="docutils literal notranslate"><span class="pre">MouseAdapter</span></code> that is a concrete class. It has a vacuous (empty) implementation for all of abstract methods. Furthermore, it also implements other interfaces: MouseMotionListener, MouseWheelListener, EventListener. This allows the developer to do the following:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExampleDialog</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JPane</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createComponents</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="c1">// Create a MouseListener and selectively override one method.</span>
+<span class="w">        </span><span class="c1">// This is so short, we can inline the Anonymous Inner Class as the argument</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">addMouseListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MouseAdapter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mouseClicked</span><span class="p">(</span><span class="n">MouseEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-key-idea admonition">
+<p class="admonition-title">Key Idea</p>
+<p>Anonymous Inner Classes are used to implement listeners that are <strong>not</strong> Functional Interfaces.</p>
+<p>Developers often override select methods of concrete classes that have vacuous implementation of these interfaces to dramatically shorten the code.</p>
 </div>
 </section>
 <section id="what-s-so-important">
 <h2>What’s so Important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
-<p>Let’s find out!</p>
+<p>Let’s repeat the key ideas of this relatively short lesson. An Anonymous Inner class:</p>
 <ul class="simple">
-<li><p>one</p></li>
-<li><p>two</p></li>
+<li><p>is a child class that has no name… it is anonymous!</p></li>
+<li><p>creates one object that overrides behaviors of its parent class (or interface)</p></li>
+<li><p>uses a shorthand notation to reduce implementation overhead (reduces clutter, keeps related code together, eliminates the need for single-use class fils)</p></li>
+<li><p>is often used to hook up an event handler</p></li>
 </ul>
+<p>The most common usage is to create an implementation of an <code class="docutils literal notranslate"><span class="pre">interface</span></code> that has multiple <code class="docutils literal notranslate"><span class="pre">abstract</span></code> methods.</p>
 </section>
 </section>
 
@@ -601,8 +717,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-methods">Default Methods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-methods">Static Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-vs-interface">Class vs Interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-usage">Common Usage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
 </ul>
   </nav></div>
