@@ -38,6 +38,40 @@ The hope is that at compile time, the compiler would be able to identify type is
         String s = (String) example(list);
     }
 ```
+## Typical Type Erasure Example
+```java
+// This is the original code written by the developer
+public static <T extends Comparable<T>> void example3(List<T> list) {
+    for (int i = 0; i < list.size() - 1; i++) {
+        T t1 = list.get(i);
+        T t2 = list.get(i+1);
+        int cmp = t1.compareTo(t2);
+        System.out.println(cmp);
+    }
+}
+
+// This is the code found in the .class file.
+// Notice how the objects in the list are type cast to Comparable. 
+public static <T extends Comparable<T>> void example3(List<T> list) {
+    for(int i = 0; i < list.size() - 1; ++i) {
+        T t1 = (Comparable) list.get(i);
+        T t2 = (Comparable) list.get(i + 1);
+        int cmp = t1.compareTo(t2);
+        System.out.println(cmp);
+    }
+}
+
+// The is what the code looks like at runtime after Type Erasure.
+// All references to `T` and `<T>` are eliminated. 
+public static void example3(List list) {
+    for(int i = 0; i < list.size() - 1; ++i) {
+        Comparable t1 = (Comparable) list.get(i);
+        Comparable t2 = (Comparable) list.get(i + 1);
+        int cmp = t1.compareTo(t2);
+        System.out.println(cmp);
+    }
+} 
+```
 ## Case Study : Create Array
 Let's say that we wanted to write a method that would create an array of some unknown type, and then fill the array with that type. We might try the following:  
 ```java
@@ -87,3 +121,33 @@ public static <T> T[] example1(Class<T> clazz, int n)  {
 }
 ```
 
+## Wildcards & Casting
+
+Wildcards are especially helpful when we have to deal with `Type Erasure`. Read the comments in the following example:
+```java
+public class Example extends Map<String, String> {
+
+    // In this implementation, we want to assure that the object passed in
+    // is a Map and not a supertype or subtype. It must be exactly a Map.
+    // It can be a map with Keys and Values of any type.
+    // If it is a Map, then let's say that they are equal if they are
+    // the same size.
+    @Override
+    public boolean equals(Object obj) {
+        // Using getClass() for equality checks is very strict and often discouraged 
+        // unless you have a specific reason to disallow subclass equality. 
+        // Most Java APIs (like Map.equals) use instanceof to allow flexibility.    
+        if (obj == null || obj.getClass() != Map.class) {
+            return false;
+        }
+        // When casting, we can't use Map<K, V> because 'K' and 'V'
+        // are not defined anywhere. Not in the class or in the method.
+        // More importantly, we can't use Map<String, String> because we don't
+        // know the key/value types because this information got erased at runtime.
+        // We must use Map<?, ?> because we can't make a type-safe cast due to
+        // the key/value types truly being unknown at runtime.
+        Map<?, ?> other = (Map<?, ?>) obj;
+        return other.size() == this.size();
+    }
+}
+```

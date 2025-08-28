@@ -1,14 +1,13 @@
 # Constraint Typing
 
 In this lesson we learn:  
-1. why we need to constrain our types  
+1. Why we need to, and the benefits we gain from constraining our `generic` types  
 2. The syntax of Contraint Typing  
-
 
 ## Overview
 Constraint typing allows a generic method to safely call methods that exist on required interface implementations or inheritance from parent classes. Constrainst estable an IS-A relationship and eliminate the need to blindly (and unsafely) type cast.  
 
-For example, we may want to call a generic method where we are guaranteed that our generic type `<T>` implements the interface `Runnable`. We would do that as follows:  
+For example, we may want to call a generic method where we are guaranteed that our generic type `T` implements the interface `Runnable`. We can do that as follows:  
 
 ```java
 public static <T extends Runnable> runIt(T t) {
@@ -20,23 +19,32 @@ public static <T extends Runnable> runIt(T t) {
 ```
 
 ### Syntax & Terminology
-There are two keywords used in constraint typing: `extends` and `super`. The most common syntax you'll see is:  
-    `<T extends SuperClass>` : This means that `T` is SuperClass or any subtype of SuperClass.    
+There are two keywords used in constraint typing: `extends` and `super`. The most common syntax you'll see is:
+> `<T extends SuperClass>`
+>
+> This means that `T` **IS-A** `SuperClass`.   
+> In other words, `T` is the class `SuperClass` or any subtype of `SuperClass`.    
 
 
-At times, we do not know the type of the object; we only know the relationship to some other type. In these cases we would use **Wildcards** `?`.  
-1. `? extends T` : The `?` represents any class that is `T` or any subclass of `T`.   
-2. `? super T` : The `?` represents any class that is `T` or any supertype of `T`.    
+At times, we do not know the type of the object; we only know the relationship to some other type. In these cases we would use **Wildcards**. We use: `?`.  
+>1. `? extends T` : The `?` represents any class that is `T` or any subclass of `T`.   
+>2. `? super T` : The `?` represents any class that is `T` or any supertype of `T`.    
 
 We also make use of these two terms:  
 1. **Upper Bound** : A constraint using the `extends` keyword.  
 2. **Lower Bound** : A constraint using the `super` keyword.  
 
-Note that `<T super ChildClass>` is invalid! We are required to use the **wildcard** when using `super` to set the **Lower Bound**.  
+```{admonition} Invalid Syntax
+:class: warning
+Note that the following is invalid:
+> ❌ `<T super ChildClass>`  ❌   
+
+We are required to use the **wildcard** `?` when using `super` to set the **Lower Bound**.  
+```
 
 ## Discussion on Bounds
 
-Let's first describe what the `Type Parameter Section` means.  
+Let's first describe what `Type Parameter Section` means.  
 ```java
 public static <type parameter section> ReturnType methodName(parameters)
 
@@ -50,22 +58,19 @@ public static <T extends Number> T method2(List<T> list) { }
 public static <T, U extends String> void method3(T item, U text) { }
 ```
 ### Upper Bound (extends)
-When we specify that the type must be a subclass of a particular class, we call this an **Upper Bound**. Let's draw a class diagram with the parent class at the top and several derived subclasses.
+When we specify that the type must be a subclass of a particular class, we call this an **Upper Bound**. Let's draw a class diagram with the parent class at the top and several derived subclasses. (Note: `GGP` stands for _Great Grandparent_. `GP` stands for _Grandparent_. And `P` stnads for _Parent_. )
 
 ![Class Hierarchy](../_static/class_constraint_hierarchy.png)  
 ```java
-// This generic method sets the Upper Bound to `ClassGP`
-// Using the class hierarchy diagram, we can see that `T`
-// is ALLOWED to be: 
-//     ClassGP, ClassP, or MyClass.
-// These three classes are at or below the Upper Bound.
-//
-// DISALLOWED: 
-//     ClassGGP, Object 
-// These two classes are above the upper bound.
+// This generic method sets the Upper Bound of T to be `ClassGP`.
 public static <T extends ClassGP> example(T t) { }
 ```
-The following code shows a longer example of using an **Upper Bound** constraint. It shows the benefits of using **Generics** versus simply using the base class `Node`.  
+From the class hierarchy diagram, we can see that `T` is ALLOWED to be: `ClassGP`, `ClassP`, or `MyClass`. These three classes are at or _below_ the Upper Bound.  
+
+Conversely, `T` is DISALLOWED from being: `ClassGGP` or `Object`. These two classes are _above_ the upper bound.  
+
+### Benefits of Generics
+The code below shows a longer example of using an **Upper Bound** constraint. It illustrates the benefits of using **Generics** versus simply using the base class `Node`.  
 
 ```java
 public class Node {
@@ -136,43 +141,49 @@ public class Example {
     }
 }
 ```
-In the code above, the generic implementation uses constraints so that the generic type `T` can be `Node` or any subclass of `Node` such as `BSTNode` or `GrandNode`. When we call the generic methods, the results are typed exactly as we want them.
+In the code above, the generic implementation uses constraints so that the generic type `T` can be `Node` or any subclass of `Node` such as `BSTNode` or `GrandNode`. When we call the generic methods, the results are typed exactly as we want them. No type casting is necessary.  
 
-It may seem like we could accomplish the same thing by having the methods accept the base class `Node`. You can see what when we call the non-generic methods, the return types are `Node` and we must resort to type casting to get the types we want.  
+The code also attempts to accomplish the same thing by having the non-generic methods accept the base class `Node`. You can see that when we call the non-generic methods, the return types are `Node` and we must resort to type casting to get the types we want.  
 
+```{admonition} Benefit of Generic
+The **benefits** of using generics are:  
+1. **Type Saftety at Compile Time:**  Errors are caught at compile time.  
+2. **Type Casting:** There is no need to do _Type Casting_.   
+3. **Preserves Specific Type Information:** Generic Collections contain the intended, designated type to allow for continued type-safe operations.   
+```
 ### Lower Bound (super)
-When we want the type must be the class or a superclass of a particular class, this is called a **Lower Bound**. Let's once again draw a class hierarchy diagram to illustrate how **Lower Bound** works.
+When we want to require the type to be a particular class or a superclass of it, this is called a **Lower Bound**. Let's once again observe the class hierarchy diagram to illustrate how **Lower Bound** works.
 
 ![Class Hierarchy](../_static/class_constraint_hierarchy.png)  
 ```java
 // This generic method sets the Lower Bound to `ClassGP`.
-// Using the class hierarchy diagram, we can see that 
-// we can have the following type of Lists
-// ALLOWED: 
-//     List<ClassGP>, List<ClassGGP>, List<Object>
-//
-// DISALLOWED: 
-//     List<ClassP>, List<MyClass>
 public static void example(List<? super ClassGP> list) { }
 ```
-In the above code, note that we cannot put the wildcad `?` in the _Type Parameter Section_. We are not allowed to use the wildcard there. Furthermore, we are not allowed to use `T`. Both of the following are invalid:  
+Using the class hierarchy diagram, we can see that we are allowed to have the following type of Lists: `List<ClassGP>`, `List<ClassGGP>`, or `List<Object>`. These classes are at or _above_ the Lower Bound.
+
+Conversly, the following List types are DISALLOWED: `List<ClassP>` or `List<MyClass>`. These two classes are _below_ the lower bound.
+
+```{admonition} Lower Bounds require Wildcard
+:class: warning
+In the above code, note that we cannot put the wildcard `?` in the _Type Parameter Section_. We are not allowed to use the wildcard there. Furthermore, we are not allowed to use `T` when setting a _Lower Bounds_. Both of the following are invalid:  
 
 ```java
-// wildcard not allowed in Type Parameter Section
-public static <? super ClassPG> void example(List<?> list) { }
+// wildcards are not allowed in Type Parameter Section
+public static <? super ClassPG> void example(List<?> list) { } // ❌ INVALID!
 
 // T is not allowed to set a Lower Bound using `super`
-public static <T super ClassPG> void example(List<T> list) { }
+public static <T super ClassPG> void example(List<T> list) { } // ❌ INVALID!
 ```
+### More on Lower Bound
 
-Let's look at another example this **Lower Bound**.
+Let's look at another example of a **Lower Bound**.
 ```java
-// setting a lower bound for '?' so that it must be:
-// ClassP, ClassGP, or Object
+// setting a lower bound for '?' so that it must be: ClassP or above.
+// ? can be: ClassP, ClassGP, ClassGGP, or Object
 public static void addToList(List<? super ClassP> list) {
     // have our list consume objects
     list.add(new ClassP());
-    list.add(new MyClass());
+    list.add(new MyClass()); // MyClass is-a ClassP which is-a `?`
 }
 
 public static void callAddToList() {
@@ -182,76 +193,54 @@ public static void callAddToList() {
     List<ClassP> list2 = new ArrayList<>();
     addToList(list2);
 }
+
+// Here we set a Lower Bound to a Generic Type `T`
 public static <T> void addToList2(List<? super T> list, T item) {
-    list.add(item);  // Safe - T is-a (? super T)
+    list.add(item);  // T is-a (? super T)
 }
 
 public static void callAddAgain() {
-    // Usage examples:
+    // Everything in the List<Number> IS-A Number
     List<Number> numbers = new ArrayList<>();
+
+    // Everything in the List<Object> IS-A Object
     List<Object> objects = new ArrayList<>();
 
+    // `T` is decided by the second argument
     addToList2(numbers, 42);        // T=Integer, List<? super Integer> accepts List<Number>
-    addToList2(objects, "hello");   // T=String, List<? super String> accepts List<Object>
     addToList2(numbers, 3.14);      // T=Double, List<? super Double> accepts List<Number>
+    
+    addToList2(objects, "hello");      // T=String, List<? super String> accepts List<Object>
+    addToList2(objects, new ClassP()); // T=ClassP, List<? super ClassP> accepts List<Object>
 }
 ```
+In the code above, there are two examples to discuss:   
+1. `addToList` will generically accept the following Lists: `List<Object>`, `List<ClassGGP>`, `List<ClassGP` and `List<ClassP>`. This is because it accepts a `List<? super ClassP`. This means the list can hold items that **IS-A** `ClassP`. It is **guaranteed** to be able to hold items of type `ClassP` or `MyClass` (because `MyClass` is-a `ClassP`).  
+2. `addToList2` will generically accept a `List<? super T>` where `T` is generically determined by the second argument.  
 
-## Extending an Interface
-
+## Constraining with an Interface
+So far we've focused on having the generic methods be constrained by a `class`. Far more popular is constraining a type with an `interface`.  
 ```java
+public static <T extends Comparable<T>> void isComparable(List<T> list) {
+    for (int i = 0; i < list.size() - 1; i++) {
+        T t1 = list.get(i);
+        T t2 = list.get(i+1);
 
-    // TODO: show how this is the logical rewrite of the code
-    public static <T extends Comparable<T>> void example3(List<T> list) {
-        for (int i = 0; i < list.size() - 1; i++) {
-            T t1 = list.get(i);
-            T t2 = list.get(i+1);
-            int cmp = t1.compareTo(t2);
-            System.out.println(cmp);
-        }
+        // Compare the items in the List using the Comparable method compareTo.
+        // This requires that the class `T` implements Comparable. That's okay.
+        // The Type Parameter Section assures that `T extends Comparable<T>`.
+        int cmp = t1.compareTo(t2);
+        System.out.println(cmp);
     }
-
-    // found in the .class file to manage the Constraint. 
-    public static <T extends Comparable<T>> void example3(List<T> list) {
-        for(int i = 0; i < list.size() - 1; ++i) {
-            T t1 = (Comparable)list.get(i);
-            T t2 = (Comparable)list.get(i + 1);
-            int cmp = t1.compareTo(t2);
-            System.out.println(cmp);
-        }
-    }
-
-    // runtime code after Type Erasure
-    public static void example3(List list) {
-        for(int i = 0; i < list.size() - 1; ++i) {
-            Comparable t1 = (Comparable) list.get(i);
-            Comparable t2 = (Comparable) list.get(i + 1);
-            int cmp = t1.compareTo(t2);
-            System.out.println(cmp);
-        }
-    } 
-```
-## PECS  (Producer Extends, Consumer Super)
-**Producer Extends:**  
-Use `? extends T` when you are reading from, or producing something from a collection.
-```java
- public void processElements(List<? extends Number> list) {
-      for (Number num : list) {
-          System.out.println(num);
-      }
-  }
-```
-**Consumer Super:**  
-Use `? super T` when you are writing to a collection, or when something is _consuming_ the objects.
-```java
-public void addElements(List<? super Number> list) {
-    list.add(1); // Adding an Integer
-     list.add(1.0); // Adding a Double
 }
+```
 
-public void callIt() {
+```{admonition} extends -- NOT implements
+:class: warning
+When creating an Upper Bound, we **always** use `extends`. We use `extends` even for interfaces.  
 
-}
+```java
+public static <T implements Comparable<T>> void isComparable(List<T> list) // ❌ INVALID!
 ```
 
 ## Reviewing Valid & Invalid Syntax
@@ -282,7 +271,7 @@ Wildcards can ONLY be used as type arguments in parameter types, return types, a
 
 **Wildcard Usage:**  
 ```java
-// ✅ Valid - wildcards in method parameters
+// ✅ Valid - wildcards in method parameters & return type
 public static void method(List<? super Integer> list) { }
 public static List<? extends Number> getList() { }
 
@@ -293,48 +282,13 @@ List<? super String> myList;
 public static <? super ClassP> void method() { } // ❌ Invalid
 public static <? super String> void method(List<?> list) { } // ❌ Invalid
 ```
-<a id="wildcards"></a>
 
-## Constraint Typing
-We can bound constrain type parameter, and we can have Bounded Wildcards. By constraining our types via **bounding**, we enable flexibility and code reuse. Let's look at each.  
 
-### Constrain (Bound Type Parameter)
-There are times where we require a parameter of a generic type to extend (or implement) something. We do this with as follows:  
+## Lower-Bounded Wildcards (? super T)
 
-```java
-public static <T extends Comparable<T>> reverseCompare(T o1, T o2) {
-    // We can't call `compareTo` if the object of type `T` doesn't
-    // implement `Comparable`. Luckily, we required this in the prototype.
-    return o2.compareTo(o1);
-}  
+A Lower-Bounded Wilcard restricts the wildcard to a specific type `T` or its superclasses. Note that a class can be considered a superclass of itself. `T` is a superclass of `T`.   
 
-```
-
-### Bounded Wildcards  
-Bounded wildcards make your code more flexible and reusable while maintaining type safety.  
-
-Bounded wildcards in Java are used to impose restrictions on the types that can be passed to a generic method, class, or interface. They are represented using the `?` symbol (the **wildcard symble**), combined with bounds (`extends` or `super`) to define the range of acceptable types. There are three types of Bounded Wildcards.  
-
-#### Upper-Bounded Wildcards (? extends T)
-
-Restricts the wildcard to a specific type `T` or its subclasses.
-Useful when you want to read data from a structure but not modify it.
-Example:
-```java
-public void processNumbers(List<? extends Number> list) {
-    for (Number num : list) {
-        System.out.println(num);
-    }
-}
-```
-
-Here, list can accept `List<Integer>`, `List<Double>`, or any subclass of `Number`.
-
-#### Lower-Bounded Wildcards (? super T)
-
-Restricts the wildcard to a specific type `T` or its superclasses. Note that a class can be considered a superclass of itself. `T` is a superclass of `T`.   
-
-In the code below we require the Comparator to have a generic type that is a superclass of `T`. This way, we can make use of the Comparator in the `Person` class, the superclass of `Kid`. We are also allowed to use the Comparator found in the `Kid` class.  
+In the code below we require the `Comparator` to have a generic type that is a superclass of `T`. This way, we can make use of the Comparator in the `Person` class, the superclass of `Kid`. We are also allowed to use the Comparator found in the `Kid` class.  
 
 ```java
 public class Person {
@@ -353,10 +307,14 @@ public class Kid extends Person {
 
 public class Example {
     public void example(Kid k1, Kid k2) {
-        System.out.printf("Person Comparison: %d\f", 
-                           reverseCompare(k1, k2, Person::compareByAge));
-        System.out.printf("   Kid Comparison: %d\f", 
+        // Since the Comparator works with Kids, this line of code would
+        // work even if we didn't have the lower-bound, <? super>
+        System.out.printf("   Kid Comparison: %d\n", 
                            reverseCompare(k1, k2, Kid::compareByDominance));
+        
+        // This line would fail if we didn't have <? super T>
+        System.out.printf("Person Comparison: %d\n", 
+                           reverseCompare(k1, k2, Person::compareByAge));                           
     }
 
     public static <T> int reverseCompare(T o1, T o2, Comparator<? super T> comparator) {
@@ -365,28 +323,25 @@ public class Example {
 }
 ```
 
-#### Unbounded Wildcards (?)
+## Unbounded Wildcards (?)
 
-Represents an unknown type without any restrictions.
-Useful when you don't care about the type but want to ensure type safety. This is especially helpful when we have to deal with `Type Erasure`.   
-Example:
+The wildcard `?` represents an unknown type without any restrictions. This is useful when you don't care about the type but want to ensure type safety. 
+
 ```java
-// In this implementation, we want to assure that the object passed in
-// is a Map and not a supertype or subtype. It must be exactly a Map.
-// It can be a map with Keys and Values of any type.
-// If it is a Map, then let's say that they are equal if they are
-// the same size.
-@Override
-public boolean equals(Object obj) {
-    // Using getClass() for equality checks is very strict and often discouraged 
-    // unless you have a specific reason to disallow subclass equality. 
-    // Most Java APIs (like Map.equals) use instanceof to allow flexibility.    
-    if (obj == null || obj.getClass() != Map.class) {
-        return false;
+// Only need size, don't care about contents
+public static int getTotalSize(List<List<?>> listOfLists) {
+    int total = 0;
+    for (List<?> list : listOfLists) {
+        total += list.size(); // size() doesn't depend on generic type
     }
-    // We need to use `?` because there is no generic type defined
-    // in this method. The method prototype has no `T` defined.
-    Map<?, ?> other = (Map<?, ?>) obj;
-    return other.size() == this.size();
+    return total;
 }
+
+// Works with any nested list structure
+getTotalSize(Arrays.asList(
+    Arrays.asList("a", "b"),           // List<String>
+    Arrays.asList(1, 2, 3),            // List<Integer>
+    Arrays.asList(true, false)         // List<Boolean>
+));
 ```
+
