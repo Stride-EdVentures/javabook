@@ -276,7 +276,7 @@ public static List<? super String> getList() { }
 |Bound Type|Wildcard `?`|Using `T`|
 |----------|------------|--------------------|
 |Upper (`extends`)|✅ `? extends Type`|✅ `T extends Type`|
-|Lower (`super`)|✅ `? superType`| ❌ `? super Type` Not Allowed|
+|Lower (`super`)|✅ `? superType`| ❌ `T super Type` Not Allowed|
 
 Wildcards can ONLY be used as type arguments in parameter types, return types, and variable declarations.  
 
