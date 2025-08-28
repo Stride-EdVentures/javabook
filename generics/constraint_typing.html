@@ -483,6 +483,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax-terminology">Syntax &amp; Terminology</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-on-bounds">Discussion on Bounds</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upper-bound-extends">Upper Bound (extends)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lower-bound-super">Lower Bound (super)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-an-interface">Extending an Interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pecs-producer-extends-consumer-super">PECS  (Producer Extends, Consumer Super)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reviewing-valid-invalid-syntax">Reviewing Valid &amp; Invalid Syntax</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Constraint Typing</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constrain-bound-type-parameter">Constrain (Bound Type Parameter)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bounded-wildcards">Bounded Wildcards</a><ul class="nav section-nav flex-column">
@@ -511,6 +523,197 @@ document.write(`
 <li><p>why we need to constrain our types</p></li>
 <li><p>The syntax of Contraint Typing</p></li>
 </ol>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Constraint typing allows a generic method to safely call methods that exist on required interface implementations or inheritance from parent classes. Constrainst estable an IS-A relationship and eliminate the need to blindly (and unsafely) type cast.</p>
+<p>For example, we may want to call a generic method where we are guaranteed that our generic type <code class="docutils literal notranslate"><span class="pre">&lt;T&gt;</span></code> implements the interface <code class="docutils literal notranslate"><span class="pre">Runnable</span></code>. We would do that as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Runnable</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">runIt</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Do stuff with the object t</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="c1">// then run it since it implements the Runnable interface</span>
+<span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="na">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="syntax-terminology">
+<h3>Syntax &amp; Terminology<a class="headerlink" href="#syntax-terminology" title="Link to this heading">#</a></h3>
+<p>There are two keywords used in constraint typing: <code class="docutils literal notranslate"><span class="pre">extends</span></code> and <code class="docutils literal notranslate"><span class="pre">super</span></code>. The most common syntax you’ll see is:<br />
+<code class="docutils literal notranslate"><span class="pre">&lt;T</span> <span class="pre">extends</span> <span class="pre">SuperClass&gt;</span></code> : This means that <code class="docutils literal notranslate"><span class="pre">T</span></code> is SuperClass or any subtype of SuperClass.</p>
+<p>At times, we do not know the type of the object; we only know the relationship to some other type. In these cases we would use <strong>Wildcards</strong> <code class="docutils literal notranslate"><span class="pre">?</span></code>.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">?</span> <span class="pre">extends</span> <span class="pre">T</span></code> : The <code class="docutils literal notranslate"><span class="pre">?</span></code> represents any class that is <code class="docutils literal notranslate"><span class="pre">T</span></code> or any subclass of <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">?</span> <span class="pre">super</span> <span class="pre">T</span></code> : The <code class="docutils literal notranslate"><span class="pre">?</span></code> represents any class that is <code class="docutils literal notranslate"><span class="pre">T</span></code> or any supertype of <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
+</ol>
+<p>We also make use of these two terms:</p>
+<ol class="arabic simple">
+<li><p><strong>Upper Bound</strong> : A constraint using the <code class="docutils literal notranslate"><span class="pre">extends</span></code> keyword.</p></li>
+<li><p><strong>Lower Bound</strong> : A constraint using the <code class="docutils literal notranslate"><span class="pre">super</span></code> keyword.</p></li>
+</ol>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">&lt;T</span> <span class="pre">super</span> <span class="pre">ChildClass&gt;</span></code> is invalid! We are required to use the <strong>wildcard</strong> when using <code class="docutils literal notranslate"><span class="pre">super</span></code> to set the <strong>Lower Bound</strong>.</p>
+</section>
+</section>
+<section id="discussion-on-bounds">
+<h2>Discussion on Bounds<a class="headerlink" href="#discussion-on-bounds" title="Link to this heading">#</a></h2>
+<p>Let’s first describe what the <code class="docutils literal notranslate"><span class="pre">Type</span> <span class="pre">Parameter</span> <span class="pre">Section</span></code> means.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">type</span><span class="w"> </span><span class="n">parameter</span><span class="w"> </span><span class="n">section</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ReturnType</span><span class="w"> </span><span class="nf">methodName</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+
+<span class="c1">// The &lt;T&gt; is the type parameter section</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method1</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// The &lt;T extends Number&gt; is the type parameter section  </span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">method2</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// The &lt;T, U extends String&gt; is the type parameter section</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method3</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<section id="upper-bound-extends">
+<h3>Upper Bound (extends)<a class="headerlink" href="#upper-bound-extends" title="Link to this heading">#</a></h3>
+<p>When we specify that the type must be a subclass of a particular class, we call this an <strong>Upper Bound</strong>. Let’s draw a class diagram with the parent class at the top and several derived subclasses.</p>
+<p><img alt="Class Hierarchy" src="../_images/class_constraint_hierarchy.png" /></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// This generic method sets the Upper Bound to `ClassGP`</span>
+<span class="c1">// Using the class hierarchy diagram, we can see that `T`</span>
+<span class="c1">// is ALLOWED to be: </span>
+<span class="c1">//     ClassGP, ClassP, or MyClass.</span>
+<span class="c1">// These three classes are at or below the Upper Bound.</span>
+<span class="c1">//</span>
+<span class="c1">// DISALLOWED: </span>
+<span class="c1">//     ClassGGP, Object </span>
+<span class="c1">// These two classes are above the upper bound.</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ClassGP</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The following code shows a longer example of using an <strong>Upper Bound</strong> constraint. It shows the benefits of using <strong>Generics</strong> versus simply using the base class <code class="docutils literal notranslate"><span class="pre">Node</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">left</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="n">right</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/* other code not shown */</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BSTNode</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GrandNode</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BSTNode</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ---- Generic implementation ---</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getListGeneric</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">root</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// T is-a Node. We can treat it as a Node object even if it is not</span>
+<span class="w">        </span><span class="c1">// precisely a Node. It could be a BSTNode. No casting necessary.</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Left child: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/* Code that add nodes to the list is not shown */</span>
+
+<span class="w">        </span><span class="c1">// we return a List&lt;T&gt; where `T` is precisely the type we want</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">list</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">findNodeGeneric</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">root</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">T</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* code not shown to find special node */</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ---- NON-Generic implementation of the code above ----</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getList</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Left child: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/* Code to generate list is not shown */</span>
+<span class="w">        </span><span class="c1">// we return a List&lt;Node&gt;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">list</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="nf">findNode</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">root</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* code not shown */</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ---- Show how we call Generic and NON-Generic methods ----</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">callIt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// creates a tree for us to use use</span>
+<span class="w">        </span><span class="n">GrandNode</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createGrandTree</span><span class="p">();</span><span class="w">   </span>
+
+<span class="w">        </span><span class="c1">// ---- call generic methods ----</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">GrandNode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getListGeneric</span><span class="p">(</span><span class="n">root</span><span class="p">);</span><span class="w">    </span><span class="c1">// List is accurately typed</span>
+<span class="w">        </span><span class="n">GrandNode</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findNodeGeneric</span><span class="p">(</span><span class="n">root</span><span class="p">);</span><span class="w">         </span><span class="c1">// no need to type cast</span>
+<span class="w">        </span><span class="n">GrandNode</span><span class="w"> </span><span class="n">firstNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">              </span><span class="c1">// no need to type cast</span>
+
+<span class="w">        </span><span class="c1">// ---- call the non-generic methods ----</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getList</span><span class="p">(</span><span class="n">root</span><span class="p">);</span><span class="w">                </span><span class="c1">// List is poorly typed</span>
+
+<span class="w">        </span><span class="c1">// We are not allowed to type cast the list itself</span>
+<span class="w">        </span><span class="c1">// List&lt;GrandNode&gt; list = (List&lt;GrandNode&gt;) getList(root); // Won&#39;t work!!</span>
+
+<span class="w">        </span><span class="n">GrandNode</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">GrandNode</span><span class="p">)</span><span class="w"> </span><span class="n">findNode</span><span class="p">(</span><span class="n">root</span><span class="p">);</span><span class="w">    </span><span class="c1">// Type Casting **required**</span>
+<span class="w">        </span><span class="n">GrandNode</span><span class="w"> </span><span class="n">firstNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">GrandNode</span><span class="p">)</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Type Casting **required**</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the code above, the generic implementation uses constraints so that the generic type <code class="docutils literal notranslate"><span class="pre">T</span></code> can be <code class="docutils literal notranslate"><span class="pre">Node</span></code> or any subclass of <code class="docutils literal notranslate"><span class="pre">Node</span></code> such as <code class="docutils literal notranslate"><span class="pre">BSTNode</span></code> or <code class="docutils literal notranslate"><span class="pre">GrandNode</span></code>. When we call the generic methods, the results are typed exactly as we want them.</p>
+<p>It may seem like we could accomplish the same thing by having the methods accept the base class <code class="docutils literal notranslate"><span class="pre">Node</span></code>. You can see what when we call the non-generic methods, the return types are <code class="docutils literal notranslate"><span class="pre">Node</span></code> and we must resort to type casting to get the types we want.</p>
+</section>
+<section id="lower-bound-super">
+<h3>Lower Bound (super)<a class="headerlink" href="#lower-bound-super" title="Link to this heading">#</a></h3>
+<p>When we want the type must be the class or a superclass of a particular class, this is called a <strong>Lower Bound</strong>. Let’s once again draw a class hierarchy diagram to illustrate how <strong>Lower Bound</strong> works.</p>
+<p><img alt="Class Hierarchy" src="../_images/class_constraint_hierarchy.png" /></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// This generic method sets the Lower Bound to `ClassGP`.</span>
+<span class="c1">// Using the class hierarchy diagram, we can see that </span>
+<span class="c1">// we can have the following type of Lists</span>
+<span class="c1">// ALLOWED: </span>
+<span class="c1">//     List&lt;ClassGP&gt;, List&lt;ClassGGP&gt;, List&lt;Object&gt;</span>
+<span class="c1">//</span>
+<span class="c1">// DISALLOWED: </span>
+<span class="c1">//     List&lt;ClassP&gt;, List&lt;MyClass&gt;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">ClassGP</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>In the above code, note that we cannot put the wildcad <code class="docutils literal notranslate"><span class="pre">?</span></code> in the <em>Type Parameter Section</em>. We are not allowed to use the wildcard there. Furthermore, we are not allowed to use <code class="docutils literal notranslate"><span class="pre">T</span></code>. Both of the following are invalid:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// wildcard not allowed in Type Parameter Section</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">ClassPG</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// T is not allowed to set a Lower Bound using `super`</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">ClassPG</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Let’s look at another example this <strong>Lower Bound</strong>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// setting a lower bound for &#39;?&#39; so that it must be:</span>
+<span class="c1">// ClassP, ClassGP, or Object</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addToList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">ClassP</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// have our list consume objects</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ClassP</span><span class="p">());</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MyClass</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">callAddToList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">addToList</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ClassP</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">addToList</span><span class="p">(</span><span class="n">list2</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addToList2</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span><span class="w">  </span><span class="c1">// Safe - T is-a (? super T)</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">callAddAgain</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Usage examples:</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">objects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">addToList2</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span><span class="w">        </span><span class="c1">// T=Integer, List&lt;? super Integer&gt; accepts List&lt;Number&gt;</span>
+<span class="w">    </span><span class="n">addToList2</span><span class="p">(</span><span class="n">objects</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// T=String, List&lt;? super String&gt; accepts List&lt;Object&gt;</span>
+<span class="w">    </span><span class="n">addToList2</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">);</span><span class="w">      </span><span class="c1">// T=Double, List&lt;? super Double&gt; accepts List&lt;Number&gt;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="extending-an-interface">
+<h2>Extending an Interface<a class="headerlink" href="#extending-an-interface" title="Link to this heading">#</a></h2>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// TODO: show how this is the logical rewrite of the code</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">example3</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -542,7 +745,85 @@ document.write(`
 <span class="w">    </span><span class="p">}</span><span class="w"> </span>
 </pre></div>
 </div>
+</section>
+<section id="pecs-producer-extends-consumer-super">
+<h2>PECS  (Producer Extends, Consumer Super)<a class="headerlink" href="#pecs-producer-extends-consumer-super" title="Link to this heading">#</a></h2>
+<p><strong>Producer Extends:</strong><br />
+Use <code class="docutils literal notranslate"><span class="pre">?</span> <span class="pre">extends</span> <span class="pre">T</span></code> when you are reading from, or producing something from a collection.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">processElements</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Number</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Consumer Super:</strong><br />
+Use <code class="docutils literal notranslate"><span class="pre">?</span> <span class="pre">super</span> <span class="pre">T</span></code> when you are writing to a collection, or when something is <em>consuming</em> the objects.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addElements</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// Adding an Integer</span>
+<span class="w">     </span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Adding a Double</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">callIt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="reviewing-valid-invalid-syntax">
+<h2>Reviewing Valid &amp; Invalid Syntax<a class="headerlink" href="#reviewing-valid-invalid-syntax" title="Link to this heading">#</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// ✅ Valid in type parameter section:</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SomeClass</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Class1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Interface1</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// ❌ Invalid in type parameter section:</span>
+<span class="c1">// Wildcards cannot appear in the Type Parameter Section</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SomeClass</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">SomeClass</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// ✅ Wildcards are allowed to define the types of the parameters and return types</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Summarizing <code class="docutils literal notranslate"><span class="pre">extends</span></code> and <code class="docutils literal notranslate"><span class="pre">super</span></code></strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Bound Type</p></th>
+<th class="head"><p>Wildcard <code class="docutils literal notranslate"><span class="pre">?</span></code></p></th>
+<th class="head"><p>Using <code class="docutils literal notranslate"><span class="pre">T</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Upper (<code class="docutils literal notranslate"><span class="pre">extends</span></code>)</p></td>
+<td><p>✅ <code class="docutils literal notranslate"><span class="pre">?</span> <span class="pre">extends</span> <span class="pre">Type</span></code></p></td>
+<td><p>✅ <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">extends</span> <span class="pre">Type</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Lower (<code class="docutils literal notranslate"><span class="pre">super</span></code>)</p></td>
+<td><p>✅ <code class="docutils literal notranslate"><span class="pre">?</span> <span class="pre">superType</span></code></p></td>
+<td><p>❌ <code class="docutils literal notranslate"><span class="pre">?</span> <span class="pre">super</span> <span class="pre">Type</span></code> Not Allowed</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Wildcards can ONLY be used as type arguments in parameter types, return types, and variable declarations.</p>
+<p><strong>Wildcard Usage:</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// ✅ Valid - wildcards in method parameters</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// ✅ Valid - wildcards in variable declarations  </span>
+<span class="n">List</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myList</span><span class="p">;</span>
+
+<span class="c1">// ❌ Invalid - wildcards in type parameter section</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">ClassP</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// ❌ Invalid</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// ❌ Invalid</span>
+</pre></div>
+</div>
 <p><a id="wildcards"></a></p>
+</section>
 <section id="id1">
 <h2>Constraint Typing<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>We can bound constrain type parameter, and we can have Bounded Wildcards. By constraining our types via <strong>bounding</strong>, we enable flexibility and code reuse. Let’s look at each.</p>
@@ -702,6 +983,18 @@ Example:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax-terminology">Syntax &amp; Terminology</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-on-bounds">Discussion on Bounds</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upper-bound-extends">Upper Bound (extends)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lower-bound-super">Lower Bound (super)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-an-interface">Extending an Interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pecs-producer-extends-consumer-super">PECS  (Producer Extends, Consumer Super)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reviewing-valid-invalid-syntax">Reviewing Valid &amp; Invalid Syntax</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Constraint Typing</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constrain-bound-type-parameter">Constrain (Bound Type Parameter)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bounded-wildcards">Bounded Wildcards</a><ul class="nav section-nav flex-column">
