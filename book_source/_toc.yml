@@ -14,6 +14,7 @@ chapters:
     - file: generics/collections
     - file: generics/generics
     - file: generics/constraint_typing
+    - file: generics/practice_ct
     - file: generics/type_erasure
   - file: interfaces/index
     sections:
