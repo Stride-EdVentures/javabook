@@ -1,6 +1,6 @@
 # Generics
 
-In this lesson, students will learn how to create their own generic `static` methods and generic classes. 
+In this lesson, students will learn how to create their own generic methods and classes. 
 
 Furthermore, students will learn about some of the benefits that generics offers us. We will answer the question: **Why use generics at all?**
 
