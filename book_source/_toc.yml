@@ -6,7 +6,6 @@ chapters:
     - file: Topics/java_conventions
     - file: Topics/installing_jgrasp
     - file: Topics/git
-    - file: Topics/generics
     - file: Topics/layout_managers
   - file: generics/index
     sections:

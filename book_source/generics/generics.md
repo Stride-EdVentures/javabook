@@ -79,11 +79,11 @@ public class Box {
 
 
 ## Why Generics?
-We have Generics to enable compile-time type checking.  This helps catch type-related errors early, reducing runtime errors and improving code reliability.  
+We have Generics to enable compile-time type checking.  This helps catch type-related errors early, reducing runtime errors and improving code reliability. Generics also reduce the amount of type casting the developer would need to do should one choose to implement the desired functionality using `Objects`.   
 
 Generics are used to do two things:  
-1. Allow a data structure to contain different types  
-2. Allow a method to work on a broad range of types 
+1. Allow a data structure to contain different types while also eliminating repeated type casting.   
+2. Allow a method to work on a broad range of types while still retaining some type safety. 
 
 ### Generic Data Structures
 Generic Data Structures are likely where developers mostly commonly see Generics. The `Java Collection Framework`<a href="#footnotes"><sup>[1]</sup></a> is built entirely on top of Generics. This is where we get support for code like the following:  
