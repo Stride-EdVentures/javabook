@@ -20,7 +20,7 @@ parse:
 #######################################################################################
 # HTML-specific settings
 html:
-  favicon: "_static/favicon.png"
+  favicon: "_static/peanut head.jpg"
   use_edit_page_button: true
   use_repository_button: true
   use_issues_button: true
