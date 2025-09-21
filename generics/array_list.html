@@ -674,12 +674,13 @@ document.write(`
 <li><p>You cannot use <code class="docutils literal notranslate"><span class="pre">[]</span></code> (brackets) on the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>. It is not an actual array.</p>
 <ul>
 <li><p>Instead, use the API <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">get</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code>.</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">list2.set(2,</span> <span class="pre">list1.get(2));</span></code></p></li>
 </ul>
 </li>
 <li><p>Only <code class="docutils literal notranslate"><span class="pre">Object</span></code> types can be contained inside the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code></p>
 <ul>
 <li><p>If you want to store <code class="docutils literal notranslate"><span class="pre">int</span></code> values, use the wrapper class <code class="docutils literal notranslate"><span class="pre">Integer</span></code></p></li>
-<li><p>Java will <strong>Box</strong> and <strong>Unbox</strong> primitives &lt;–&gt; Wrapper Classes.</p></li>
+<li><p>Java will automatically <strong>Box</strong> and <strong>Unbox</strong> primitives for you</p></li>
 </ul>
 </li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">size()</span></code> to see how many elements are in the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code></p></li>

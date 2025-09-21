@@ -116,9 +116,10 @@ Things to remember:
     * Example: `ArrayList<Double> list = new ArrayList<>();`
 * You cannot use `[]` (brackets) on the `ArrayList`. It is not an actual array.
     * Instead, use the API `add`, `get` and `set`.    
+    * Example: `list2.set(2, list1.get(2));`
 * Only `Object` types can be contained inside the `ArrayList`  
     * If you want to store `int` values, use the wrapper class `Integer`  
-    * Java will **Box** and **Unbox** primitives <--> Wrapper Classes.  
+    * Java will automatically **Box** and **Unbox** primitives for you   
 * Use `size()` to see how many elements are in the `ArrayList`  
 * The ArrayList will automaticall grow and shrink.  
     * `list.remove(1);` // removes the element at index 1 and the other elements at index 2+ will slide into place.  
