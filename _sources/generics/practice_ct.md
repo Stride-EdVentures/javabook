@@ -10,7 +10,7 @@ public static <T extends Node> void answer1(List<T> list) { }
 
 **Question #2:** Update this prototype so that the body of the method will work. Note that the method `compareTo` belongs to the `Comparable` interface.  
 ```java
-public static <T> reverseCompare(T o1, T o2) {
+public static <T> int reverseCompare(T o1, T o2) {
     return o2.compareTo(o1);
 }  
 ```
@@ -18,7 +18,7 @@ public static <T> reverseCompare(T o1, T o2) {
 ```{admonition} Click to see answer
 :class: dropdown hint
 ```java
-public static <T extends Comparable<T>> reverseCompare(T o1, T o2) {
+public static <T extends Comparable<T>> int reverseCompare(T o1, T o2) {
     // We can't call `compareTo` if the object of type `T` doesn't
     // implement `Comparable`. Luckily, we required this in the prototype.
     return o2.compareTo(o1);

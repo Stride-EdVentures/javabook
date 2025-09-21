@@ -96,7 +96,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="icon" href="../_static/peanut head.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Stack &amp; Queue" href="stack_queue.html" />
+    <link rel="next" title="Practice: ArrayList" href="practice_arraylist.html" />
     <link rel="prev" title="Generics" href="index.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -238,6 +238,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stack_queue.html">Stack &amp; Queue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collections.html">Collections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generics.html">Generics</a></li>
@@ -487,7 +488,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-api">More API</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-exploration">Practical Exploration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapper-types">Wrapper Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construction-of-wrapper-classes">Construction of Wrapper Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxing-unboxing">Boxing &amp; Unboxing</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
             </nav>
         </div>
@@ -522,7 +529,7 @@ document.write(`
 <ul class="simple">
 <li><p>The declaration requires that we provide the type of object in the ArrayList</p></li>
 <li><p>An <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> can hold any type of object we want, but it <strong>must</strong> be an <code class="docutils literal notranslate"><span class="pre">Object</span></code>.</p></li>
-<li><p>We don’t provide the size of the array in the constructor. Instead, the size of the list will grow &amp; shrink automatically.</p></li>
+<li><p>We don’t provide the size of the array in the constructor.<a href="#footnotes"><sup>[1]</sup></a> Instead, the size of the list will grow &amp; shrink automatically.</p></li>
 <li><p>We don’t index into the list as we do in an array. We do <strong>not</strong> use <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Instead, we use API such as <code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">get</span></code>.</p></li>
 </ul>
 </section>
@@ -543,37 +550,37 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td><p>arr.add(object)</p></td>
-<td><p>// adds an object at the end</p></td>
+<td><p>adds an object at the end</p></td>
 </tr>
 <tr class="row-odd"><td><p>arr.get(index)</p></td>
-<td><p>// gets the object at index</p></td>
+<td><p>gets the object at index</p></td>
 </tr>
 <tr class="row-even"><td><p>arr.set(index, object)</p></td>
-<td><p>// sets the value at index</p></td>
+<td><p>sets the value at index</p></td>
 </tr>
 <tr class="row-odd"><td><p>arr.add(index, object)</p></td>
-<td><p>// insert an object at index</p></td>
+<td><p>insert an object at index</p></td>
 </tr>
 <tr class="row-even"><td><p>arr.remove(index)</p></td>
-<td><p>// removes the object at index</p></td>
+<td><p>removes the object at index</p></td>
 </tr>
 <tr class="row-odd"><td><p>arr.remove(object)</p></td>
-<td><p>// removes the object from arr</p></td>
+<td><p>removes the object from arr</p></td>
 </tr>
 <tr class="row-even"><td><p>arr.size()</p></td>
-<td><p>// gets the size of the array</p></td>
+<td><p>gets the size of the array</p></td>
 </tr>
 <tr class="row-odd"><td><p>arr.clear()</p></td>
-<td><p>// removes ALL elements from the array</p></td>
+<td><p>removes ALL elements from the array</p></td>
 </tr>
 <tr class="row-even"><td><p>arr.contains(object)</p></td>
-<td><p>// asks if an object is in array using .equals()</p></td>
+<td><p>asks if an object is in array using .equals()</p></td>
 </tr>
 <tr class="row-odd"><td><p>arr.indexOf(object)</p></td>
-<td><p>// finds index of the object</p></td>
+<td><p>finds index of the object</p></td>
 </tr>
 <tr class="row-even"><td><p>arr.isEmpty()</p></td>
-<td><p>// asks if the array is empty</p></td>
+<td><p>asks if the array is empty</p></td>
 </tr>
 </tbody>
 </table>
@@ -582,28 +589,120 @@ document.write(`
 <section id="practical-exploration">
 <h2>Practical Exploration<a class="headerlink" href="#practical-exploration" title="Link to this heading">#</a></h2>
 <p>Here are just a few ways create an <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// repeat the object type in the constructor</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// repeat the object type in the constructor&#39;s &lt;angle brackets&gt;</span>
 <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
 
-<span class="c1">// allow the compiler to infer the object type at the constructor</span>
+<span class="c1">// allow the compiler to infer the object type</span>
 <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 
-<span class="c1">// assign the ArrayList to the List interface</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="c1">// Assign the ArrayList to the List interface.</span>
+<span class="c1">// Set ArrayList&#39;s initial capacity to 100.</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
 
-<span class="c1">// Use the Arrays helper to create a FIXED sized List</span>
-<span class="c1">// This is technically not an ArrayList</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World!&quot;</span><span class="p">);</span>
+<span class="c1">// Pass in a fixed-size list into the ArrayList constructor</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World!&quot;</span><span class="p">));</span>
 </pre></div>
 </div>
+</section>
+<section id="wrapper-types">
+<h2>Wrapper Types<a class="headerlink" href="#wrapper-types" title="Link to this heading">#</a></h2>
+<p>Generics do <strong>not</strong> work with primitive types; they must work with <code class="docutils literal notranslate"><span class="pre">Object</span></code> types. Java has come to our rescue and made it easy for us to contain primitive types by offering Wrapper Classes for each. Here are the most common: <code class="docutils literal notranslate"><span class="pre">Integer</span></code>, <code class="docutils literal notranslate"><span class="pre">Double</span></code>, <code class="docutils literal notranslate"><span class="pre">Boolean</span></code> and <code class="docutils literal notranslate"><span class="pre">Character</span></code>. These classes offer lots of helpful methods.</p>
+<p><strong>Key points about these wrapper classes:</strong></p>
+<ul class="simple">
+<li><p>All wrapper classes are <em>immutable</em> - their values cannot be changed after creation</p></li>
+<li><p>All extend <code class="docutils literal notranslate"><span class="pre">Object</span></code>, so they can be used in generic collections</p></li>
+<li><p>They provide useful static methods (like <code class="docutils literal notranslate"><span class="pre">Integer.parseInt()</span></code>, <code class="docutils literal notranslate"><span class="pre">Double.valueOf()</span></code>)</p></li>
+<li><p>Autoboxing automatically converts primitives to wrappers: <code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">i</span> <span class="pre">=</span> <span class="pre">5;</span></code></p></li>
+<li><p>Auto-unboxing automatically converts wrappers to primitives: <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">Integer(5);</span></code></p></li>
+<li><p>All wrapper classes (except <code class="docutils literal notranslate"><span class="pre">Character</span></code>) can be constructed from <code class="docutils literal notranslate"><span class="pre">String</span></code> representations</p></li>
+<li><p>They all override <code class="docutils literal notranslate"><span class="pre">equals()</span></code> and <code class="docutils literal notranslate"><span class="pre">toString()</span></code> methods appropriately</p></li>
+</ul>
+<section id="construction-of-wrapper-classes">
+<h3>Construction of Wrapper Classes<a class="headerlink" href="#construction-of-wrapper-classes" title="Link to this heading">#</a></h3>
+<p>The Wrapper Classes can be created from a <code class="docutils literal notranslate"><span class="pre">String</span></code> by:</p>
+<ul class="simple">
+<li><p><strong>valueOf</strong>: <code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">i1</span> <span class="pre">=</span> <span class="pre">Integer.valueOf(&quot;123&quot;);</span></code></p>
+<ul>
+<li><p>Each wrapper class has a <code class="docutils literal notranslate"><span class="pre">valueOf</span></code> method.</p></li>
+</ul>
+</li>
+<li><p><strong>parsing</strong>: <code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">i2</span> <span class="pre">=</span> <span class="pre">Integer.parseInt(&quot;123&quot;);</span></code></p>
+<ul>
+<li><p>Other wrapper classes have similar, but not identical method names. e.g. <code class="docutils literal notranslate"><span class="pre">Double.parseDouble</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Boxing</strong>: <code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">i3</span> <span class="pre">=</span> <span class="pre">4;</span></code></p></li>
+</ul>
+</section>
+<section id="boxing-unboxing">
+<h3>Boxing &amp; Unboxing<a class="headerlink" href="#boxing-unboxing" title="Link to this heading">#</a></h3>
+<p>Boxing and unboxing are Java’s automatic conversion mechanisms between primitive types and their corresponding wrapper classes. Boxing occurs when Java automatically converts a primitive value (like <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code>, or <code class="docutils literal notranslate"><span class="pre">boolean</span></code>) into its wrapper object (like <code class="docutils literal notranslate"><span class="pre">Integer</span></code>, <code class="docutils literal notranslate"><span class="pre">Double</span></code>, or <code class="docutils literal notranslate"><span class="pre">Boolean</span></code>), while unboxing is the reverse process where wrapper objects are automatically converted back to their primitive equivalents.</p>
+<p>Understanding boxing and unboxing is crucial because while it makes code more convenient to write, it can impact performance in certain scenarios since object creation and method calls have more overhead than primitive operations.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// This work due to autoboxing/unboxing:</span>
+<span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">numbers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span><span class="w">             </span><span class="c1">// autoboxing: int → Integer</span>
+
+<span class="c1">// We can also auto-unbox</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// auto-unboxing: Integer → int</span>
+
+<span class="c1">// Explicit Boxing</span>
+<span class="n">Integer</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">Boolean</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">;</span>
+<span class="n">Character</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Character</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">);</span>
+
+<span class="c1">// Explicit Unboxing</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num</span><span class="p">.</span><span class="na">intValue</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Oracle’s official documentation, and some technical resources, often reserve <strong>Boxing</strong> specifically for the <em>automatic</em> (or <em>implicit</em>) conversion done by the compiler. Oracle will not consider “Explict Boxing” as boxing at all. However, there is not concensus on this terminology.</p>
+<p>This site has chosen to declare that there are two ways to <strong>Box</strong> or <strong>Unbox</strong>:</p>
+<ul class="simple">
+<li><p><strong>Implicit</strong> or <strong>Automatic</strong>: The compiler does it automatically for the developer.</p></li>
+<li><p><strong>Explicit</strong> or <strong>Manual</strong>: The developer explicitly puts the primitive into the Wrapper Class.</p></li>
+</ul>
+</section>
 </section>
 <section id="what-s-so-important">
 <h2>What’s so Important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
 <p>Things to remember:</p>
 <ul class="simple">
-<li><p>one</p></li>
-<li><p>two</p></li>
+<li><p>Creating an <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> uses &lt;angle brackets&gt; and parentheses. It a bit wonky.</p>
+<ul>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">ArrayList&lt;Double&gt;</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">ArrayList&lt;&gt;();</span></code></p></li>
 </ul>
+</li>
+<li><p>You cannot use <code class="docutils literal notranslate"><span class="pre">[]</span></code> (brackets) on the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>. It is not an actual array.</p>
+<ul>
+<li><p>Instead, use the API <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">get</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Only <code class="docutils literal notranslate"><span class="pre">Object</span></code> types can be contained inside the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code></p>
+<ul>
+<li><p>If you want to store <code class="docutils literal notranslate"><span class="pre">int</span></code> values, use the wrapper class <code class="docutils literal notranslate"><span class="pre">Integer</span></code></p></li>
+<li><p>Java will <strong>Box</strong> and <strong>Unbox</strong> primitives &lt;–&gt; Wrapper Classes.</p></li>
+</ul>
+</li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">size()</span></code> to see how many elements are in the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code></p></li>
+<li><p>The ArrayList will automaticall grow and shrink.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">list.remove(1);</span></code> // removes the element at index 1 and the other elements at index 2+ will slide into place.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
+<p>[1] The constructor for <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> can take an integer argument. Most students think that this is the size of the array, and to some degree they’re right! It is the <em>initial</em> size of the underlying <code class="docutils literal notranslate"><span class="pre">array</span></code>, but it is not the count of elements currently in the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> (the value returned by the method <code class="docutils literal notranslate"><span class="pre">size()</span></code>). It gets a bit complicated.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is implemented with an underlying <code class="docutils literal notranslate"><span class="pre">array</span></code> and the size of the underlying array is <strong>not</strong> the same as the <code class="docutils literal notranslate"><span class="pre">size()</span></code> of the ArrayList. The <code class="docutils literal notranslate"><span class="pre">size()</span></code> of an ArrayList is the count of elements that have been added to the array that can be safely indexed. When the user adds enough elements to exceed the size of the unerlying array, a new array needs to be constructed, and all the elements in the array need to be copied over. This process is expensive and work is done to minimize the occurance.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> will start off with a default capacity of 10. When the 11th element is added, the ArrayList will double its size to 20. When the 21st element is added, it is doubled again to 40. So on and so forth until the size growth is beyond memory limits.</p>
+<p>[2] <code class="docutils literal notranslate"><span class="pre">Arrays.asList</span></code> is a convient way to create a <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Use the Arrays helper to create a list tht has a FIXED-SIZED.</span>
+<span class="c1">// In this List, elements cannot be added or removed.</span>
+<span class="c1">// This is not an ArrayList. It is a limited List.</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World!&quot;</span><span class="p">);</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Illegal&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// ❌ throws UnsupportedOperationException</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -647,11 +746,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="stack_queue.html"
+       href="practice_arraylist.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stack &amp; Queue</p>
+        <p class="prev-next-title"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -674,7 +773,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-api">More API</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-exploration">Practical Exploration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapper-types">Wrapper Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construction-of-wrapper-classes">Construction of Wrapper Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxing-unboxing">Boxing &amp; Unboxing</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
   </nav></div>
 
