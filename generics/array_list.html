@@ -511,7 +511,7 @@ document.write(`
 <p>The class <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is a special type of class called a <code class="docutils literal notranslate"><span class="pre">Generic</span></code>. In this lesson, we won’t go into the details of how generics work. Instead, we will focus on why and how to use the class <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> class provides <em>array like</em> behavior with some added benefits. It also introduces a new syntax that involves <strong>&lt;angle brackets&gt;</strong>. The easiest way to figure this stuff out is by example.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> class provides <em>array like</em> behavior with some added benefits. Its constructor introduces a new syntax that involves <strong>&lt;angle brackets&gt;</strong>. The easiest way to figure this stuff out is by example.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// We create a new ArrayList capable of holding Strings.</span>
 <span class="c1">// We must have `&lt;String&gt;` added to the class name.</span>
 <span class="c1">// The constructor must have &lt;&gt;. </span>
@@ -568,7 +568,7 @@ document.write(`
 <td><p>removes the object from arr</p></td>
 </tr>
 <tr class="row-even"><td><p>arr.size()</p></td>
-<td><p>gets the size of the array</p></td>
+<td><p>gets the count of elements in arr</p></td>
 </tr>
 <tr class="row-odd"><td><p>arr.clear()</p></td>
 <td><p>removes ALL elements from the array</p></td>
@@ -633,6 +633,8 @@ document.write(`
 </li>
 <li><p><strong>Boxing</strong>: <code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">i3</span> <span class="pre">=</span> <span class="pre">4;</span></code></p></li>
 </ul>
+<p>A Wrapper class is a class that has very little functionality. Think of it as a gift box that holds the actual item. In this image, we see a wrapper class that holds the primitive <code class="docutils literal notranslate"><span class="pre">int</span></code>. To get the primitive into the wrapper class we have to <em>Box</em> it. To extract the primitive value from the wrapper class we <em>Unbox</em> it.<br />
+<img alt="Integer Wrapper" src="_static/Integer%20Wrapper%20Box.png" /></p>
 </section>
 <section id="boxing-unboxing">
 <h3>Boxing &amp; Unboxing<a class="headerlink" href="#boxing-unboxing" title="Link to this heading">#</a></h3>
@@ -694,6 +696,14 @@ document.write(`
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
 <p>[1] The constructor for <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> can take an integer argument. Most students think that this is the size of the array, and to some degree they’re right! It is the <em>initial</em> size of the underlying <code class="docutils literal notranslate"><span class="pre">array</span></code>, but it is not the count of elements currently in the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> (the value returned by the method <code class="docutils literal notranslate"><span class="pre">size()</span></code>). It gets a bit complicated.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// create a list that can hold 101 dalmations</span>
+<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dalmations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">101</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// size() == 0.  The capacity of the list starts out as 101.</span>
+<span class="w">    </span><span class="c1">// This prints: Count of dogs in the list is: 0</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Count of dogs in the list is: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dalmations</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w"> </span>
+</pre></div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is implemented with an underlying <code class="docutils literal notranslate"><span class="pre">array</span></code> and the size of the underlying array is <strong>not</strong> the same as the <code class="docutils literal notranslate"><span class="pre">size()</span></code> of the ArrayList. The <code class="docutils literal notranslate"><span class="pre">size()</span></code> of an ArrayList is the count of elements that have been added to the array that can be safely indexed. When the user adds enough elements to exceed the size of the unerlying array, a new array needs to be constructed, and all the elements in the array need to be copied over. This process is expensive and work is done to minimize the occurance.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> will start off with a default capacity of 10. When the 11th element is added, the ArrayList will double its size to 20. When the 21st element is added, it is doubled again to 40. So on and so forth until the size growth is beyond memory limits.</p>
 <p>[2] <code class="docutils literal notranslate"><span class="pre">Arrays.asList</span></code> is a convient way to create a <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>

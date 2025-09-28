@@ -4,7 +4,7 @@ The class `ArrayList` is a special type of class called a `Generic`. In this les
 
 ## Overview
 
-The `ArrayList` class provides _array like_ behavior with some added benefits. It also introduces a new syntax that involves **&lt;angle brackets&gt;**. The easiest way to figure this stuff out is by example.  
+The `ArrayList` class provides _array like_ behavior with some added benefits. Its constructor introduces a new syntax that involves **&lt;angle brackets&gt;**. The easiest way to figure this stuff out is by example.  
 ```java
 // We create a new ArrayList capable of holding Strings.
 // We must have `<String>` added to the class name.
@@ -40,7 +40,7 @@ Here are some popular API:
 |arr.add(index, object)|	insert an object at index|
 |arr.remove(index)|			removes the object at index|
 |arr.remove(object)|		removes the object from arr|
-|arr.size()|				gets the size of the array|
+|arr.size()|				gets the count of elements in arr|
 |arr.clear()|				removes ALL elements from the array|
 |arr.contains(object)|		asks if an object is in array using .equals()|
 |arr.indexOf(object)|		finds index of the object|
@@ -82,6 +82,9 @@ The Wrapper Classes can be created from a `String` by:
 * **parsing**: `Integer i2 = Integer.parseInt("123");`  
     * Other wrapper classes have similar, but not identical method names. e.g. `Double.parseDouble`  
 * **Boxing**: `Integer i3 = 4;`  
+
+A Wrapper class is a class that has very little functionality. Think of it as a gift box that holds the actual item. In this image, we see a wrapper class that holds the primitive `int`. To get the primitive into the wrapper class we have to *Box* it. To extract the primitive value from the wrapper class we *Unbox* it.  
+![Integer Wrapper](../_static/Integer%20Wrapper%20Box.png)  
 
 ### Boxing & Unboxing
 Boxing and unboxing are Java's automatic conversion mechanisms between primitive types and their corresponding wrapper classes. Boxing occurs when Java automatically converts a primitive value (like `int`, `double`, or `boolean`) into its wrapper object (like `Integer`, `Double`, or `Boolean`), while unboxing is the reverse process where wrapper objects are automatically converted back to their primitive equivalents.  
@@ -127,6 +130,15 @@ Things to remember:
 
 ## Footnotes
 [1] The constructor for `ArrayList` can take an integer argument. Most students think that this is the size of the array, and to some degree they're right! It is the *initial* size of the underlying `array`, but it is not the count of elements currently in the `ArrayList` (the value returned by the method `size()`). It gets a bit complicated.  
+
+```java
+    // create a list that can hold 101 dalmations
+    ArrayList<Dog> dalmations = new ArrayList<>(101);
+
+    // size() == 0.  The capacity of the list starts out as 101.
+    // This prints: Count of dogs in the list is: 0
+    System.out.printf("Count of dogs in the list is: %d\n", dalmations.size()); 
+```
 
 The `ArrayList` is implemented with an underlying `array` and the size of the underlying array is **not** the same as the `size()` of the ArrayList. The `size()` of an ArrayList is the count of elements that have been added to the array that can be safely indexed. When the user adds enough elements to exceed the size of the unerlying array, a new array needs to be constructed, and all the elements in the array need to be copied over. This process is expensive and work is done to minimize the occurance.  
 
