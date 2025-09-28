@@ -83,8 +83,8 @@ The Wrapper Classes can be created from a `String` by:
     * Other wrapper classes have similar, but not identical method names. e.g. `Double.parseDouble`  
 * **Boxing**: `Integer i3 = 4;`  
 
-A Wrapper class is a class that has very little functionality. Think of it as a gift box that holds the actual item. In this image, we see a wrapper class that holds the primitive `int`. To get the primitive into the wrapper class we have to *Box* it. To extract the primitive value from the wrapper class we *Unbox* it.  
-![Integer Wrapper](../_static/Integer%20Wrapper%20Box.png)  
+A Wrapper class is a class that has very little functionality. Think of it as a gift box that holds the actual item. In this image, we see a wrapper class that holds the primitive `int`. To get the primitive value into the wrapper class we have to *Box* it. To extract the primitive value from the wrapper class we *Unbox* it.  
+![Integer Wrapper](../_static/int_wrapper_box.png)  
 
 ### Boxing & Unboxing
 Boxing and unboxing are Java's automatic conversion mechanisms between primitive types and their corresponding wrapper classes. Boxing occurs when Java automatically converts a primitive value (like `int`, `double`, or `boolean`) into its wrapper object (like `Integer`, `Double`, or `Boolean`), while unboxing is the reverse process where wrapper objects are automatically converted back to their primitive equivalents.  
