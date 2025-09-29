@@ -462,7 +462,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -478,6 +480,20 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stack">Stack</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lifo">LIFO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#queue">Queue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -489,7 +505,64 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="stack-queue">
 <h1>Stack &amp; Queue<a class="headerlink" href="#stack-queue" title="Link to this heading">#</a></h1>
-<p>In this lesson, we will learn about other Collection classes, primarily <code class="docutils literal notranslate"><span class="pre">Stack</span></code> and <code class="docutils literal notranslate"><span class="pre">Queue</span></code>.</p>
+<p>In this lesson, we will learn about two Collection classes, <code class="docutils literal notranslate"><span class="pre">Stack</span></code> and <code class="docutils literal notranslate"><span class="pre">Queue</span></code>.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is an Abstract Data Type (ADT)<a href="#footnotes"><sup>[1]</sup></a> that is provided by the <a class="reference external" href="https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html">Java Collections Framework</a>. It is a Generic just like <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> and therefore can hold only <code class="docutils literal notranslate"><span class="pre">Objects</span></code>. A <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is a concept that is found in many different programming lanagues. In Java, a <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is also a concrete class.<a href="#footnotes"><sup>[2]</sup></a> The two most common operations to perform on a Stack is <code class="docutils literal notranslate"><span class="pre">push</span></code> (add an item to the data structure) and <code class="docutils literal notranslate"><span class="pre">pop</span></code> (remove an item from the data structure). As the name <em>stack</em> infers, you can think of the data structure like a stack of books. To add a book to the stack, you <strong>push</strong> it to the top. To remove a book from the top of the stack, you <strong>pop</strong> it off. Fortunately, the API that invoke the behaviors have the same name.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">books</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">(</span><span class="s">&quot;Misquoting Jesus&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="n">books</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">(</span><span class="s">&quot;The Da Vinci Code&quot;</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">Book</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span><span class="w">  </span><span class="c1">// the book on top of the stack is &quot;The Da Vinci Code&quot;</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Queue</span></code> is a fancy word for a <em>line</em>, as in the line you stand in while waiting to get into the concert. In proper English, as spoken in Great Britian, you don’t stand in the <em>line</em>, you stand in the <em>queue.</em> The data structure works just like queue you stand in. When you are added to the queue, you go to the end of the line. The next person allowed into the concert, the one to come out of the line next, is the person at the front of the line.</p>
+</section>
+<section id="stack">
+<h2>Stack<a class="headerlink" href="#stack" title="Link to this heading">#</a></h2>
+<p>Stacks are a super simple data structure. They are an ordered collection of elements, meaning that where elements are located in the data structure is instrumental in how it behaves. The most important position in the stack is being on top. Elements are pulled off the top of the stack when we <code class="docutils literal notranslate"><span class="pre">pop</span></code>, and they are added to the top of the stack when we <code class="docutils literal notranslate"><span class="pre">push</span></code>. There are times we want to know which element is on top without removing it, which we can do with the API, <code class="docutils literal notranslate"><span class="pre">peek</span></code>.
+<img alt="Push Pop" src="../_images/stack_push_pop.png" /></p>
+<p>Stacks are used extensively used by Java (<em>all programming languages, really</em>) when methods are called. When a method is invoked, a data structure called a <strong>Stack Frame</strong> is pushed onto <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">Stack</span></code>. A Stack Frame contains all the method arguments, local variables, and the return address of the calling method. We need the return address so that the computer knows where to resume execution when the method finishes.</p>
+<p><strong>The Stack</strong> is a special area of memory that stores Stack Frames. The Stack grows just like the data structure grows. New stack frames are pushed to the top of the stack. Old stack frames are popped off the top. The stack has a maximum size that can, at times, not be large enough. For example, a poorly coded recursive method without a good exit case may call itself infinitely. At each recursive call, a new stack frame is added to the stack. After a while, the stack runs out of space and the stack frames overflow. This is called a <strong>Stack Overflow Exception</strong>.</p>
+<section id="lifo">
+<h3>LIFO<a class="headerlink" href="#lifo" title="Link to this heading">#</a></h3>
+<p>A Stack is “LIFO”: <strong>L</strong>ast <strong>I</strong>n <strong>F</strong>irst <strong>O</strong>ut. This means that the last item that was pushed onto the stack is the item that is popped out.</p>
+</section>
+</section>
+<section id="queue">
+<h2>Queue<a class="headerlink" href="#queue" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Queue</span></code> is an interface and therefore cannot be directly instantiated. Instead, you need to create the Queue behavior by instantiating one of the implementing classes such as <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> or <code class="docutils literal notranslate"><span class="pre">ArrayDeque</span></code>.</p>
+</section>
+<section id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
+<p>[1] An <strong>Abstract Data Type</strong> (ADT) is a conceptual model for a data structure that defines:</p>
+<ul class="simple">
+<li><p>What <strong>operations</strong> can be performed on the data.</p></li>
+<li><p>What <strong>behavior</strong> those operations have.</p></li>
+<li><p>But <strong>not how</strong> the data is implemented internally.</p></li>
+</ul>
+<p>In other words, an ADT focuses on <strong>interface</strong> and <strong>behavior</strong>, <strong>not</strong> implementation.</p>
+<p>Common ADTs (in the Collections Framework) include:</p>
+<ul class="simple">
+<li><p><strong>List</strong>: add, remove, get by</p></li>
+<li><p><strong>Stack</strong>: push, pop, peek</p></li>
+<li><p><strong>Queue</strong>: enqueue, dequeue</p></li>
+<li><p><strong>Map</strong>: put, get, remove by key</p></li>
+<li><p><strong>Set</strong>: add, remove, check membership</p></li>
+</ul>
+<p>A <code class="docutils literal notranslate"><span class="pre">String</span></code> is also an ADT. The ADT Characteristics of String are:</p>
+<ul class="simple">
+<li><p>It encapsulates a sequence of characters.</p></li>
+<li><p>It provides a rich set of operations: substring(), charAt(), indexOf(), concat(), etc.</p></li>
+<li><p>It hides the internal representation (e.g., character array).</p></li>
+</ul>
+<p>[2] A <code class="docutils literal notranslate"><span class="pre">Concrete</span> <span class="pre">Class</span></code> is a class that can be instantiated (i.e. it can be created directly with the <code class="docutils literal notranslate"><span class="pre">new</span></code> operator). Most classes that students have learned thus far have been concrete classes. Alternatives to concrete classes would be <code class="docutils literal notranslate"><span class="pre">abstract</span></code> classes and interfaces. Because <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is a concrete class and <code class="docutils literal notranslate"><span class="pre">Queue</span></code> is an interface, we have the follow legal and illegal code:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">Stack</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="w">   </span><span class="c1">// ✅ it is legal to do new Stack </span>
+<span class="w">    </span><span class="n">Queue</span><span class="w"> </span><span class="n">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="w">   </span><span class="c1">// ❌ Cannot new Queue, it is an interface</span>
+<span class="w">    </span><span class="n">Number</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Number</span><span class="p">();</span><span class="w">           </span><span class="c1">// ❌ Cannot new Number, it is an abstract class</span>
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -546,6 +619,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stack">Stack</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lifo">LIFO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#queue">Queue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
