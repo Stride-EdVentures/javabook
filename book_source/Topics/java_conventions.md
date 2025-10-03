@@ -840,6 +840,46 @@ int age = console.nextInt();
 boolean canDrive = (age >= 16);
 ```
 
+## Catching Exceptions
+You should catch specific exceptions and not the general `Exception`. ([StackOverflow](https://stackoverflow.com/questions/21938/is-it-really-that-bad-to-catch-a-general-exception)).
+
+A good rule of thumb is that you should only catch exceptions that you can properly deal with yourself. If you cannot handle the exception completely then you should let it bubble up to someone who can.  
+
+Catching all exceptions can mask bugs, hide critical failures, and make debugging harder. It is best to catch only the exceptions you can meaningfully handle.  
+
+
+```{code-block} java
+:class: bad-code
+    // BAD
+    try {
+        // this may throw NumberFormatException
+        int size = Integer.parseInt(input);
+
+        int[] arr = new int[size];
+    } catch (Exception ex) {
+        // this will also catch NullPointerException if input == null
+        // this will also catch NegativeArraySizeException if size < 0
+        // this will also catch OutOfMemoryError if size is too big
+    }
+```
+```{code-block} java
+:class: good-code
+    // GOOD
+    try {
+        int size = Integer.parseInt(input);
+
+        // we should explicitly handle when size is out of expected range
+        if (size > 0 && size < 5000) {
+            int[] arr = new int[size];
+            ...
+        }
+        
+    } catch (NumberFormatException ex) {
+        // handle the case where the input is not an integer
+    }
+    // Do NOT catch NullPointerException since we want to discover
+    // that flaw in our code with the exception thrown.
+```
 ## Using Objects 
 
 It's generally good to try to minimize the number of objects your
@@ -1344,7 +1384,11 @@ in comments:
 - *"class constant"*
 - *"extends"*
 
-Finally, you should absolutely never refer to the spec in your comments.
+#### Dead Code
+There are times that you'll comment out code that is no longer relevant. Perhaps you were doing some printing to help you debug. When your code is complete, all code that has been commented out should be deleted.  
+
+#### Spec References
+You should absolutely never refer to the spec in your comments.
 The spec is for you, and you should assume that a client of your program
 has no knowledge of it. We also hope that this is clear, but your
 comments should be your description of your program, so copying text
