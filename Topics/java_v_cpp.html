@@ -1,0 +1,875 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Java &lt;–&gt; C++ &#8212; Practical Java </title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6c3db60c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "Stride-EdVentures/javabook");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "preferred-color-scheme");
+    script.setAttribute("label", "💬 Comments");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Topics/java_v_cpp';</script>
+    <link rel="icon" href="../_static/peanut head.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Generics" href="../generics/index.html" />
+    <link rel="prev" title="Layout Managers" href="layout_managers.html" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DW6SHVPBYV"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DW6SHVPBYV');
+    </script>
+
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Practical Java  - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Practical Java  - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    <i class="fas fa-hand-sparkles fa-fw"></i> Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Miscellaneous</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="java_conventions.html">Code Quality Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing_jgrasp.html">Installing jGrasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html">Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layout_managers.html">Layout Managers</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Java &lt;–&gt; C++</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../generics/index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../generics/array_list.html">ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/stack_queue.html">Stack &amp; Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/collections.html">Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/generics.html">Generics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/constraint_typing.html">Constraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_ct.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Contraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/type_erasure.html">Type Erasure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interfaces/index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/interfaces_101.html">Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/classes_fall_short.html">Classes Fall Short</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/method_references.html">Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/lambdas.html">Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_03.html"><i class="fas fa-pen-square fa-fw"></i> Practice Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/applied.html">Applied Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/anonymous_classes.html">Anonymous Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/default_methods.html">Default Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/full_review.html">Full Review</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/maven.html">Maven</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../patterns/index.html"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/solid.html">SOLID principles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference external" href="https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching">Learn Git Branching</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/Topics/java_v_cpp.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2FTopics/java_v_cpp.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Topics/java_v_cpp.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Java <–> C++</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#top-things-a-c-developer-needs-to-know-when-learning-java">Top Things a C++ Developer Needs to Know When Learning Java</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-management">1. <strong>Memory Management</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-ecosystem-file-structure">2. <strong>Build Ecosystem &amp; File Structure</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-methods-and-polymorphism">3. <strong>Virtual Methods and Polymorphism</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#templates-vs-generics">4. <strong>Templates vs Generics</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-libraries">5. <strong>Standard Libraries</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-functional-programming">6. <strong>Interfaces &amp; Functional Programming</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operator-overloads">7. <strong>Operator Overloads</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-inheritance">8. <strong>Multiple Inheritance</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#header-files">Header Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-directives">Compiler directives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#public-private">public private</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-creation">Object Creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-and-delete"><code class="docutils literal notranslate"><span class="pre">new</span></code> and <code class="docutils literal notranslate"><span class="pre">delete</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-creation-in-c">Object Creation in C++:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes">Additional Notes:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-keyword">Virtual Keyword</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="java-c">
+<h1>Java &lt;–&gt; C++<a class="headerlink" href="#java-c" title="Link to this heading">#</a></h1>
+<section id="top-things-a-c-developer-needs-to-know-when-learning-java">
+<h2>Top Things a C++ Developer Needs to Know When Learning Java<a class="headerlink" href="#top-things-a-c-developer-needs-to-know-when-learning-java" title="Link to this heading">#</a></h2>
+<section id="memory-management">
+<h3>1. <strong>Memory Management</strong><a class="headerlink" href="#memory-management" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>C++</strong>: Explicit use of pointers, references, and pointer arithmetic. Objects can be created on the stack without using <code class="docutils literal notranslate"><span class="pre">new</span></code>. Manual memory management; <code class="docutils literal notranslate"><span class="pre">delete</span></code> objects. Constructors and Destructors.</p></li>
+<li><p><strong>Java</strong>: Objects need to be explicitly created. No pointers; all objects are accessed via references. Automatic garbage collection — no <code class="docutils literal notranslate"><span class="pre">delete</span></code>, and <code class="docutils literal notranslate"><span class="pre">new</span></code> is used but memory is managed by the JVM.</p></li>
+<li><p><strong>Hurdle</strong>: Need to explicitly create objects. No ability to directly manage memory; only reference semantics. Destructors don’t really exist as objects are deleted by the garbage collector at unknown times.</p></li>
+</ul>
+</section>
+<section id="build-ecosystem-file-structure">
+<h3>2. <strong>Build Ecosystem &amp; File Structure</strong><a class="headerlink" href="#build-ecosystem-file-structure" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>C++</strong>: Include <code class="docutils literal notranslate"><span class="pre">header</span></code> files for definitions. Access modifiers used to label ‘sections’ of the file. Uses <code class="docutils literal notranslate"><span class="pre">make</span></code> or IDE-specific build tools. Compiles to native machine code.</p></li>
+<li><p><strong>Java</strong>: Only <code class="docutils literal notranslate"><span class="pre">.java</span></code> files. Packages and imports. Each member has its own access modifiers. Uses <code class="docutils literal notranslate"><span class="pre">Maven</span></code>. Has a large ecosystem of frameworks (e.g. Spring). Compiles to bytecode and runs in the JVM.</p></li>
+<li><p><strong>Hurdle</strong>: Getting comfortable with Java’s JVM, classpath, file structure, package-based access control, and build management tools.</p></li>
+</ul>
+</section>
+<section id="virtual-methods-and-polymorphism">
+<h3>3. <strong>Virtual Methods and Polymorphism</strong><a class="headerlink" href="#virtual-methods-and-polymorphism" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>C++</strong>: Methods are non-virtual by default; must use <code class="docutils literal notranslate"><span class="pre">virtual</span></code> for polymorphism.</p></li>
+<li><p><strong>Java</strong>: All instance methods are <strong>virtual by default</strong> (unless marked <code class="docutils literal notranslate"><span class="pre">final</span></code>, <code class="docutils literal notranslate"><span class="pre">static</span></code>, or <code class="docutils literal notranslate"><span class="pre">private</span></code>).</p></li>
+<li><p><strong>Hurdle</strong>: Understanding that Java supports polymorphism more naturally and consistently.</p></li>
+</ul>
+</section>
+<section id="templates-vs-generics">
+<h3>4. <strong>Templates vs Generics</strong><a class="headerlink" href="#templates-vs-generics" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>C++</strong>: Templates are compile-time and more flexible.</p></li>
+<li><p><strong>Java</strong>: Generics are type-safe but use <strong>type erasure</strong>, which limits runtime type information.</p></li>
+<li><p><strong>Hurdle</strong>: Understanding the limitations of Java generics compared to C++ templates.</p></li>
+</ul>
+</section>
+<section id="standard-libraries">
+<h3>5. <strong>Standard Libraries</strong><a class="headerlink" href="#standard-libraries" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>C++</strong>: STL (Standard Template Library) with containers and algorithms.</p></li>
+<li><p><strong>Java</strong>: Rich standard library with collections, streams, and concurrency utilities.</p></li>
+<li><p><strong>Hurdle</strong>: Learning Java’s collection framework and functional-style APIs (like <code class="docutils literal notranslate"><span class="pre">Stream</span></code>).</p></li>
+</ul>
+</section>
+<section id="interfaces-functional-programming">
+<h3>6. <strong>Interfaces &amp; Functional Programming</strong><a class="headerlink" href="#interfaces-functional-programming" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>C++</strong>: Interfaces are implemented using <strong>abstract classes</strong> with pure virtual functions (<code class="docutils literal notranslate"><span class="pre">=</span> <span class="pre">0</span></code>). Functional programming is supported via <strong>function pointers</strong>, <strong>functors</strong>, <strong>lambdas</strong>, and <strong><code class="docutils literal notranslate"><span class="pre">std::function</span></code></strong>. The STL provides higher-order functions like <code class="docutils literal notranslate"><span class="pre">std::for_each</span></code>, and algorithms that accept callable objects. Lambdas and smart pointers make modern C++ more expressive and safer.</p></li>
+<li><p><strong>Java</strong>: Interfaces are first-class citizens with the <code class="docutils literal notranslate"><span class="pre">interface</span></code> keyword. Interfaces can include <strong>default</strong> and <strong>static</strong> methods. Functional programming is supported via <strong>lambdas</strong>, <strong>method references</strong>, and the <strong>Stream API</strong>, which enables declarative data processing.</p></li>
+<li><p><strong>Hurdle</strong>: In C++, functional programming requires understanding multiple callable types (function pointers, functors, lambdas) and how they interact with templates and type inference. In Java, the challenge is mastering the Stream API and functional interfaces like <code class="docutils literal notranslate"><span class="pre">Predicate</span></code>, <code class="docutils literal notranslate"><span class="pre">Function</span></code>, and <code class="docutils literal notranslate"><span class="pre">Consumer</span></code>.</p></li>
+</ul>
+</section>
+<section id="operator-overloads">
+<h3>7. <strong>Operator Overloads</strong><a class="headerlink" href="#operator-overloads" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>C++</strong>: offers powerful syntax customization, but overuse of operator overloading can reduce traceability.</p></li>
+<li><p><strong>Java</strong>: Operator overloads are <strong>NOT</strong> offered. Attempts clarity by enforcing explicit method calls.</p></li>
+<li><p><strong>Hurdle</strong>: Losing the ability to overload operators using C++’s syntactic sugar will be cumbersome as Java’s syntax is verbose.</p></li>
+</ul>
+</section>
+<section id="multiple-inheritance">
+<h3>8. <strong>Multiple Inheritance</strong><a class="headerlink" href="#multiple-inheritance" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>C++</strong>: Supports multiple inheritance of classes.</p></li>
+<li><p><strong>Java</strong>: Only single inheritance for classes, but allows multiple interfaces.</p></li>
+<li><p><strong>Hurdle</strong>: Learning to use <strong>interfaces</strong> and <strong>composition</strong> instead of multiple inheritance.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="header-files">
+<h2>Header Files<a class="headerlink" href="#header-files" title="Link to this heading">#</a></h2>
+<p>In C++, the definitions are found in a <code class="docutils literal notranslate"><span class="pre">.h</span></code> header file. The implementation is found in the <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file.<br />
+In Java, all the definitions and implementation are found in the same file.</p>
+<section id="compiler-directives">
+<h3>Compiler directives<a class="headerlink" href="#compiler-directives" title="Link to this heading">#</a></h3>
+<p>In C++, regardless of where an implemenation resides, all definitions are provided with <code class="docutils literal notranslate"><span class="pre">#include</span></code>.<br />
+In Java, code in the same <code class="docutils literal notranslate"><span class="pre">package</span></code> is automatically included (or imported). Other definitions are provided with <code class="docutils literal notranslate"><span class="pre">import</span></code>.</p>
+<p>In C++, definitions are provided by including the header files. To prevent <strong>re</strong>definitions, compiler directives (or preprocessor directives) are used to assure that a header file is included only once.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">#ifndef</span> <span class="pre">MYSTUFF_H</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">once</span></code></p></li>
+</ul>
+<p>In Java, code can be outside of all named packages. This set of files is called the <code class="docutils literal notranslate"><span class="pre">default</span> <span class="pre">package</span></code> and can import any other package. It has has access to all the code in the default package. However, the default package cannot be imported into any other code. It stands alone.</p>
+<p><strong>Impact</strong><br />
+Java makes it pretty easy to control what code is used. An intentional design of packages and explicit importing of specific classes allows a file to categorically use code while also picking classes a la cart. There is no need for a long list of including files, or a header file that includes header files.</p>
+</section>
+<section id="syntax">
+<h3>Syntax<a class="headerlink" href="#syntax" title="Link to this heading">#</a></h3>
+<p>Clearly there are a lot of syntax differences. Here are some of the ones top of mind:</p>
+<ul class="simple">
+<li><p>Scoping:  Class methods are scoped using double colons <code class="docutils literal notranslate"><span class="pre">::</span></code>. Ex:  <code class="docutils literal notranslate"><span class="pre">MyClass::method</span></code></p></li>
+<li><p>Deconstructors: When an object is destroyed and its memory is freed, the deconstructor is called. Ex: <code class="docutils literal notranslate"><span class="pre">MyClass::~MyClass()</span></code>.</p></li>
+<li><p>Constructors: A constructor offers a shorthand way to initialize instance fields. <code class="docutils literal notranslate"><span class="pre">MyClass::MyClass(int</span> <span class="pre">value)</span> <span class="pre">:</span> <span class="pre">fieldName(value)</span> <span class="pre">{}</span></code></p></li>
+</ul>
+</section>
+<section id="public-private">
+<h3>public private<a class="headerlink" href="#public-private" title="Link to this heading">#</a></h3>
+<p>In C++, access modifiers are more like labels for a section of the file.<br />
+In Java, each method/class has its access modifier applied to it individually; there are no file sections.</p>
+</section>
+</section>
+<section id="object-creation">
+<h2>Object Creation<a class="headerlink" href="#object-creation" title="Link to this heading">#</a></h2>
+<p>In C++, objects are implicitly created on the <code class="docutils literal notranslate"><span class="pre">stack</span></code>. There is no need to use the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword to create an object on the stack. Objects on the stack are deconstructed at the close of the scope. When the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyord is used, the object is created on the <code class="docutils literal notranslate"><span class="pre">heap</span></code> and the pointer to this object it given to the developer who is responsible for releasing (deleting)  it when the object is no longer needed.<br />
+In Java, the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword must be used to create all objects which are located in the <code class="docutils literal notranslate"><span class="pre">heap</span></code>. The <code class="docutils literal notranslate"><span class="pre">Garbage</span> <span class="pre">Collector</span></code> is responsible for releasing the memory when the object is no longer referenced.</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// myclass.h</span>
+<span class="cp">#ifndef MYCLASS_H</span>
+<span class="cp">#define MYCLASS_H</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">();</span><span class="w">              </span><span class="c1">// Constructor</span>
+<span class="w">    </span><span class="o">~</span><span class="n">MyClass</span><span class="p">();</span><span class="w">             </span><span class="c1">// Destructor</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">demoStackHeap</span><span class="p">();</span><span class="w">   </span><span class="c1">// Demonstrates stack vs heap allocation</span>
+<span class="p">};</span>
+
+<span class="cp">#endif </span><span class="c1">// MYCLASS_H</span>
+
+<span class="c1">// myclass.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Constructor called</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="o">~</span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Destructor called</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">demoStackHeap</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Creating stack instance</span>
+<span class="w">        </span><span class="n">MyClass</span><span class="w"> </span><span class="n">stackInstance</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Creating heap instance</span>
+<span class="w">        </span><span class="n">MyClass</span><span class="o">*</span><span class="w"> </span><span class="n">heapInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyClass</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Deleting heap instance</span>
+<span class="w">        </span><span class="k">delete</span><span class="w"> </span><span class="n">heapInstance</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// closing method scope. stackInstance is destroyed.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Creating stack instance</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span>
+<span class="w">    </span><span class="n">obj</span><span class="p">.</span><span class="n">demoStackHeap</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// closing method scope. obj is destroyed.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="new-and-delete">
+<h2><code class="docutils literal notranslate"><span class="pre">new</span></code> and <code class="docutils literal notranslate"><span class="pre">delete</span></code><a class="headerlink" href="#new-and-delete" title="Link to this heading">#</a></h2>
+<p>In C++,</p>
+</section>
+<section id="object-creation-in-c">
+<h2>Object Creation in C++:<a class="headerlink" href="#object-creation-in-c" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Stack Allocation (Automatic Storage):</strong></p>
+<ul class="simple">
+<li><p>In C++, when you declare an object like <code class="docutils literal notranslate"><span class="pre">MyClass</span> <span class="pre">obj;</span></code>, it is created on the <strong>stack</strong>.</p></li>
+<li><p>No <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword is needed.</p></li>
+<li><p>The object is <strong>automatically destroyed</strong> when it goes out of scope (e.g., at the end of a function or block).</p></li>
+<li><p>This is known as <strong>automatic storage duration</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Heap Allocation (Dynamic Storage):</strong></p>
+<ul class="simple">
+<li><p>When you use <code class="docutils literal notranslate"><span class="pre">new</span></code>, like <code class="docutils literal notranslate"><span class="pre">MyClass*</span> <span class="pre">obj</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">MyClass();</span></code>, the object is created on the <strong>heap</strong>.</p></li>
+<li><p>You receive a <strong>pointer</strong> to the object.</p></li>
+<li><p>You are responsible for <strong>manually deleting</strong> it using <code class="docutils literal notranslate"><span class="pre">delete</span> <span class="pre">obj;</span></code> when it’s no longer needed.</p></li>
+<li><p>Failure to do so results in a <strong>memory leak</strong>.</p></li>
+</ul>
+</li>
+</ol>
+<section id="additional-notes">
+<h3>Additional Notes:<a class="headerlink" href="#additional-notes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Smart pointers</strong> (like <code class="docutils literal notranslate"><span class="pre">std::unique_ptr</span></code> or <code class="docutils literal notranslate"><span class="pre">std::shared_ptr</span></code>) in modern C++ help manage heap memory automatically and reduce the risk of leaks.</p></li>
+</ul>
+</section>
+</section>
+<section id="virtual-keyword">
+<h2>Virtual Keyword<a class="headerlink" href="#virtual-keyword" title="Link to this heading">#</a></h2>
+<p>Virtual methods behave polymorphically.</p>
+<p>In C++, methods can be one of three types. By default, a method is a non-virtual instance method.</p>
+<ul class="simple">
+<li><p>instance : a non-virtual method that has access to the instance fields belonging to the object. It cannot be overridden by a derived class. When a derived class provides a method with the same signature, no polymorphism occurs, and the base class method can only be invoked by scoping to the base class. The method was not overridden. Code invoke this method does not behave polmorphically.  When a class calls a non-virtual instance method, it always invokes its own implementation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">static</span></code> : a method that belongs to the class (namespace) and does not have access to any instance members.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">virtual</span></code> : This is an instance method that can be overridden so that code can support <code class="docutils literal notranslate"><span class="pre">polymorphism</span></code>.</p></li>
+</ul>
+<p>In Java, there are only two types of methods (<code class="docutils literal notranslate"><span class="pre">static</span></code> or instance). All instance methods are virtual.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Topics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="layout_managers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Layout Managers</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../generics/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><i class="fas fa-book fa-fw"></i> Generics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#top-things-a-c-developer-needs-to-know-when-learning-java">Top Things a C++ Developer Needs to Know When Learning Java</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-management">1. <strong>Memory Management</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-ecosystem-file-structure">2. <strong>Build Ecosystem &amp; File Structure</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-methods-and-polymorphism">3. <strong>Virtual Methods and Polymorphism</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#templates-vs-generics">4. <strong>Templates vs Generics</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-libraries">5. <strong>Standard Libraries</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-functional-programming">6. <strong>Interfaces &amp; Functional Programming</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operator-overloads">7. <strong>Operator Overloads</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-inheritance">8. <strong>Multiple Inheritance</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#header-files">Header Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-directives">Compiler directives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#public-private">public private</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-creation">Object Creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-and-delete"><code class="docutils literal notranslate"><span class="pre">new</span></code> and <code class="docutils literal notranslate"><span class="pre">delete</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-creation-in-c">Object Creation in C++:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes">Additional Notes:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-keyword">Virtual Keyword</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeff Stride
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="https://idp.mrstride.com/acknowledgements.html">Acknowledgements</a>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
