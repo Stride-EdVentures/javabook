@@ -192,8 +192,134 @@ public class Example {
 }
 ```
 
+## Abstract Classes vs Interfaces
+What differentiates an `abstract class` from an `interface`?
+
+**Both an abstract class and an interface:**
+* Cannot be instantiated.  
+* May have `abstract` methods.  
+* May have `static` methods with implementations.  
+* May have `static final` fields.  
+* May have instance methods with implementation, but they are annotated slightly differently:  
+    * **Abstract class**: looks *normal* with no extra keywords.  
+    * **Interface**: must be annotated with the `default` keyword. *Some restrictions apply*.  
+* May inherit via `extends`, but with unique restrictions.  
+    * **Abstract class**: 
+        * Uses `extends` to extend any other `class`.  
+        * Uses `implements` to implement an interface.  
+        * It may not use `extends` on an `interface`.  
+    * **Interface**: 
+        * May not extend a `class`.  
+        * Uses `extends` to extend any other `interface`. 
+        * It may not use the keyword `implements`.  
+
+|  |`extends` MyClass|`extends` interface|`implements` interface|
+|--|-----------------|-------------------|----------------------|
+|Abstract Class| ✅ |      ❌           | ✅ |
+|Interface|     ❌     | ✅ | ❌ |
 
 
+**Only Abstract Class:**
+* May have instance fields  
+* Uses the `class` keyword in its definition  
+* Has a class inheritance hierarchy  
+* Can be inherited where no other class may be inherited.  
+* May use `private` unrestricted.  
+
+**Only an Interface:**
+* Uses the interface keyword in its definition  
+* Does not impose a class inheritance hierarchy. The implementing class can inherit from any class it wants.  
+* An implementing class can implement MANY different interfaces.  
+* Default method restrictions: (in the interface's implementation)  
+    * Cannot access any instance fields (not even those in the implementing class).  
+    * Cannot use the `super` keyword  
+* Private instance methods are not allowed. But may have `private static` methods and `private default` methods.  
+* Supports the ability for a developer to implement the interface with a *Lambda Expression* or *Method Reference* (*Functional Interfaces* only)  
+* An interface cannot `implements` another interface.
+
+## Conflicts
+### Duplicate Methods
+If two interfaces each have a method with the same signature<a href="#footnotes"><sup>[1]</sup></a> (**including the return type**), then the implementing class would provide a single implementation that would be used for both.  
+**For example**:
+```java
+public interface Printable {
+   public void print1();
+   public void print2();
+}
+
+public interface Printable2 {
+   public void print1();
+   public void print3();
+} 
+
+class DemoConflict implements Printable, Printable2 {
+   @Override
+   public void print1() { 
+      // Used to fulfill both interfaces
+   }
+
+   @Override
+   public void print2() { }
+
+   @Override
+   public void print3() { }
+}
+```
+### Resolving `default` Conflicts
+It is possible for a class to implement two different interfaces where each has a `default` method with the same signature (including return type). This causes a conflict that needs to be resolved by the implementing class; it must override the `default` method to provide a single, resolved implementation. If the impelmentation wants to use an implementation provided by the interface, this is allowed. Java enables a way to call the correct default method using `super`.  
+
+**For example:**    
+```java
+interface Interface1 {
+  default void display() {
+    System.out.println("Interface1");
+  }
+}
+
+interface Interface2 {
+  default void display() {
+    System.out.println("Interface2");
+  }
+}
+
+class MyClass implements Interface1, Interface2 {
+  // It is required to override to resolve the conflict
+  @Override
+  public void display() {
+    // we are allowed to use the Interface's version.
+    // Explicitly call using this special syntax.
+    Interface1.super.display(); 
+
+    // we can call both if we, but it is not required
+    Interface2.super.display();
+
+    // Interface1.display() won't work!!
+    // Without `super` the syntax would be indicating that the 
+    // display() method is static, which it is not.
+  }
+}
+```
+> Note: If the `default` method had identical signatures but with different return types, this would cause an unresolvable compiler error when attempting to have a single class implement both interfaces.  
+
+### Unresolvable Conflicts
+If two interfaces have methods with identical signatures, but the return type is different, then those interfaces cannot be implemented by one class. 
+
+**For Example**:
+```java
+public interface Printable {
+   public int print1();  // returns int
+}
+
+interface Printable2 {
+   public void print1(); // returns void
+} 
+
+// Impossible to implement AS-IS
+class DemoConflict implements Printable, Printable2 {
+    // This class cannot be implemented.
+    // The print1 methods have signatures that cannot be resolved.
+}
+```
 ## Function&lt;T, R&gt;
 Let's look at this generic interface more closely. We will look at two `default` methods.  
 
@@ -244,7 +370,7 @@ While classes and interfaces have differences, they are mostly similar.
 |Anonymous|	Inline Implementation |Creates an anonymous class|Can anonymously extend an interface<br>Creates an anonymous class, not an interface|
 |Package-Private|Non-public class in the same file|Yes|Yes|
 
-TODO: Example Implementation types for Interfaces
+TODO: Provide example Implementation for each of the types listed above
 ```java
 // Top-Level: in file MyInterface.java
 public interface MyInterface {
@@ -259,3 +385,13 @@ public class MyClass {
     }
 }
 ```
+
+## Footnotes
+[1] **Method Signature** has a formal definition to be:  
+* Method name  
+* Parameter list (types and order)  
+
+**Note:** The return type of the method is **NOT** included in the method signature.  
+
+However, many people (including Mr. Stride) will sometimes be a bit informal and loose to also include the **return type** as a part of the method signature. While this is technically incorrect, it can help make some discussions a bit more brief.  It can also lead to confusion! Be careful!  
+  
