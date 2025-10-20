@@ -767,24 +767,48 @@ Java will allow us to write an instance method prototype that will explicitly id
 <li><p>May have instance fields</p></li>
 <li><p>Uses the <code class="docutils literal notranslate"><span class="pre">class</span></code> keyword in its definition</p></li>
 <li><p>Has a class inheritance hierarchy</p></li>
-<li><p>Can be inherited where no other class may be inherited.</p></li>
-<li><p>May use <code class="docutils literal notranslate"><span class="pre">private</span></code> unrestricted.</p></li>
+<li><p>A class can inherit from only ONE class (<code class="docutils literal notranslate"><span class="pre">abstract</span></code> or not).</p></li>
+<li><p>May use <code class="docutils literal notranslate"><span class="pre">public</span></code> and <code class="docutils literal notranslate"><span class="pre">private</span></code> unrestricted.</p></li>
 </ul>
 <p><strong>Only an Interface:</strong></p>
 <ul class="simple">
-<li><p>Uses the interface keyword in its definition</p></li>
+<li><p>Uses the <code class="docutils literal notranslate"><span class="pre">interface</span></code> keyword in its definition</p></li>
 <li><p>Does not impose a class inheritance hierarchy. The implementing class can inherit from any class it wants.</p></li>
-<li><p>An implementing class can implement MANY different interfaces.</p></li>
+<li><p>A class can implement MANY different interfaces.</p></li>
 <li><p>Default method restrictions: (in the interface’s implementation)</p>
 <ul>
 <li><p>Cannot access any instance fields (not even those in the implementing class).</p></li>
 <li><p>Cannot use the <code class="docutils literal notranslate"><span class="pre">super</span></code> keyword</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">default</span></code> methods are not allowed.</p></li>
 </ul>
 </li>
-<li><p>Private instance methods are not allowed. But may have <code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">static</span></code> methods and <code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">default</span></code> methods.</p></li>
+<li><p>Allowed: <code class="docutils literal notranslate"><span class="pre">private</span> <span class="pre">static</span></code> methods and <code class="docutils literal notranslate"><span class="pre">private</span></code> instance methods.</p></li>
 <li><p>Supports the ability for a developer to implement the interface with a <em>Lambda Expression</em> or <em>Method Reference</em> (<em>Functional Interfaces</em> only)</p></li>
 <li><p>An interface cannot <code class="docutils literal notranslate"><span class="pre">implements</span></code> another interface.</p></li>
 </ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Printable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">print1</span><span class="p">();</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">print2</span><span class="p">();</span>
+
+<span class="w">   </span><span class="c1">// Allowed</span>
+<span class="w">   </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">privateStatic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">publicStatic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">   </span><span class="c1">// Allowed: this is implicitly public</span>
+<span class="w">   </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">publicDefault</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="p">}</span>
+
+<span class="w">   </span><span class="c1">// Allowed: private instance methods are helper methods</span>
+<span class="w">   </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">helper</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">   </span><span class="c1">// DISALLOWED: public instance are NOT allowed.</span>
+<span class="w">   </span><span class="c1">// The `default` keyword is required.</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">publicHelper</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">   </span><span class="c1">// DISALLOWED: private default are NOT allowed</span>
+<span class="w">   </span><span class="kd">private</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">privateDefault</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 <section id="conflicts">
 <h2>Conflicts<a class="headerlink" href="#conflicts" title="Link to this heading">#</a></h2>
