@@ -240,22 +240,26 @@ What differentiates an `abstract class` from an `interface`?
 
 ```java
 public interface Printable {
-   public void print1();
-   public void print2();
+   // Interface methods are implicitly public abstract
+   // Allowed
+   void print1();
+   public abstract void print2();
+
+   // The following methods are NOT abstract; they have implementation.
 
    // Allowed
-   private static void privateStatic() {   }
+   private static void privateStatic() { }
    public static void publicStatic() { }
 
-   // Allowed: this is implicitly public
-   default void publicDefault() {  }
+   // Allowed
+   public default void publicDefault() { }
 
-   // Allowed: private instance methods are helper methods
-   private void helper() { }
+   // Allowed
+   private void privateInstance() { }
 
    // DISALLOWED: public instance are NOT allowed.
-   // The `default` keyword is required.
-   public void publicHelper() { }
+   // They must use the `default` keyword or be abstract.
+   public void publicInstance() { }
 
    // DISALLOWED: private default are NOT allowed
    private default void privateDefault() { }
