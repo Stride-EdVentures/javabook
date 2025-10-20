@@ -223,20 +223,44 @@ What differentiates an `abstract class` from an `interface`?
 * May have instance fields  
 * Uses the `class` keyword in its definition  
 * Has a class inheritance hierarchy  
-* Can be inherited where no other class may be inherited.  
-* May use `private` unrestricted.  
+* A class can inherit from only ONE class (`abstract` or not).  
+* May use `public` and `private` unrestricted.  
 
 **Only an Interface:**
-* Uses the interface keyword in its definition  
+* Uses the `interface` keyword in its definition  
 * Does not impose a class inheritance hierarchy. The implementing class can inherit from any class it wants.  
-* An implementing class can implement MANY different interfaces.  
+* A class can implement MANY different interfaces.  
 * Default method restrictions: (in the interface's implementation)  
     * Cannot access any instance fields (not even those in the implementing class).  
     * Cannot use the `super` keyword  
-* Private instance methods are not allowed. But may have `private static` methods and `private default` methods.  
+    * `private default` methods are not allowed.  
+* Allowed: `private static` methods and `private` instance methods.  
 * Supports the ability for a developer to implement the interface with a *Lambda Expression* or *Method Reference* (*Functional Interfaces* only)  
 * An interface cannot `implements` another interface.
 
+```java
+public interface Printable {
+   public void print1();
+   public void print2();
+
+   // Allowed
+   private static void privateStatic() {   }
+   public static void publicStatic() { }
+
+   // Allowed: this is implicitly public
+   default void publicDefault() {  }
+
+   // Allowed: private instance methods are helper methods
+   private void helper() { }
+
+   // DISALLOWED: public instance are NOT allowed.
+   // The `default` keyword is required.
+   public void publicHelper() { }
+
+   // DISALLOWED: private default are NOT allowed
+   private default void privateDefault() { }
+}
+```
 ## Conflicts
 ### Duplicate Methods
 If two interfaces each have a method with the same signature<a href="#footnotes"><sup>[1]</sup></a> (**including the return type**), then the implementing class would provide a single implementation that would be used for both.  
