@@ -71,12 +71,37 @@ Generics do **not** work with primitive types; they must work with `Object` type
 * All extend `Object`, so they can be used in generic collections  
 * They provide useful static methods (like `Integer.parseInt()`, `Double.valueOf()`)  
 * Autoboxing automatically converts primitives to wrappers: `Integer i = 5;`  
-* Auto-unboxing automatically converts wrappers to primitives: `int x = new Integer(5);`  
+* Auto-unboxing automatically converts wrappers to primitives: `int x = Integer.valueOf(5);`  
 * All wrapper classes (except `Character`) can be constructed from `String` representations  
 * They all override `equals()` and `toString()` methods appropriately  
 
 ### Construction of Wrapper Classes
-The Wrapper Classes can be created from a `String` by: 
+The Wrapper classes are generally instantiated implicitly through automatic Boxing (shown below). At times it can can be helpful to one's understanding to explicilty instantiate a wrapper class. There are several ways to explicitly convert from the primitive type to the wrapper class. Most approaches have the same result meaning that developers can choose their favorite. However, for performance reasons, it is not good to call `new Integer(value)`. This is because `new` will be slow as it goes through the entire process of allocating memory for a newly created object. Using `valueOf` makes use of the *Factory Pattern* to provide an object from a set of pre-cached values.  
+```java
+   // BAD: Slow and deprecated, but allowed. Do NOT use.
+   Integer n1 = new Integer(7);
+
+   // Explicitly invoke valueOf
+   Integer n3 = Integer.valueOf(3);
+
+   // Casting will also invoke valueOf
+   Integer n2 = (Integer) 4;
+
+   // Automatic Boxing (also invokes valueOf)
+   Integer n4 = 8;
+
+   // Explicitly invoke intValue
+   int x1 = n1.intValue();
+
+   // Casting will invoke intValue
+   int x2 = (int) n1;
+
+   // Automatic Unboxing (also invokes intValue)
+   int x3 = n1;
+```
+
+### Integer from String
+The Wrapper Classes offer construction from a `String`: 
 * **valueOf**: `Integer i1 = Integer.valueOf("123");`  
     * Each wrapper class has a `valueOf` method.  
 * **parsing**: `Integer i2 = Integer.parseInt("123");`  
@@ -100,11 +125,23 @@ int value = numbers.get(0);  // auto-unboxing: Integer → int
 
 // Explicit Boxing
 Integer num = Integer.valueOf(100);
-Boolean flag = Boolean.TRUE;
 Character ch = Character.valueOf('A');
+Double d = (Double) 3.141;
 
 // Explicit Unboxing
 int n = num.intValue();
+
+// NOT Boxing. Uses cached Boolean object
+Boolean flag = Boolean.TRUE;
+
+// Autoboxing, but NOT unboxing.
+// The primitive 4 is boxed.
+// The result is the primitive boolean
+boolean present = list.contains(4);
+
+// Boolean.TRUE is a cached Boolean object.
+// There is no boxing or unboxing going on here.
+Boolean flag = Boolean.TRUE;
 ```
 
 Oracle's official documentation, and some technical resources, often reserve **Boxing** specifically for the *automatic* (or *implicit*) conversion done by the compiler. Oracle will not consider "Explict Boxing" as boxing at all. However, there is not concensus on this terminology.  

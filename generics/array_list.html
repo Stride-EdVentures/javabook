@@ -495,6 +495,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-exploration">Practical Exploration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapper-types">Wrapper Types</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construction-of-wrapper-classes">Construction of Wrapper Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-from-string">Integer from String</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxing-unboxing">Boxing &amp; Unboxing</a></li>
 </ul>
 </li>
@@ -618,13 +619,39 @@ document.write(`
 <li><p>All extend <code class="docutils literal notranslate"><span class="pre">Object</span></code>, so they can be used in generic collections</p></li>
 <li><p>They provide useful static methods (like <code class="docutils literal notranslate"><span class="pre">Integer.parseInt()</span></code>, <code class="docutils literal notranslate"><span class="pre">Double.valueOf()</span></code>)</p></li>
 <li><p>Autoboxing automatically converts primitives to wrappers: <code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">i</span> <span class="pre">=</span> <span class="pre">5;</span></code></p></li>
-<li><p>Auto-unboxing automatically converts wrappers to primitives: <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">Integer(5);</span></code></p></li>
+<li><p>Auto-unboxing automatically converts wrappers to primitives: <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">Integer.valueOf(5);</span></code></p></li>
 <li><p>All wrapper classes (except <code class="docutils literal notranslate"><span class="pre">Character</span></code>) can be constructed from <code class="docutils literal notranslate"><span class="pre">String</span></code> representations</p></li>
 <li><p>They all override <code class="docutils literal notranslate"><span class="pre">equals()</span></code> and <code class="docutils literal notranslate"><span class="pre">toString()</span></code> methods appropriately</p></li>
 </ul>
 <section id="construction-of-wrapper-classes">
 <h3>Construction of Wrapper Classes<a class="headerlink" href="#construction-of-wrapper-classes" title="Link to this heading">#</a></h3>
-<p>The Wrapper Classes can be created from a <code class="docutils literal notranslate"><span class="pre">String</span></code> by:</p>
+<p>The Wrapper classes are generally instantiated implicitly through automatic Boxing (shown below). At times it can can be helpful to one’s understanding to explicilty instantiate a wrapper class. There are several ways to explicitly convert from the primitive type to the wrapper class. Most approaches have the same result meaning that developers can choose their favorite. However, for performance reasons, it is not good to call <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Integer(value)</span></code>. This is because <code class="docutils literal notranslate"><span class="pre">new</span></code> will be slow as it goes through the entire process of allocating memory for a newly created object. Using <code class="docutils literal notranslate"><span class="pre">valueOf</span></code> makes use of the <em>Factory Pattern</em> to provide an object from a set of pre-cached values.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="c1">// BAD: Slow and deprecated, but allowed. Do NOT use.</span>
+<span class="w">   </span><span class="n">Integer</span><span class="w"> </span><span class="n">n1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Integer</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// Explicitly invoke valueOf</span>
+<span class="w">   </span><span class="n">Integer</span><span class="w"> </span><span class="n">n3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// Casting will also invoke valueOf</span>
+<span class="w">   </span><span class="n">Integer</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1">// Automatic Boxing (also invokes valueOf)</span>
+<span class="w">   </span><span class="n">Integer</span><span class="w"> </span><span class="n">n4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1">// Explicitly invoke intValue</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n1</span><span class="p">.</span><span class="na">intValue</span><span class="p">();</span>
+
+<span class="w">   </span><span class="c1">// Casting will invoke intValue</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">n1</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1">// Automatic Unboxing (also invokes intValue)</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n1</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="integer-from-string">
+<h3>Integer from String<a class="headerlink" href="#integer-from-string" title="Link to this heading">#</a></h3>
+<p>The Wrapper Classes offer construction from a <code class="docutils literal notranslate"><span class="pre">String</span></code>:</p>
 <ul class="simple">
 <li><p><strong>valueOf</strong>: <code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">i1</span> <span class="pre">=</span> <span class="pre">Integer.valueOf(&quot;123&quot;);</span></code></p>
 <ul>
@@ -654,11 +681,23 @@ document.write(`
 
 <span class="c1">// Explicit Boxing</span>
 <span class="n">Integer</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-<span class="n">Boolean</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">;</span>
 <span class="n">Character</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Character</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">);</span>
+<span class="n">Double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Double</span><span class="p">)</span><span class="w"> </span><span class="mf">3.141</span><span class="p">;</span>
 
 <span class="c1">// Explicit Unboxing</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num</span><span class="p">.</span><span class="na">intValue</span><span class="p">();</span>
+
+<span class="c1">// NOT Boxing. Uses cached Boolean object</span>
+<span class="n">Boolean</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">;</span>
+
+<span class="c1">// Autoboxing, but NOT unboxing.</span>
+<span class="c1">// The primitive 4 is boxed.</span>
+<span class="c1">// The result is the primitive boolean</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">present</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+
+<span class="c1">// Boolean.TRUE is a cached Boolean object.</span>
+<span class="c1">// There is no boxing or unboxing going on here.</span>
+<span class="n">Boolean</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Oracle’s official documentation, and some technical resources, often reserve <strong>Boxing</strong> specifically for the <em>automatic</em> (or <em>implicit</em>) conversion done by the compiler. Oracle will not consider “Explict Boxing” as boxing at all. However, there is not concensus on this terminology.</p>
@@ -791,6 +830,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-exploration">Practical Exploration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapper-types">Wrapper Types</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construction-of-wrapper-classes">Construction of Wrapper Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-from-string">Integer from String</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boxing-unboxing">Boxing &amp; Unboxing</a></li>
 </ul>
 </li>
