@@ -525,79 +525,18 @@ Recall:</p>
 <span class="linenos">9</span><span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">num3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num</span><span class="p">.</span><span class="na">intValue</span><span class="p">();</span>
 </pre></div>
 </div>
-<div class="dropdown hint admonition">
-<p class="admonition-title">Click to see answer</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>line</p></th>
-<th class="head"><p>code</p></th>
-<th class="head text-center"><p>Auto-boxing</p></th>
-<th class="head text-center"><p>Auto-Unboxing</p></th>
-<th class="head text-center"><p>Boxing<br>(explicit)</p></th>
-<th class="head text-center"><p>Unboxing<br>(explicit)</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>2</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">list.add(5);</span></code></p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>3</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">n0</span> <span class="pre">=</span> <span class="pre">list.get(0);</span></code></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-</tr>
-<tr class="row-even"><td><p>4</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">n1</span> <span class="pre">=</span> <span class="pre">list.get(0);</span></code></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>5</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">num</span> <span class="pre">=</span> <span class="pre">11;</span></code></p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-</tr>
-<tr class="row-even"><td><p>6</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">n2</span> <span class="pre">=</span> <span class="pre">num;</span></code></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>7</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">n3</span> <span class="pre">=</span> <span class="pre">num.intValue();</span></code></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>8</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">num2</span> <span class="pre">=</span> <span class="pre">Integer.valueOf(11);</span></code></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>9</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Integer</span> <span class="pre">num3</span> <span class="pre">=</span> <span class="pre">num.intValue();</span></code></p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p>✅</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<details><summary>Click to see answer</summary>
+|line|code|Auto-boxing|Auto-Unboxing|Boxing<br>(explicit)|Unboxing<br>(explicit)|
+|----|----|:----------:|:----------:|:------------------:|:--------------------:|
+|2   | `list.add(5);`| ✅      |             |                    |                      |
+|3   | `int n0 = list.get(0);`|          |     ✅        |                    |                      |
+|4   | `Integer n1 = list.get(0);`|          |             |                    |                      |
+|5   | `Integer num = 11;`|  ✅       |             |                    |                      |
+|6   | `int n2 = num;`|          |       ✅     |                    |                      |
+|7   | `int n3 = num.intValue();`|          |             |                    |        ✅             |
+|8   | `Integer num2 = Integer.valueOf(11);`|          |             |        ✅           |                      |
+|9   | `Integer num3 = num.intValue();`|    ✅     |             |                    |         ✅            |
+</details>
 <p><strong>Question #3:</strong> What is the output of the following code?</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Olympia&quot;</span><span class="p">);</span>
@@ -615,9 +554,8 @@ Recall:</p>
 <span class="linenos">14</span><span class="w">    </span><span class="p">}</span>
 </pre></div>
 </div>
-<div class="dropdown hint admonition">
-<p class="admonition-title">Click to see answer</p>
-<p>The output is: <code class="docutils literal notranslate"><span class="pre">Woodinville</span></code></p>
+<details><summary>Click to see answer</summary>
+The output is: `Woodinville`  
 <p>This is because the list progresses as shown below. After line 8, the list does not contain <code class="docutils literal notranslate"><span class="pre">&quot;Olympia&quot;</span></code> so it gets the element that is after <code class="docutils literal notranslate"><span class="pre">&quot;Kenmore&quot;</span></code>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -656,7 +594,7 @@ Recall:</p>
 </tbody>
 </table>
 </div>
-</div>
+</details>
 <p><strong>Question #4:</strong> Write a method that will accept an <code class="docutils literal notranslate"><span class="pre">ArrayList&lt;String&gt;</span></code> and manually remove all occurrences of the argument <code class="docutils literal notranslate"><span class="pre">removeMe</span></code>. There are several ways to do this. How many can you implement?</p>
 <div class="dropdown hint admonition">
 <p class="admonition-title">Click to see answer</p>

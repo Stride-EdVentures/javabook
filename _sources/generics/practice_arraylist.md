@@ -29,8 +29,7 @@ Recall:
     Integer num2 = Integer.valueOf(11);
     Integer num3 = num.intValue();
 ```
-```{admonition} Click to see answer
-:class: dropdown hint
+<details><summary>Click to see answer</summary>
 |line|code|Auto-boxing|Auto-Unboxing|Boxing<br>(explicit)|Unboxing<br>(explicit)|
 |----|----|:----------:|:----------:|:------------------:|:--------------------:|
 |2   | `list.add(5);`| ✅      |             |                    |                      |
@@ -41,7 +40,7 @@ Recall:
 |7   | `int n3 = num.intValue();`|          |             |                    |        ✅             |
 |8   | `Integer num2 = Integer.valueOf(11);`|          |             |        ✅           |                      |
 |9   | `Integer num3 = num.intValue();`|    ✅     |             |                    |         ✅            |
-```
+</details>
 
 **Question #3:** What is the output of the following code?
 
@@ -63,8 +62,7 @@ Recall:
     }
 ```
 
-```{admonition} Click to see answer
-:class: dropdown hint
+<details><summary>Click to see answer</summary>
 The output is: `Woodinville`  
 
 This is because the list progresses as shown below. After line 8, the list does not contain `"Olympia"` so it gets the element that is after `"Kenmore"`.  
@@ -77,7 +75,7 @@ This is because the list progresses as shown below. After line 8, the list does 
 |3    |Woodinville |Kenmore     | Woodinville|
 |4    |            |Woodinville |            |
 
-```
+</details>
 
 **Question #4:** Write a method that will accept an `ArrayList<String>` and manually remove all occurrences of the argument `removeMe`. There are several ways to do this. How many can you implement?    
 
