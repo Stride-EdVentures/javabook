@@ -96,7 +96,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="icon" href="../_static/peanut head.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Collections" href="collections.html" />
+    <link rel="next" title="Practice: Shunting Yard" href="practice_shunting.html" />
     <link rel="prev" title="Stack &amp; Queue" href="stack_queue.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -242,6 +242,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stack_queue.html">Stack &amp; Queue</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collections.html">Collections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generics.html">Generics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="constraint_typing.html">Constraint Typing</a></li>
@@ -491,8 +492,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#postfix">Postfix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-algorithm">The Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#postfix-expressions">Postfix Expressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-postfix">Why Postfix?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-postfix-with-a-stack">Evaluating Postfix with a Stack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-code-left-as-an-exercise">The Code (left as an exercise)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shunting-yard-algorithm">The Shunting Yard Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rule-summary">Rule Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
 </ul>
             </nav>
         </div>
@@ -506,14 +516,95 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="shunting-yard">
 <h1>Shunting Yard<a class="headerlink" href="#shunting-yard" title="Link to this heading">#</a></h1>
-<p>Here we will learn how to convert an infix mathematical expression to a postfix expression using the Shunting Yard algorithm.</p>
+<p>Here we will learn how to convert an infix mathematical expression to a postfix expression using the <a class="reference external" href="https://en.wikipedia.org/wiki/Shunting_yard_algorithm">Shunting Yard Algorithm</a>. To keep things simple, we will assume that all operators are <a class="reference external" href="https://en.wikipedia.org/wiki/Operator_associativity">left-associative</a>.</p>
 <p>First, we need to know what a postfix expression and how to evaluate it.</p>
-<section id="postfix">
-<h2>Postfix<a class="headerlink" href="#postfix" title="Link to this heading">#</a></h2>
+<section id="postfix-expressions">
+<h2>Postfix Expressions<a class="headerlink" href="#postfix-expressions" title="Link to this heading">#</a></h2>
+<p>A postfix expression is a mathematical expression where the operator comes <strong>AFTER</strong> the operands. For example:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Infix</p></th>
+<th class="head"><p>Postfix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>5 + 3</p></td>
+<td><p>5  3  +</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When we have a larger postfix expression, we can visually compute the result using a relatively simple approach. Here are the steps:</p>
+<ol class="arabic simple">
+<li><p>Scan from the left to the right until an operator is found.</p></li>
+<li><p>Do the math and compress the expression.</p></li>
+<li><p>Repeat until there is only one token in the queue, which is the answer.</p></li>
+</ol>
+<p><img alt="Postfix Expression" src="../_images/postfix_example.png" />
+Consider the epxression shown above. Here are the specific steps.</p>
+<ol class="arabic simple">
+<li><p>Find the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator as the left-most operator.</p></li>
+<li><p>Compute <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">6</span> <span class="pre">=</span> <span class="pre">9</span></code></p></li>
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">3</span></code>, <code class="docutils literal notranslate"><span class="pre">6</span></code>, and <code class="docutils literal notranslate"><span class="pre">+</span></code> and replace with <code class="docutils literal notranslate"><span class="pre">9</span></code></p></li>
+<li><p>Find the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator. Compute <code class="docutils literal notranslate"><span class="pre">9</span> <span class="pre">*</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">18</span></code></p></li>
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">9</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, and <code class="docutils literal notranslate"><span class="pre">*</span></code> and replace with <code class="docutils literal notranslate"><span class="pre">18</span></code></p></li>
+<li><p>Find the <code class="docutils literal notranslate"><span class="pre">-</span></code> operator. Compute <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">-</span> <span class="pre">18</span> <span class="pre">=</span> <span class="pre">-16</span></code></p></li>
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">18</span></code>, and <code class="docutils literal notranslate"><span class="pre">-</span></code> and replace with <code class="docutils literal notranslate"><span class="pre">-16</span></code></p></li>
+<li><p>Find the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator. Compute <code class="docutils literal notranslate"><span class="pre">-16</span> <span class="pre">+</span> <span class="pre">3</span> <span class="pre">=</span> <span class="pre">-13</span></code></p></li>
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">-16</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code>, and <code class="docutils literal notranslate"><span class="pre">+</span></code> and replace with <code class="docutils literal notranslate"><span class="pre">-13</span></code></p></li>
+<li><p>Queue has only one Token. Answer = <code class="docutils literal notranslate"><span class="pre">-13</span></code></p></li>
+</ol>
+<section id="why-postfix">
+<h3>Why Postfix?<a class="headerlink" href="#why-postfix" title="Link to this heading">#</a></h3>
+<p>We are learning postfix expressions because:</p>
+<ol class="arabic simple">
+<li><p>There are <strong>NO</strong> parentheses in postfix expressions.</p></li>
+<li><p>Even without parentheses, the order of operations is encoded in the ordering of the tokens.</p></li>
+<li><p>Computers can easily compute the result of a postfix expression using a Stack.</p></li>
+</ol>
 </section>
-<section id="the-algorithm">
-<h2>The Algorithm<a class="headerlink" href="#the-algorithm" title="Link to this heading">#</a></h2>
-<p>The best way to learn the algorithm is by example. Here is a video that animates and explains the steps. No code is shown and students will have to make some inferences. The goal is to be able to predict what will happen.</p>
+<section id="evaluating-postfix-with-a-stack">
+<h3>Evaluating Postfix with a Stack<a class="headerlink" href="#evaluating-postfix-with-a-stack" title="Link to this heading">#</a></h3>
+<p>Let’s examine the postfix expression: <code class="docutils literal notranslate"><span class="pre">5</span>&#160; <span class="pre">2</span> <span class="pre">-</span> <span class="pre">2</span>&#160; <span class="pre">4</span>&#160; <span class="pre">+</span>&#160; <span class="pre">2</span>&#160; <span class="pre">*</span>&#160; <span class="pre">+</span></code></p>
+<blockquote>
+<div><p>For the curious, the matching infix expression is: <code class="docutils literal notranslate"><span class="pre">(5</span> <span class="pre">-</span> <span class="pre">2)</span> <span class="pre">+</span> <span class="pre">(2</span> <span class="pre">+</span> <span class="pre">4)</span> <span class="pre">*</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">15</span></code></p>
+</div></blockquote>
+<p>The general approach is as follows.<br />
+When the input queue…</p>
+<ol class="arabic simple">
+<li><p>is a number, push it</p></li>
+<li><p>is an operator</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pop</span> <span class="n">to</span> <span class="n">the</span> <span class="n">right</span>  
+    <span class="n">pop</span> <span class="n">to</span> <span class="n">the</span> <span class="n">left</span>  
+    <span class="n">do</span> <span class="n">the</span> <span class="n">math</span>  
+    <span class="n">push</span> <span class="n">the</span> <span class="n">result</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>is empty, the stack contains the final result.</p></li>
+</ol>
+<p>Let’s take a more graphical look where we evaluate the expression <code class="docutils literal notranslate"><span class="pre">5</span>&#160; <span class="pre">2</span> <span class="pre">-</span> <span class="pre">2</span>&#160; <span class="pre">4</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">+</span></code><br />
+<img alt="Postfix Evaluation" src="../_images/postfix_eval.png" /><br />
+In the above image you’ll see that the stack has two numbers in it. The front of the input queue is an operator, <code class="docutils literal notranslate"><span class="pre">-</span></code>. We pop off the two numbers, compute <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">-</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">3</span></code> and push the <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+<p>Let’s continue…
+<img alt="Postfix Evaluation continued" src="../_images/postfix_eval2.png" /><br />
+After the above operations, we stack becomes <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">6]</span></code>.  Then we continue to process the postfix expression.</p>
+<p><img alt="Postfix Evaluation continued" src="../_images/postfix_eval3.png" /><br />
+Now the stack becomes <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">12]</span></code> and the input queue has only <code class="docutils literal notranslate"><span class="pre">+</span></code>.<br />
+<img alt="Postfix Evaluation continued" src="../_images/postfix_eval4.png" /></p>
+<p>With the input queue now empty, the stack has only one item in it, the result = <code class="docutils literal notranslate"><span class="pre">15</span></code>.</p>
+</section>
+<section id="the-code-left-as-an-exercise">
+<h3>The Code (left as an exercise)<a class="headerlink" href="#the-code-left-as-an-exercise" title="Link to this heading">#</a></h3>
+<p>The code to evaluate a postfix expression is surprisingly simple! It is so simple, we leave this as an exercise for the reader.</p>
+<p>All we need now is a way to take any infix expression–including one with parentheses–and to convert it to a postfix expression without parentheses. <strong>This is what the Shunting Yard Algorithm does!!!</strong></p>
+</section>
+</section>
+<section id="the-shunting-yard-algorithm">
+<h2>The Shunting Yard Algorithm<a class="headerlink" href="#the-shunting-yard-algorithm" title="Link to this heading">#</a></h2>
+<p>The Shunting Yard Algorithm converts any infix expression, including one with parentheses, and converts it to a postfix expression without parentheses.</p>
+<p>A great way to learn the algorithm is to watch it in action and figure out the rules as you go. (Just like you do when you learn to play a new card game.) Below is a video that illustrates the processing of an infix expression and explains the steps as it goes. No code is shown; students should identify and write down the rules as they are identified.</p>
 <p>The video will illustrate the conversion of the following expressions:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -537,7 +628,46 @@ document.write(`
 </tbody>
 </table>
 </div>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/O6YKiEHuSfE?si=wdasc1SMkxBF5Nim" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></section>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/O6YKiEHuSfE?si=wdasc1SMkxBF5Nim" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<section id="rule-summary">
+<h3>Rule Summary<a class="headerlink" href="#rule-summary" title="Link to this heading">#</a></h3>
+<p>Here we assume that every operator is left-associative. For brevity, we will refer to the output queue as simply <strong>the output</strong>, and we will refer to the operator stack as simply <strong>the stack</strong>.</p>
+<p>If the input Token is:</p>
+<ul class="simple">
+<li><p>number: always add it to the output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(</span></code>: always push to the stack</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">)</span></code>: pop off the stack, adding to output, until we find <code class="docutils literal notranslate"><span class="pre">)</span></code>. Discard parentheses.</p></li>
+<li><p>operator:</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cannot</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">stack</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="n">pop</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">stack</span><span class="p">,</span><span class="w"> </span><span class="n">adding</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">output</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">push</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">stack</span>
+</pre></div>
+</div>
+<p>To determine if we can push to the stack, use the following rules.</p>
+<p>We can push to the stack when:</p>
+<ul class="simple">
+<li><p>stack is empty</p></li>
+<li><p>top of stack is <code class="docutils literal notranslate"><span class="pre">(</span></code></p></li>
+<li><p>precidence of input operator is greater than precidence of top of stack operator</p></li>
+</ul>
+</section>
+</section>
+<section id="what-s-so-important">
+<h2>What’s so Important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
+<p><strong>Postfix Expressions:</strong></p>
+<ul class="simple">
+<li><p>A postfix expression has no parenthesis yet still retains order of operations.</p></li>
+<li><p>A computer can easily evaluate a postfix expression using a Stack.</p></li>
+</ul>
+<p><strong>Shunting Yard:</strong></p>
+<ul class="simple">
+<li><p>The Shunting Yard Algorithm is used to <strong>convert an infix expression into a postfix expression</strong>.</p></li>
+<li><p>The input is a Queue of Tokens (infix). The output is a Queue of Tokens (postfix).</p></li>
+<li><p>It uses a Stack to help it produce the output.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -580,11 +710,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="collections.html"
+       href="practice_shunting.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Collections</p>
+        <p class="prev-next-title"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -604,8 +734,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#postfix">Postfix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-algorithm">The Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#postfix-expressions">Postfix Expressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-postfix">Why Postfix?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-postfix-with-a-stack">Evaluating Postfix with a Stack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-code-left-as-an-exercise">The Code (left as an exercise)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shunting-yard-algorithm">The Shunting Yard Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rule-summary">Rule Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
 </ul>
   </nav></div>
 

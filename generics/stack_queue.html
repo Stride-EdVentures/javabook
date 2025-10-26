@@ -242,6 +242,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Stack &amp; Queue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shuntingyard.html">Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collections.html">Collections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generics.html">Generics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="constraint_typing.html">Constraint Typing</a></li>
@@ -499,7 +500,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linked-list">Linked List</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#queue">Queue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#queue">Queue</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fifo">FIFO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
             </nav>
@@ -661,6 +666,41 @@ document.write(`
 <p class="admonition-title">Deque</p>
 <p><code class="docutils literal notranslate"><span class="pre">Deque</span></code> extends <code class="docutils literal notranslate"><span class="pre">Queue</span></code>. This means that the <code class="docutils literal notranslate"><span class="pre">interface</span></code> Deque has all the behaviors that <code class="docutils literal notranslate"><span class="pre">Queue</span></code> has plus more. In fact, <code class="docutils literal notranslate"><span class="pre">Deque</span></code> provides the methods necessary to implement <strong>BOTH</strong> a Stack and a Queue.</p>
 </div>
+<section id="fifo">
+<h3>FIFO<a class="headerlink" href="#fifo" title="Link to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Queue</span></code> is <strong>FIFO</strong> meaning that it is: <strong>F</strong>irst <strong>I</strong>n, <strong>F</strong>irst <strong>O</strong>ut. The first item that is added to the queue, is the first item that is removed.</p>
+<p>It is <em>not</em> commonly said, but one could also say that a <code class="docutils literal notranslate"><span class="pre">Queue</span></code> is <strong>LILO</strong>: Last in, Last out.</p>
+</section>
+</section>
+<section id="what-s-so-important">
+<h2>What’s so Important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Stack &amp; Queue are two important concepts that are provided by generic data structures.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Stack</span></code></p>
+<ul>
+<li><p><strong>First-In-First-Out</strong>: Behaves like a stack of books.</p></li>
+<li><p><strong>API</strong>: <code class="docutils literal notranslate"><span class="pre">push</span></code>, <code class="docutils literal notranslate"><span class="pre">pop</span></code>, <code class="docutils literal notranslate"><span class="pre">peek</span></code></p></li>
+<li><p>Example construction:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Stack&lt;String&gt;</span> <span class="pre">stack</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">Stack&lt;&gt;();</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Deque&lt;String&gt;</span> <span class="pre">stack</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">ArrayDeque&lt;&gt;();</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Queue</span></code></p>
+<ul>
+<li><p><strong>Last-In-Last-Out</strong>: Behaves like a line to get into a concert.</p></li>
+<li><p><strong>API</strong>: <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">remove</span></code>, <code class="docutils literal notranslate"><span class="pre">peek</span></code></p></li>
+<li><p>Example construction:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Queue&lt;String&gt;</span> <span class="pre">queue</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">LinkedList&lt;&gt;();</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Deque&lt;String&gt;</span> <span class="pre">queue</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">ArrayDeque&lt;&gt;();</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
@@ -766,7 +806,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linked-list">Linked List</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#queue">Queue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#queue">Queue</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fifo">FIFO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
   </nav></div>
