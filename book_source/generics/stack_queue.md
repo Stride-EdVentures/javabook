@@ -111,6 +111,26 @@ int newFront = que1.peek();  // newFront is 2
 `Deque` extends `Queue`. This means that the `interface` Deque has all the behaviors that `Queue` has plus more. In fact, `Deque` provides the methods necessary to implement **BOTH** a Stack and a Queue. 
 ```
 
+### FIFO
+A `Queue` is **FIFO** meaning that it is: **F**irst **I**n, **F**irst **O**ut. The first item that is added to the queue, is the first item that is removed.  
+
+It is *not* commonly said, but one could also say that a `Queue` is **LILO**: Last in, Last out. 
+
+## What's so Important? ![Billy](../_static/whats_so_important.png)
+* Stack & Queue are two important concepts that are provided by generic data structures.  
+* A `Stack`  
+    * **First-In-First-Out**: Behaves like a stack of books.  
+    * **API**: `push`, `pop`, `peek`  
+    * Example construction:
+        * `Stack<String> stack = new Stack<>();`  
+        * `Deque<String> stack = new ArrayDeque<>();`   
+* A `Queue`  
+    * **Last-In-Last-Out**: Behaves like a line to get into a concert.  
+    * **API**: `add`, `remove`, `peek`  
+    * Example construction:  
+        * `Queue<String> queue = new LinkedList<>();`  
+        * `Deque<String> queue = new ArrayDeque<>();`  
+
 ## Footnotes
 [1] An **Abstract Data Type** (ADT) is a conceptual model for a data structure that defines:  
 * What **operations** can be performed on the data.  

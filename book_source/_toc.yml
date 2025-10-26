@@ -14,6 +14,7 @@ chapters:
     - file: generics/practice_arraylist
     - file: generics/stack_queue
     - file: generics/shuntingyard
+    - file: generics/practice_shunting
     - file: generics/collections
     - file: generics/generics
     - file: generics/constraint_typing
