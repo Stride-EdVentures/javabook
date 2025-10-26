@@ -469,7 +469,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -485,6 +487,19 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-structures">Fundamental Structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps">Maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashmap">HashMap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#treemap">TreeMap</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -497,6 +512,97 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="collections">
 <h1>Collections<a class="headerlink" href="#collections" title="Link to this heading">#</a></h1>
 <p>In this lesson we will learn about the <code class="docutils literal notranslate"><span class="pre">Java</span> <span class="pre">Collection</span> <span class="pre">Framework</span></code>. There are many <code class="docutils literal notranslate"><span class="pre">abstract</span></code> classes, concrete classes, and interfaces that make up the framework.</p>
+<p>We will look at a class hierarchy showing <code class="docutils literal notranslate"><span class="pre">interfaces</span></code>, <code class="docutils literal notranslate"><span class="pre">abstract</span></code> classes, and concrete classes. The point is to see how code is shared by using the abstract classes, and behaviors are provided by classes not necessarily in the same path.</p>
+<p>We also want to review the most fundamental data structures.</p>
+<section id="fundamental-structures">
+<h2>Fundamental Structures<a class="headerlink" href="#fundamental-structures" title="Link to this heading">#</a></h2>
+<p>We will use conceptual names that map to <code class="docutils literal notranslate"><span class="pre">interfaces</span></code>. And we will show the most popular types of classes used to implement that behavior.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Class</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>List</p></td>
+<td><p>ArrayList</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>LinkedList</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Queue</p></td>
+<td><p>LinkedList</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>ArrayDeque</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Stack</p></td>
+<td><p>Stack</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Stack</span></code> is a concrete class. Slow.</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>LinkedList</p></td>
+<td><p>Acts as both a Stack and a Queue via interface <code class="docutils literal notranslate"><span class="pre">Deque</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>ArrayDeque</p></td>
+<td><p>Acts as both a Stack and a Queue via interface <code class="docutils literal notranslate"><span class="pre">Deque</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Set</p></td>
+<td><p>HashSet</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>TreeSet</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Map</p></td>
+<td><p>HashMap</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>TreeMap</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><img alt="Collection Classes" src="../_images/collections.png" /></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="maps">
+<h2>Maps<a class="headerlink" href="#maps" title="Link to this heading">#</a></h2>
+<p>TODO: Have a Map page that discusses how they work. Put some of this information there.</p>
+<p>Here we will look at the two most popular implementations for a Map. In this example, we will have the following Key/Values.<br />
+<img alt="Key Values" src="../_images/key_values_in_map.png" /></p>
+<section id="hashmap">
+<h3>HashMap<a class="headerlink" href="#hashmap" title="Link to this heading">#</a></h3>
+<p>The Keys and Values are stored in a node in a Hash Table. It is beyond the scope of this lesson to discuss <a class="reference external" href="https://cse163.github.io/book/module-9-miscellaneous-topics/lesson-26-reading-hashing/index.html">Hashing</a>.
+<img alt="HashMap" src="../_images/hashtable.png" /><br />
+What we hope to illustrate here is that because a <code class="docutils literal notranslate"><span class="pre">HashMap</span></code> uses a hash table to store its nodes, we get the following characteristics:</p>
+<ul class="simple">
+<li><p>Getting, Adding and Removing a key/value is O(1)</p></li>
+<li><p>There is no predictable enumeration order to the keys in a <code class="docutils literal notranslate"><span class="pre">HashMap</span></code>.</p></li>
+</ul>
+</section>
+<section id="treemap">
+<h3>TreeMap<a class="headerlink" href="#treemap" title="Link to this heading">#</a></h3>
+<p>The Keys and Values are stored in a node in a Binary Search Tree. (Balanced using Red-Black Tree algorithms)
+<img alt="TreeMap" src="../_images/bst_map.png" /><br />
+Because the nodes are stored in a Binary Search Tree, we get the following characteristics:</p>
+<ul class="simple">
+<li><p>Getting, Adding and Removing a key/value is <strong>O(ln N)</strong></p></li>
+<li><p>The keys can be enumerated in a predictable, sorted order.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -553,6 +659,26 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-structures">Fundamental Structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps">Maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashmap">HashMap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#treemap">TreeMap</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
