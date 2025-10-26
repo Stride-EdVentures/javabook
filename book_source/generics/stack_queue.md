@@ -25,9 +25,91 @@ Stacks are used extensively used by Java (*all programming languages, really*) w
 ### LIFO
 A Stack is "LIFO": **L**ast **I**n **F**irst **O**ut. This means that the last item that was pushed onto the stack is the item that is popped out.  
 
-## Queue
-A `Queue` is an interface and therefore cannot be directly instantiated. Instead, you need to create the Queue behavior by instantiating one of the implementing classes such as `LinkedList` or `ArrayDeque`. 
+### class Stack&lt;E&gt;
+In Java, we can get a stack implementation from the `Stack` class. It is a concrete class and can be instantiated directly. It is **NOT** and `interface`. What is especially nice about the `Stack` class is that it implements the stack behaviors with the expected names; it provides methods with the names `pop`, `push` and `peek`.   
+```java
+Stack<Integer> stack = new Stack<>();
+stack.push(5);  // First In - Last Out. Bottom of stack
+stack.push(3);  // middle of stack
+stack.push(1);  // top of stack
 
+int top = stack.peek();     // top of stack is unchanged. top is 1
+int popTop = stack.pop();   // top of stack is removed. popTop is 1
+int newTop = stack.peek();  // newTop is 3 since 1 was removed. 
+```
+
+If we look at the class hierarchy of `Stack`, we'll see that it is implemented by extending `Vector` which is thread-safe (or `synchronized`), meaning that it works well in a multi-threaded context. Unfortunately, it also means that the data structure is slower in a single-threaded context. Use of `Stack` is generally discouraged.   
+![Stack Hierarchy](../_static/stack_hierarchy.png)  
+
+### class ArrayDeque&lt;E&gt;
+The `ArrayDeque` class (pronouned "Array Deck") is short for **Double-Ended Queue**, and because it provides a rich set of methods for working at both ends of a queue, it can be efficiently used to implement both a Stack and a Queue. Furthermore, most of the familiar behaviors keep their familiar names. We can abstract the Stack behaviors using the `Deque` interface:  
+|Stack Behavior|Deque Method Name|Notes|
+|--------|-----------|-----------|
+|**push**|`push`|Adds to the Head|
+|**pop**|`pop`|Removes from the Head|
+|**peek**|`peek`|Looks at the Head|
+|**empty**|`isEmpty`|`true` if empty|
+
+```java
+// Example: Using an ArrayDeque to be a Stack
+Deque<Integer> stack = new ArrayDeque<>();
+
+// Yes, it behaves like a STACK!
+stack.push(3);
+int top = stack.pop();
+```
+## Linked List
+For many reasons, it is helpful to understand the `LinkedList` data structure which is implemented as a **Doubly Linked List**. This means that each `Node` in the data structure references the item in front of it as well as the one behind it. The `Node` class has three instance fields: 1) an `item` that contains user provided information; 2) the `next` node reference; 3) the `previous` node reference. Here is the code.
+```java
+class Node<E> {
+        E item;         // The nodes holds some information
+        Node<E> next;   // The node behind this node. May be null.
+        Node<E> prev;   // The node ahead of this node. May be null.
+}
+```
+The `LinkedList` data structure will have a reference to the `first` and `last` `Node` in a list that are connected together with a sequences of references. They are *chained*  together twice. One *chain* goes forward while the second *chain* goes backwards.  
+
+Here is an illustration of a Linked List that has 7 items. The first item contains a `Token` that has the value `1.0`. The second item contains a `Token` that has the `+` operator. The last node in the list is contains the `Token` that has the value `4.0`.  
+![Linked List](../_static/double_linked_list.png)  
+
+One of the nicest properties of a LinkedList is that adding Nodes to the Head or Tail is cheap: O(1)--constant time! If you want to add a Node to the middle of the list, the implementation requires that you follow the chain from the front (or tail) until you find the location that you want to add the new node. Once found, it is very easy to insert the new node: you just update the forwards & backwards references to include the new nodes. You update both *chains*.  
+
+One negative propery of a `LinkedList` is that finding the location of a node is expensive because you have to traverse the chain to the desired location. Even if you know that you want to go to the 5th item, you still have to traverse from 0 to 1 to 2 to 3 to 4 to 5.  
+
+Another negative property of a `LinkedList` is that the nodes are allocated on the Heap at discontiguous locations. While it is nice to allocate memory only when you need it, it can be poor performance to allocate one at a time and at disparate locations. 
+
+```{admonition} ArrayDeque Performance
+:class: dropdown
+We will see below that an `ArrayDeque` can provide better performance by using an Array to achieve [Random Access](https://en.wikipedia.org/wiki/Random_access). It will also allocate memory for all elements all at once in a contiguous array. This generally improves performance except in the case when we need to insert a node. It behaves like an `ArrayList` where all elements need to be shifted over which is an expensive operation.
+```  
+
+## Queue
+A `Queue` is an `interface` and therefore cannot be directly instantiated. Instead, you need to create the Queue *behavior* by instantiating one of the implementing classes such as `LinkedList` or `ArrayDeque`. 
+
+Developers will often want to provide some level of abstraction and use an `interface` instead of a concrete class. The recommended code is:
+```java
+// Both of these are valid
+Queue<Integer> que1 = new LinkedList<>();
+Queue<Integer> que2 = new ArrayDeque<>();
+que1.add(1);    // First in - First out
+que1.add(2);
+que1.add(3);
+
+int front = que1.peek();     // front is 1
+int removed = que1.remove(); // remove 1
+int newFront = que1.peek();  // newFront is 2
+```
+|Queue Behavior|`Queue` Method Name|Notes|
+|--------------|-----------------|-----|
+|**enqueue**|`add`|Adds to the Tail|
+|**dequeue**|`poll` or `remove`|Removes from the Head|
+|**peek**|`peek`|Looks at the Head|
+|**empty**|`isEmpty`|`true` if empty|
+
+```{admonition} Deque
+:class: dropdown
+`Deque` extends `Queue`. This means that the `interface` Deque has all the behaviors that `Queue` has plus more. In fact, `Deque` provides the methods necessary to implement **BOTH** a Stack and a Queue. 
+```
 
 ## Footnotes
 [1] An **Abstract Data Type** (ADT) is a conceptual model for a data structure that defines:  
