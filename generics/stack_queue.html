@@ -494,8 +494,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stack">Stack</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lifo">LIFO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-stack-e">class Stack&lt;E&gt;</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-arraydeque-e">class ArrayDeque&lt;E&gt;</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linked-list">Linked List</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#queue">Queue</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
@@ -534,10 +537,130 @@ document.write(`
 <h3>LIFO<a class="headerlink" href="#lifo" title="Link to this heading">#</a></h3>
 <p>A Stack is “LIFO”: <strong>L</strong>ast <strong>I</strong>n <strong>F</strong>irst <strong>O</strong>ut. This means that the last item that was pushed onto the stack is the item that is popped out.</p>
 </section>
+<section id="class-stack-e">
+<h3>class Stack&lt;E&gt;<a class="headerlink" href="#class-stack-e" title="Link to this heading">#</a></h3>
+<p>In Java, we can get a stack implementation from the <code class="docutils literal notranslate"><span class="pre">Stack</span></code> class. It is a concrete class and can be instantiated directly. It is <strong>NOT</strong> and <code class="docutils literal notranslate"><span class="pre">interface</span></code>. What is especially nice about the <code class="docutils literal notranslate"><span class="pre">Stack</span></code> class is that it implements the stack behaviors with the expected names; it provides methods with the names <code class="docutils literal notranslate"><span class="pre">pop</span></code>, <code class="docutils literal notranslate"><span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">peek</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w">  </span><span class="c1">// First In - Last Out. Bottom of stack</span>
+<span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w">  </span><span class="c1">// middle of stack</span>
+<span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="c1">// top of stack</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span><span class="w">     </span><span class="c1">// top of stack is unchanged. top is 1</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">popTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span><span class="w">   </span><span class="c1">// top of stack is removed. popTop is 1</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">newTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span><span class="w">  </span><span class="c1">// newTop is 3 since 1 was removed. </span>
+</pre></div>
+</div>
+<p>If we look at the class hierarchy of <code class="docutils literal notranslate"><span class="pre">Stack</span></code>, we’ll see that it is implemented by extending <code class="docutils literal notranslate"><span class="pre">Vector</span></code> which is thread-safe (or <code class="docutils literal notranslate"><span class="pre">synchronized</span></code>), meaning that it works well in a multi-threaded context. Unfortunately, it also means that the data structure is slower in a single-threaded context. Use of <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is generally discouraged.<br />
+<img alt="Stack Hierarchy" src="../_images/stack_hierarchy.png" /></p>
+</section>
+<section id="class-arraydeque-e">
+<h3>class ArrayDeque&lt;E&gt;<a class="headerlink" href="#class-arraydeque-e" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ArrayDeque</span></code> class (pronouned “Array Deck”) is short for <strong>Double-Ended Queue</strong>, and because it provides a rich set of methods for working at both ends of a queue, it can be efficiently used to implement both a Stack and a Queue. Furthermore, most of the familiar behaviors keep their familiar names. We can abstract the Stack behaviors using the <code class="docutils literal notranslate"><span class="pre">Deque</span></code> interface:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stack Behavior</p></th>
+<th class="head"><p>Deque Method Name</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>push</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">push</span></code></p></td>
+<td><p>Adds to the Head</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>pop</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pop</span></code></p></td>
+<td><p>Removes from the Head</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>peek</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">peek</span></code></p></td>
+<td><p>Looks at the Head</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>empty</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">isEmpty</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if empty</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Example: Using an ArrayDeque to be a Stack</span>
+<span class="n">Deque</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayDeque</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="c1">// Yes, it behaves like a STACK!</span>
+<span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="linked-list">
+<h2>Linked List<a class="headerlink" href="#linked-list" title="Link to this heading">#</a></h2>
+<p>For many reasons, it is helpful to understand the <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> data structure which is implemented as a <strong>Doubly Linked List</strong>. This means that each <code class="docutils literal notranslate"><span class="pre">Node</span></code> in the data structure references the item in front of it as well as the one behind it. The <code class="docutils literal notranslate"><span class="pre">Node</span></code> class has three instance fields: 1) an <code class="docutils literal notranslate"><span class="pre">item</span></code> that contains user provided information; 2) the <code class="docutils literal notranslate"><span class="pre">next</span></code> node reference; 3) the <code class="docutils literal notranslate"><span class="pre">previous</span></code> node reference. Here is the code.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">E</span><span class="w"> </span><span class="n">item</span><span class="p">;</span><span class="w">         </span><span class="c1">// The nodes holds some information</span>
+<span class="w">        </span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="n">next</span><span class="p">;</span><span class="w">   </span><span class="c1">// The node behind this node. May be null.</span>
+<span class="w">        </span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="n">prev</span><span class="p">;</span><span class="w">   </span><span class="c1">// The node ahead of this node. May be null.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> data structure will have a reference to the <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">last</span></code> <code class="docutils literal notranslate"><span class="pre">Node</span></code> in a list that are connected together with a sequences of references. They are <em>chained</em>  together twice. One <em>chain</em> goes forward while the second <em>chain</em> goes backwards.</p>
+<p>Here is an illustration of a Linked List that has 7 items. The first item contains a <code class="docutils literal notranslate"><span class="pre">Token</span></code> that has the value <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. The second item contains a <code class="docutils literal notranslate"><span class="pre">Token</span></code> that has the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator. The last node in the list is contains the <code class="docutils literal notranslate"><span class="pre">Token</span></code> that has the value <code class="docutils literal notranslate"><span class="pre">4.0</span></code>.<br />
+<img alt="Linked List" src="../_images/double_linked_list.png" /></p>
+<p>One of the nicest properties of a LinkedList is that adding Nodes to the Head or Tail is cheap: O(1)–constant time! If you want to add a Node to the middle of the list, the implementation requires that you follow the chain from the front (or tail) until you find the location that you want to add the new node. Once found, it is very easy to insert the new node: you just update the forwards &amp; backwards references to include the new nodes. You update both <em>chains</em>.</p>
+<p>One negative propery of a <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> is that finding the location of a node is expensive because you have to traverse the chain to the desired location. Even if you know that you want to go to the 5th item, you still have to traverse from 0 to 1 to 2 to 3 to 4 to 5.</p>
+<p>Another negative property of a <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> is that the nodes are allocated on the Heap at discontiguous locations. While it is nice to allocate memory only when you need it, it can be poor performance to allocate one at a time and at disparate locations.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">ArrayDeque Performance</p>
+<p>We will see below that an <code class="docutils literal notranslate"><span class="pre">ArrayDeque</span></code> can provide better performance by using an Array to achieve <a class="reference external" href="https://en.wikipedia.org/wiki/Random_access">Random Access</a>. It will also allocate memory for all elements all at once in a contiguous array. This generally improves performance except in the case when we need to insert a node. It behaves like an <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> where all elements need to be shifted over which is an expensive operation.</p>
+</div>
 </section>
 <section id="queue">
 <h2>Queue<a class="headerlink" href="#queue" title="Link to this heading">#</a></h2>
-<p>A <code class="docutils literal notranslate"><span class="pre">Queue</span></code> is an interface and therefore cannot be directly instantiated. Instead, you need to create the Queue behavior by instantiating one of the implementing classes such as <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> or <code class="docutils literal notranslate"><span class="pre">ArrayDeque</span></code>.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Queue</span></code> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> and therefore cannot be directly instantiated. Instead, you need to create the Queue <em>behavior</em> by instantiating one of the implementing classes such as <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> or <code class="docutils literal notranslate"><span class="pre">ArrayDeque</span></code>.</p>
+<p>Developers will often want to provide some level of abstraction and use an <code class="docutils literal notranslate"><span class="pre">interface</span></code> instead of a concrete class. The recommended code is:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Both of these are valid</span>
+<span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">que1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">que2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayDeque</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">que1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">    </span><span class="c1">// First in - First out</span>
+<span class="n">que1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">que1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">front</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">que1</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span><span class="w">     </span><span class="c1">// front is 1</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">removed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">que1</span><span class="p">.</span><span class="na">remove</span><span class="p">();</span><span class="w"> </span><span class="c1">// remove 1</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">newFront</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">que1</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span><span class="w">  </span><span class="c1">// newFront is 2</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Queue Behavior</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">Queue</span></code> Method Name</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>enqueue</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">add</span></code></p></td>
+<td><p>Adds to the Tail</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>dequeue</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">poll</span></code> or <code class="docutils literal notranslate"><span class="pre">remove</span></code></p></td>
+<td><p>Removes from the Head</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>peek</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">peek</span></code></p></td>
+<td><p>Looks at the Head</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>empty</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">isEmpty</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if empty</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Deque</p>
+<p><code class="docutils literal notranslate"><span class="pre">Deque</span></code> extends <code class="docutils literal notranslate"><span class="pre">Queue</span></code>. This means that the <code class="docutils literal notranslate"><span class="pre">interface</span></code> Deque has all the behaviors that <code class="docutils literal notranslate"><span class="pre">Queue</span></code> has plus more. In fact, <code class="docutils literal notranslate"><span class="pre">Deque</span></code> provides the methods necessary to implement <strong>BOTH</strong> a Stack and a Queue.</p>
+</div>
 </section>
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
@@ -638,8 +761,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stack">Stack</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lifo">LIFO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-stack-e">class Stack&lt;E&gt;</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-arraydeque-e">class ArrayDeque&lt;E&gt;</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linked-list">Linked List</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#queue">Queue</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
