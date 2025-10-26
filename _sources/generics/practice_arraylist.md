@@ -30,16 +30,19 @@ Recall:
     Integer num3 = num.intValue();
 ```
 <details><summary>Click to see answer</summary>
+See the table:
+
 |line|code|Auto-boxing|Auto-Unboxing|Boxing<br>(explicit)|Unboxing<br>(explicit)|
 |----|----|:----------:|:----------:|:------------------:|:--------------------:|
-|2   | `list.add(5);`| ✅      |             |                    |                      |
-|3   | `int n0 = list.get(0);`|          |     ✅        |                    |                      |
+|2   | `list.add(5);`| ✅      |   |       |            |
+|3   | `int n0 = list.get(0);`|    |   ✅   |         |           |
 |4   | `Integer n1 = list.get(0);`|          |             |                    |                      |
 |5   | `Integer num = 11;`|  ✅       |             |                    |                      |
 |6   | `int n2 = num;`|          |       ✅     |                    |                      |
 |7   | `int n3 = num.intValue();`|          |             |                    |        ✅             |
 |8   | `Integer num2 = Integer.valueOf(11);`|          |             |        ✅           |                      |
 |9   | `Integer num3 = num.intValue();`|    ✅     |             |                    |         ✅            |
+
 </details>
 
 **Question #3:** What is the output of the following code?
