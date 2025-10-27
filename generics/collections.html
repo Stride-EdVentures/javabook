@@ -495,11 +495,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-structures">Fundamental Structures</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps">Maps</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashmap">HashMap</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#treemap">TreeMap</a></li>
-</ul>
-</li>
 </ul>
             </nav>
         </div>
@@ -579,32 +574,6 @@ document.write(`
 </table>
 </div>
 </section>
-<section id="maps">
-<h2>Maps<a class="headerlink" href="#maps" title="Link to this heading">#</a></h2>
-<p>TODO: Have a Map page that discusses how they work. Put some of this information there.</p>
-<p>Here we will look at the two most popular implementations for a Map. In this example, we will have the following Key/Values.<br />
-<img alt="Key Values" src="../_images/key_values_in_map.png" /></p>
-<section id="hashmap">
-<h3>HashMap<a class="headerlink" href="#hashmap" title="Link to this heading">#</a></h3>
-<p>The Keys and Values are stored in a node in a Hash Table. It is beyond the scope of this lesson to discuss <a class="reference external" href="https://cse163.github.io/book/module-9-miscellaneous-topics/lesson-26-reading-hashing/index.html">Hashing</a>.
-<img alt="HashMap" src="../_images/hashtable.png" /><br />
-What we hope to illustrate here is that because a <code class="docutils literal notranslate"><span class="pre">HashMap</span></code> uses a hash table to store its nodes, we get the following characteristics:</p>
-<ul class="simple">
-<li><p>Getting, Adding and Removing a key/value is O(1)</p></li>
-<li><p>There is no predictable enumeration order to the keys in a <code class="docutils literal notranslate"><span class="pre">HashMap</span></code>.</p></li>
-</ul>
-</section>
-<section id="treemap">
-<h3>TreeMap<a class="headerlink" href="#treemap" title="Link to this heading">#</a></h3>
-<p>The Keys and Values are stored in a node in a Binary Search Tree. (Balanced using Red-Black Tree algorithms)
-<img alt="TreeMap" src="../_images/bst_map.png" /><br />
-Because the nodes are stored in a Binary Search Tree, we get the following characteristics:</p>
-<ul class="simple">
-<li><p>Getting, Adding and Removing a key/value is <strong>O(ln N)</strong></p></li>
-<li><p>The keys can be enumerated in a predictable, sorted order.</p></li>
-</ul>
-</section>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -672,11 +641,6 @@ Because the nodes are stored in a Binary Search Tree, we get the following chara
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-structures">Fundamental Structures</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps">Maps</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashmap">HashMap</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#treemap">TreeMap</a></li>
-</ul>
-</li>
 </ul>
   </nav></div>
 
