@@ -20,6 +20,8 @@ We will use conceptual names that map to `interfaces`. And we will show the most
 |Set|HashSet| |
 |   |TreeSet| |
 |Map|HashMap| |
-|   |TreeMap| |
+|   |TreeMap| |  
+
+Here we see the class hierarchy of many classes in the Java Collections Framework.
 ![Collection Classes](../_static/collections.png)  
 
