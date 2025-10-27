@@ -1,6 +1,20 @@
 # Parallel Streams
 
+TODO: Add this to Practice_Streams
+```java
+    // let map be Map<String, Integer>.
+    // Use streams to output the keys that have an even value, 
+    // sort by the keys, case-insensitive.
+    // output using `forEach` and a Method Reference to println.
+    List<String> result = map.entrySet().stream()
+        .filter(entry -> entry.getValue() % 2 == 0) // keep even values
+        .sorted(Comparator.comparing(entry -> entry.getKey().toLowerCase())) // sort by key, case-insensitive
+        .map(Map.Entry::getKey) // extract keys only
+        .collect(Collectors.toList());
 
+    result.forEach(System.out::println);
+
+```
 
 ## What is a Stream?
 
