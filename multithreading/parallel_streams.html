@@ -243,6 +243,8 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="../generics/stack_queue.html">Stack &amp; Queue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generics/shuntingyard.html">Shunting Yard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generics/practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/maps.html">Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_maps.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generics/collections.html">Collections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generics/generics.html">Generics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generics/constraint_typing.html">Constraint Typing</a></li>
@@ -506,6 +508,20 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="parallel-streams">
 <h1>Parallel Streams<a class="headerlink" href="#parallel-streams" title="Link to this heading">#</a></h1>
+<p>TODO: Add this to Practice_Streams</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// let map be Map&lt;String, Integer&gt;.</span>
+<span class="w">    </span><span class="c1">// Use streams to output the keys that have an even value, </span>
+<span class="w">    </span><span class="c1">// sort by the keys, case-insensitive.</span>
+<span class="w">    </span><span class="c1">// output using `forEach` and a Method Reference to println.</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">entrySet</span><span class="p">().</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getValue</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// keep even values</span>
+<span class="w">        </span><span class="p">.</span><span class="na">sorted</span><span class="p">(</span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparing</span><span class="p">(</span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">().</span><span class="na">toLowerCase</span><span class="p">()))</span><span class="w"> </span><span class="c1">// sort by key, case-insensitive</span>
+<span class="w">        </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="p">::</span><span class="n">getKey</span><span class="p">)</span><span class="w"> </span><span class="c1">// extract keys only</span>
+<span class="w">        </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">result</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span>
+</pre></div>
+</div>
 <section id="what-is-a-stream">
 <h2>What is a Stream?<a class="headerlink" href="#what-is-a-stream" title="Link to this heading">#</a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a sequence of elements processed in a <em>functional</em> style.</p>

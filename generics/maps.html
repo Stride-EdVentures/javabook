@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tasks in Parallel &#8212; Practical Java </title>
+    <title>Maps &#8212; Practical Java </title>
   
   
   
@@ -92,12 +92,12 @@ commentsRunWhenDOMLoaded(addUtterances);
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'multithreading/tasks';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'generics/maps';</script>
     <link rel="icon" href="../_static/peanut head.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Parallel Streams" href="parallel_streams.html" />
-    <link rel="prev" title="Concurrency &amp; Synchronization" href="conc_synch.html" />
+    <link rel="next" title="Practice: Maps" href="practice_maps.html" />
+    <link rel="prev" title="Practice: Shunting Yard" href="practice_shunting.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -237,19 +237,19 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="../Topics/java_v_cpp.html">Java &lt;–&gt; C++</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../generics/index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../generics/array_list.html">ArrayList</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/stack_queue.html">Stack &amp; Queue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/shuntingyard.html">Shunting Yard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/maps.html">Maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/practice_maps.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/collections.html">Collections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/generics.html">Generics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/constraint_typing.html">Constraint Typing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/practice_ct.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Contraint Typing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../generics/type_erasure.html">Type Erasure</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="array_list.html">ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_queue.html">Stack &amp; Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shuntingyard.html">Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_maps.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collections.html">Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generics.html">Generics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constraint_typing.html">Constraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_ct.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Contraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_erasure.html">Type Erasure</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../interfaces/index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -266,11 +266,11 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="../interfaces/full_review.html">Full Review</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="intro_to_threads.html">Introduction to Threads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conc_synch.html">Concurrency &amp; Synchronization</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Tasks in Parallel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel_streams.html">Parallel Streams</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -353,7 +353,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/multithreading/tasks.md" target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/generics/maps.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -370,7 +370,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fmultithreading/tasks.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fgenerics/maps.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -400,7 +400,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="../_sources/multithreading/tasks.md" target="_blank"
+      <li><a href="../_sources/generics/maps.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -484,7 +484,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tasks in Parallel</h1>
+    <h1>Maps</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -494,9 +494,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forkjoin-framework">ForkJoin Framework</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callable">Callable</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future">Future</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-maps">Working with Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concrete-maps">Concrete Maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashmap">HashMap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#treemap">TreeMap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linkedhashmap">LinkedHashMap</a></li>
 </ul>
 </li>
 </ul>
@@ -510,30 +513,76 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tasks-in-parallel">
-<h1>Tasks in Parallel<a class="headerlink" href="#tasks-in-parallel" title="Link to this heading">#</a></h1>
-<p><strong>Resources:</strong></p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://learning.oreilly.com/course/java-concurrency-and/9781789806410/">Tatiana Fesenko (O’Reilly): Video</a></p></li>
-</ul>
-<section id="forkjoin-framework">
-<h2>ForkJoin Framework<a class="headerlink" href="#forkjoin-framework" title="Link to this heading">#</a></h2>
-<p><strong>Problem:</strong> It is hard to execute tasks in parallel because we don’t know how many threads to create, and coordinating their communication is error prone.<br />
-<strong>Solution:</strong> Using ForkJoin can simplify by managing a pool of threads and by synchronizing the results. A common pool allows the framework to optimize based on available resources.<br />
-<strong>How:</strong> Create a collection of tasks (or Callables). Use a <code class="docutils literal notranslate"><span class="pre">ForkJoinPool</span></code> to optimally invoke the collection on separate threads and to join the results.</p>
-<section id="callable">
-<h3>Callable<a class="headerlink" href="#callable" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">Callable&lt;V&gt;</span></code>: A Generic Functional Interface. The method has no arguments and returns something of type V.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="p">};</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="maps">
+<h1>Maps<a class="headerlink" href="#maps" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Map</span></code> is an <code class="docutils literal notranslate"><span class="pre">interface</span></code> that offers a data structure that acts a lot like an array except that the indices do not have to be integers.</p>
+<p>Let’s say that you want to the ability to look up the age of individuals using their unique name. One way to solve this with arrays is to have two parallel arrays as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">ages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">};</span>
+<span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Rishitha&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Zainab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Prithu&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;George&quot;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// look up the age of `name`</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">names</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">names</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">name</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Age is %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ages</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>The ForkJoin Framework can execute a list of <code class="docutils literal notranslate"><span class="pre">Callables</span></code> on separate threads and return a list of <code class="docutils literal notranslate"><span class="pre">Futures</span></code>.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Future</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">futures</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pool</span><span class="p">.</span><span class="na">invokeAll</span><span class="p">(</span><span class="n">myCallables</span><span class="p">);</span>
+<p>The above code take O(n) time to sequentially search the array. It is slow and long.</p>
+<p>Wouldn’t it be great if we could have a fast and “special” array where the <em>index</em> was the name? Then, to look up the age we’d greatly simply the code to be:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Code to create special &quot;array&quot; is not shown</span>
+<span class="n">SpecialArray</span><span class="o">[]</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">;</span>
+
+<span class="c1">// Look up the age of `name`</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Age is %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">special</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The above code takes O(1) and has no loops! <strong>Maps</strong> allow us to accomplish the same thing, but we need to use generics syntax and use APIs for indexing. Furthermore, just like with <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>, we are restricted to <code class="docutils literal notranslate"><span class="pre">Object</span></code> types. Here is how the <code class="docutils literal notranslate"><span class="pre">Map</span></code> code would look:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a map where the Index (or Key) is a String</span>
+<span class="c1">// and the Value is an Integer.</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;Rishitha&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span><span class="w">   </span><span class="c1">// special[&quot;Rishitha&quot;] = 15</span>
+<span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;Zainab&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">);</span><span class="w">     </span><span class="c1">// special[&quot;Zainab&quot;] = 18</span>
+<span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;Prithu&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">      </span><span class="c1">// special[&quot;Prithu&quot;] = 3</span>
+<span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;George&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w">      </span><span class="c1">// special[&quot;George&quot;] = 4</span>
+
+<span class="c1">// Look up the age of `name`</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Age is %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">name</span><span class="p">));</span>
 </pre></div>
 </div>
 </section>
-<section id="future">
-<h3>Future<a class="headerlink" href="#future" title="Link to this heading">#</a></h3>
+<section id="working-with-maps">
+<h2>Working with Maps<a class="headerlink" href="#working-with-maps" title="Link to this heading">#</a></h2>
+</section>
+<section id="concrete-maps">
+<h2>Concrete Maps<a class="headerlink" href="#concrete-maps" title="Link to this heading">#</a></h2>
+<p>Here we will look at the two most popular implementations for a Map. In this example, we will have the following Key/Values.<br />
+<img alt="Key Values" src="../_images/key_values_in_map.png" /></p>
+<section id="hashmap">
+<h3>HashMap<a class="headerlink" href="#hashmap" title="Link to this heading">#</a></h3>
+<p>The Keys and Values are stored in a node in a Hash Table. It is beyond the scope of this lesson to discuss <a class="reference external" href="https://cse163.github.io/book/module-9-miscellaneous-topics/lesson-26-reading-hashing/index.html">Hashing</a>.
+<img alt="HashMap" src="../_images/hashtable.png" /><br />
+What we hope to illustrate here is that because a <code class="docutils literal notranslate"><span class="pre">HashMap</span></code> uses a hash table to store its nodes, we get the following characteristics:</p>
+<ul class="simple">
+<li><p>Getting, Adding and Removing a key/value is O(1)</p></li>
+<li><p>There is no predictable enumeration order to the keys in a <code class="docutils literal notranslate"><span class="pre">HashMap</span></code>.</p></li>
+</ul>
+</section>
+<section id="treemap">
+<h3>TreeMap<a class="headerlink" href="#treemap" title="Link to this heading">#</a></h3>
+<p>The Keys and Values are stored in a node in a Binary Search Tree. (Balanced using Red-Black Tree algorithms)
+<img alt="TreeMap" src="../_images/bst_map.png" /><br />
+Because the nodes are stored in a Binary Search Tree, we get the following characteristics:</p>
+<ul class="simple">
+<li><p>Getting, Adding and Removing a key/value is <strong>O(ln N)</strong></p></li>
+<li><p>The keys can be enumerated in a predictable, sorted order.</p></li>
+</ul>
+</section>
+<section id="linkedhashmap">
+<h3>LinkedHashMap<a class="headerlink" href="#linkedhashmap" title="Link to this heading">#</a></h3>
+<p>In this…</p>
 </section>
 </section>
 </section>
@@ -551,7 +600,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./multithreading"
+            path: "./generics"
         },
         predefinedOutput: true
     }
@@ -569,20 +618,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="conc_synch.html"
+       href="practice_shunting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Concurrency &amp; Synchronization</p>
+        <p class="prev-next-title"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</p>
       </div>
     </a>
     <a class="right-next"
-       href="parallel_streams.html"
+       href="practice_maps.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Parallel Streams</p>
+        <p class="prev-next-title"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -602,9 +651,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forkjoin-framework">ForkJoin Framework</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callable">Callable</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future">Future</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-maps">Working with Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concrete-maps">Concrete Maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashmap">HashMap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#treemap">TreeMap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linkedhashmap">LinkedHashMap</a></li>
 </ul>
 </li>
 </ul>
