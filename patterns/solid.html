@@ -494,11 +494,20 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-solid-principles">The SOLID Principles</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s-single-responsibility-principle-srp">1. <strong>S — Single Responsibility Principle (SRP)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-open-closed-principle-ocp">2. <strong>O — Open/Closed Principle (OCP)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-liskov-substitution-principle-lsp">3. <strong>L — Liskov Substitution Principle (LSP)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-interface-segregation-principle-isp">4. <strong>I — Interface Segregation Principle (ISP)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-dependency-inversion-principle-dip">5. <strong>D — Dependency Inversion Principle (DIP)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s-single-responsibility-principle-srp"><strong>S — Single Responsibility Principle (SRP)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-open-closed-principle-ocp"><strong>O — Open/Closed Principle (OCP)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#also-as-one-considers-reusing-code-and-extending-a-base-class-one-needs-to-consider-this-next-principle-lsp">Also, as one considers reusing code and extending a base class, one needs to consider this next principle, LSP.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-liskov-substitution-principle-lsp"><strong>L — Liskov Substitution Principle (LSP)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-base-class-ever-starts-to-make-use-of-instanceof-to-conditionally-change-behavior-based-on-the-actual-sub-type-of-an-object-then-there-is-an-issue">If the base class ever starts to make use of <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> to conditionally change behavior based on the actual sub-type of an object, then there is an issue.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-interface-segregation-principle-isp"><strong>I — Interface Segregation Principle (ISP)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-principle-is-similar-to-using-microservices">This principle is similar to using Microservices.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-dependency-inversion-principle-dip"><strong>D — Dependency Inversion Principle (DIP)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-solid-matters">Why SOLID Matters</a></li>
 </ul>
 </li>
@@ -512,6 +521,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#online-resources-courses"><strong>Online Resources &amp; Courses</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
             </nav>
         </div>
@@ -526,62 +536,84 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="solid-principles">
 <h1>SOLID principles<a class="headerlink" href="#solid-principles" title="Link to this heading">#</a></h1>
 <blockquote>
-<div><p>SOLID principles are a set of five foundational guidelines in <strong>object-oriented design</strong> that help developers create software that is <strong>easy to maintain, extend, and scale</strong>. They were introduced by Robert C. Martin (“Uncle Bob”) and are widely used in professional software engineering.</p>
+<div><p>SOLID principles are a set of five foundational guidelines in <strong>object-oriented design</strong> that help developers create software that is <strong>easy to maintain, extend, and scale</strong>. They were introduced by Robert C. Martin (“Uncle Bob”) and are widely used in professional software engineering. <a class="reference external" href="https://learning.oreilly.com/library/view/clean-architecture-a/9780134494272/contents.xhtml">UW Bothell Library</a></p>
 </div></blockquote>
 <section id="the-solid-principles">
 <h2>The SOLID Principles<a class="headerlink" href="#the-solid-principles" title="Link to this heading">#</a></h2>
 <section id="s-single-responsibility-principle-srp">
-<h3>1. <strong>S — Single Responsibility Principle (SRP)</strong><a class="headerlink" href="#s-single-responsibility-principle-srp" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>A class should have only one reason to change.</strong></p>
-</div></blockquote>
+<h3><strong>S — Single Responsibility Principle (SRP)</strong><a class="headerlink" href="#s-single-responsibility-principle-srp" title="Link to this heading">#</a></h3>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>A module should be response to one, and only one, <strong>actor</strong>.<a href="#footnotes"><sup>[1]</sup></a></p>
+</div>
 <ul class="simple">
-<li><p>Each class should do <strong>one thing</strong> and do it well.</p></li>
-<li><p>This makes code easier to understand, test, and maintain.</p></li>
-<li><p><strong>Example</strong>: A <code class="docutils literal notranslate"><span class="pre">ReportGenerator</span></code> class should only generate reports, not handle file saving or formatting.</p></li>
+<li><p>Identify the actors</p></li>
+<li><p>Create separate modules for each actor</p></li>
+<li><p>Use the Facade Pattern to simplify if necessary</p></li>
 </ul>
+<p><strong>Details:</strong><br />
+The idea says to serve a <strong>single actor</strong> where an <em>actor</em> is defined to be a group of users or clients that have the <em>same</em> expectations of behavior.</p>
+<p>When a module serves multiple actors then this can result in a kind of “whack-a-mole” situation. One actor wants X, but another wants Y. <em>Fix it for X, break it for Y.</em> As the module is updated to serve both, the code becomes unnecessarily complicated, convoluted, and a tangled mess. As developers fix the symptoms, they unwittingly repeat logic with fragile code.</p>
+<p>A better design is to encouraging clear boundaries between responsibilities with <em>intentional duplication</em> (or better yet, <strong>separation</strong>). This is a design choice to isolate responsibilities, even if it means similar code exists in multiple places. When truly exact and duplicate code is identified, it can be factored out. Sometimes, the commonality is the <strong>data</strong> and not functionality.</p>
+<p>When a solution involves the creation of an abundant number of classes that can cause client code to become unnecessarily complicated. A common fix is to use the <strong>Facade</strong> pattern to <strong>aggregate</strong> the set of classes. The <em>facade</em> is responsible for delegating to the appropriate class.</p>
 </section>
 <hr class="docutils" />
 <section id="o-open-closed-principle-ocp">
-<h3>2. <strong>O — Open/Closed Principle (OCP)</strong><a class="headerlink" href="#o-open-closed-principle-ocp" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>Software entities should be open for extension but closed for modification.</strong></p>
-</div></blockquote>
+<h3><strong>O — Open/Closed Principle (OCP)</strong><a class="headerlink" href="#o-open-closed-principle-ocp" title="Link to this heading">#</a></h3>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>Software entities should be open for extension but closed for modification.</p>
+</div>
 <ul class="simple">
 <li><p>You should be able to <strong>add new functionality</strong> without changing existing code.</p></li>
 <li><p>Achieved through <strong>inheritance</strong> or <strong>interfaces</strong>.</p></li>
-<li><p><strong>Example</strong>: Instead of modifying a class to support a new payment method, create a new subclass that implements a common interface.</p></li>
+<li><p>Instead of modifying a class to support a new behavior, consider creating a new subclass with the behavior.</p></li>
 </ul>
+<p><strong>Details:</strong><br />
+It isn’t <em>always</em> true that when an entity needs to be extended, that inheritance (or interfaces) are required to do it cleanly. An entity can be modified directly if the new behavior is always needed.</p>
+<p>There are many cases where the new needed behavior is for a subset of scenarios.</p>
+<p>A logical hierarchy of inheritance can help isolate the code and reduce complications. If the inherited classes require new getters be added to the base class to expose private state, then inheritance is probably not the right solution. Instead, consider either: a) the new behavior should be added to the base class; b) the new behavior should be exposed via an interface that the base class can implement possibly via containment.</p>
 </section>
-<hr class="docutils" />
+</section>
+<section id="also-as-one-considers-reusing-code-and-extending-a-base-class-one-needs-to-consider-this-next-principle-lsp">
+<h2>Also, as one considers reusing code and extending a base class, one needs to consider this next principle, LSP.<a class="headerlink" href="#also-as-one-considers-reusing-code-and-extending-a-base-class-one-needs-to-consider-this-next-principle-lsp" title="Link to this heading">#</a></h2>
 <section id="l-liskov-substitution-principle-lsp">
-<h3>3. <strong>L — Liskov Substitution Principle (LSP)</strong><a class="headerlink" href="#l-liskov-substitution-principle-lsp" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>Objects of a superclass should be replaceable with objects of its subclasses without breaking the application.</strong></p>
-</div></blockquote>
+<h3><strong>L — Liskov Substitution Principle (LSP)</strong><a class="headerlink" href="#l-liskov-substitution-principle-lsp" title="Link to this heading">#</a></h3>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>Objects of a superclass should be replaceable with objects of its subclasses without breaking the application.</p>
+</div>
 <ul class="simple">
 <li><p>Subclasses should behave in a way that doesn’t surprise or break the expectations set by the parent class.</p></li>
 <li><p><strong>Example</strong>: If <code class="docutils literal notranslate"><span class="pre">Bird</span></code> has a method <code class="docutils literal notranslate"><span class="pre">fly()</span></code>, a subclass <code class="docutils literal notranslate"><span class="pre">Penguin</span></code> shouldn’t inherit <code class="docutils literal notranslate"><span class="pre">Bird</span></code> unless it can also fly—or the design should be reconsidered.</p></li>
 </ul>
+<p><strong>Details:</strong><br />
+A base class can reasonably expect that all subclasses behave consistently. Let’s consider an example of a Point3D that extends Point2D. In the base class, Point2D, there may be a need to calculate the distance between two points. It could reasonably use just the x &amp; y instance fields to calculate the distance, but this would be incorrect for a point in 3D.</p>
 </section>
-<hr class="docutils" />
+</section>
+<section id="if-the-base-class-ever-starts-to-make-use-of-instanceof-to-conditionally-change-behavior-based-on-the-actual-sub-type-of-an-object-then-there-is-an-issue">
+<h2>If the base class ever starts to make use of <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> to conditionally change behavior based on the actual sub-type of an object, then there is an issue.<a class="headerlink" href="#if-the-base-class-ever-starts-to-make-use-of-instanceof-to-conditionally-change-behavior-based-on-the-actual-sub-type-of-an-object-then-there-is-an-issue" title="Link to this heading">#</a></h2>
 <section id="i-interface-segregation-principle-isp">
-<h3>4. <strong>I — Interface Segregation Principle (ISP)</strong><a class="headerlink" href="#i-interface-segregation-principle-isp" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>Clients should not be forced to depend on interfaces they do not use.</strong></p>
-</div></blockquote>
+<h3><strong>I — Interface Segregation Principle (ISP)</strong><a class="headerlink" href="#i-interface-segregation-principle-isp" title="Link to this heading">#</a></h3>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>Clients should not be forced to depend on interfaces they do not use.</p>
+</div>
 <ul class="simple">
 <li><p>Prefer <strong>smaller, more specific interfaces</strong> over large, general-purpose ones.</p></li>
 <li><p>This avoids forcing classes to implement methods they don’t need.</p></li>
 <li><p><strong>Example</strong>: Instead of one <code class="docutils literal notranslate"><span class="pre">IMachine</span></code> interface with <code class="docutils literal notranslate"><span class="pre">Print()</span></code>, <code class="docutils literal notranslate"><span class="pre">Scan()</span></code>, and <code class="docutils literal notranslate"><span class="pre">Fax()</span></code>, split it into <code class="docutils literal notranslate"><span class="pre">IPrinter</span></code>, <code class="docutils literal notranslate"><span class="pre">IScanner</span></code>, and <code class="docutils literal notranslate"><span class="pre">IFax</span></code>.</p></li>
 </ul>
 </section>
-<hr class="docutils" />
+</section>
+<section id="this-principle-is-similar-to-using-microservices">
+<h2>This principle is similar to using Microservices.<a class="headerlink" href="#this-principle-is-similar-to-using-microservices" title="Link to this heading">#</a></h2>
 <section id="d-dependency-inversion-principle-dip">
-<h3>5. <strong>D — Dependency Inversion Principle (DIP)</strong><a class="headerlink" href="#d-dependency-inversion-principle-dip" title="Link to this heading">#</a></h3>
-<blockquote>
-<div><p><strong>High-level modules should not depend on low-level modules. Both should depend on abstractions.</strong></p>
-</div></blockquote>
+<h3><strong>D — Dependency Inversion Principle (DIP)</strong><a class="headerlink" href="#d-dependency-inversion-principle-dip" title="Link to this heading">#</a></h3>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>High-level modules should not depend on low-level modules. Both should depend on abstractions.</p>
+</div>
 <ul class="simple">
 <li><p>Code should depend on <strong>interfaces or abstract classes</strong>, not concrete implementations.</p></li>
 <li><p>Promotes <strong>loose coupling</strong> and easier testing.</p></li>
@@ -616,7 +648,7 @@ document.write(`
 <li><p>Introduces key principles of writing clean, maintainable code.</p></li>
 <li><p>Covers SRP and other SOLID principles through practical examples.</p></li>
 <li><p>A must-read for understanding the mindset behind SOLID.<br />
-View on Amazon<a class="reference external" href="https://www.guru99.com/software-engineer-book.html">1</a></p></li>
+<a class="reference external" href="https://www.guru99.com/software-engineer-book.html">View on Amazon</a></p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -670,6 +702,10 @@ View on Amazon<a class="reference external" href="https://discoveringsaas.com/bo
 <li><p><strong>GitHub Repositories</strong>: Search for SOLID principle examples in various languages.</p></li>
 </ul>
 </section>
+</section>
+<section id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
+<p>[1] <em>Clean Architecture: A Craftsman’s Guide to Software Structure and Design</em>, Robert C. Martin. <a class="reference external" href="https://learning.oreilly.com/library/view/clean-architecture-a/9780134494272/part3.xhtml">UWB Library E-Book</a></p>
 </section>
 </section>
 
@@ -729,11 +765,20 @@ View on Amazon<a class="reference external" href="https://discoveringsaas.com/bo
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-solid-principles">The SOLID Principles</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s-single-responsibility-principle-srp">1. <strong>S — Single Responsibility Principle (SRP)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-open-closed-principle-ocp">2. <strong>O — Open/Closed Principle (OCP)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-liskov-substitution-principle-lsp">3. <strong>L — Liskov Substitution Principle (LSP)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-interface-segregation-principle-isp">4. <strong>I — Interface Segregation Principle (ISP)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-dependency-inversion-principle-dip">5. <strong>D — Dependency Inversion Principle (DIP)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s-single-responsibility-principle-srp"><strong>S — Single Responsibility Principle (SRP)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-open-closed-principle-ocp"><strong>O — Open/Closed Principle (OCP)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#also-as-one-considers-reusing-code-and-extending-a-base-class-one-needs-to-consider-this-next-principle-lsp">Also, as one considers reusing code and extending a base class, one needs to consider this next principle, LSP.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-liskov-substitution-principle-lsp"><strong>L — Liskov Substitution Principle (LSP)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-base-class-ever-starts-to-make-use-of-instanceof-to-conditionally-change-behavior-based-on-the-actual-sub-type-of-an-object-then-there-is-an-issue">If the base class ever starts to make use of <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> to conditionally change behavior based on the actual sub-type of an object, then there is an issue.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-interface-segregation-principle-isp"><strong>I — Interface Segregation Principle (ISP)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-principle-is-similar-to-using-microservices">This principle is similar to using Microservices.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-dependency-inversion-principle-dip"><strong>D — Dependency Inversion Principle (DIP)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-solid-matters">Why SOLID Matters</a></li>
 </ul>
 </li>
@@ -747,6 +792,7 @@ View on Amazon<a class="reference external" href="https://discoveringsaas.com/bo
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#online-resources-courses"><strong>Online Resources &amp; Courses</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
   </nav></div>
 
