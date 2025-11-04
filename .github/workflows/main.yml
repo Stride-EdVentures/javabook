@@ -28,7 +28,7 @@ jobs:
         run: |
           set -e  # stop on first error
           pip install -r requirements.txt
-          make -C book_source html
+          make html
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.7.3
