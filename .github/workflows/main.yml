@@ -18,17 +18,17 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Debug: show current directory
+      - name: Debug show current directory
         run: pwd
 
-      - name: Debug: List contents of book_source
+      - name: Debug List contents of book_source
         run: ls -R book_sources
-        
+
       - name: Install and Build 🔧
         run: |
           set -e  # stop on first error
           pip install -r requirements.txt
-          make html
+          make -C book_source html
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.7.3
