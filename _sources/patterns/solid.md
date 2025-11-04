@@ -1,5 +1,6 @@
 # SOLID principles
 
+
 > SOLID principles are a set of five foundational guidelines in **object-oriented design** that help developers create software that is **easy to maintain, extend, and scale**. They were introduced by Robert C. Martin ("Uncle Bob") and are widely used in professional software engineering. [UW Bothell Library](https://learning.oreilly.com/library/view/clean-architecture-a/9780134494272/contents.xhtml)
 
 
@@ -23,7 +24,6 @@ A better design is to encouraging clear boundaries between responsibilities with
 
 When a solution involves the creation of an abundant number of classes that can cause client code to become unnecessarily complicated. A common fix is to use the **Facade** pattern to **aggregate** the set of classes. The *facade* is responsible for delegating to the appropriate class. 
 
----
 
 ### **O — Open/Closed Principle (OCP)**
 ```{admonition} Definition
@@ -42,7 +42,7 @@ There are many cases where the new needed behavior is for a subset of scenarios.
 A logical hierarchy of inheritance can help isolate the code and reduce complications. If the inherited classes require new getters be added to the base class to expose private state, then inheritance is probably not the right solution. Instead, consider either: a) the new behavior should be added to the base class; b) the new behavior should be exposed via an interface that the base class can implement possibly via containment.    
 
 Also, as one considers reusing code and extending a base class, one needs to consider this next principle, LSP.  
----
+
 
 ### **L — Liskov Substitution Principle (LSP)**
 ```{admonition} Definition
@@ -56,7 +56,7 @@ Objects of a superclass should be replaceable with objects of its subclasses wit
 A base class can reasonably expect that all subclasses behave consistently. Let's consider an example of a Point3D that extends Point2D. In the base class, Point2D, there may be a need to calculate the distance between two points. It could reasonably use just the x & y instance fields to calculate the distance, but this would be incorrect for a point in 3D.  
 
 If the base class ever starts to make use of `instanceof` to conditionally change behavior based on the actual sub-type of an object, then there is an issue.  
----
+
 
 ### **I — Interface Segregation Principle (ISP)**
 ```{admonition} Definition
@@ -67,7 +67,7 @@ Clients should not be forced to depend on interfaces they do not use.
 - **Example**: Instead of one `IMachine` interface with `Print()`, `Scan()`, and `Fax()`, split it into `IPrinter`, `IScanner`, and `IFax`.
 
 This principle is similar to using Microservices.  
----
+
 
 ### **D — Dependency Inversion Principle (DIP)**
 ```{admonition} Definition
@@ -76,9 +76,8 @@ High-level modules should not depend on low-level modules. Both should depend on
 
 - Code should depend on **interfaces or abstract classes**, not concrete implementations.
 - Promotes **loose coupling** and easier testing.
-- **Example**: A `NotificationService` should depend on an `INotificationSender` interface, not directly on `EmailSender` or `SmsSender`.
+- **Example**: A `NotificationService` should depend on an `INotificationSender` interface, not directly on `EmailSender` or `SmsSender`.  
 
----
 
 ### Why SOLID Matters
 - Encourages **clean architecture**.
@@ -86,7 +85,7 @@ High-level modules should not depend on low-level modules. Both should depend on
 - Reduces **technical debt**.
 - Supports **agile development** and **continuous integration**.
 
----
+
 
 ## TODO: Example
 Here is bad code.
@@ -105,7 +104,6 @@ Here are some of the **top books and resources** to learn and master the **SOLID
 - A must-read for understanding the mindset behind SOLID.  
 [View on Amazon](https://www.guru99.com/software-engineer-book.html)
 
----
 
 ### 2. **Mastering SOLID: Advanced Software Architecture & Design Principles**  
 **Author**: R. Parvin  
@@ -114,7 +112,6 @@ Here are some of the **top books and resources** to learn and master the **SOLID
 - Includes real-world scenarios and refactoring techniques.  
 [View on Amazon](https://www.amazon.com/Mastering-SOLID-Architecture-Object-Oriented-Depth-ebook/dp/B0CTYV2KK4)[2](https://www.amazon.com/Mastering-SOLID-Architecture-Object-Oriented-Depth-ebook/dp/B0CTYV2KK4)
 
----
 
 ### 3. **Design Patterns: Elements of Reusable Object-Oriented Software**  
 **Authors**: Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides  
@@ -122,7 +119,6 @@ Here are some of the **top books and resources** to learn and master the **SOLID
 - Helps understand how to apply OCP and DIP effectively.  
 View on Amazon[1](https://www.guru99.com/software-engineer-book.html)
 
----
 
 ### 4. **Refactoring: Improving the Design of Existing Code**  
 **Author**: Martin Fowler  
@@ -130,7 +126,6 @@ View on Amazon[1](https://www.guru99.com/software-engineer-book.html)
 - Focuses on improving design without changing behavior.  
 View on Amazon[1](https://www.guru99.com/software-engineer-book.html)
 
----
 
 ### 5. **The Pragmatic Programmer**  
 **Authors**: Andrew Hunt and David Thomas  
@@ -138,7 +133,6 @@ View on Amazon[1](https://www.guru99.com/software-engineer-book.html)
 - Encourages modular, maintainable design aligned with SOLID.  
 View on Amazon[3](https://discoveringsaas.com/books/best-books-for-software-engineers/)
 
----
 
 ### **Online Resources & Courses**
 - **Pluralsight**: Offers dedicated courses on SOLID principles and design patterns.

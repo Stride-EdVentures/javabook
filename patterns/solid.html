@@ -96,6 +96,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="icon" href="../_static/peanut head.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Design Patterns" href="design_patterns.html" />
     <link rel="prev" title="Patterns &amp; Principles" href="index.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -274,10 +275,15 @@ commentsRunWhenDOMLoaded(addUtterances);
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/maven.html">Maven</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/spring.html">Spring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/mockito.html">Mokito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/log4j.html">Log4j</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">SOLID principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_patterns.html">Design Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="principles.html">Principle</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference external" href="https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching">Learn Git Branching</a></li>
@@ -496,17 +502,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-solid-principles">The SOLID Principles</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s-single-responsibility-principle-srp"><strong>S — Single Responsibility Principle (SRP)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-open-closed-principle-ocp"><strong>O — Open/Closed Principle (OCP)</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#also-as-one-considers-reusing-code-and-extending-a-base-class-one-needs-to-consider-this-next-principle-lsp">Also, as one considers reusing code and extending a base class, one needs to consider this next principle, LSP.</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-liskov-substitution-principle-lsp"><strong>L — Liskov Substitution Principle (LSP)</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-base-class-ever-starts-to-make-use-of-instanceof-to-conditionally-change-behavior-based-on-the-actual-sub-type-of-an-object-then-there-is-an-issue">If the base class ever starts to make use of <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> to conditionally change behavior based on the actual sub-type of an object, then there is an issue.</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-interface-segregation-principle-isp"><strong>I — Interface Segregation Principle (ISP)</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-principle-is-similar-to-using-microservices">This principle is similar to using Microservices.</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-dependency-inversion-principle-dip"><strong>D — Dependency Inversion Principle (DIP)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-solid-matters">Why SOLID Matters</a></li>
 </ul>
@@ -557,7 +554,6 @@ The idea says to serve a <strong>single actor</strong> where an <em>actor</em> i
 <p>A better design is to encouraging clear boundaries between responsibilities with <em>intentional duplication</em> (or better yet, <strong>separation</strong>). This is a design choice to isolate responsibilities, even if it means similar code exists in multiple places. When truly exact and duplicate code is identified, it can be factored out. Sometimes, the commonality is the <strong>data</strong> and not functionality.</p>
 <p>When a solution involves the creation of an abundant number of classes that can cause client code to become unnecessarily complicated. A common fix is to use the <strong>Facade</strong> pattern to <strong>aggregate</strong> the set of classes. The <em>facade</em> is responsible for delegating to the appropriate class.</p>
 </section>
-<hr class="docutils" />
 <section id="o-open-closed-principle-ocp">
 <h3><strong>O — Open/Closed Principle (OCP)</strong><a class="headerlink" href="#o-open-closed-principle-ocp" title="Link to this heading">#</a></h3>
 <div class="admonition-definition admonition">
@@ -573,10 +569,8 @@ The idea says to serve a <strong>single actor</strong> where an <em>actor</em> i
 It isn’t <em>always</em> true that when an entity needs to be extended, that inheritance (or interfaces) are required to do it cleanly. An entity can be modified directly if the new behavior is always needed.</p>
 <p>There are many cases where the new needed behavior is for a subset of scenarios.</p>
 <p>A logical hierarchy of inheritance can help isolate the code and reduce complications. If the inherited classes require new getters be added to the base class to expose private state, then inheritance is probably not the right solution. Instead, consider either: a) the new behavior should be added to the base class; b) the new behavior should be exposed via an interface that the base class can implement possibly via containment.</p>
+<p>Also, as one considers reusing code and extending a base class, one needs to consider this next principle, LSP.</p>
 </section>
-</section>
-<section id="also-as-one-considers-reusing-code-and-extending-a-base-class-one-needs-to-consider-this-next-principle-lsp">
-<h2>Also, as one considers reusing code and extending a base class, one needs to consider this next principle, LSP.<a class="headerlink" href="#also-as-one-considers-reusing-code-and-extending-a-base-class-one-needs-to-consider-this-next-principle-lsp" title="Link to this heading">#</a></h2>
 <section id="l-liskov-substitution-principle-lsp">
 <h3><strong>L — Liskov Substitution Principle (LSP)</strong><a class="headerlink" href="#l-liskov-substitution-principle-lsp" title="Link to this heading">#</a></h3>
 <div class="admonition-definition admonition">
@@ -589,10 +583,8 @@ It isn’t <em>always</em> true that when an entity needs to be extended, that i
 </ul>
 <p><strong>Details:</strong><br />
 A base class can reasonably expect that all subclasses behave consistently. Let’s consider an example of a Point3D that extends Point2D. In the base class, Point2D, there may be a need to calculate the distance between two points. It could reasonably use just the x &amp; y instance fields to calculate the distance, but this would be incorrect for a point in 3D.</p>
+<p>If the base class ever starts to make use of <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> to conditionally change behavior based on the actual sub-type of an object, then there is an issue.</p>
 </section>
-</section>
-<section id="if-the-base-class-ever-starts-to-make-use-of-instanceof-to-conditionally-change-behavior-based-on-the-actual-sub-type-of-an-object-then-there-is-an-issue">
-<h2>If the base class ever starts to make use of <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> to conditionally change behavior based on the actual sub-type of an object, then there is an issue.<a class="headerlink" href="#if-the-base-class-ever-starts-to-make-use-of-instanceof-to-conditionally-change-behavior-based-on-the-actual-sub-type-of-an-object-then-there-is-an-issue" title="Link to this heading">#</a></h2>
 <section id="i-interface-segregation-principle-isp">
 <h3><strong>I — Interface Segregation Principle (ISP)</strong><a class="headerlink" href="#i-interface-segregation-principle-isp" title="Link to this heading">#</a></h3>
 <div class="admonition-definition admonition">
@@ -604,10 +596,8 @@ A base class can reasonably expect that all subclasses behave consistently. Let�
 <li><p>This avoids forcing classes to implement methods they don’t need.</p></li>
 <li><p><strong>Example</strong>: Instead of one <code class="docutils literal notranslate"><span class="pre">IMachine</span></code> interface with <code class="docutils literal notranslate"><span class="pre">Print()</span></code>, <code class="docutils literal notranslate"><span class="pre">Scan()</span></code>, and <code class="docutils literal notranslate"><span class="pre">Fax()</span></code>, split it into <code class="docutils literal notranslate"><span class="pre">IPrinter</span></code>, <code class="docutils literal notranslate"><span class="pre">IScanner</span></code>, and <code class="docutils literal notranslate"><span class="pre">IFax</span></code>.</p></li>
 </ul>
+<p>This principle is similar to using Microservices.</p>
 </section>
-</section>
-<section id="this-principle-is-similar-to-using-microservices">
-<h2>This principle is similar to using Microservices.<a class="headerlink" href="#this-principle-is-similar-to-using-microservices" title="Link to this heading">#</a></h2>
 <section id="d-dependency-inversion-principle-dip">
 <h3><strong>D — Dependency Inversion Principle (DIP)</strong><a class="headerlink" href="#d-dependency-inversion-principle-dip" title="Link to this heading">#</a></h3>
 <div class="admonition-definition admonition">
@@ -620,7 +610,6 @@ A base class can reasonably expect that all subclasses behave consistently. Let�
 <li><p><strong>Example</strong>: A <code class="docutils literal notranslate"><span class="pre">NotificationService</span></code> should depend on an <code class="docutils literal notranslate"><span class="pre">INotificationSender</span></code> interface, not directly on <code class="docutils literal notranslate"><span class="pre">EmailSender</span></code> or <code class="docutils literal notranslate"><span class="pre">SmsSender</span></code>.</p></li>
 </ul>
 </section>
-<hr class="docutils" />
 <section id="why-solid-matters">
 <h3>Why SOLID Matters<a class="headerlink" href="#why-solid-matters" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -631,7 +620,6 @@ A base class can reasonably expect that all subclasses behave consistently. Let�
 </ul>
 </section>
 </section>
-<hr class="docutils" />
 <section id="todo-example">
 <h2>TODO: Example<a class="headerlink" href="#todo-example" title="Link to this heading">#</a></h2>
 <p>Here is bad code.</p>
@@ -651,7 +639,6 @@ A base class can reasonably expect that all subclasses behave consistently. Let�
 <a class="reference external" href="https://www.guru99.com/software-engineer-book.html">View on Amazon</a></p></li>
 </ul>
 </section>
-<hr class="docutils" />
 <section id="mastering-solid-advanced-software-architecture-design-principles">
 <h3>2. <strong>Mastering SOLID: Advanced Software Architecture &amp; Design Principles</strong><a class="headerlink" href="#mastering-solid-advanced-software-architecture-design-principles" title="Link to this heading">#</a></h3>
 <p><strong>Author</strong>: R. Parvin</p>
@@ -662,7 +649,6 @@ A base class can reasonably expect that all subclasses behave consistently. Let�
 <a class="reference external" href="https://www.amazon.com/Mastering-SOLID-Architecture-Object-Oriented-Depth-ebook/dp/B0CTYV2KK4">View on Amazon</a><a class="reference external" href="https://www.amazon.com/Mastering-SOLID-Architecture-Object-Oriented-Depth-ebook/dp/B0CTYV2KK4">2</a></p></li>
 </ul>
 </section>
-<hr class="docutils" />
 <section id="design-patterns-elements-of-reusable-object-oriented-software">
 <h3>3. <strong>Design Patterns: Elements of Reusable Object-Oriented Software</strong><a class="headerlink" href="#design-patterns-elements-of-reusable-object-oriented-software" title="Link to this heading">#</a></h3>
 <p><strong>Authors</strong>: Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides</p>
@@ -672,7 +658,6 @@ A base class can reasonably expect that all subclasses behave consistently. Let�
 View on Amazon<a class="reference external" href="https://www.guru99.com/software-engineer-book.html">1</a></p></li>
 </ul>
 </section>
-<hr class="docutils" />
 <section id="refactoring-improving-the-design-of-existing-code">
 <h3>4. <strong>Refactoring: Improving the Design of Existing Code</strong><a class="headerlink" href="#refactoring-improving-the-design-of-existing-code" title="Link to this heading">#</a></h3>
 <p><strong>Author</strong>: Martin Fowler</p>
@@ -682,7 +667,6 @@ View on Amazon<a class="reference external" href="https://www.guru99.com/softwar
 View on Amazon<a class="reference external" href="https://www.guru99.com/software-engineer-book.html">1</a></p></li>
 </ul>
 </section>
-<hr class="docutils" />
 <section id="the-pragmatic-programmer">
 <h3>5. <strong>The Pragmatic Programmer</strong><a class="headerlink" href="#the-pragmatic-programmer" title="Link to this heading">#</a></h3>
 <p><strong>Authors</strong>: Andrew Hunt and David Thomas</p>
@@ -692,7 +676,6 @@ View on Amazon<a class="reference external" href="https://www.guru99.com/softwar
 View on Amazon<a class="reference external" href="https://discoveringsaas.com/books/best-books-for-software-engineers/">3</a></p></li>
 </ul>
 </section>
-<hr class="docutils" />
 <section id="online-resources-courses">
 <h3><strong>Online Resources &amp; Courses</strong><a class="headerlink" href="#online-resources-courses" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -748,6 +731,15 @@ View on Amazon<a class="reference external" href="https://discoveringsaas.com/bo
         <p class="prev-next-title"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</p>
       </div>
     </a>
+    <a class="right-next"
+       href="design_patterns.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Design Patterns</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -767,17 +759,8 @@ View on Amazon<a class="reference external" href="https://discoveringsaas.com/bo
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-solid-principles">The SOLID Principles</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s-single-responsibility-principle-srp"><strong>S — Single Responsibility Principle (SRP)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-open-closed-principle-ocp"><strong>O — Open/Closed Principle (OCP)</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#also-as-one-considers-reusing-code-and-extending-a-base-class-one-needs-to-consider-this-next-principle-lsp">Also, as one considers reusing code and extending a base class, one needs to consider this next principle, LSP.</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-liskov-substitution-principle-lsp"><strong>L — Liskov Substitution Principle (LSP)</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-base-class-ever-starts-to-make-use-of-instanceof-to-conditionally-change-behavior-based-on-the-actual-sub-type-of-an-object-then-there-is-an-issue">If the base class ever starts to make use of <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> to conditionally change behavior based on the actual sub-type of an object, then there is an issue.</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-interface-segregation-principle-isp"><strong>I — Interface Segregation Principle (ISP)</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-principle-is-similar-to-using-microservices">This principle is similar to using Microservices.</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-dependency-inversion-principle-dip"><strong>D — Dependency Inversion Principle (DIP)</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-solid-matters">Why SOLID Matters</a></li>
 </ul>
