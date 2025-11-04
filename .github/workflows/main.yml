@@ -22,7 +22,7 @@ jobs:
         run: pwd
 
       - name: Debug List contents of book_source
-        run: ls -R book_sources
+        run: ls -R book_source
 
       - name: Install and Build 🔧
         run: |
