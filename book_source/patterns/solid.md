@@ -23,7 +23,6 @@ A better design is to encouraging clear boundaries between responsibilities with
 
 When a solution involves the creation of an abundant number of classes that can cause client code to become unnecessarily complicated. A common fix is to use the **Facade** pattern to **aggregate** the set of classes. The *facade* is responsible for delegating to the appropriate class. 
 
----
 
 ### **O — Open/Closed Principle (OCP)**
 ```{admonition} Definition
@@ -43,7 +42,6 @@ A logical hierarchy of inheritance can help isolate the code and reduce complica
 
 Also, as one considers reusing code and extending a base class, one needs to consider this next principle, LSP.  
 
----
 
 ### **L — Liskov Substitution Principle (LSP)**
 ```{admonition} Definition
@@ -58,7 +56,6 @@ A base class can reasonably expect that all subclasses behave consistently. Let'
 
 If the base class ever starts to make use of `instanceof` to conditionally change behavior based on the actual sub-type of an object, then there is an issue.  
 
----
 
 ### **I — Interface Segregation Principle (ISP)**
 ```{admonition} Definition
@@ -70,7 +67,6 @@ Clients should not be forced to depend on interfaces they do not use.
 
 This principle is similar to using Microservices.  
 
----
 
 ### **D — Dependency Inversion Principle (DIP)**
 ```{admonition} Definition
@@ -79,9 +75,8 @@ High-level modules should not depend on low-level modules. Both should depend on
 
 - Code should depend on **interfaces or abstract classes**, not concrete implementations.
 - Promotes **loose coupling** and easier testing.
-- **Example**: A `NotificationService` should depend on an `INotificationSender` interface, not directly on `EmailSender` or `SmsSender`.
+- **Example**: A `NotificationService` should depend on an `INotificationSender` interface, not directly on `EmailSender` or `SmsSender`.  
 
----
 
 ### Why SOLID Matters
 - Encourages **clean architecture**.
@@ -89,7 +84,7 @@ High-level modules should not depend on low-level modules. Both should depend on
 - Reduces **technical debt**.
 - Supports **agile development** and **continuous integration**.
 
----
+
 
 ## TODO: Example
 Here is bad code.
@@ -108,7 +103,6 @@ Here are some of the **top books and resources** to learn and master the **SOLID
 - A must-read for understanding the mindset behind SOLID.  
 [View on Amazon](https://www.guru99.com/software-engineer-book.html)
 
----
 
 ### 2. **Mastering SOLID: Advanced Software Architecture & Design Principles**  
 **Author**: R. Parvin  
@@ -117,7 +111,6 @@ Here are some of the **top books and resources** to learn and master the **SOLID
 - Includes real-world scenarios and refactoring techniques.  
 [View on Amazon](https://www.amazon.com/Mastering-SOLID-Architecture-Object-Oriented-Depth-ebook/dp/B0CTYV2KK4)[2](https://www.amazon.com/Mastering-SOLID-Architecture-Object-Oriented-Depth-ebook/dp/B0CTYV2KK4)
 
----
 
 ### 3. **Design Patterns: Elements of Reusable Object-Oriented Software**  
 **Authors**: Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides  
@@ -125,7 +118,6 @@ Here are some of the **top books and resources** to learn and master the **SOLID
 - Helps understand how to apply OCP and DIP effectively.  
 View on Amazon[1](https://www.guru99.com/software-engineer-book.html)
 
----
 
 ### 4. **Refactoring: Improving the Design of Existing Code**  
 **Author**: Martin Fowler  
@@ -133,7 +125,6 @@ View on Amazon[1](https://www.guru99.com/software-engineer-book.html)
 - Focuses on improving design without changing behavior.  
 View on Amazon[1](https://www.guru99.com/software-engineer-book.html)
 
----
 
 ### 5. **The Pragmatic Programmer**  
 **Authors**: Andrew Hunt and David Thomas  
@@ -141,7 +132,6 @@ View on Amazon[1](https://www.guru99.com/software-engineer-book.html)
 - Encourages modular, maintainable design aligned with SOLID.  
 View on Amazon[3](https://discoveringsaas.com/books/best-books-for-software-engineers/)
 
----
 
 ### **Online Resources & Courses**
 - **Pluralsight**: Offers dedicated courses on SOLID principles and design patterns.
