@@ -44,8 +44,13 @@ chapters:
   - file: frameworks/index
     sections:
     - file: frameworks/maven
+    - file: frameworks/spring
+    - file: frameworks/mockito
+    - file: frameworks/log4j
   - file: patterns/index
     sections:
     - file: patterns/solid
+    - file: patterns/design_patterns
+    - file: patterns/principles  
   - url: https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching
     title: Learn Git Branching
