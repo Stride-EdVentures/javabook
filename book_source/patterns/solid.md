@@ -42,6 +42,7 @@ There are many cases where the new needed behavior is for a subset of scenarios.
 A logical hierarchy of inheritance can help isolate the code and reduce complications. If the inherited classes require new getters be added to the base class to expose private state, then inheritance is probably not the right solution. Instead, consider either: a) the new behavior should be added to the base class; b) the new behavior should be exposed via an interface that the base class can implement possibly via containment.    
 
 Also, as one considers reusing code and extending a base class, one needs to consider this next principle, LSP.  
+
 ---
 
 ### **L — Liskov Substitution Principle (LSP)**
@@ -56,6 +57,7 @@ Objects of a superclass should be replaceable with objects of its subclasses wit
 A base class can reasonably expect that all subclasses behave consistently. Let's consider an example of a Point3D that extends Point2D. In the base class, Point2D, there may be a need to calculate the distance between two points. It could reasonably use just the x & y instance fields to calculate the distance, but this would be incorrect for a point in 3D.  
 
 If the base class ever starts to make use of `instanceof` to conditionally change behavior based on the actual sub-type of an object, then there is an issue.  
+
 ---
 
 ### **I — Interface Segregation Principle (ISP)**
@@ -67,6 +69,7 @@ Clients should not be forced to depend on interfaces they do not use.
 - **Example**: Instead of one `IMachine` interface with `Print()`, `Scan()`, and `Fax()`, split it into `IPrinter`, `IScanner`, and `IFax`.
 
 This principle is similar to using Microservices.  
+
 ---
 
 ### **D — Dependency Inversion Principle (DIP)**
