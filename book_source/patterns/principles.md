@@ -1,4 +1,4 @@
-# Principle
+# Principles
 
 A principle is different from a Design Pattern in that ...
 

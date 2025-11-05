@@ -18,15 +18,8 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Debug show current directory
-        run: pwd
-
-      - name: Debug List contents of book_source
-        run: ls -R book_source
-
       - name: Install and Build 🔧
         run: |
-          set -e  # stop on first error
           pip install -r requirements.txt
           make html
 
