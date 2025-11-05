@@ -41,6 +41,26 @@ System.out.printf("Age is %d\n", map.get(name));
 ```
 
 ## Working with Maps
+A map holds a set of unique keys and a collection of values, where each key is associated with one value. The basic map operations are:  
+* `put(key, value)`: Adds a mapping from a key to a value.  
+* `get(key)`: Retrieves the value mapped to the key.  
+* `remove(key)`: Removes the given key and its mapped value.  
+![Friendly Map](../_static/map_illustration.png)  
+
+### Iterating a Map
+We iterate through the Set of Keys.
+```java
+    for (String word : map.keySet()) {
+        System.out.printf("%10s: %2d\n", word, map.get(word));
+    }
+```
+Or, we get the Entry Set and iterate through that:
+```java
+for (Map.Entry<String, Integer> entry : map.entrySet()) {
+    System.out.printf("%10s: %2d\n", entry.getKey(), entry.getValue());
+}
+```
+Order is unknown in a `HashSet`.
 
 ## Concrete Maps
 
@@ -64,3 +84,19 @@ Because the nodes are stored in a Binary Search Tree, we get the following chara
 
 ### LinkedHashMap
 In this...
+
+## Key Requirements
+There are some requirements for the Objects that act as keys in a Map. The requirements are **not** enforced so if a developer doesn't follow them then the behavior can get wild!  
+
+### Immutability
+Keys should ideally be immutable. This ensures that the hash code and equality do not change while the key is in the map. If the key changes, and the hash code changes, then the `HashMap` will have problem when doing a lookup. This immutability must last over the lifetime of the map unless the key is removed and reinserted.  
+
+### Equals and hashCode are Consistent
+The two methods, `equals` and `hashCode`, need to be proper and consistent with each other. If two keys are considered equal via `equals()`, they must return the same `hashCode()`.   
+
+### Sortable
+When using a `TreeMap<K, V>`, the keys must either:  
+* Implement the `Comparable<K>` interface, **OR**  
+* Be used with a custom `Comparator<K>` provided when the `TreeMap` is constructed.  
+
+

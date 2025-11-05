@@ -276,14 +276,14 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/maven.html">Maven</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/spring.html">Spring</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../frameworks/mockito.html">Mokito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/mockito.html">Mockito</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/log4j.html">Log4j</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../patterns/index.html"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../patterns/solid.html">SOLID principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../patterns/design_patterns.html">Design Patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../patterns/principles.html">Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/principles.html">Principles</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference external" href="https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching">Learn Git Branching</a></li>
@@ -499,6 +499,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-sets-and-maps">Lists, Sets and Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-summary">Quick Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-structures">Fundamental Structures</a></li>
 </ul>
             </nav>
@@ -516,6 +518,74 @@ document.write(`
 <p>In this lesson we will learn about the <code class="docutils literal notranslate"><span class="pre">Java</span> <span class="pre">Collection</span> <span class="pre">Framework</span></code>. There are many <code class="docutils literal notranslate"><span class="pre">abstract</span></code> classes, concrete classes, and interfaces that make up the framework.</p>
 <p>We will look at a class hierarchy showing <code class="docutils literal notranslate"><span class="pre">interfaces</span></code>, <code class="docutils literal notranslate"><span class="pre">abstract</span></code> classes, and concrete classes. The point is to see how code is shared by using the abstract classes, and behaviors are provided by classes not necessarily in the same path.</p>
 <p>We also want to review the most fundamental data structures.</p>
+<section id="lists-sets-and-maps">
+<h2>Lists, Sets and Maps<a class="headerlink" href="#lists-sets-and-maps" title="Link to this heading">#</a></h2>
+<p>The most popular Collection classes are Lists, Sets and Maps.</p>
+<p>As we’ve seen, a <code class="docutils literal notranslate"><span class="pre">List</span></code> behaves like a dynamically sized array. One can index into it using integer values (e.g. <code class="docutils literal notranslate"><span class="pre">list.get(3)</span></code>). The list has order as the items are stored at indices 0 to n.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>Element</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Item0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Item1</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Item2</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Item3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Set</span></code> is a very simple collection of object. It is very much like a set in mathematics. There is <strong>no order</strong> to the items. The main thing you do with a set is to <code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">remove</span></code> items. You can also <code class="docutils literal notranslate"><span class="pre">clear</span></code> it, get its <code class="docutils literal notranslate"><span class="pre">size</span></code>, and see if the set <code class="docutils literal notranslate"><span class="pre">contains</span></code> an item already.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>This is a Set</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{ Item2, Item1, Item0, Item3 }</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Map</span></code> behaves like an array where the index must be an <code class="docutils literal notranslate"><span class="pre">Object</span></code> instead of an <code class="docutils literal notranslate"><span class="pre">int</span></code>. <a class="reference internal" href="maps.html"><span class="doc std std-doc">See Maps</span></a><br />
+<img alt="Friendly Map" src="../_images/map_illustration.png" /></p>
+</section>
+<section id="quick-summary">
+<h2>Quick Summary<a class="headerlink" href="#quick-summary" title="Link to this heading">#</a></h2>
+<p>There are many Collection classes. Here are the top three types.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Collection<br>interface</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example Concrete Class</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>List</p></td>
+<td><p>Like an array, but it grows and shrinks, and has helper methods.<br>Indexed with integer values.</p></td>
+<td><p>ArrayList&lt;String&gt;<br>LinkedLIst&lt;String&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>Set</p></td>
+<td><p>Like a List, but no duplicates are allowed.<br>There is no predictable order in a HashSet<br>One will add to it and check if the set contains something.</p></td>
+<td><p>HashSet&lt;String&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>Map</p></td>
+<td><p>Like a List, but the index can be any Object<br>Key order depends on the concrete class</p></td>
+<td><p>HashMap&lt;String&gt;<br>TreeMap&lt;String&gt;</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="fundamental-structures">
 <h2>Fundamental Structures<a class="headerlink" href="#fundamental-structures" title="Link to this heading">#</a></h2>
 <p>We will use conceptual names that map to <code class="docutils literal notranslate"><span class="pre">interfaces</span></code>. And we will show the most popular types of classes used to implement that behavior.</p>
@@ -643,6 +713,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-sets-and-maps">Lists, Sets and Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-summary">Quick Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-structures">Fundamental Structures</a></li>
 </ul>
   </nav></div>

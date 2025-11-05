@@ -276,14 +276,14 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/maven.html">Maven</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/spring.html">Spring</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../frameworks/mockito.html">Mokito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/mockito.html">Mockito</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/log4j.html">Log4j</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../patterns/index.html"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../patterns/solid.html">SOLID principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../patterns/design_patterns.html">Design Patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../patterns/principles.html">Principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/principles.html">Principles</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference external" href="https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching">Learn Git Branching</a></li>
@@ -500,11 +500,20 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-maps">Working with Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-maps">Working with Maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-a-map">Iterating a Map</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concrete-maps">Concrete Maps</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashmap">HashMap</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#treemap">TreeMap</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linkedhashmap">LinkedHashMap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-requirements">Key Requirements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immutability">Immutability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equals-and-hashcode-are-consistent">Equals and hashCode are Consistent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sortable">Sortable</a></li>
 </ul>
 </li>
 </ul>
@@ -560,6 +569,29 @@ document.write(`
 </section>
 <section id="working-with-maps">
 <h2>Working with Maps<a class="headerlink" href="#working-with-maps" title="Link to this heading">#</a></h2>
+<p>A map holds a set of unique keys and a collection of values, where each key is associated with one value. The basic map operations are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">put(key,</span> <span class="pre">value)</span></code>: Adds a mapping from a key to a value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get(key)</span></code>: Retrieves the value mapped to the key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove(key)</span></code>: Removes the given key and its mapped value.<br />
+<img alt="Friendly Map" src="../_images/map_illustration.png" /></p></li>
+</ul>
+<section id="iterating-a-map">
+<h3>Iterating a Map<a class="headerlink" href="#iterating-a-map" title="Link to this heading">#</a></h3>
+<p>We iterate through the Set of Keys.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">keySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%10s: %2d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">word</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Or, we get the Entry Set and iterate through that:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">entrySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%10s: %2d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Order is unknown in a <code class="docutils literal notranslate"><span class="pre">HashSet</span></code>.</p>
+</section>
 </section>
 <section id="concrete-maps">
 <h2>Concrete Maps<a class="headerlink" href="#concrete-maps" title="Link to this heading">#</a></h2>
@@ -588,6 +620,26 @@ Because the nodes are stored in a Binary Search Tree, we get the following chara
 <section id="linkedhashmap">
 <h3>LinkedHashMap<a class="headerlink" href="#linkedhashmap" title="Link to this heading">#</a></h3>
 <p>In this…</p>
+</section>
+</section>
+<section id="key-requirements">
+<h2>Key Requirements<a class="headerlink" href="#key-requirements" title="Link to this heading">#</a></h2>
+<p>There are some requirements for the Objects that act as keys in a Map. The requirements are <strong>not</strong> enforced so if a developer doesn’t follow them then the behavior can get wild!</p>
+<section id="immutability">
+<h3>Immutability<a class="headerlink" href="#immutability" title="Link to this heading">#</a></h3>
+<p>Keys should ideally be immutable. This ensures that the hash code and equality do not change while the key is in the map. If the key changes, and the hash code changes, then the <code class="docutils literal notranslate"><span class="pre">HashMap</span></code> will have problem when doing a lookup. This immutability must last over the lifetime of the map unless the key is removed and reinserted.</p>
+</section>
+<section id="equals-and-hashcode-are-consistent">
+<h3>Equals and hashCode are Consistent<a class="headerlink" href="#equals-and-hashcode-are-consistent" title="Link to this heading">#</a></h3>
+<p>The two methods, <code class="docutils literal notranslate"><span class="pre">equals</span></code> and <code class="docutils literal notranslate"><span class="pre">hashCode</span></code>, need to be proper and consistent with each other. If two keys are considered equal via <code class="docutils literal notranslate"><span class="pre">equals()</span></code>, they must return the same <code class="docutils literal notranslate"><span class="pre">hashCode()</span></code>.</p>
+</section>
+<section id="sortable">
+<h3>Sortable<a class="headerlink" href="#sortable" title="Link to this heading">#</a></h3>
+<p>When using a <code class="docutils literal notranslate"><span class="pre">TreeMap&lt;K,</span> <span class="pre">V&gt;</span></code>, the keys must either:</p>
+<ul class="simple">
+<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">Comparable&lt;K&gt;</span></code> interface, <strong>OR</strong></p></li>
+<li><p>Be used with a custom <code class="docutils literal notranslate"><span class="pre">Comparator&lt;K&gt;</span></code> provided when the <code class="docutils literal notranslate"><span class="pre">TreeMap</span></code> is constructed.</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -657,11 +709,20 @@ Because the nodes are stored in a Binary Search Tree, we get the following chara
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-maps">Working with Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-maps">Working with Maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-a-map">Iterating a Map</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concrete-maps">Concrete Maps</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashmap">HashMap</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#treemap">TreeMap</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linkedhashmap">LinkedHashMap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-requirements">Key Requirements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immutability">Immutability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equals-and-hashcode-are-consistent">Equals and hashCode are Consistent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sortable">Sortable</a></li>
 </ul>
 </li>
 </ul>
