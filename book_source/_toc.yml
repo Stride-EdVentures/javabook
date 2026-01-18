@@ -8,6 +8,7 @@ chapters:
     - file: Topics/git
     - file: Topics/layout_managers
     - file: Topics/java_v_cpp
+    - file: Topics/images
   - file: generics/index
     sections:
     - file: generics/array_list
