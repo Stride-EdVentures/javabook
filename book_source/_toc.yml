@@ -5,6 +5,7 @@ chapters:
     sections:
     - file: Topics/java_conventions
     - file: Topics/installing_jgrasp
+    - file: Topics/problem_solving
     - file: Topics/git
     - file: Topics/layout_managers
     - file: Topics/java_v_cpp
@@ -50,6 +51,8 @@ chapters:
     - file: frameworks/log4j
   - file: patterns/index
     sections:
+    - file: patterns/singleton
+    - file: patterns/dependency_injection
     - file: patterns/solid
     - file: patterns/design_patterns
     - file: patterns/principles  

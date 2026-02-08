@@ -1,5 +1,7 @@
 # Design Patterns
 
+A Design Pattern is ...
+
 ## 5 Patterns To Know  
 [Reference article](https://slash.co/articles/5-design-patterns-you-should-know)  
 1. Singleton : blah  
