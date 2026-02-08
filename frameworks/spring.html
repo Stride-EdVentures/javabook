@@ -232,6 +232,9 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Topics/index.html"><i class="fas fa-book fa-fw"></i> Miscellaneous</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/java_conventions.html">Code Quality Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/installing_jgrasp.html">Installing jGrasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/problem_solving.html">Problem Solving</a></li>
+
+
 <li class="toctree-l2"><a class="reference internal" href="../Topics/git.html">Git</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/java_v_cpp.html">Java &lt;–&gt; C++</a></li>
@@ -282,6 +285,8 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../patterns/index.html"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/singleton.html">Singleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/dependency_injection.html">Dependency Injection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../patterns/solid.html">SOLID principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../patterns/design_patterns.html">Design Patterns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../patterns/principles.html">Principles</a></li>
@@ -500,7 +505,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#services">Services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations">Annotations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-component-annotations">Core Component Annotations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-injection">Dependency Injection:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beans">Beans</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-configuration-and-testing">Spring Configuration and Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#service-locator-pattern">Service Locator Pattern</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
             </nav>
         </div>
@@ -523,11 +540,201 @@ document.write(`
 <li><p><strong>Web Development:</strong> Spring MVC provides a powerful way to   build web applications.</p></li>
 <li><p><strong>Security:</strong> Spring Security offers robust authentication and authorization mechanisms.</p></li>
 </ul>
-<p>While Spring is mostly for Web Development, we will be focusing on functionality beneficial to a client application.</p>
+<p>While Spring is mostly for Web Development, we will be focusing on the features beneficial to a <strong>client</strong> application. In particular, we will look at how it helps us create services and supports <a class="reference internal" href="../patterns/dependency_injection.html"><span class="doc std std-doc">Dependency Injection</span></a>.</p>
+<blockquote>
+<div><p>Note: We will be using <strong>Spring Boot</strong> which is a modernized and lite weight version of its predecessor.</p>
+</div></blockquote>
+<section id="services">
+<h2>Services<a class="headerlink" href="#services" title="Link to this heading">#</a></h2>
+<p>A service should be stateless, thread-safe, and idempotent<a href="#footnotes"><sup>[1]</sup></a>. With these qualities we can create a <strong>Singleton</strong> object, one and only instance of the service to field all the requests.</p>
+<p><strong>Service</strong> simply means <em>“business logic layer”</em> and doesn’t necessarily imply an online, web-based architecture. It’s the go-to naming convention for classes that orchestrate operations and coordinate between different concerns.</p>
+<p>Spring allows a developer to easily create a Service with the <code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code> annotation.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Microservices</p>
+<p>A good <strong>Architectural Approach</strong> is <em>Microservices</em>.</p>
+<blockquote>
+<div><p>Microservices is an architectural approach where you build an application as a collection of small, independent services that each focus on a specific business capability.</p>
+</div></blockquote>
+<p>Each microservice runs in its own process, manages its own data, and communicates with other services through well-defined APIs.</p>
+<p>Key characteristics include:</p>
+<ul class="simple">
+<li><p><strong>Independence:</strong> Each service can be developed, deployed, and scaled <em>independently</em>.</p></li>
+<li><p><strong>Single responsibility:</strong> Each service handles one business domain or capability.</p></li>
+<li><p><strong>Decentralized data management:</strong> Services own their own databases rather than sharing one.</p></li>
+<li><p><strong>Technology diversity:</strong> Different services can use different programming languages, frameworks, or databases.</p></li>
+<li><p><strong>Fault isolation:</strong> If one service fails, it doesn’t necessarily bring down the entire system.</p></li>
+</ul>
+<p>Even for in client-based application, these characteristics are good to have. These concepts are discussed further in the <a class="reference internal" href="../patterns/solid.html"><span class="doc std std-doc">SOLID Lesson</span></a>.</p>
+</div>
+</section>
+<section id="annotations">
+<h2>Annotations<a class="headerlink" href="#annotations" title="Link to this heading">#</a></h2>
+<p>There are many annotations that come with Spring Boot. Here are some of the top-level annotations.</p>
+<section id="core-component-annotations">
+<h3>Core Component Annotations<a class="headerlink" href="#core-component-annotations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> is the most generic stereotype annotation. It marks a class as a Spring-managed component, meaning Spring will detect it during classpath scanning and register it as a bean in the application context. Use this when your class doesn’t fit into a more specific category.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code> is a specialization of &#64;Component that indicates a class holds business logic. While functionally identical to &#64;Component, it provides semantic meaning and makes your code more readable. Use this for your service layer classes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Repository</span></code> is another <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> specialization for data access classes. It provides additional benefits like automatic exception translation from database-specific exceptions to Spring’s <em>DataAccessException</em> hierarchy.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Controller</span></code> marks a class as a Spring <code class="docutils literal notranslate"><span class="pre">MVC</span> <span class="pre">controller</span></code> that handles web requests. The <code class="docutils literal notranslate"><span class="pre">&#64;RestController</span></code> annotation combines &#64;Controller with &#64;ResponseBody, making it ideal for RESTful web services.</p></li>
+</ul>
+</section>
+<section id="dependency-injection">
+<h3>Dependency Injection:<a class="headerlink" href="#dependency-injection" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> tells Spring to automatically inject dependencies into your class. You can use it on constructors <strong>(preferred)</strong>, <em>setters</em>, or <em>fields</em>. (See <a class="reference internal" href="../patterns/dependency_injection.html"><span class="doc std std-doc">Dependency Injection</span></a>) Spring will find a matching bean in the application context and wire it in. Constructor injection is generally recommended over field injection for better testability.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;MockitoBean</span></code> is an annotation that uses Mockito under the hood to replace a bean (to Mock a dependency) in the Spring ApplicationContext. See the Spring Configuration and Testing in <a class="reference internal" href="../patterns/dependency_injection.html"><span class="doc std std-doc">Dependency Injection</span></a></p></li>
+</ul>
+</section>
+<section id="configuration">
+<h3>Configuration:<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> indicates a class contains bean definitions. Methods annotated with &#64;Bean inside a &#64;Configuration class will be called by Spring to register those beans in the application context.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> is used on methods within &#64;Configuration classes to explicitly define beans. The method’s return value is registered as a bean in Spring’s Application Context.<br />
+-&#64;<code class="docutils literal notranslate"><span class="pre">SpringBootApplication</span></code> is put on the application Main class with the main method.</p></li>
+</ul>
+</section>
+<section id="testing">
+<h3>Testing:<a class="headerlink" href="#testing" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;SpringBootTest</span></code> is used in integration tests to load the complete application context. It bootstraps the entire Spring Boot application, allowing you to test with all your actual beans and configurations. While this is convenient and easy, it is discouraged because it is heavy-weight. For faster, more isolated unit tests, developers should try to avoid this annotation. Using it can <em>launch</em> the application and trigger unintended behavior (e.g. GUI appearing).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;TestConfiguration</span></code> is used to define additional beans or override existing beans specifically for testing purposes. Unlike &#64;Configuration, it won’t be picked up by component scanning in your main application. You typically use it as a static inner class within your test or import it explicitly in your test with &#64;Import. This is helpful when you need to mock certain beans or provide test-specific configurations without affecting your production code.</p></li>
+</ul>
+<p>These annotations work together to provide Spring’s dependency injection, component scanning, and configuration capabilities that make Spring Boot development straightforward.</p>
+</section>
+</section>
+<section id="beans">
+<h2>Beans<a class="headerlink" href="#beans" title="Link to this heading">#</a></h2>
+<p>In Spring Boot, a <strong>bean</strong> is simply an object that is created, managed, and maintained by the Spring IoC (Inversion of Control) container.</p>
+<p>A bean is just a regular Java object, but instead of creating it with the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword, Spring creates it and keeps track of it. Spring handles the bean’s entire lifecycle—instantiation, dependency injection, initialization, and destruction. This can make the code more modular, testable, and loosely coupled.</p>
+<p>Spring discovers and registers beans using the annotations &#64;Component and &#64;Service. In the following example both <code class="docutils literal notranslate"><span class="pre">ImageService</span></code> and <code class="docutils literal notranslate"><span class="pre">ImageProcessor</span></code> are beans, and the ImageProcessor has a dependency on ImageService which is injected in the constructor.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImageService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// This becomes a bean managed by Spring</span>
+<span class="p">}</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImageProcessor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ImageService</span><span class="w"> </span><span class="n">imageService</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ImageProcessor</span><span class="p">(</span><span class="n">ImageService</span><span class="w"> </span><span class="n">imageService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Spring automatically injects the ImageService bean argument.</span>
+<span class="w">        </span><span class="c1">// This is called `Constructor Injection` and is the preferred method of DI.</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">imageService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imageService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the application starts, Spring creates one instance of ImageService (by default, beans are <a class="reference internal" href="../patterns/singleton.html"><span class="doc std std-doc">singletons</span></a>) and automatically injects it into ImageProcessor. The application code never includes <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">ImageService()</span></code> because Spring handles it all. However, when writing tests, one would want to explicitly instantiate services, real or mocked, to control the tests to make them predictable.</p>
+</section>
+<section id="spring-configuration-and-testing">
+<h2>Spring Configuration and Testing<a class="headerlink" href="#spring-configuration-and-testing" title="Link to this heading">#</a></h2>
+<p>Spring will look at the return type of methods annotated with <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> and call these methods to instantiate beans.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ImageService</span><span class="w"> </span><span class="nf">imageService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MySpecialImageService</span><span class="w"> </span><span class="n">imgSvc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MySpecialImageService</span><span class="p">();</span>
+<span class="w">        </span><span class="n">imgSvc</span><span class="p">.</span><span class="na">customInit</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">imgSvc</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// In a Test we can override the registered beans</span>
+<span class="nd">@SpringBootTest</span>
+<span class="nd">@Import</span><span class="p">(</span><span class="n">MyTest</span><span class="p">.</span><span class="na">TestConfig</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@TestConfiguration</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestConfig</span><span class="w"> </span><span class="p">{</span><span class="w">        </span>
+<span class="w">        </span><span class="nd">@Bean</span>
+<span class="w">        </span><span class="nd">@Primary</span><span class="w"> </span><span class="c1">// use this bean over any other</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">ImageService</span><span class="w"> </span><span class="nf">imageService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ImageService</span><span class="w"> </span><span class="n">mocked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ImageService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="n">BufferedImage</span><span class="w"> </span><span class="nf">getImage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">Mockito</span><span class="p">.</span><span class="na">mock</span><span class="p">(</span><span class="n">BufferedImage</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">};</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">mocked</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Alternatively a Test can override the registered beans with Mockito</span>
+<span class="nd">@SpringBootTest</span>
+<span class="nd">@Import</span><span class="p">(</span><span class="n">MyTest</span><span class="p">.</span><span class="na">TestConfig</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@TestConfiguration</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestConfig</span><span class="w"> </span><span class="p">{</span><span class="w">        </span>
+<span class="w">        </span><span class="nd">@Bean</span>
+<span class="w">        </span><span class="nd">@Primary</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">ImageService</span><span class="w"> </span><span class="nf">imageService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ImageService</span><span class="w"> </span><span class="n">mocked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mockito</span><span class="p">.</span><span class="na">mock</span><span class="p">(</span><span class="n">ImageService</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">            </span><span class="n">when</span><span class="p">(</span><span class="n">mocked</span><span class="p">.</span><span class="na">getImage</span><span class="p">(</span><span class="n">anyString</span><span class="p">()))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Mockito</span><span class="p">.</span><span class="na">mock</span><span class="p">(</span><span class="n">BufferedImage</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">mocked</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Alternatively, Mockito can be used as follows:</span>
+<span class="nd">@SpringBootTest</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@MockitoBean</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ImageService</span><span class="w"> </span><span class="n">imageService</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">when</span><span class="p">(</span><span class="n">imageService</span><span class="p">.</span><span class="na">getImage</span><span class="p">(</span><span class="n">anyString</span><span class="p">()))</span>
+<span class="w">            </span><span class="p">.</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Mockito</span><span class="p">.</span><span class="na">mock</span><span class="p">(</span><span class="n">BufferedImage</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">// your test code</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="service-locator-pattern">
+<h2>Service Locator Pattern<a class="headerlink" href="#service-locator-pattern" title="Link to this heading">#</a></h2>
+<p>Another IoC style is the Service Locator pattern. It is <strong>NOT</strong> recommended as it is often considered an anti-pattern. That said, the above Configuration code does allow one to explicitly provide the dependencies in Test code.</p>
+<p>Here is a class that one would add to a Spring project to create a Service Locator:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * This is a Singleton Pattern. This is a Component that will get automatically</span>
+<span class="cm"> * registered by the IoC SpringBoot framework. The ApplicationContext object</span>
+<span class="cm"> * will be saved and made available via the static field. This will allow all</span>
+<span class="cm"> * other objects, Component or not, to use IoC to fulfill dependencies. Example:</span>
+<span class="cm"> * </span>
+<span class="cm"> *    imageService = ApplicationContextProvider</span>
+<span class="cm"> *                      .getApplicationContext()</span>
+<span class="cm"> *                      .getBean(ImageService.class);</span>
+<span class="cm"> */</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ApplicationContextProvider</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ApplicationContextAware</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">context</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setApplicationContext</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">applicationContext</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">applicationContext</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ApplicationContext</span><span class="w"> </span><span class="nf">getApplicationContext</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">context</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 <section id="what-s-so-important">
 <h2>What’s so Important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Spring …</p></li>
+</ul>
+</section>
+<section id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><em>Def <strong>idempotent</strong></em>: An idempotent method is one that can be called multiple times with the same inputs and produces the same result, without causing <em>additional</em> side effects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Bean</span></code>: This is …</p></li>
 </ul>
 </section>
 </section>
@@ -596,7 +803,19 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#services">Services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations">Annotations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-component-annotations">Core Component Annotations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-injection">Dependency Injection:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beans">Beans</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-configuration-and-testing">Spring Configuration and Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#service-locator-pattern">Service Locator Pattern</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
   </nav></div>
 

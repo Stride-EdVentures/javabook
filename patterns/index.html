@@ -96,7 +96,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="icon" href="../_static/peanut head.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="SOLID principles" href="solid.html" />
+    <link rel="next" title="Singleton" href="singleton.html" />
     <link rel="prev" title="Log4j" href="../frameworks/log4j.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -232,6 +232,9 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Topics/index.html"><i class="fas fa-book fa-fw"></i> Miscellaneous</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/java_conventions.html">Code Quality Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/installing_jgrasp.html">Installing jGrasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/problem_solving.html">Problem Solving</a></li>
+
+
 <li class="toctree-l2"><a class="reference internal" href="../Topics/git.html">Git</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Topics/java_v_cpp.html">Java &lt;–&gt; C++</a></li>
@@ -282,6 +285,8 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="singleton.html">Singleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">Dependency Injection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="solid.html">SOLID principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design_patterns.html">Design Patterns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="principles.html">Principles</a></li>
@@ -505,8 +510,12 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="patterns-principles">
 <h1><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles<a class="headerlink" href="#patterns-principles" title="Link to this heading">#</a></h1>
 <p>This section will provide a thorough lesson on Patterns &amp; Principles in designing software.</p>
+<p><strong>Design Patterns</strong> (like <em>Singleton</em>, <em>Factory</em>, or <em>Observer</em>) are reusable solutions to common problems within a single application or module. They’re about how you structure code and objects.</p>
+<p><strong>Architecture</strong> describes the high-level structure of an entire system. Architecture describes how different services, databases, and components interact with each other. <em>Microservices</em> is an example architecture <strong>approach</strong> because it defines how one organizes and deploys the overall application.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="singleton.html">Singleton</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency_injection.html">Dependency Injection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solid.html">SOLID principles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design_patterns.html">Design Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="principles.html">Principles</a></li>
@@ -554,11 +563,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="solid.html"
+       href="singleton.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">SOLID principles</p>
+        <p class="prev-next-title">Singleton</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Parallel Streams &#8212; Practical Java </title>
+    <title>Singleton &#8212; Practical Java </title>
   
   
   
@@ -92,12 +92,12 @@ commentsRunWhenDOMLoaded(addUtterances);
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'multithreading/parallel_streams';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'patterns/singleton';</script>
     <link rel="icon" href="../_static/peanut head.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Frameworks" href="../frameworks/index.html" />
-    <link rel="prev" title="Tasks in Parallel" href="tasks.html" />
+    <link rel="next" title="Dependency Injection" href="dependency_injection.html" />
+    <link rel="prev" title="Patterns &amp; Principles" href="index.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -270,11 +270,11 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="../interfaces/full_review.html">Full Review</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="intro_to_threads.html">Introduction to Threads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conc_synch.html">Concurrency &amp; Synchronization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks in Parallel</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Parallel Streams</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -284,12 +284,12 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/log4j.html">Log4j</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../patterns/index.html"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../patterns/singleton.html">Singleton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../patterns/dependency_injection.html">Dependency Injection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../patterns/solid.html">SOLID principles</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../patterns/design_patterns.html">Design Patterns</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../patterns/principles.html">Principles</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Singleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">Dependency Injection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solid.html">SOLID principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_patterns.html">Design Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="principles.html">Principles</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference external" href="https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching">Learn Git Branching</a></li>
@@ -364,7 +364,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/multithreading/parallel_streams.md" target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/patterns/singleton.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -381,7 +381,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fmultithreading/parallel_streams.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fpatterns/singleton.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -411,7 +411,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <li><a href="../_sources/multithreading/parallel_streams.md" target="_blank"
+      <li><a href="../_sources/patterns/singleton.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -495,7 +495,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Parallel Streams</h1>
+    <h1>Singleton</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -505,7 +505,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-stream">What is a Stream?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-example">Typical Example</a></li>
 </ul>
             </nav>
         </div>
@@ -517,47 +517,34 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="parallel-streams">
-<h1>Parallel Streams<a class="headerlink" href="#parallel-streams" title="Link to this heading">#</a></h1>
-<p>TODO: Add this to Practice_Streams</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// let map be Map&lt;String, Integer&gt;.</span>
-<span class="w">    </span><span class="c1">// Use streams to output the keys that have an even value, </span>
-<span class="w">    </span><span class="c1">// sort by the keys, case-insensitive.</span>
-<span class="w">    </span><span class="c1">// output using `forEach` and a Method Reference to println.</span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">entrySet</span><span class="p">().</span><span class="na">stream</span><span class="p">()</span>
-<span class="w">        </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getValue</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// keep even values</span>
-<span class="w">        </span><span class="p">.</span><span class="na">sorted</span><span class="p">(</span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparing</span><span class="p">(</span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">().</span><span class="na">toLowerCase</span><span class="p">()))</span><span class="w"> </span><span class="c1">// sort by key, case-insensitive</span>
-<span class="w">        </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="p">::</span><span class="n">getKey</span><span class="p">)</span><span class="w"> </span><span class="c1">// extract keys only</span>
-<span class="w">        </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="singleton">
+<h1>Singleton<a class="headerlink" href="#singleton" title="Link to this heading">#</a></h1>
+<p>A Singleton is a design pattern that ensures a class has exactly one instance in an application and provides a global point of access to that instance. It is perhaps the most simple and widely used pattern, but it can be abused and over used.</p>
+<section id="typical-example">
+<h2>Typical Example<a class="headerlink" href="#typical-example" title="Link to this heading">#</a></h2>
+<p>The easiest way to create a Singleton in a Java application is through a <code class="docutils literal notranslate"><span class="pre">static</span></code> field.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MySingleton</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="n">result</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// The single instance, stored in a static field that</span>
+<span class="w">    </span><span class="c1">// gets `Lazy Initialized` by the getInstance() method.</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">MySingleton</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// An `Eager singleton` style would instantiate immediately.</span>
+<span class="w">    </span><span class="c1">// Do not do this in addition to Lazy Initialization. Choose ONE!</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MySingleton</span><span class="w"> </span><span class="n">INSTANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MySingleton</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Private constructor prevents direct instantiation</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">MySingleton</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Public method to get the single instance `lazily`</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">MySingleton</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MySingleton</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
-</div>
-<section id="what-is-a-stream">
-<h2>What is a Stream?<a class="headerlink" href="#what-is-a-stream" title="Link to this heading">#</a></h2>
-<p>A <code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a sequence of elements processed in a <em>functional</em> style.</p>
-<p><strong>Key Characteristics of Streams</strong></p>
-<ol class="arabic simple">
-<li><p><strong>Not a Data Structure:</strong> Unlike collections (e.g., List, Set), a Stream does not store elements. Instead, it provides a way to process elements from a source.</p></li>
-<li><p><strong>Lazy Evaluation:</strong> Stream operations are performed lazily, meaning they are not executed until a terminal operation (like collect, forEach, or reduce) is invoked.</p></li>
-<li><p><strong>Functional Style:</strong> Streams rely on functional-style operations, such as filter, map, and reduce, which can be chained together to form a pipeline of operations.</p></li>
-<li><p><strong>Parallel Processing:</strong> Streams can be processed in parallel, making it easier to write parallel code and improve performance.</p></li>
-</ol>
-<div class="dropdown seealso admonition">
-<p class="admonition-title">References</p>
-<p>[1] <a class="reference external" href="https://www.youtube.com/watch?v=Q93JsQ8vcwY">Java Streams Tutorial | 2020</a>
-[2] <a class="reference external" href="https://www.youtube.com/watch?v=8yyHwQtnOj4">Java 8 Stream API Tutorial</a>
-[3] <a class="reference external" href="https://www.youtube.com/watch?v=E10Q6-nWO9g">Master Java Streams: Complete Guide from Basics to Advanced in One Video!</a>
-[4] <a class="reference external" href="https://www.baeldung.com/java-8-streams">The Java Stream API Tutorial - Baeldung</a>
-[5] <a class="reference external" href="https://howtodoinjava.com/java/stream/java-streams-by-examples/">Java Stream API: Real-world Examples for Beginners - HowToDoInJava</a>
-[6] <a class="reference external" href="https://www.tutorialspoint.com/java/java_streams.htm">Java - Streams - Online Tutorials Library</a>
-[7] <a class="reference external" href="https://www.scaler.com/topics/java/streams-in-java/">Streams in Java- Complete Tutorial with Examples</a>
-[8] https://topmate.io/engineeringdigest
-[9] https://razorpay.me/&#64;engineeringdigest
-[10] https://www.youtube.com/&#64;EngineeringDigest/join
-[11] https://discord.oia.bio/engineeringdigest
-[12] https://insta.oia.bio/engineering-digest
-[13] https://x.openinapp.co/thevipulvats</p>
 </div>
 </section>
 </section>
@@ -575,7 +562,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./multithreading"
+            path: "./patterns"
         },
         predefinedOutput: true
     }
@@ -593,20 +580,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="tasks.html"
+       href="index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tasks in Parallel</p>
+        <p class="prev-next-title"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</p>
       </div>
     </a>
     <a class="right-next"
-       href="../frameworks/index.html"
+       href="dependency_injection.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><i class="fas fa-book fa-fw"></i> Frameworks</p>
+        <p class="prev-next-title">Dependency Injection</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -626,7 +613,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-stream">What is a Stream?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-example">Typical Example</a></li>
 </ul>
   </nav></div>
 
