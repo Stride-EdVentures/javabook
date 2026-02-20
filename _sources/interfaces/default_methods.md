@@ -1,4 +1,4 @@
-# Default Methods
+# Lesson I7: Default Methods
 
 We've been focusing on the `abstract` methods of an interface, those methods that have no implementation. It is common that an interface can add beneficial behavior simply by leveraging the other `abstract` instance methods it knows about. These _additive_ instance methods are called `default` methods.   
 

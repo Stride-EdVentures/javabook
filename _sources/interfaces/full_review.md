@@ -1,4 +1,4 @@
-# Full Review
+# Lesson I8: Full Review
 
 ## Recall the Uses of Interfaces
 Interfaces are powerful and common. Below is a list of ways interfaces are used. **You are not expected to understand these examples yet.** Future lessons should add a lot of clarity.  

@@ -1,4 +1,4 @@
-# Anonymous Classes
+# Lesson I6: Anonymous Classes
 
 We've seen how lambda expressions is shorthand for creating a function that has no name. It is anonymous.  
 
