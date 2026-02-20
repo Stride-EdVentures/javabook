@@ -1,8 +1,8 @@
-# Stack & Queue
+# Lesson G2: Stack & Queue
 In this lesson, we will learn about two Collection classes, `Stack` and `Queue`.
 
 ## Overview
-A `Stack` is an Abstract Data Type (ADT)<a href="#footnotes"><sup>[1]</sup></a> that is provided by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). It is a Generic just like `ArrayList` and therefore can hold only `Objects`. A `Stack` is a concept that is found in many different programming lanagues. In Java, a `Stack` is also a concrete class.<a href="#footnotes"><sup>[2]</sup></a> The two most common operations to perform on a Stack is `push` (add an item to the data structure) and `pop` (remove an item from the data structure). As the name *stack* infers, you can think of the data structure like a stack of books. To add a book to the stack, you **push** it to the top. To remove a book from the top of the stack, you **pop** it off. Fortunately, the API that invoke the behaviors have the same name.
+A `Stack` is an Abstract Data Type (ADT)<a href="#footnotes"><sup>[1]</sup></a> that is provided by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). It is a Generic just like `ArrayList` and therefore can hold only `Objects`. A `Stack` is a concept that is found in many different programming languages. In Java, a `Stack` is also a concrete class.<a href="#footnotes"><sup>[2]</sup></a> The two most common operations to perform on a Stack is `push` (add an item to the data structure) and `pop` (remove an item from the data structure). As the name *stack* infers, you can think of the data structure like a stack of books. To add a book to the stack, you **push** it to the top. To remove a book from the top of the stack, you **pop** it off. Fortunately, the API that invoke the behaviors have the same name.
 
 ```java
     Stack<Book> books = new Stack<>();
@@ -12,7 +12,7 @@ A `Stack` is an Abstract Data Type (ADT)<a href="#footnotes"><sup>[1]</sup></a> 
     Book top = books.pop();  // the book on top of the stack is "The Da Vinci Code"
 ```
 
-A `Queue` is a fancy word for a *line*, as in the line you stand in while waiting to get into the concert. In proper English, as spoken in Great Britian, you don't stand in the *line*, you stand in the *queue.* The data structure works just like queue you stand in. When you are added to the queue, you go to the end of the line. The next person allowed into the concert, the one to come out of the line next, is the person at the front of the line.  
+A `Queue` is a fancy word for a *line*, as in the line you stand in while waiting to get into the concert. In proper English, as spoken in Great Britain, you don't stand in the *line*, you stand in the *queue.* The data structure works just like queue you stand in. When you are added to the queue, you go to the end of the line. The next person allowed into the concert, the one to come out of the line next, is the person at the front of the line.  
 
 ## Stack
 Stacks are a super simple data structure. They are an ordered collection of elements, meaning that where elements are located in the data structure is instrumental in how it behaves. The most important position in the stack is being on top. Elements are pulled off the top of the stack when we `pop`, and they are added to the top of the stack when we `push`. There are times we want to know which element is on top without removing it, which we can do with the API, `peek`. 
@@ -42,7 +42,7 @@ If we look at the class hierarchy of `Stack`, we'll see that it is implemented b
 ![Stack Hierarchy](../_static/stack_hierarchy.png)  
 
 ### class ArrayDeque&lt;E&gt;
-The `ArrayDeque` class (pronouned "Array Deck") is short for **Double-Ended Queue**, and because it provides a rich set of methods for working at both ends of a queue, it can be efficiently used to implement both a Stack and a Queue. Furthermore, most of the familiar behaviors keep their familiar names. We can abstract the Stack behaviors using the `Deque` interface:  
+The `ArrayDeque` class (pronounced "Array Deck") is short for **Double-Ended Queue**, and because it provides a rich set of methods for working at both ends of a queue, it can be efficiently used to implement both a Stack and a Queue. Furthermore, most of the familiar behaviors keep their familiar names. We can abstract the Stack behaviors using the `Deque` interface:  
 |Stack Behavior|Deque Method Name|Notes|
 |--------|-----------|-----------|
 |**push**|`push`|Adds to the Head|
@@ -74,7 +74,7 @@ Here is an illustration of a Linked List that has 7 items. The first item contai
 
 One of the nicest properties of a LinkedList is that adding Nodes to the Head or Tail is cheap: O(1)--constant time! If you want to add a Node to the middle of the list, the implementation requires that you follow the chain from the front (or tail) until you find the location that you want to add the new node. Once found, it is very easy to insert the new node: you just update the forwards & backwards references to include the new nodes. You update both *chains*.  
 
-One negative propery of a `LinkedList` is that finding the location of a node is expensive because you have to traverse the chain to the desired location. Even if you know that you want to go to the 5th item, you still have to traverse from 0 to 1 to 2 to 3 to 4 to 5.  
+One negative property of a `LinkedList` is that finding the location of a node is expensive because you have to traverse the chain to the desired location. Even if you know that you want to go to the 5th item, you still have to traverse from 0 to 1 to 2 to 3 to 4 to 5.  
 
 Another negative property of a `LinkedList` is that the nodes are allocated on the Heap at discontiguous locations. While it is nice to allocate memory only when you need it, it can be poor performance to allocate one at a time and at disparate locations. 
 

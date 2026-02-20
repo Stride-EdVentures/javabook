@@ -16,6 +16,8 @@ chapters:
     - file: generics/practice_arraylist
     - file: generics/stack_queue
     - file: generics/shuntingyard
+    - url: https://java.mrstride.com/_static/html/shunting_yard.html
+      title: Animated Shunting Yard
     - file: generics/practice_shunting
     - file: generics/maps
     - file: generics/practice_maps

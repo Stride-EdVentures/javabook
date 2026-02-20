@@ -1,4 +1,4 @@
-# Shunting Yard
+# Lesson G3: Shunting Yard
 
 Here we will learn how to convert an infix mathematical expression to a postfix expression using the [Shunting Yard Algorithm](https://en.wikipedia.org/wiki/Shunting_yard_algorithm). To keep things simple, we will assume that all operators are [left-associative](https://en.wikipedia.org/wiki/Operator_associativity).   
 
@@ -16,7 +16,7 @@ When we have a larger postfix expression, we can visually compute the result usi
 3) Repeat until there is only one token in the queue, which is the answer.  
 
 ![Postfix Expression](../_static/postfix_example.png)
-Consider the epxression shown above. Here are the specific steps.   
+Consider the expression shown above. Here are the specific steps.   
 1) Find the `+` operator as the left-most operator.  
 2) Compute `3 + 6 = 9`  
 3) Remove `3`, `6`, and `+` and replace with `9`
@@ -106,7 +106,10 @@ To determine if we can push to the stack, use the following rules.
 We can push to the stack when:  
 * stack is empty  
 * top of stack is `(`  
-* precidence of input operator is greater than precidence of top of stack operator  
+* precedence of input operator is greater than precedence of top of stack operator  
+
+### Shunting Yard Example
+Let's look at an example. TODO!!
 
 ## What's so Important? ![Billy](../_static/whats_so_important.png)
 **Postfix Expressions:**   

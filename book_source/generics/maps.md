@@ -1,4 +1,4 @@
-# Maps
+# Lesson G4: Maps
 
 ## Introduction
 A `Map` is an `interface` that offers a data structure that acts a lot like an array except that the indices do not have to be integers. 

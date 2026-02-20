@@ -26,7 +26,7 @@ conda activate 163-book
 ```
 
 Install the book theme dependencies. All of these are libraries used for themes/templating in the book. `Sphinx` is the documentation templating tool, `sphinx-book-theme` 
-is the specific book theme, `myst-nb` changes the Sphinx langauge from rST to MyST (more similar to Markdown), and `sphinx-thebe` allows interactive notebooks in the browser.
+is the specific book theme, `myst-nb` changes the Sphinx language from rST to MyST (more similar to Markdown), and `sphinx-thebe` allows interactive notebooks in the browser.
 
 ```bash
 pip install -r requirements.txt
@@ -77,9 +77,9 @@ permissions:
 ```
 
 ## Important Note for First Time
-**Special note aboute deploying:**
+**Special note about deploying:**
 
-This will likely not matter, but is a bug we ran into a few times when setting up the book so I thought we should docunment it. 
+This will likely not matter, but is a bug we ran into a few times when setting up the book so I thought we should document it. 
 There must be a file called `.nojekyll` in the directory wherever GitHub Pages is deployed. This file exists on the `gh-pages` branch
 and should stay there by itself (i.e. add this empty `.nojekyll` file to the root of the branch). If something weird happens though, check to make sure it is still there.
 

@@ -1,13 +1,13 @@
-# Constraint Typing
+# Lesson G7: Constraint Typing
 
 In this lesson we learn:  
 1. How to easily interpret Constraint Typing  
 2. Why we need to, and the benefits we gain from, constraining our `generic` types  
-3. The syntax of Contraint Typing and **Wildcard** Typing 
+3. The syntax of Constraint Typing and **Wildcard** Typing 
 4. How to write generic methods using constraints
 
 ## Overview
-A primary purpose of Constraint Typing is to allow a generic method to safely call methods on a generic type. For example, the method may want to require that a generic type `T` implements an interface or inherits from parent a class. Constraints estable an IS-A relationship and eliminate the need to blindly (and unsafely) type cast.  
+A primary purpose of Constraint Typing is to allow a generic method to safely call methods on a generic type. For example, the method may want to require that a generic type `T` implements an interface or inherits from parent a class. Constraints establish an IS-A relationship and eliminate the need to blindly (and unsafely) type cast.  
 
 For example, we may want to call a generic method where we are guaranteed that our generic type `T` implements the interface `Runnable`. We can do that as follows:  
 
@@ -179,7 +179,7 @@ The code also attempts to accomplish the same thing by having the non-generic me
 
 ```{admonition} Benefit of Generic
 The **benefits** of using generics are:  
-1. **Type Saftety at Compile Time:**  Errors are caught at compile time.  
+1. **Type Safety at Compile Time:**  Errors are caught at compile time.  
 2. **Type Casting:** There is no need to do _Type Casting_.   
 3. **Preserves Specific Type Information:** Generic Collections contain the intended, designated type to allow for continued type-safe operations.   
 ```
@@ -193,7 +193,7 @@ public static void example(List<? super ClassGP> list) { }
 ```
 Using the class hierarchy diagram, we can see that we are allowed to have the following type of Lists: `List<ClassGP>`, `List<ClassGGP>`, or `List<Object>`. These classes are at or _above_ the Lower Bound.
 
-Conversly, the following List types are DISALLOWED: `List<ClassP>` or `List<MyClass>`. These two classes are _below_ the lower bound.
+Conversely, the following List types are DISALLOWED: `List<ClassP>` or `List<MyClass>`. These two classes are _below_ the lower bound.
 
 ```{admonition} Lower Bounds require Wildcard
 :class: warning
@@ -321,7 +321,7 @@ public static <? super T> void method(List<T> list) { }   // ❌ Invalid
 
 ## Lower-Bounded Wildcards (? super T)
 
-A Lower-Bounded Wilcard restricts the wildcard to a specific type `T` or its superclasses. Note that a class can be considered a superclass of itself. `T` is a superclass of `T`.   
+A Lower-Bounded Wildcard restricts the wildcard to a specific type `T` or its superclasses. Note that a class can be considered a superclass of itself. `T` is a superclass of `T`.   
 
 In the code below we require the `Comparator` to have a generic type that is a superclass of `T`. This way, we can make use of the Comparator in the `Person` class, the superclass of `Kid`. We are also allowed to use the Comparator found in the `Kid` class.  
 
@@ -404,9 +404,9 @@ public static int getTotalSize(List<List<?>> listOfLists) {
 ```
 
 ## What's so important? ![Billy](../_static/whats_so_important.png)  
-* Generics offer _Type Saftety at Compile Time_ and elminate the need for _Type Casting_.   
-* To invoke a method on a generic type, we need to contrain the type. Example: `<T extends Interface>`.  
-* To help us read methods with complicated Constraint Typing, we can elminate wildcards and sometimes replace the generic type with the upper bound type.  
+* Generics offer _Type Safety at Compile Time_ and eliminate the need for _Type Casting_.   
+* To invoke a method on a generic type, we need to constrain the type. Example: `<T extends Interface>`.  
+* To help us read methods with complicated Constraint Typing, we can eliminate wildcards and sometimes replace the generic type with the upper bound type.  
 * You should be able to write methods involving upper bounds. Example: `<T extends Interface>`.   
 * Wildcards are necessary for creating lower bounds. Wildcards are sometimes necessary to enable greater flexibility.    
 
