@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Postfix (RPN) Evaluator — Sliding Tokens</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root{
+    --bg:#0f172a;           /* slate-900 */
+    --panel:#111827;        /* gray-900 */
+    --panel-2:#0b1220;      /* darker */
+    --text:#e5e7eb;         /* gray-200 */
+    --muted:#9ca3af;        /* gray-400 */
+    --accent:#60a5fa;       /* blue-400 */
+    --danger:#f87171;       /* red-400 */
+    --token:#1f2937;        /* gray-800 */
+    --curve:cubic-bezier(.22,1,.36,1);
+    --dur:480ms;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Inter,Arial,sans-serif;
+    line-height:1.35; padding:24px;
+  }
+  h1{margin:0 0 8px 0; font-weight:700}
+  .sub{color:var(--muted); margin-bottom:16px}
+
+  /* Controls */
+  .controls{
+    background:var(--panel); border-radius:12px; padding:12px; border:1px solid #1f2937;
+    display:flex; flex-wrap:wrap; gap:10px; align-items:center
+  }
+  .controls input[type="text"]{
+    background:#0b1220; color:var(--text); border:1px solid #23304a; outline:none;
+    border-radius:8px; padding:10px 12px; width:min(700px, 100%);
+    font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  .btn{
+    background:#0b1220; color:var(--text); border:1px solid #23304a; padding:10px 12px;
+    border-radius:10px; cursor:pointer; transition:all .15s ease; font-weight:600
+  }
+  .btn:hover{border-color:#2f4270; transform:translateY(-1px)}
+  .btn.primary{background:#10223f; border-color:#2b4d8a; color:#dbeafe}
+  .btn.danger{background:#3a1010; border-color:#7f1d1d; color:#fee2e2}
+  .label{color:var(--muted); font-size:.9rem}
+
+  /* Layout: Work area on the left, Input on the right, Stack below */
+  .board{
+    margin-top:16px;
+    display:grid;
+    grid-template-columns: minmax(300px,1fr) 160px minmax(300px,1fr);
+    grid-template-rows: auto 260px;
+    grid-template-areas:
+      "work center in"
+      ".    stack  .";
+    gap: 12px 40px;
+    align-items:center;
+    position:relative;
+  }
+  .panel{
+    background:var(--panel); border:1px solid #1f2937; border-radius:12px; overflow:hidden;
+  }
+  .panel h3{
+    margin:0; padding:8px 12px; background:var(--panel-2); border-bottom:1px solid #1f2937;
+    font-size:0.95rem; display:flex; justify-content:space-between; align-items:center
+  }
+  .panel .body{ padding:12px; min-height:90px }
+
+  .in   { grid-area: in; }
+  .work { grid-area: work; }
+  .center {
+    grid-area: center; color: var(--muted);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; height:100%;
+  }
+  .center .labels{
+    position:absolute; top:0; bottom:0; left:0; right:0;
+    display:grid; grid-template-rows: 1fr 1fr; pointer-events:none;
+    font-weight:700; color:#c7d2fe;
+  }
+  .center .labels .top { align-self:start; justify-self:center; margin-top:6px }
+  .center .labels .bottom {
+    align-self:end; margin-bottom:6px; display:flex; justify-content:space-between;
+    color:#93c5fd; font-weight:600;
+  }
+
+  /* Stack (vertical, top at top) */
+  .stack-panel{ grid-area: stack; max-width:360px; justify-self:center; }
+  .stack-body{
+    padding:12px; min-height:220px;
+    display:flex; flex-direction:column; gap:8px;
+    align-items:stretch; justify-content:flex-start;
+  }
+
+  /* Token visuals */
+  .rowline{ display:flex; gap:8px; flex-wrap:nowrap; align-items:center; min-height:54px }
+  .token{
+    background:var(--token); color:#d1d5db; border:1px solid #374151; border-radius:10px;
+    padding:6px 10px; font-weight:700; letter-spacing:.2px;
+    font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    white-space:nowrap; display:inline-block; will-change: transform;
+  }
+  .op   { background:rgba(14,165,233,.12); border-color:rgba(14,165,233,.45); color:#7dd3fc }
+  .num  { background:rgba(34,197,94,.12); border-color:rgba(34,197,94,.45); color:#86efac }
+  .current{ box-shadow:0 0 0 3px rgba(96,165,250,.35); transform:scale(1.04) }
+
+  /* Work area slots */
+  .slots{ display:grid; grid-template-columns: 1fr auto 1fr; gap:12px; align-items:center; }
+  .slot{
+    min-height:54px; display:flex; align-items:center; justify-content:center;
+    border:1px dashed #374151; border-radius:10px; padding:6px;
+  }
+  .slot.op{ min-width:64px }
+
+  .merge-hide{
+    transition: transform 260ms var(--curve), opacity 260ms var(--curve);
+    transform: scale(.2);
+    opacity: .2;
+  }
+
+  /* Footer & log */
+  .log{
+    margin-top:12px; background:#0b1220; border:1px solid #1f2937; border-radius:12px; padding:12px;
+    max-height:220px; overflow:auto;
+    font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  .log .entry{ margin-bottom:6px; color:#a5b4fc }
+  .legend{ color:var(--muted); font-size:.9rem; margin-top:6px }
+  .rpn{ color:#a7f3d0; font-weight:700 }
+
+  @media (prefers-reduced-motion: reduce) {
+    .token { transition: none !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+  <h1>Postfix (RPN) Evaluator</h1>
+  <div class="sub">Provide a valid postfix expression, click `Reset`, then step through the operations.</div>
+
+  <div class="controls">
+    <input id="expr" type="text" value="3 4 2 - 5 1 - 2 3 ^ / * +" />
+    <button class="btn" id="btnUndo">◀ Undo Step</button>
+    <button class="btn primary" id="btnStep">▶ Step Forward</button>
+    <button class="btn danger" id="btnReset">↺ Reset</button>
+    <span class="label">Shortcuts: ← undo, → step, Enter reset</span>
+  </div>
+
+  <div class="board">
+    <!-- LEFT: Work area -->
+    <div class="panel work">
+      <h3>Work (a ∘ b)</h3>
+      <div class="body">
+        <div class="slots">
+          <div id="workL" class="slot"></div>
+          <div id="workOp" class="slot op"></div>
+          <div id="workR" class="slot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- center labels (hints) -->
+    <div class="center">
+      <div class="labels">
+        <div class="top">Apply operator to the top two stack values</div>
+        <div class="bottom"><span>Pop two</span><span>Push result</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Input queue -->
+    <div class="panel in">
+      <h3>Input Queue <span class="label">head on left • tail on right</span></h3>
+      <div class="body"><div id="input" class="rowline"></div></div>
+    </div>
+
+    <!-- BOTTOM: Stack -->
+    <div class="panel stack-panel">
+      <h3>Value Stack</h3>
+      <div class="stack-body" id="stack"></div>
+    </div>
+  </div>
+
+  <div class="log" id="log"></div>
+
+<script>
+/* =========================
+   Helpers & Data
+   ========================= */
+const OPS = { '+':1, '-':1, '*':1, '/':1, '^':1 };
+const isOp  = t => OPS[t] === 1;
+const isNum = t => /^-?\d+(?:\.\d+)?$/.test(t);
+
+const $input  = document.getElementById('input');
+const $stack  = document.getElementById('stack');
+const $workL  = document.getElementById('workL');
+const $workOp = document.getElementById('workOp');
+const $workR  = document.getElementById('workR');
+const $status = document.getElementById('status');
+const $log    = document.getElementById('log');
+
+let nextId=1;
+const elById   = new Map(); // id -> element
+const tokenById= new Map(); // id -> {id,text,kind}
+
+function token(text, kind){
+  return { id: nextId++, text, kind };
+}
+function tokenEl(tok){
+  const el = document.createElement('div');
+  el.className = `token ${tok.kind}`;
+  el.textContent = tok.text;
+  el.dataset.id = tok.id;
+  return el;
+}
+function mountInitial(tokens){
+  $input.innerHTML = ''; $stack.innerHTML = '';
+  $workL.innerHTML = ''; $workOp.innerHTML = ''; $workR.innerHTML = '';
+  elById.clear(); tokenById.clear();
+  tokens.forEach(t=>{
+    tokenById.set(t.id, t);
+    const el = tokenEl(t);
+    elById.set(t.id, el);
+    $input.appendChild(el);
+  });
+  markHead();
+}
+function markHead(){
+  Array.from($input.children).forEach((el, i)=>{
+    el.classList.toggle('current', i===0);
+  });
+}
+function log(msg){
+  const d=document.createElement('div'); d.className='entry'; d.textContent=msg;
+  $log.appendChild(d); $log.scrollTop=$log.scrollHeight;
+}
+
+/* =========================
+   FLIP move (with placeholder)
+   ========================= */
+function makePlaceholder(el){
+  const ph = document.createElement('div');
+  const cs = getComputedStyle(el);
+  ph.style.width = el.offsetWidth+'px'; ph.style.height = el.offsetHeight+'px';
+  ph.style.margin = cs.margin; ph.style.visibility='hidden';
+  return ph;
+}
+function moveEl(el, toParent, toIndex, { keepPlaceholder=false } = {}){
+  return new Promise(resolve=>{
+    const first = el.getBoundingClientRect();
+    const fromParent = el.parentElement;
+    const fromIndex  = Array.from(fromParent.children).indexOf(el);
+
+    let ph=null;
+    if(keepPlaceholder){
+      ph = makePlaceholder(el);
+      fromParent.insertBefore(ph, fromParent.children[fromIndex] || null);
+    }
+
+    if(toIndex==null || toIndex >= toParent.children.length) toParent.appendChild(el);
+    else toParent.insertBefore(el, toParent.children[toIndex]);
+
+    const last = el.getBoundingClientRect();
+    const dx = first.left - last.left, dy = first.top - last.top;
+
+    el.style.transition='none';
+    el.style.transform=`translate(${dx}px, ${dy}px)`;
+    el.offsetWidth;
+    el.style.transition=`transform var(--dur) var(--curve)`;
+    el.style.transform='translate(0,0)';
+
+    el.addEventListener('transitionend', function onEnd(){
+      el.style.transition=''; el.style.transform='';
+      el.removeEventListener('transitionend', onEnd);
+      if(ph && ph.parentElement) ph.parentElement.removeChild(ph);
+      resolve({ fromParent, fromIndex, toParent, toIndex });
+    }, { once:true });
+  });
+}
+const insertTop = (parent, el, opts) => moveEl(el, parent, 0, opts);
+
+/* =========================
+   Engine (state only)
+   ========================= */
+class Engine {
+  constructor(tokens){
+    this.tokens = tokens; // array of token objects (input)
+    this.i = 0;           // head index in input
+    this.stack = [];      // stack of token objects (all numbers during evaluation)
+    this.done = false;
+  }
+}
+
+/* =========================
+   Wiring + History
+   ========================= */
+let eng=null;
+let history=[]; // array of { snapshot, actions, note }
+
+function snapshot(e){
+  return {
+    i: e.i,
+    stack: e.stack.map(t=>t.id),
+    done: e.done,
+    // Also remember text/kind for any tokens we may mutate (operators -> numbers)
+    mutated: {} // id -> {text,kind}, we populate when needed
+  };
+}
+function restore(e, snap){
+  e.i = snap.i;
+  e.stack = snap.stack.map(id=>tokenById.get(id));
+  e.done = snap.done;
+}
+
+/* =========================
+   Step logic + animation
+   ========================= */
+async function stepForward(){
+  if(!eng || eng.done) return;
+
+  const actions=[]; // record DOM moves / mutations for undo
+  const snap = snapshot(eng);
+
+  if(eng.i < eng.tokens.length){
+    const t = eng.tokens[eng.i];
+    const el = elById.get(t.id);
+
+    if(isNum(t.text)){
+      // Number -> push to stack (drop)
+      eng.stack.push(t);
+      eng.i++;
+      const rec = await insertTop($stack, el, { keepPlaceholder:false });
+      actions.push({ type:'push', id:t.id, ...rec });
+      markHead();
+      log(`Push number ${t.text} onto stack.`);
+    }
+    else if(isOp(t.text)){
+      // Need at least two numbers
+      if(eng.stack.length < 2){
+        log('⛔ Not enough operands on stack.');
+        return;
+      }
+
+      // Pop right (top), then left
+      const right = eng.stack.pop();
+      const left  = eng.stack.pop();
+
+      const elRight = elById.get(right.id);
+      const elLeft  = elById.get(left.id);
+
+      // Move right to workR (keep placeholder so it leaves visibly from top)
+      const recR = await moveEl(elRight, $workR, null, { keepPlaceholder:true });
+      // Move left to workL
+      const recL = await moveEl(elLeft,  $workL, null, { keepPlaceholder:true });
+
+      actions.push({ type:'popToWork', id:right.id, target:$workR, ...recR });
+      actions.push({ type:'popToWork', id:left.id,  target:$workL, ...recL });
+
+      // Move operator from input head to workOp
+      eng.i++;
+      const recOp = await moveEl(el, $workOp, null);
+      actions.push({ type:'opToWork', id:t.id, ...recOp });
+
+      // Compute result; mutate operator token to become the result
+      const a = parseFloat(left.text);
+      const b = parseFloat(right.text);
+      let r;
+      switch(t.text){
+        case '+': r = a + b; break;
+        case '-': r = a - b; break;
+        case '*': r = a * b; break;
+        case '/': r = a / b; break;
+        case '^': r = Math.pow(a, b); break;
+        default:  log('⛔ Unknown operator '+t.text); return;
+      }
+      // Format (avoid long floats)
+      const rText = (Math.abs(r) < 1e-10 ? 0 : r);
+      const rStr  = Number.isInteger(rText) ? String(rText) : String(+rText.toFixed(10)).replace(/\.?0+$/,'');
+
+      // Record pre-mutation to allow undo
+      snap.mutated[t.id] = { text: t.text, kind: t.kind };
+
+      // Mutate token + element
+      t.text = rStr; t.kind='num';
+      el.classList.remove('op'); el.classList.add('num');
+      el.textContent = rStr;
+
+      // Visually "replace" the three tokens:
+      // shrink operands in place to show they were consumed
+      elLeft.classList.add('merge-hide');
+      elRight.classList.add('merge-hide');
+
+      // Now move the (mutated) operator (now a number) down into the stack
+      eng.stack.push(t);
+      const recRes = await insertTop($stack, el, { keepPlaceholder:false });
+      actions.push({ type:'resultToStack', id:t.id, ...recRes, wasOp:true, prev:snap.mutated[t.id], operands:[left.id, right.id] });
+
+      // Keep operands elements around (hidden) so Undo can bring them back
+      markHead();
+      log(`Apply: ${left.text} ${snap.mutated[t.id].text} ${right.text} → ${rStr}. Push result onto stack.`);
+    }
+    else{
+      log('⛔ Unknown token "'+t.text+'"');
+      return;
+    }
+  }else{
+    // No more input; finalize
+    if(eng.stack.length===1){
+      eng.done = true;
+      log('✔ Evaluation complete. Result = ' + eng.stack[0].text);
+    }else if(eng.stack.length>1){
+      log('ℹ Input exhausted: multiple values remain on stack. Continue stepping or reset.');
+    }else{
+      log('ℹ Input exhausted: stack is empty.');
+    }
+  }
+
+  history.push({ snapshot: snap, actions, note: $log.lastElementChild?.textContent || '' });
+}
+
+/* =========================
+   Undo logic
+   ========================= */
+async function undoStep(){
+  if(!eng || history.length===0) return;
+  const last = history.pop();
+
+  // Restore engine state first
+  restore(eng, last.snapshot);
+
+  // Undo DOM in reverse order
+  for(let i=last.actions.length-1; i>=0; i--){
+    const a = last.actions[i];
+
+    if(a.type==='resultToStack'){
+      // Move result back from stack to workOp
+      const el = elById.get(a.id);
+      await moveEl(el, $workOp, null);
+
+      // Revert mutation back to operator
+      const prev = a.prev;
+      const tok = tokenById.get(a.id);
+      tok.text = prev.text; tok.kind = prev.kind;
+      el.textContent = prev.text; el.classList.remove('num'); el.classList.add('op');
+
+      // Un-shrink operands in work area so they are visible again
+      const [lid, rid] = a.operands;
+      const elL = elById.get(lid);
+      const elR = elById.get(rid);
+      if(elL) elL.classList.remove('merge-hide');
+      if(elR) elR.classList.remove('merge-hide');
+    }
+    else if(a.type==='opToWork' || a.type==='popToWork' || a.type==='push'){
+      const el = elById.get(a.id);
+      // Move element back to its original parent/index
+      if(a.fromParent && a.fromParent.isConnected){
+        await moveEl(el, a.fromParent, a.fromIndex, { keepPlaceholder: a.fromParent === $stack });
+      }
+    }
+  }
+
+  markHead();
+  log('↩ Undo: ' + (last.note || 'previous step'));
+}
+
+/* =========================
+   Reset + tokenize
+   ========================= */
+function tokenizePostfix(expr){
+  // Split by whitespace; accept numbers (including negative/decimal) and operators
+  const raw = expr.trim().split(/\s+/).filter(Boolean);
+  return raw.map(t => token(t, isOp(t) ? 'op' : 'num'));
+}
+function reset(){
+  const expr = document.getElementById('expr').value.trim();
+  $log.innerHTML=''; history=[];
+  try{
+    const toks = tokenizePostfix(expr);
+    eng = new Engine(toks);
+    mountInitial(toks);
+    log('Ready. Input: ' + toks.map(t=>t.text).join(' '));
+  }catch(err){
+    log('⛔ ' + (err?.message || String(err)));
+  }
+}
+
+/* =========================
+   Event wiring
+   ========================= */
+document.getElementById('btnStep').addEventListener('click', stepForward);
+document.getElementById('btnUndo').addEventListener('click', undoStep);
+document.getElementById('btnReset').addEventListener('click', reset);
+document.getElementById('expr').addEventListener('keydown', (e)=>{
+  if(e.key==='Enter'){ reset(); }
+  if(e.key==='ArrowRight'){ e.preventDefault(); stepForward(); }
+  if(e.key==='ArrowLeft'){ e.preventDefault(); undoStep(); }
+});
+
+// Boot
+reset();
+</script>
+</body>
+</html>
