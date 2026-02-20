@@ -113,9 +113,7 @@
   .bin{ position:absolute; left:50%; transform:translateX(-50%); top:calc(100% + 40px); width:1px; height:1px; overflow:hidden; }
 
   /* Footer & log */
-  .status{
-    margin-top:12px; padding:12px; border:1px dashed #374151; border-radius:12px; background:#0b1220;
-  }
+
   .log{
     margin-top:12px; background:#0b1220; border:1px solid #1f2937; border-radius:12px; padding:12px;
     max-height:220px; overflow:auto;
@@ -145,21 +143,21 @@
   <div class="board" id="board">
     <!-- LEFT: OUTPUT QUEUE -->
     <div class="panel out">
-      <h3>Output Queue <span class="label">head on left • tail on right</span></h3>
+      <h3>Output Queue <span class="label">head ⇔ tail</span></h3>
       <div class="body"><div id="output" class="rowline"></div></div>
     </div>
 
     <!-- CENTER: labels (visual hints) -->
     <div class="center">
       <div class="labels">
-        <div class="top">Add → to Output</div>
+        <div class="top">Output ← Add</div>
         <div class="bottom"><span>Pop</span><span>Push</span></div>
       </div>
     </div>
 
     <!-- RIGHT: INPUT QUEUE -->
     <div class="panel in">
-      <h3>Input Queue <span class="label">head on left • tail on right</span></h3>
+      <h3>Input Queue <span class="label">head ⇔ tail</span></h3>
       <div class="body"><div id="input" class="rowline"></div></div>
     </div>
 
@@ -173,7 +171,6 @@
     <div id="bin" class="bin" aria-hidden="true"></div>
   </div>
 
-  <div class="status" id="status">Ready. Click <b>Step Forward</b> to begin.</div>
   <div class="legend">
     Operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code> (right-associative). Parentheses supported.
   </div>
@@ -233,19 +230,11 @@ function tokenizeWithIds(expr){
 const $input  = document.getElementById('input');
 const $output = document.getElementById('output');
 const $stack  = document.getElementById('stack');
-const $status = document.getElementById('status');
 const $log    = document.getElementById('log');
 const $bin    = document.getElementById('bin'); // NEW
 
 const elById = new Map();   // tokenId -> element
 const tokenById = new Map();// tokenId -> token data
-
-function updateRpnStatus() {
-  const rpn = eng.output.map(x => x.text).join(' ');
-  $status.innerHTML = eng.done
-    ? `✔ Complete. RPN: <span class="rpn">${rpn || '(empty)'}</span>`
-    : `RPN so far: <span class="rpn">${rpn || '(empty)'}</span>`;
-}
 
 function tokenEl(token){
   let el = document.createElement('div');
@@ -399,7 +388,6 @@ async function stepForward(){
       actions.push({ id: t.id, ...rec });
       markInputHead();
       const rpn = eng.output.map(x=>x.text).join(' ');
-      $status.innerHTML = `RPN so far: <span class="rpn">${rpn || '(empty)'}</span>`;
       log(`Add "${t.text}" to output`);
     }
     else if(isOp(t.text)){
@@ -482,14 +470,12 @@ async function stepForward(){
       const sTop = eng.stack.pop();
       eng.output.push(sTop);
       const elTop = elById.get(sTop.id);
-      updateRpnStatus();
       const rec = await moveEl(elTop, $output, null, { keepPlaceholder:true }); // NEW
       actions.push({ id:sTop.id, ...rec });
       log(`Drain stack: move "${sTop.text}" to output`);
     } else {
       eng.done = true;
       log('✔ Algorithm complete. RPN: ' + eng.output.map(x=>x.text).join(' '));
-      $status.innerHTML = `✔ Complete. RPN: <span class="rpn">${eng.output.map(x=>x.text).join(' ')}</span>`;
     }
   }
 
@@ -498,7 +484,6 @@ async function stepForward(){
 }
 
 function error(msg){
-  $status.innerHTML = `<span style="color:var(--danger)">${msg}</span>`;
   log('⛔ ' + msg);
 }
 
@@ -546,7 +531,6 @@ function reset(){
     const tokens = tokenizeWithIds(expr);
     eng = new Engine(tokens);
     mountInitial(tokens);
-    $status.innerHTML = `Ready. Input queue: ${tokens.map(t=>t.text).join(' ')}`;
   }catch(err){
     error(err.message || String(err));
   }

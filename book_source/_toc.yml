@@ -15,9 +15,11 @@ chapters:
     - file: generics/array_list
     - file: generics/practice_arraylist
     - file: generics/stack_queue
+    - url: https://java.mrstride.com/_static/html/postfix_visualizer.html
+      title: Postfix Visualizer
     - file: generics/shuntingyard
     - url: https://java.mrstride.com/_static/html/shunting_yard.html
-      title: Animated Shunting Yard
+      title: Shunting Yard Visualizer
     - file: generics/practice_shunting
     - file: generics/maps
     - file: generics/practice_maps

@@ -1,4 +1,4 @@
-# Type Erasure
+# Lesson G8: Type Erasure
 
 This is an advanced lesson about what happens under the hood when we use generics.  
 
