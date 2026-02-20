@@ -1,154 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Shunting Yard Visualizer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root{
-      --bg:#0f172a;           /* slate-900 */
-      --panel:#111827;        /* gray-900 */
-      --panel-2:#0b1220;      /* darker */
-      --text:#e5e7eb;         /* gray-200 */
-      --muted:#9ca3af;        /* gray-400 */
-      --accent:#60a5fa;       /* blue-400 */
-      --warn:#fbbf24;         /* amber-400 */
-      --danger:#f87171;       /* red-400 */
-      --token:#1f2937;        /* gray-800 */
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; background:var(--bg); color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Inter,Arial,sans-serif;
-      line-height:1.35; padding:24px;
-    }
-    h1{margin:0 0 8px 0; font-weight:700}
-    .sub{color:var(--muted); margin-bottom:16px}
+<meta charset="UTF-8" />
+<title>Shunting Yard Visualizer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root{
+    --bg:#0f172a;           /* slate-900 */
+    --panel:#111827;        /* gray-900 */
+    --panel-2:#0b1220;      /* darker */
+    --text:#e5e7eb;         /* gray-200 */
+    --muted:#9ca3af;        /* gray-400 */
+    --accent:#60a5fa;       /* blue-400 */
+    --danger:#f87171;       /* red-400 */
+    --token:#1f2937;        /* gray-800 */
+    --curve:cubic-bezier(.22,1,.36,1);
+    --dur:480ms;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Inter,Arial,sans-serif;
+    line-height:1.35; padding:24px;
+  }
+  h1{margin:0 0 8px 0; font-weight:700}
+  .sub{color:var(--muted); margin-bottom:16px}
 
-    /* Controls */
-    .controls{
-      background:var(--panel); border-radius:12px; padding:12px; border:1px solid #1f2937;
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center
-    }
-    .controls input[type="text"]{
-      background:#0b1220; color:var(--text); border:1px solid #23304a; outline:none;
-      border-radius:8px; padding:10px 12px; width:min(680px, 100%);
-      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-    }
-    .btn{
-      background:#0b1220; color:var(--text); border:1px solid #23304a; padding:10px 12px;
-      border-radius:10px; cursor:pointer; transition:all .15s ease; font-weight:600
-    }
-    .btn:hover{border-color:#2f4270; transform:translateY(-1px)}
-    .btn.primary{background:#10223f; border-color:#2b4d8a; color:#dbeafe}
-    .btn.danger{background:#3a1010; border-color:#7f1d1d; color:#fee2e2}
-    .label{color:var(--muted); font-size:.9rem}
+  /* Controls */
+  .controls{
+    background:var(--panel); border-radius:12px; padding:12px; border:1px solid #1f2937;
+    display:flex; flex-wrap:wrap; gap:10px; align-items:center
+  }
+  .controls input[type="text"]{
+    background:#0b1220; color:var(--text); border:1px solid #23304a; outline:none;
+    border-radius:8px; padding:10px 12px; width:min(680px, 100%);
+    font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  .btn{
+    background:#0b1220; color:var(--text); border:1px solid #23304a; padding:10px 12px;
+    border-radius:10px; cursor:pointer; transition:all .15s ease; font-weight:600
+  }
+  .btn:hover{border-color:#2f4270; transform:translateY(-1px)}
+  .btn.primary{background:#10223f; border-color:#2b4d8a; color:#dbeafe}
+  .btn.danger{background:#3a1010; border-color:#7f1d1d; color:#fee2e2}
+  .label{color:var(--muted); font-size:.9rem}
 
-    /* Layout per your sketch */
-    .board{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns: minmax(280px,1fr) 160px minmax(280px,1fr);
-      grid-template-rows: auto 240px;
-      grid-template-areas:
-        "out center in"
-        ".   stack  .";
-      gap: 12px 40px;
-      align-items:center;
-    }
-    .panel{
-      background:var(--panel); border:1px solid #1f2937; border-radius:12px; overflow:hidden;
-    }
-    .panel h3{
-      margin:0; padding:8px 12px; background:var(--panel-2); border-bottom:1px solid #1f2937;
-      font-size:0.95rem; display:flex; justify-content:space-between; align-items:center
-    }
-    .panel .body{ padding:12px; min-height:88px }
+  /* Layout matching your sketch */
+  .board{
+    margin-top:16px;
+    display:grid;
+    grid-template-columns: minmax(280px,1fr) 160px minmax(280px,1fr);
+    grid-template-rows: auto 260px;
+    grid-template-areas:
+      "out center in"
+      ".   stack  .";
+    gap: 12px 40px;
+    align-items:center;
+    position:relative; /* needed for the bin anchor */
+  }
+  .panel{
+    background:var(--panel); border:1px solid #1f2937; border-radius:12px; overflow:hidden;
+  }
+  .panel h3{
+    margin:0; padding:8px 12px; background:var(--panel-2); border-bottom:1px solid #1f2937;
+    font-size:0.95rem; display:flex; justify-content:space-between; align-items:center
+  }
+  .panel .body{ padding:12px; min-height:90px }
 
-    /* Left: Output queue (head at left) */
-    .out { grid-area: out; }
-    /* Right: Input queue (head at left) */
-    .in  { grid-area: in; }
+  .out { grid-area: out; }
+  .in  { grid-area: in; }
+  .center {
+    grid-area: center; color: var(--muted);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; height:100%;
+  }
+  .center .labels{
+    position:absolute; top:0; bottom:0; left:0; right:0;
+    display:grid; grid-template-rows: 1fr 1fr; pointer-events:none;
+    font-weight:700; color:#c7d2fe;
+  }
+  .center .labels .top { align-self:start; justify-self:center; margin-top:6px }
+  .center .labels .bottom {
+    align-self:end; margin-bottom:6px; display:flex; justify-content:space-between;
+    color:#93c5fd; font-weight:600;
+  }
 
-    /* Center labels mimicking arrows */
-    .center {
-      grid-area: center;
-      color: var(--muted);
-      display:flex; align-items:center; justify-content:center;
-      position:relative; height:100%;
-    }
-    .center .labels{
-      position:absolute; top:0; bottom:0; left:0; right:0;
-      display:grid; grid-template-rows: 1fr 1fr; pointer-events:none;
-      font-weight:700; color:#c7d2fe;
-    }
-    .center .labels .top { align-self:start; justify-self:center; margin-top:6px }
-    .center .labels .bottom {
-      align-self:end; margin-bottom:6px; display:flex; justify-content:space-between;
-      color:#93c5fd; font-weight:600;
-    }
+  /* Stack (vertical, top at top) */
+  .stack-panel{ grid-area: stack; max-width:360px; justify-self:center; }
+  .stack-body{
+    padding:12px; min-height:220px;
+    display:flex; flex-direction:column; gap:8px;
+    align-items:stretch; justify-content:flex-start;
+  }
 
-    /* Bottom: vertical stack, centered */
-    .stack-panel{ grid-area: stack; max-width:340px; justify-self:center; }
-    .stack-body{
-      padding:12px; min-height:200px; display:flex; flex-direction:column; gap:8px;
-      align-items:stretch; justify-content:flex-start; /* top is at top */
-    }
+  /* Rows of tokens */
+  .rowline{ display:flex; gap:8px; flex-wrap:nowrap; align-items:center; min-height:54px }
+  .token{
+    background:var(--token); color:#d1d5db; border:1px solid #374151; border-radius:10px;
+    padding:6px 10px; font-weight:700; letter-spacing:.2px;
+    font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    white-space:nowrap; display:inline-block;
+    will-change: transform;
+  }
+  .op   { background:rgba(14,165,233,.12); border-color:rgba(14,165,233,.45); color:#7dd3fc }
+  .num  { background:rgba(34,197,94,.12); border-color:rgba(34,197,94,.45); color:#86efac }
+  .id   { background:rgba(245,158,11,.12); border-color:rgba(245,158,11,.45); color:#fbbf24 }
+  .par  { background:rgba(167,139,250,.12); border-color:rgba(167,139,250,.45); color:#c4b5fd }
 
-    /* Token visuals */
-    .rowline{ display:flex; gap:8px; flex-wrap:nowrap; align-items:center; min-height:52px }
-    .token{
-      background:var(--token); color:#d1d5db; border:1px solid #374151; border-radius:10px;
-      padding:6px 10px; font-weight:700; letter-spacing:.2px;
-      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      transition:transform .25s ease, opacity .25s ease, box-shadow .25s ease;
-      white-space:nowrap;
-    }
-    .op   { background:rgba(14,165,233,.12); border-color:rgba(14,165,233,.45); color:#7dd3fc }
-    .num  { background:rgba(34,197,94,.12); border-color:rgba(34,197,94,.45); color:#86efac }
-    .id   { background:rgba(245,158,11,.12); border-color:rgba(245,158,11,.45); color:#fbbf24 }
-    .par  { background:rgba(167,139,250,.12); border-color:rgba(167,139,250,.45); color:#c4b5fd }
+  .current{ box-shadow:0 0 0 3px rgba(96,165,250,.35); transform:scale(1.04) }
 
-    .current{ box-shadow:0 0 0 3px rgba(96,165,250,.35); transform:scale(1.04) }
-    .added{ animation:pop .2s ease-out }
-    @keyframes pop{ from{transform:scale(.8); opacity:.3} to{transform:scale(1); opacity:1} }
+  /* NEW: Hidden "bin" where discarded tokens slide to (below the board) */
+  .bin{ position:absolute; left:50%; transform:translateX(-50%); top:calc(100% + 40px); width:1px; height:1px; overflow:hidden; }
 
-    /* Footer & log */
-    .status{
-      margin-top:12px; padding:12px; border:1px dashed #374151; border-radius:12px; background:#0b1220;
-    }
-    .log{
-      margin-top:12px; background:#0b1220; border:1px solid #1f2937; border-radius:12px; padding:12px;
-      max-height:220px; overflow:auto;
-      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-    }
-    .log .entry{ margin-bottom:6px; color:#a5b4fc }
-    .legend{ color:var(--muted); font-size:.9rem; margin-top:6px }
-    .rpn{ color:#a7f3d0; font-weight:700 }
-  </style>
+  /* Footer & log */
+  .status{
+    margin-top:12px; padding:12px; border:1px dashed #374151; border-radius:12px; background:#0b1220;
+  }
+  .log{
+    margin-top:12px; background:#0b1220; border:1px solid #1f2937; border-radius:12px; padding:12px;
+    max-height:220px; overflow:auto;
+    font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  .log .entry{ margin-bottom:6px; color:#a5b4fc }
+  .legend{ color:var(--muted); font-size:.9rem; margin-top:6px }
+  .rpn{ color:#a7f3d0; font-weight:700 }
+
+  @media (prefers-reduced-motion: reduce) {
+    .token { transition: none !important; transform: none !important; }
+  }
+</style>
 </head>
 <body>
   <h1>Shunting Yard Visualizer</h1>
-  <div class="sub">Infix ➜ RPN using Dijkstra’s algorithm. Output on the left, input on the right, stack centered below.</div>
+  <div class="sub">Type in expression, Reset, then Step Forward</div>
 
   <div class="controls">
-    <input id="expr" type="text" value="3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3" />
+    <input id="expr" type="text" value="3 + 4 * 2 / ( 1 - 5 ) ^ 2" />
     <button class="btn" id="btnUndo">◀ Undo Step</button>
     <button class="btn primary" id="btnStep">▶ Step Forward</button>
     <button class="btn danger" id="btnReset">↺ Reset</button>
     <span class="label">Shortcuts: ← undo, → step, Enter reset</span>
   </div>
 
-  <div class="board">
+  <div class="board" id="board">
     <!-- LEFT: OUTPUT QUEUE -->
     <div class="panel out">
       <h3>Output Queue <span class="label">head on left • tail on right</span></h3>
-      <div class="body">
-        <div id="queue" class="rowline"></div>
-      </div>
+      <div class="body"><div id="output" class="rowline"></div></div>
     </div>
 
-    <!-- CENTER: labels mimicking arrows -->
+    <!-- CENTER: labels (visual hints) -->
     <div class="center">
       <div class="labels">
         <div class="top">Add → to Output</div>
@@ -159,302 +160,409 @@
     <!-- RIGHT: INPUT QUEUE -->
     <div class="panel in">
       <h3>Input Queue <span class="label">head on left • tail on right</span></h3>
-      <div class="body">
-        <div id="tokens" class="rowline"></div>
-      </div>
+      <div class="body"><div id="input" class="rowline"></div></div>
     </div>
 
     <!-- BOTTOM: STACK -->
     <div class="panel stack-panel">
-      <h3>Operator Stack <span class="label">top at top</span></h3>
+      <h3>Operator Stack</h3>
       <div class="stack-body" id="stack"></div>
     </div>
+
+    <!-- NEW: off-board discard bin (for ')' and removing '(') -->
+    <div id="bin" class="bin" aria-hidden="true"></div>
   </div>
 
   <div class="status" id="status">Ready. Click <b>Step Forward</b> to begin.</div>
   <div class="legend">
-    Operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code> (right-associative). Parentheses supported. Unary <code>-</code> handled.
+    Operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code> (right-associative). Parentheses supported.
   </div>
   <div class="log" id="log"></div>
 
-  <script>
-    // ----------------------------
-    // Model: operators and helpers
-    // ----------------------------
-    const OPS = {
-      '+': { prec: 2, assoc: 'L' },
-      '-': { prec: 2, assoc: 'L' },
-      '*': { prec: 3, assoc: 'L' },
-      '/': { prec: 3, assoc: 'L' },
-      '^': { prec: 4, assoc: 'R' },
-    };
+<script>
+/* =========================
+   Tokenization with IDs
+   ========================= */
+const OPS = {
+  '+': { prec: 2, assoc: 'L' },
+  '-': { prec: 2, assoc: 'L' },
+  '*': { prec: 3, assoc: 'L' },
+  '/': { prec: 3, assoc: 'L' },
+  '^': { prec: 4, assoc: 'R' },
+};
+const isOp  = t => Object.prototype.hasOwnProperty.call(OPS, t);
+const isNum = t => /^[0-9]+(?:\.[0-9]+)?$/.test(t);
+const isId  = t => /^[A-Za-z_][A-Za-z0-9_]*$/.test(t);
 
-    const isOperator   = t => Object.prototype.hasOwnProperty.call(OPS, t);
-    const isNumber     = t => /^[0-9]+(?:\.[0-9]+)?$/.test(t);
-    const isIdentifier = t => /^[A-Za-z_][A-Za-z0-9_]*$/.test(t);
+let nextId = 1;
+function classify(text){
+  if(isOp(text)) return 'op';
+  if(isNum(text)) return 'num';
+  if(isId(text))  return 'id';
+  if(text==='(' || text===')') return 'par';
+  return 'tok';
+}
+function tokenizeWithIds(expr){
+  const raw=[];
+  const re=/\s*([A-Za-z_][A-Za-z0-9_]*|\d+(?:\.\d+)?|[+\-*/^()]|\S)\s*/g;
+  let m;
+  while((m=re.exec(expr))!==null){
+    const t=m[1];
+    if(t && t.trim()) raw.push(t);
+  }
+  // unary -
+  const out=[];
+  for(let i=0;i<raw.length;i++){
+    const t=raw[i];
+    const prev=out[out.length-1]?.text;
+    const unary = t==='-' && (i===0 || prev==='(' || isOp(prev));
+    if(unary){
+      const nxt=raw[i+1];
+      if(nxt && isNum(nxt)){ out.push({ id: nextId++, text:String(-parseFloat(nxt)), kind:'num' }); i++; }
+      else { out.push({ id: nextId++, text:'0', kind:'num' }); out.push({ id: nextId++, text:'-', kind:'op' }); }
+      continue;
+    }
+    out.push({ id: nextId++, text:t, kind: classify(t) });
+  }
+  return out;
+}
 
-    function tokenize(expr){
-      const tokens = [];
-      const re = /\s*([A-Za-z_][A-Za-z0-9_]*|\d+(?:\.\d+)?|[+\-*/^()]|\S)\s*/g;
-      let m;
-      while((m = re.exec(expr))!==null){
-        const t = m[1];
-        if(t && t.trim()) tokens.push(t);
-      }
-      // Unary minus: attach to number (e.g., -3) or rewrite as "0 - x"
-      const out = [];
-      for(let i=0;i<tokens.length;i++){
-        const t = tokens[i];
-        const prev = out[out.length-1];
-        const isUnary = t==='-' && (i===0 || prev==='(' || isOperator(prev));
-        if(isUnary){
-          const next = tokens[i+1];
-          if(next && isNumber(next)){
-            out.push(String(-parseFloat(next))); i++;
-          }else{
-            out.push('0'); out.push('-');
+/* =========================
+   DOM helpers + FLIP move
+   ========================= */
+const $input  = document.getElementById('input');
+const $output = document.getElementById('output');
+const $stack  = document.getElementById('stack');
+const $status = document.getElementById('status');
+const $log    = document.getElementById('log');
+const $bin    = document.getElementById('bin'); // NEW
+
+const elById = new Map();   // tokenId -> element
+const tokenById = new Map();// tokenId -> token data
+
+function updateRpnStatus() {
+  const rpn = eng.output.map(x => x.text).join(' ');
+  $status.innerHTML = eng.done
+    ? `✔ Complete. RPN: <span class="rpn">${rpn || '(empty)'}</span>`
+    : `RPN so far: <span class="rpn">${rpn || '(empty)'}</span>`;
+}
+
+function tokenEl(token){
+  let el = document.createElement('div');
+  el.className = `token ${token.kind}`;
+  el.textContent = token.text;
+  el.dataset.id = token.id;
+  return el;
+}
+
+// NEW: create a size-matched invisible placeholder to prevent stack jump
+function makePlaceholder(el){
+  const ph = document.createElement('div');
+  ph.style.width  = el.offsetWidth + 'px';
+  ph.style.height = el.offsetHeight + 'px';
+  ph.style.margin = getComputedStyle(el).margin;
+  ph.style.visibility = 'hidden';
+  return ph;
+}
+
+// FLIP reparent-and-slide animation (with placeholder support)
+function moveEl(el, toParent, toIndex, opts={}){
+  const { keepPlaceholder = false } = opts;
+  return new Promise(resolve=>{
+    // Measure FIRST
+    const first = el.getBoundingClientRect();
+
+    // Remember old position for undo records
+    const fromParent = el.parentElement;
+    const fromIndex  = Array.from(fromParent.children).indexOf(el);
+
+    // Optional placeholder to prevent origin shift (great for stack pops)
+    let placeholder = null;
+    if(keepPlaceholder){
+      placeholder = makePlaceholder(el);
+      fromParent.insertBefore(placeholder, fromParent.children[fromIndex] || null);
+    }
+
+    // Move in DOM (LAST)
+    if(toIndex==null || toIndex >= toParent.children.length) toParent.appendChild(el);
+    else toParent.insertBefore(el, toParent.children[toIndex]);
+
+    // Measure LAST
+    const last  = el.getBoundingClientRect();
+
+    // INVERT
+    const dx = first.left - last.left;
+    const dy = first.top  - last.top;
+
+    // PLAY
+    el.style.transition = 'none';
+    el.style.transform  = `translate(${dx}px, ${dy}px)`;
+    // Force reflow
+    el.offsetWidth; 
+    el.style.transition = `transform var(--dur) var(--curve)`;
+    el.style.transform  = 'translate(0,0)';
+    el.addEventListener('transitionend', function onEnd(){
+      el.style.transition = '';
+      el.style.transform  = '';
+      el.removeEventListener('transitionend', onEnd);
+      // Remove placeholder after animation completes
+      if(placeholder && placeholder.parentElement) placeholder.parentElement.removeChild(placeholder);
+      resolve({ fromParent, fromIndex, toParent, toIndex });
+    }, { once:true });
+  });
+}
+
+// Utility: insert at stack top (index 0)
+function insertAtTop(parent, el, opts){ return moveEl(el, parent, 0, opts); }
+
+function log(msg){
+  const div = document.createElement('div');
+  div.className = 'entry';
+  div.textContent = msg;
+  $log.appendChild(div);
+  $log.scrollTop = $log.scrollHeight;
+}
+
+/* =========================
+   Engine state
+   ========================= */
+class Engine {
+  constructor(tokens){
+    this.tokens = tokens; // array of token objects
+    this.i = 0;           // input head index
+    this.stack = [];      // array of token objects (top = end)
+    this.output = [];     // array of token objects
+    this.done = false;
+  }
+  peek(){ return this.stack[this.stack.length-1]; }
+}
+
+/* =========================
+   Visualization wiring
+   ========================= */
+let eng = null;
+let history = []; // array of { snapshot, actions[], message }
+
+function snapshot(e){
+  return {
+    i: e.i,
+    stack: e.stack.map(t=>t.id),
+    output: e.output.map(t=>t.id),
+    done: e.done
+  };
+}
+function restore(e, snap){
+  e.i = snap.i;
+  e.stack = snap.stack.map(id=>tokenById.get(id));
+  e.output = snap.output.map(id=>tokenById.get(id));
+  e.done = snap.done;
+}
+
+/* Initialize input lane with token elements */
+function mountInitial(tokens){
+  $input.innerHTML=''; $output.innerHTML=''; $stack.innerHTML='';
+  elById.clear(); tokenById.clear();
+  tokens.forEach(tok=>{
+    tokenById.set(tok.id, tok);
+    const el = tokenEl(tok);
+    elById.set(tok.id, el);
+    $input.appendChild(el);
+  });
+  markInputHead();
+}
+
+/* Visually mark current input head */
+function markInputHead(){
+  Array.from($input.children).forEach((el, idx)=>{
+    if(idx===0) el.classList.add('current'); else el.classList.remove('current');
+  });
+}
+
+/* =========================
+   Step Forward with slides
+   ========================= */
+async function stepForward(){
+  if(!eng || eng.done) return;
+
+  const actions = []; // will record DOM moves for undo
+  const snap = snapshot(eng);
+
+  if(eng.i < eng.tokens.length){
+    const t = eng.tokens[eng.i];
+    const el = elById.get(t.id);
+
+    if(isNum(t.text) || isId(t.text)){
+      // input -> output
+      eng.output.push(t);
+      eng.i++;
+      const rec = await moveEl(el, $output, null);
+      actions.push({ id: t.id, ...rec });
+      markInputHead();
+      const rpn = eng.output.map(x=>x.text).join(' ');
+      $status.innerHTML = `RPN so far: <span class="rpn">${rpn || '(empty)'}</span>`;
+      log(`Add "${t.text}" to output`);
+    }
+    else if(isOp(t.text)){
+      const o1 = t.text;
+      let popped = [];
+      // Pop from stack per precedence/associativity
+      while(true){
+        const o2 = eng.peek()?.text;
+        if(isOp(o2)){
+          const p1 = OPS[o1].prec, p2 = OPS[o2].prec, a = OPS[o1].assoc;
+          if( (a==='L' && p1<=p2) || (a==='R' && p1<p2) ){
+            const sTop = eng.stack.pop();
+            eng.output.push(sTop);
+            const elTop = elById.get(sTop.id);
+            // stack (top) -> output (tail); keep placeholder so it visibly leaves from the top
+            const rec = await moveEl(elTop, $output, null, { keepPlaceholder:true }); // NEW
+            actions.push({ id:sTop.id, ...rec });
+            popped.push(sTop.text);
+            continue;
           }
-          continue;
         }
-        out.push(t);
+        break;
       }
-      return out;
+      // Move current operator to stack (push)
+      eng.i++;
+      eng.stack.push(t);
+      const rec2 = await insertAtTop($stack, el, { keepPlaceholder:false });
+      actions.push({ id:t.id, ...rec2 });
+      markInputHead();
+      const msg = popped.length
+        ? `Pop "${popped.join(', ')}" to output, then push "${o1}" to stack`
+        : `Push "${o1}" to stack`;
+      log(msg);
     }
+    else if(t.text==='('){
+      // input -> stack (push)
+      eng.i++;
+      eng.stack.push(t);
+      const rec = await insertAtTop($stack, el, { keepPlaceholder:false });
+      actions.push({ id:t.id, ...rec });
+      markInputHead();
+      log('Push "(" to stack');
+    }
+    else if(t.text===')'){
+      // NEW: ) should leave the input — slide it down to the bin first
+      eng.i++;
+      const recClose = await moveEl(el, $bin, null, { keepPlaceholder:false }); // slide out of input
+      actions.push({ id:t.id, ...recClose, toBin:true });
 
-    // ----------------------------
-    // Engine: step-by-step SYA
-    // ----------------------------
-    class ShuntingYard {
-      constructor(tokens){
-        this.tokens = tokens; // full token list
-        this.i = 0;           // index of head in input queue
-        this.stack = [];      // operator stack (top is end)
-        this.output = [];     // output queue (append at end)
-        this.done = false;
+      // Pop until "("
+      let popped = [];
+      while(eng.stack.length && eng.peek().text!=='('){
+        const sTop = eng.stack.pop();
+        eng.output.push(sTop);
+        const elTop = elById.get(sTop.id);
+        const rec = await moveEl(elTop, $output, null, { keepPlaceholder:true }); // NEW
+        actions.push({ id:sTop.id, ...rec });
+        popped.push(sTop.text);
       }
-      peek(){ return this.stack[this.stack.length-1]; }
-
-      step(){
-        if(this.done) return { done:true, action:'Algorithm complete.' };
-
-        if(this.i < this.tokens.length){
-          const t = this.tokens[this.i];
-          if(isNumber(t) || isIdentifier(t)){
-            this.output.push(t);
-            this.i++;
-            return { action:`Enqueue operand <${t}> to output.`,
-                     move: { from:'input', to:'output', tokens:[t] } };
-          }
-          if(isOperator(t)){
-            const o1 = t; let popped=[];
-            while(true){
-              const o2 = this.peek();
-              if(isOperator(o2)){
-                const p1 = OPS[o1].prec, p2 = OPS[o2].prec, a = OPS[o1].assoc;
-                if( (a==='L' && p1<=p2) || (a==='R' && p1<p2) ){
-                  popped.push(this.stack.pop());
-                  this.output.push(o2);
-                  continue;
-                }
-              }
-              break;
-            }
-            this.stack.push(o1);
-            this.i++;
-            const msg = popped.length
-              ? `Pop ${popped.join(', ')} to output (precedence/associativity), then push <${o1}> to stack.`
-              : `Push operator <${o1}> to stack.`;
-            return { action: msg, move:{ from:'input', to:'stack', tokens:[o1] }, pops:popped };
-          }
-          if(t==='('){
-            this.stack.push(t);
-            this.i++;
-            return { action:'Push "(" to stack.', move:{ from:'input', to:'stack', tokens:['('] } };
-          }
-          if(t===')'){
-            let popped=[];
-            while(this.stack.length && this.peek()!=='('){
-              const sTop = this.stack.pop();
-              popped.push(sTop); this.output.push(sTop);
-            }
-            if(this.peek()==='('){ this.stack.pop(); }
-            else throw new Error('Mismatched parentheses.');
-            this.i++;
-            return { action:`Encountered ")": pop until "(". Moved ${popped.join(', ')||'nothing'}.`,
-                     move:{ from:'input', to:'output', tokens:[] }, pops:popped };
-          }
-          throw new Error(`Unknown token "${t}"`);
-        }else{
-          if(this.stack.length){
-            const sTop = this.stack.pop();
-            if(sTop==='(' || sTop===')') throw new Error('Mismatched parentheses at end.');
-            this.output.push(sTop);
-            return { action:`Drain stack: move <${sTop}> to output.`,
-                     move:{ from:'stack', to:'output', tokens:[sTop] } };
-          }else{
-            this.done = true;
-            return { done:true, action:'Algorithm complete.' };
-          }
-        }
+      if(eng.peek() && eng.peek().text==='('){
+        // Remove '(' from stack: slide it down into the bin (visible discard)
+        const par = eng.stack.pop();
+        const elPar = elById.get(par.id);
+        const recOpen = await moveEl(elPar, $bin, null, { keepPlaceholder:true }); // NEW
+        actions.push({ id:par.id, ...recOpen, toBin:true });
+      }else{
+        error(`Mismatched parentheses.`);
+        return;
       }
+      markInputHead();
+      log(`Encountered ")": pop until "(". Moved "${popped.join(', ')||'nothing'}"`);
     }
-
-    // ----------------------------
-    // View
-    // ----------------------------
-    const $tokens = document.getElementById('tokens'); // input (remaining)
-    const $queue  = document.getElementById('queue');  // output
-    const $stack  = document.getElementById('stack');  // vertical stack
-    const $status = document.getElementById('status');
-    const $log    = document.getElementById('log');
-
-    function tClass(t){
-      if(isOperator(t)) return 'token op';
-      if(isNumber(t))   return 'token num';
-      if(isIdentifier(t)) return 'token id';
-      if(t==='(' || t===')') return 'token par';
-      return 'token';
+    else{
+      error(`Unknown token "${t.text}"`);
+      return;
     }
-
-    function render(engine){
-      // INPUT: show remaining tokens only (head is leftmost)
-      $tokens.innerHTML = '';
-      const remaining = engine.tokens.slice(engine.i);
-      remaining.forEach((t, idx)=>{
-        const div = document.createElement('div');
-        div.className = tClass(t) + (idx===0 ? ' current' : '');
-        div.textContent = t;
-        $tokens.appendChild(div);
-      });
-
-      // OUTPUT: head at left
-      $queue.innerHTML = '';
-      engine.output.forEach(t=>{
-        const div = document.createElement('div');
-        div.className = tClass(t);
-        div.textContent = t;
-        $queue.appendChild(div);
-      });
-
-      // STACK: vertical; show top at top (reverse array for display)
-      $stack.innerHTML = '';
-      const view = engine.stack.slice().reverse();
-      view.forEach(t=>{
-        const div = document.createElement('div');
-        div.className = tClass(t);
-        div.textContent = t;
-        $stack.appendChild(div);
-      });
-
-      const rpn = engine.output.join(' ');
-      $status.innerHTML = engine.done
-        ? `✔ Complete. RPN: <span class="rpn">${rpn || '(empty)'}</span>`
-        : `RPN so far: <span class="rpn">${rpn || '(empty)'}</span>`;
+  } else {
+    // Drain stack to output
+    if(eng.stack.length){
+      const sTop = eng.stack.pop();
+      eng.output.push(sTop);
+      const elTop = elById.get(sTop.id);
+      updateRpnStatus();
+      const rec = await moveEl(elTop, $output, null, { keepPlaceholder:true }); // NEW
+      actions.push({ id:sTop.id, ...rec });
+      log(`Drain stack: move "${sTop.text}" to output`);
+    } else {
+      eng.done = true;
+      log('✔ Algorithm complete. RPN: ' + eng.output.map(x=>x.text).join(' '));
+      $status.innerHTML = `✔ Complete. RPN: <span class="rpn">${eng.output.map(x=>x.text).join(' ')}</span>`;
     }
+  }
 
-    function log(msg){
-      const div = document.createElement('div');
-      div.className = 'entry';
-      div.textContent = msg;
-      $log.appendChild(div);
-      $log.scrollTop = $log.scrollHeight;
-    }
+  // Save for undo
+  history.push({ snapshot: snap, actions, message: $log.lastElementChild?.textContent || '' });
+}
 
-    function pulse(where, count=1){
-      const container = where==='output' ? $queue : where==='stack' ? $stack : $tokens;
-      const kids = Array.from(container.children);
-      for(let i=Math.max(0, kids.length-count); i<kids.length; i++){
-        kids[i].classList.add('added');
+function error(msg){
+  $status.innerHTML = `<span style="color:var(--danger)">${msg}</span>`;
+  log('⛔ ' + msg);
+}
+
+/* =========================
+   Undo (slide back)
+   ========================= */
+async function undoStep(){
+  if(!eng || history.length===0) return;
+  const last = history.pop();
+
+  // Restore algorithm snapshot first
+  restore(eng, last.snapshot);
+
+  // Undo DOM moves in reverse
+  for(let i=last.actions.length-1; i>=0; i--){
+    const a = last.actions[i];
+    const el = elById.get(a.id);
+    // For tokens sent to bin (')' or '('), slide them back to their original parent/index
+    if(a.toBin){
+      // ensure element is currently in the bin; if not (e.g., recreated), append it there first
+      if(el && el.parentElement !== $bin){
+        $bin.appendChild(el);
       }
+      await moveEl(el, a.fromParent, a.fromIndex, { keepPlaceholder:false });
+      continue;
     }
-
-    // ----------------------------
-    // Controller: Step & Undo
-    // ----------------------------
-    let engine=null;
-    let history=[]; // stack of {state, action}
-
-    function snapshotFrom(engine){
-      return {
-        i: engine.i,
-        stack: engine.stack.slice(),
-        output: engine.output.slice(),
-        done: engine.done
-      };
+    // Normal slide-back
+    if(a.fromParent && a.fromParent.isConnected){
+      await moveEl(el, a.fromParent, a.fromIndex, { keepPlaceholder: a.fromParent === $stack }); // keepPlaceholder if returning to stack
     }
-    function restoreTo(engine, snap){
-      engine.i = snap.i;
-      engine.stack = snap.stack.slice();
-      engine.output = snap.output.slice();
-      engine.done = snap.done;
-    }
+  }
 
-    function reset(){
-      const expr = document.getElementById('expr').value.trim();
-      $log.innerHTML='';
-      try{
-        const tokens = tokenize(expr);
-        engine = new ShuntingYard(tokens);
-        history = []; // clear undo history
-        render(engine);
-        $status.innerHTML = `Ready. Input queue: ${tokens.join(' ')}`;
-      }catch(err){
-        $status.innerHTML = `<span style="color:var(--danger)">Error: ${err.message}</span>`;
-      }
-    }
+  markInputHead();
+  log('↩ Undo: ' + (last.message || 'previous step'));
+}
 
-    function stepForward(){
-      if(!engine) return;
-      try{
-        // Save snapshot for undo
-        const snap = snapshotFrom(engine);
-        history.push({ state: snap, action: null });
+/* =========================
+   Reset + wiring
+   ========================= */
+function reset(){
+  const expr = document.getElementById('expr').value.trim();
+  $log.innerHTML='';
+  history = [];
+  try{
+    const tokens = tokenizeWithIds(expr);
+    eng = new Engine(tokens);
+    mountInitial(tokens);
+    $status.innerHTML = `Ready. Input queue: ${tokens.map(t=>t.text).join(' ')}`;
+  }catch(err){
+    error(err.message || String(err));
+  }
+}
 
-        const res = engine.step(); // advance one algorithm action
-        render(engine);
+document.getElementById('btnStep').addEventListener('click', stepForward);
+document.getElementById('btnUndo').addEventListener('click', undoStep);
+document.getElementById('btnReset').addEventListener('click', reset);
+document.getElementById('expr').addEventListener('keydown', (e)=>{
+  if(e.key==='Enter'){ reset(); }
+  if(e.key==='ArrowRight'){ e.preventDefault(); stepForward(); }
+  if(e.key==='ArrowLeft'){ e.preventDefault(); undoStep(); }
+});
 
-        // annotate last history entry with the action text we took
-        if(history.length) history[history.length-1].action = res.action || '(internal step)';
-
-        // visuals
-        if(res && res.pops && res.pops.length) pulse('output', res.pops.length);
-        if(res && res.move){
-          if(res.move.to==='output') pulse('output', res.move.tokens.length);
-          if(res.move.to==='stack')  pulse('stack',  res.move.tokens.length);
-        }
-
-        // logging
-        if(res && res.done){
-          log('✔ Algorithm complete. RPN: ' + engine.output.join(' '));
-        }else if(res && res.action){
-          log(res.action);
-        }
-      }catch(err){
-        $status.innerHTML = `<span style="color:var(--danger)">Error: ${err.message}</span>`;
-        log('⛔ ' + err.message);
-      }
-    }
-
-    function undoStep(){
-      if(!engine || history.length===0) return;
-      const last = history.pop();
-      restoreTo(engine, last.state);
-      render(engine);
-      log('↩ Undo: ' + (last.action || 'previous step'));
-    }
-
-    // Events
-    document.getElementById('btnStep').addEventListener('click', stepForward);
-    document.getElementById('btnUndo').addEventListener('click', undoStep);
-    document.getElementById('btnReset').addEventListener('click', reset);
-    document.getElementById('expr').addEventListener('keydown', (e)=>{
-      if(e.key==='Enter'){ reset(); }
-      if(e.key==='ArrowRight'){ e.preventDefault(); stepForward(); }
-      if(e.key==='ArrowLeft'){ e.preventDefault(); undoStep(); }
-    });
-
-    // Initial
-    reset();
-  </script>
+// Initial boot
+reset();
+</script>
 </body>
 </html>
