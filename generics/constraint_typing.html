@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Constraint Typing &#8212; Practical Java </title>
+    <title>Lesson G7: Constraint Typing &#8212; Practical Java </title>
   
   
   
@@ -97,7 +97,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Practice: Contraint Typing" href="practice_ct.html" />
-    <link rel="prev" title="Generics" href="generics.html" />
+    <link rel="prev" title="Lesson G6: Generics" href="generics.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -242,16 +242,17 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="array_list.html">ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="array_list.html">Lesson G1: ArrayList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stack_queue.html">Stack &amp; Queue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shuntingyard.html">Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_queue.html">Lesson G2: Stack &amp; Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shuntingyard.html">Lesson G3: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://java.mrstride.com/_static/html/shunting_yard.html">Animated Shunting Yard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="maps.html">Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maps.html">Lesson G4: Maps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_maps.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="collections.html">Collections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generics.html">Generics</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Constraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collections.html">Lesson G5: Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generics.html">Lesson G6: Generics</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Lesson G7: Constraint Typing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_ct.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Contraint Typing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="type_erasure.html">Type Erasure</a></li>
 </ul>
@@ -495,7 +496,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Constraint Typing</h1>
+    <h1>Lesson G7: Constraint Typing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -534,18 +535,18 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="constraint-typing">
-<h1>Constraint Typing<a class="headerlink" href="#constraint-typing" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lesson-g7-constraint-typing">
+<h1>Lesson G7: Constraint Typing<a class="headerlink" href="#lesson-g7-constraint-typing" title="Link to this heading">#</a></h1>
 <p>In this lesson we learn:</p>
 <ol class="arabic simple">
 <li><p>How to easily interpret Constraint Typing</p></li>
 <li><p>Why we need to, and the benefits we gain from, constraining our <code class="docutils literal notranslate"><span class="pre">generic</span></code> types</p></li>
-<li><p>The syntax of Contraint Typing and <strong>Wildcard</strong> Typing</p></li>
+<li><p>The syntax of Constraint Typing and <strong>Wildcard</strong> Typing</p></li>
 <li><p>How to write generic methods using constraints</p></li>
 </ol>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>A primary purpose of Constraint Typing is to allow a generic method to safely call methods on a generic type. For example, the method may want to require that a generic type <code class="docutils literal notranslate"><span class="pre">T</span></code> implements an interface or inherits from parent a class. Constraints estable an IS-A relationship and eliminate the need to blindly (and unsafely) type cast.</p>
+<p>A primary purpose of Constraint Typing is to allow a generic method to safely call methods on a generic type. For example, the method may want to require that a generic type <code class="docutils literal notranslate"><span class="pre">T</span></code> implements an interface or inherits from parent a class. Constraints establish an IS-A relationship and eliminate the need to blindly (and unsafely) type cast.</p>
 <p>For example, we may want to call a generic method where we are guaranteed that our generic type <code class="docutils literal notranslate"><span class="pre">T</span></code> implements the interface <code class="docutils literal notranslate"><span class="pre">Runnable</span></code>. We can do that as follows:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Runnable</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">runIt</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Do stuff with the object t</span>
@@ -724,7 +725,7 @@ Let’s first describe what <code class="docutils literal notranslate"><span cla
 <p class="admonition-title">Benefit of Generic</p>
 <p>The <strong>benefits</strong> of using generics are:</p>
 <ol class="arabic simple">
-<li><p><strong>Type Saftety at Compile Time:</strong>  Errors are caught at compile time.</p></li>
+<li><p><strong>Type Safety at Compile Time:</strong>  Errors are caught at compile time.</p></li>
 <li><p><strong>Type Casting:</strong> There is no need to do <em>Type Casting</em>.</p></li>
 <li><p><strong>Preserves Specific Type Information:</strong> Generic Collections contain the intended, designated type to allow for continued type-safe operations.</p></li>
 </ol>
@@ -739,7 +740,7 @@ Let’s first describe what <code class="docutils literal notranslate"><span cla
 </pre></div>
 </div>
 <p>Using the class hierarchy diagram, we can see that we are allowed to have the following type of Lists: <code class="docutils literal notranslate"><span class="pre">List&lt;ClassGP&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">List&lt;ClassGGP&gt;</span></code>, or <code class="docutils literal notranslate"><span class="pre">List&lt;Object&gt;</span></code>. These classes are at or <em>above</em> the Lower Bound.</p>
-<p>Conversly, the following List types are DISALLOWED: <code class="docutils literal notranslate"><span class="pre">List&lt;ClassP&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">List&lt;MyClass&gt;</span></code>. These two classes are <em>below</em> the lower bound.</p>
+<p>Conversely, the following List types are DISALLOWED: <code class="docutils literal notranslate"><span class="pre">List&lt;ClassP&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">List&lt;MyClass&gt;</span></code>. These two classes are <em>below</em> the lower bound.</p>
 <div class="warning admonition">
 <p class="admonition-title">Lower Bounds require Wildcard</p>
 <p>We are required to use the <strong>wildcard</strong> <code class="docutils literal notranslate"><span class="pre">?</span></code> when using <code class="docutils literal notranslate"><span class="pre">super</span></code> to set the <strong>Lower Bound</strong>.</p>
@@ -881,7 +882,7 @@ Let’s first describe what <code class="docutils literal notranslate"><span cla
 </section>
 <section id="lower-bounded-wildcards-super-t">
 <h2>Lower-Bounded Wildcards (? super T)<a class="headerlink" href="#lower-bounded-wildcards-super-t" title="Link to this heading">#</a></h2>
-<p>A Lower-Bounded Wilcard restricts the wildcard to a specific type <code class="docutils literal notranslate"><span class="pre">T</span></code> or its superclasses. Note that a class can be considered a superclass of itself. <code class="docutils literal notranslate"><span class="pre">T</span></code> is a superclass of <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
+<p>A Lower-Bounded Wildcard restricts the wildcard to a specific type <code class="docutils literal notranslate"><span class="pre">T</span></code> or its superclasses. Note that a class can be considered a superclass of itself. <code class="docutils literal notranslate"><span class="pre">T</span></code> is a superclass of <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
 <p>In the code below we require the <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> to have a generic type that is a superclass of <code class="docutils literal notranslate"><span class="pre">T</span></code>. This way, we can make use of the Comparator in the <code class="docutils literal notranslate"><span class="pre">Person</span></code> class, the superclass of <code class="docutils literal notranslate"><span class="pre">Kid</span></code>. We are also allowed to use the Comparator found in the <code class="docutils literal notranslate"><span class="pre">Kid</span></code> class.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
@@ -962,9 +963,9 @@ Let’s first describe what <code class="docutils literal notranslate"><span cla
 <section id="what-s-so-important">
 <h2>What’s so important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Generics offer <em>Type Saftety at Compile Time</em> and elminate the need for <em>Type Casting</em>.</p></li>
-<li><p>To invoke a method on a generic type, we need to contrain the type. Example: <code class="docutils literal notranslate"><span class="pre">&lt;T</span> <span class="pre">extends</span> <span class="pre">Interface&gt;</span></code>.</p></li>
-<li><p>To help us read methods with complicated Constraint Typing, we can elminate wildcards and sometimes replace the generic type with the upper bound type.</p></li>
+<li><p>Generics offer <em>Type Safety at Compile Time</em> and eliminate the need for <em>Type Casting</em>.</p></li>
+<li><p>To invoke a method on a generic type, we need to constrain the type. Example: <code class="docutils literal notranslate"><span class="pre">&lt;T</span> <span class="pre">extends</span> <span class="pre">Interface&gt;</span></code>.</p></li>
+<li><p>To help us read methods with complicated Constraint Typing, we can eliminate wildcards and sometimes replace the generic type with the upper bound type.</p></li>
 <li><p>You should be able to write methods involving upper bounds. Example: <code class="docutils literal notranslate"><span class="pre">&lt;T</span> <span class="pre">extends</span> <span class="pre">Interface&gt;</span></code>.</p></li>
 <li><p>Wildcards are necessary for creating lower bounds. Wildcards are sometimes necessary to enable greater flexibility.</p></li>
 </ul>
@@ -1007,7 +1008,7 @@ Let’s first describe what <code class="docutils literal notranslate"><span cla
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Generics</p>
+        <p class="prev-next-title">Lesson G6: Generics</p>
       </div>
     </a>
     <a class="right-next"

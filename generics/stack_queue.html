@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Stack &amp; Queue &#8212; Practical Java </title>
+    <title>Lesson G2: Stack &amp; Queue &#8212; Practical Java </title>
   
   
   
@@ -96,7 +96,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="icon" href="../_static/peanut head.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Shunting Yard" href="shuntingyard.html" />
+    <link rel="next" title="Lesson G3: Shunting Yard" href="shuntingyard.html" />
     <link rel="prev" title="Practice: ArrayList" href="practice_arraylist.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -242,16 +242,17 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="array_list.html">ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="array_list.html">Lesson G1: ArrayList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Stack &amp; Queue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shuntingyard.html">Shunting Yard</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Lesson G2: Stack &amp; Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shuntingyard.html">Lesson G3: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://java.mrstride.com/_static/html/shunting_yard.html">Animated Shunting Yard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="maps.html">Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maps.html">Lesson G4: Maps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_maps.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="collections.html">Collections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generics.html">Generics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="constraint_typing.html">Constraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collections.html">Lesson G5: Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generics.html">Lesson G6: Generics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constraint_typing.html">Lesson G7: Constraint Typing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_ct.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Contraint Typing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="type_erasure.html">Type Erasure</a></li>
 </ul>
@@ -495,7 +496,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Stack & Queue</h1>
+    <h1>Lesson G2: Stack & Queue</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -530,12 +531,12 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="stack-queue">
-<h1>Stack &amp; Queue<a class="headerlink" href="#stack-queue" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lesson-g2-stack-queue">
+<h1>Lesson G2: Stack &amp; Queue<a class="headerlink" href="#lesson-g2-stack-queue" title="Link to this heading">#</a></h1>
 <p>In this lesson, we will learn about two Collection classes, <code class="docutils literal notranslate"><span class="pre">Stack</span></code> and <code class="docutils literal notranslate"><span class="pre">Queue</span></code>.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>A <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is an Abstract Data Type (ADT)<a href="#footnotes"><sup>[1]</sup></a> that is provided by the <a class="reference external" href="https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html">Java Collections Framework</a>. It is a Generic just like <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> and therefore can hold only <code class="docutils literal notranslate"><span class="pre">Objects</span></code>. A <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is a concept that is found in many different programming lanagues. In Java, a <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is also a concrete class.<a href="#footnotes"><sup>[2]</sup></a> The two most common operations to perform on a Stack is <code class="docutils literal notranslate"><span class="pre">push</span></code> (add an item to the data structure) and <code class="docutils literal notranslate"><span class="pre">pop</span></code> (remove an item from the data structure). As the name <em>stack</em> infers, you can think of the data structure like a stack of books. To add a book to the stack, you <strong>push</strong> it to the top. To remove a book from the top of the stack, you <strong>pop</strong> it off. Fortunately, the API that invoke the behaviors have the same name.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is an Abstract Data Type (ADT)<a href="#footnotes"><sup>[1]</sup></a> that is provided by the <a class="reference external" href="https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html">Java Collections Framework</a>. It is a Generic just like <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> and therefore can hold only <code class="docutils literal notranslate"><span class="pre">Objects</span></code>. A <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is a concept that is found in many different programming languages. In Java, a <code class="docutils literal notranslate"><span class="pre">Stack</span></code> is also a concrete class.<a href="#footnotes"><sup>[2]</sup></a> The two most common operations to perform on a Stack is <code class="docutils literal notranslate"><span class="pre">push</span></code> (add an item to the data structure) and <code class="docutils literal notranslate"><span class="pre">pop</span></code> (remove an item from the data structure). As the name <em>stack</em> infers, you can think of the data structure like a stack of books. To add a book to the stack, you <strong>push</strong> it to the top. To remove a book from the top of the stack, you <strong>pop</strong> it off. Fortunately, the API that invoke the behaviors have the same name.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <span class="w">    </span><span class="n">books</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">(</span><span class="s">&quot;Misquoting Jesus&quot;</span><span class="p">));</span>
 <span class="w">    </span><span class="n">books</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">(</span><span class="s">&quot;The Da Vinci Code&quot;</span><span class="p">));</span>
@@ -543,7 +544,7 @@ document.write(`
 <span class="w">    </span><span class="n">Book</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span><span class="w">  </span><span class="c1">// the book on top of the stack is &quot;The Da Vinci Code&quot;</span>
 </pre></div>
 </div>
-<p>A <code class="docutils literal notranslate"><span class="pre">Queue</span></code> is a fancy word for a <em>line</em>, as in the line you stand in while waiting to get into the concert. In proper English, as spoken in Great Britian, you don’t stand in the <em>line</em>, you stand in the <em>queue.</em> The data structure works just like queue you stand in. When you are added to the queue, you go to the end of the line. The next person allowed into the concert, the one to come out of the line next, is the person at the front of the line.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Queue</span></code> is a fancy word for a <em>line</em>, as in the line you stand in while waiting to get into the concert. In proper English, as spoken in Great Britain, you don’t stand in the <em>line</em>, you stand in the <em>queue.</em> The data structure works just like queue you stand in. When you are added to the queue, you go to the end of the line. The next person allowed into the concert, the one to come out of the line next, is the person at the front of the line.</p>
 </section>
 <section id="stack">
 <h2>Stack<a class="headerlink" href="#stack" title="Link to this heading">#</a></h2>
@@ -573,7 +574,7 @@ document.write(`
 </section>
 <section id="class-arraydeque-e">
 <h3>class ArrayDeque&lt;E&gt;<a class="headerlink" href="#class-arraydeque-e" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">ArrayDeque</span></code> class (pronouned “Array Deck”) is short for <strong>Double-Ended Queue</strong>, and because it provides a rich set of methods for working at both ends of a queue, it can be efficiently used to implement both a Stack and a Queue. Furthermore, most of the familiar behaviors keep their familiar names. We can abstract the Stack behaviors using the <code class="docutils literal notranslate"><span class="pre">Deque</span></code> interface:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ArrayDeque</span></code> class (pronounced “Array Deck”) is short for <strong>Double-Ended Queue</strong>, and because it provides a rich set of methods for working at both ends of a queue, it can be efficiently used to implement both a Stack and a Queue. Furthermore, most of the familiar behaviors keep their familiar names. We can abstract the Stack behaviors using the <code class="docutils literal notranslate"><span class="pre">Deque</span></code> interface:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Stack Behavior</p></th>
@@ -625,7 +626,7 @@ document.write(`
 <p>Here is an illustration of a Linked List that has 7 items. The first item contains a <code class="docutils literal notranslate"><span class="pre">Token</span></code> that has the value <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. The second item contains a <code class="docutils literal notranslate"><span class="pre">Token</span></code> that has the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator. The last node in the list is contains the <code class="docutils literal notranslate"><span class="pre">Token</span></code> that has the value <code class="docutils literal notranslate"><span class="pre">4.0</span></code>.<br />
 <img alt="Linked List" src="../_images/double_linked_list.png" /></p>
 <p>One of the nicest properties of a LinkedList is that adding Nodes to the Head or Tail is cheap: O(1)–constant time! If you want to add a Node to the middle of the list, the implementation requires that you follow the chain from the front (or tail) until you find the location that you want to add the new node. Once found, it is very easy to insert the new node: you just update the forwards &amp; backwards references to include the new nodes. You update both <em>chains</em>.</p>
-<p>One negative propery of a <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> is that finding the location of a node is expensive because you have to traverse the chain to the desired location. Even if you know that you want to go to the 5th item, you still have to traverse from 0 to 1 to 2 to 3 to 4 to 5.</p>
+<p>One negative property of a <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> is that finding the location of a node is expensive because you have to traverse the chain to the desired location. Even if you know that you want to go to the 5th item, you still have to traverse from 0 to 1 to 2 to 3 to 4 to 5.</p>
 <p>Another negative property of a <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> is that the nodes are allocated on the Heap at discontiguous locations. While it is nice to allocate memory only when you need it, it can be poor performance to allocate one at a time and at disparate locations.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">ArrayDeque Performance</p>
@@ -791,7 +792,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Shunting Yard</p>
+        <p class="prev-next-title">Lesson G3: Shunting Yard</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

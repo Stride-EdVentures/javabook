@@ -1,4 +1,4 @@
-# Generics
+# Lesson G6: Generics
 
 In this lesson, students will learn how to create their own generic methods and classes. 
 
@@ -23,7 +23,7 @@ Generics allows the developer to create code that is very much like a **template
  First, here is a generic `static` method using the Collection class `List`:  
 ```java
 // The `<T>` is important. It says that we are introducing a generic type `T`.
-// All the occurances of `T` will **conceptually** be replaced by the actual type you want.
+// All the occurrences of `T` will **conceptually** be replaced by the actual type you want.
 public static <T> void printItems(List<T> list) {
     for (T item : list) {
         System.out.println(item);

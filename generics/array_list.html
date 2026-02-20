@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ArrayList &#8212; Practical Java </title>
+    <title>Lesson G1: ArrayList &#8212; Practical Java </title>
   
   
   
@@ -242,16 +242,17 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">ArrayList</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Lesson G1: ArrayList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stack_queue.html">Stack &amp; Queue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shuntingyard.html">Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_queue.html">Lesson G2: Stack &amp; Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shuntingyard.html">Lesson G3: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://java.mrstride.com/_static/html/shunting_yard.html">Animated Shunting Yard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="maps.html">Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maps.html">Lesson G4: Maps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_maps.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="collections.html">Collections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generics.html">Generics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="constraint_typing.html">Constraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collections.html">Lesson G5: Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generics.html">Lesson G6: Generics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constraint_typing.html">Lesson G7: Constraint Typing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_ct.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Contraint Typing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="type_erasure.html">Type Erasure</a></li>
 </ul>
@@ -495,7 +496,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>ArrayList</h1>
+    <h1>Lesson G1: ArrayList</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -527,8 +528,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="arraylist">
-<h1>ArrayList<a class="headerlink" href="#arraylist" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lesson-g1-arraylist">
+<h1>Lesson G1: ArrayList<a class="headerlink" href="#lesson-g1-arraylist" title="Link to this heading">#</a></h1>
 <p>The class <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is a special type of class called a <code class="docutils literal notranslate"><span class="pre">Generic</span></code>. In this lesson, we won’t go into the details of how generics work. Instead, we will focus on why and how to use the class <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
@@ -640,7 +641,7 @@ document.write(`
 </ul>
 <section id="construction-of-wrapper-classes">
 <h3>Construction of Wrapper Classes<a class="headerlink" href="#construction-of-wrapper-classes" title="Link to this heading">#</a></h3>
-<p>The Wrapper classes are generally instantiated implicitly through automatic Boxing (shown below). At times it can can be helpful to one’s understanding to explicilty instantiate a wrapper class. There are several ways to explicitly convert from the primitive type to the wrapper class. Most approaches have the same result meaning that developers can choose their favorite. However, for performance reasons, it is not good to call <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Integer(value)</span></code>. This is because <code class="docutils literal notranslate"><span class="pre">new</span></code> will be slow as it goes through the entire process of allocating memory for a newly created object. Using <code class="docutils literal notranslate"><span class="pre">valueOf</span></code> makes use of the <em>Factory Pattern</em> to provide an object from a set of pre-cached values.</p>
+<p>The Wrapper classes are generally instantiated implicitly through automatic Boxing (shown below). At times it can can be helpful to one’s understanding to explicitly instantiate a wrapper class. There are several ways to explicitly convert from the primitive type to the wrapper class. Most approaches have the same result meaning that developers can choose their favorite. However, for performance reasons, it is not good to call <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Integer(value)</span></code>. This is because <code class="docutils literal notranslate"><span class="pre">new</span></code> will be slow as it goes through the entire process of allocating memory for a newly created object. Using <code class="docutils literal notranslate"><span class="pre">valueOf</span></code> makes use of the <em>Factory Pattern</em> to provide an object from a set of pre-cached values.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="c1">// BAD: Slow and deprecated, but allowed. Do NOT use.</span>
 <span class="w">   </span><span class="n">Integer</span><span class="w"> </span><span class="n">n1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Integer</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
 
@@ -715,7 +716,7 @@ document.write(`
 <span class="n">Boolean</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Oracle’s official documentation, and some technical resources, often reserve <strong>Boxing</strong> specifically for the <em>automatic</em> (or <em>implicit</em>) conversion done by the compiler. Oracle will not consider “Explict Boxing” as boxing at all. However, there is not concensus on this terminology.</p>
+<p>Oracle’s official documentation, and some technical resources, often reserve <strong>Boxing</strong> specifically for the <em>automatic</em> (or <em>implicit</em>) conversion done by the compiler. Oracle will not consider “Explicit Boxing” as boxing at all. However, there is no consensus on this terminology.</p>
 <p>This site has chosen to declare that there are two ways to <strong>Box</strong> or <strong>Unbox</strong>:</p>
 <ul class="simple">
 <li><p><strong>Implicit</strong> or <strong>Automatic</strong>: The compiler does it automatically for the developer.</p></li>
@@ -745,7 +746,7 @@ document.write(`
 </ul>
 </li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">size()</span></code> to see how many elements are in the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code></p></li>
-<li><p>The ArrayList will automaticall grow and shrink.</p>
+<li><p>The ArrayList will automatically grow and shrink.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">list.remove(1);</span></code> // removes the element at index 1 and the other elements at index 2+ will slide into place.</p></li>
 </ul>
@@ -755,17 +756,17 @@ document.write(`
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
 <p>[1] The constructor for <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> can take an integer argument. Most students think that this is the size of the array, and to some degree they’re right! It is the <em>initial</em> size of the underlying <code class="docutils literal notranslate"><span class="pre">array</span></code>, but it is not the count of elements currently in the <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> (the value returned by the method <code class="docutils literal notranslate"><span class="pre">size()</span></code>). It gets a bit complicated.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// create a list that can hold 101 dalmations</span>
-<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dalmations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">101</span><span class="p">);</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// create a list that can hold 101 dalmatians</span>
+<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dalmatians</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">101</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// size() == 0.  The capacity of the list starts out as 101.</span>
 <span class="w">    </span><span class="c1">// This prints: Count of dogs in the list is: 0</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Count of dogs in the list is: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dalmations</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w"> </span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Count of dogs in the list is: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dalmatians</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w"> </span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is implemented with an underlying <code class="docutils literal notranslate"><span class="pre">array</span></code> and the size of the underlying array is <strong>not</strong> the same as the <code class="docutils literal notranslate"><span class="pre">size()</span></code> of the ArrayList. The <code class="docutils literal notranslate"><span class="pre">size()</span></code> of an ArrayList is the count of elements that have been added to the array that can be safely indexed. When the user adds enough elements to exceed the size of the unerlying array, a new array needs to be constructed, and all the elements in the array need to be copied over. This process is expensive and work is done to minimize the occurance.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is implemented with an underlying <code class="docutils literal notranslate"><span class="pre">array</span></code> and the size of the underlying array is <strong>not</strong> the same as the <code class="docutils literal notranslate"><span class="pre">size()</span></code> of the ArrayList. The <code class="docutils literal notranslate"><span class="pre">size()</span></code> of an ArrayList is the count of elements that have been added to the array that can be safely indexed. When the user adds enough elements to exceed the size of the underlying array, a new array needs to be constructed, and all the elements in the array need to be copied over. This process is expensive and work is done to minimize the occurrence.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> will start off with a default capacity of 10. When the 11th element is added, the ArrayList will double its size to 20. When the 21st element is added, it is doubled again to 40. So on and so forth until the size growth is beyond memory limits.</p>
-<p>[2] <code class="docutils literal notranslate"><span class="pre">Arrays.asList</span></code> is a convient way to create a <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<p>[2] <code class="docutils literal notranslate"><span class="pre">Arrays.asList</span></code> is a convenient way to create a <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Use the Arrays helper to create a list tht has a FIXED-SIZED.</span>
 <span class="c1">// In this List, elements cannot be added or removed.</span>
 <span class="c1">// This is not an ArrayList. It is a limited List.</span>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Shunting Yard &#8212; Practical Java </title>
+    <title>Lesson G3: Shunting Yard &#8212; Practical Java </title>
   
   
   
@@ -97,7 +97,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Practice: Shunting Yard" href="practice_shunting.html" />
-    <link rel="prev" title="Stack &amp; Queue" href="stack_queue.html" />
+    <link rel="prev" title="Lesson G2: Stack &amp; Queue" href="stack_queue.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -242,16 +242,17 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="array_list.html">ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="array_list.html">Lesson G1: ArrayList</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stack_queue.html">Stack &amp; Queue</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stack_queue.html">Lesson G2: Stack &amp; Queue</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Lesson G3: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://java.mrstride.com/_static/html/shunting_yard.html">Animated Shunting Yard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="maps.html">Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maps.html">Lesson G4: Maps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_maps.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="collections.html">Collections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generics.html">Generics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="constraint_typing.html">Constraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collections.html">Lesson G5: Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generics.html">Lesson G6: Generics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constraint_typing.html">Lesson G7: Constraint Typing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_ct.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Contraint Typing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="type_erasure.html">Type Erasure</a></li>
 </ul>
@@ -495,7 +496,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Shunting Yard</h1>
+    <h1>Lesson G3: Shunting Yard</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -513,6 +514,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shunting-yard-algorithm">The Shunting Yard Algorithm</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rule-summary">Rule Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shunting-yard-example">Shunting Yard Example</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
@@ -527,8 +529,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="shunting-yard">
-<h1>Shunting Yard<a class="headerlink" href="#shunting-yard" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lesson-g3-shunting-yard">
+<h1>Lesson G3: Shunting Yard<a class="headerlink" href="#lesson-g3-shunting-yard" title="Link to this heading">#</a></h1>
 <p>Here we will learn how to convert an infix mathematical expression to a postfix expression using the <a class="reference external" href="https://en.wikipedia.org/wiki/Shunting_yard_algorithm">Shunting Yard Algorithm</a>. To keep things simple, we will assume that all operators are <a class="reference external" href="https://en.wikipedia.org/wiki/Operator_associativity">left-associative</a>.</p>
 <p>First, we need to know what a postfix expression and how to evaluate it.</p>
 <section id="postfix-expressions">
@@ -554,7 +556,7 @@ document.write(`
 <li><p>Repeat until there is only one token in the queue, which is the answer.</p></li>
 </ol>
 <p><img alt="Postfix Expression" src="../_images/postfix_example.png" />
-Consider the epxression shown above. Here are the specific steps.</p>
+Consider the expression shown above. Here are the specific steps.</p>
 <ol class="arabic simple">
 <li><p>Find the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator as the left-most operator.</p></li>
 <li><p>Compute <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">6</span> <span class="pre">=</span> <span class="pre">9</span></code></p></li>
@@ -663,8 +665,12 @@ Now the stack becomes <code class="docutils literal notranslate"><span class="pr
 <ul class="simple">
 <li><p>stack is empty</p></li>
 <li><p>top of stack is <code class="docutils literal notranslate"><span class="pre">(</span></code></p></li>
-<li><p>precidence of input operator is greater than precidence of top of stack operator</p></li>
+<li><p>precedence of input operator is greater than precedence of top of stack operator</p></li>
 </ul>
+</section>
+<section id="shunting-yard-example">
+<h3>Shunting Yard Example<a class="headerlink" href="#shunting-yard-example" title="Link to this heading">#</a></h3>
+<p>Let’s look at an example. TODO!!</p>
 </section>
 </section>
 <section id="what-s-so-important">
@@ -719,7 +725,7 @@ Now the stack becomes <code class="docutils literal notranslate"><span class="pr
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Stack &amp; Queue</p>
+        <p class="prev-next-title">Lesson G2: Stack &amp; Queue</p>
       </div>
     </a>
     <a class="right-next"
@@ -755,6 +761,7 @@ Now the stack becomes <code class="docutils literal notranslate"><span class="pr
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shunting-yard-algorithm">The Shunting Yard Algorithm</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rule-summary">Rule Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shunting-yard-example">Shunting Yard Example</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>

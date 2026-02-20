@@ -1,4 +1,4 @@
-# ArrayList
+# Lesson G1: ArrayList
 
 The class `ArrayList` is a special type of class called a `Generic`. In this lesson, we won't go into the details of how generics work. Instead, we will focus on why and how to use the class `ArrayList`.  
 
@@ -76,7 +76,7 @@ Generics do **not** work with primitive types; they must work with `Object` type
 * They all override `equals()` and `toString()` methods appropriately  
 
 ### Construction of Wrapper Classes
-The Wrapper classes are generally instantiated implicitly through automatic Boxing (shown below). At times it can can be helpful to one's understanding to explicilty instantiate a wrapper class. There are several ways to explicitly convert from the primitive type to the wrapper class. Most approaches have the same result meaning that developers can choose their favorite. However, for performance reasons, it is not good to call `new Integer(value)`. This is because `new` will be slow as it goes through the entire process of allocating memory for a newly created object. Using `valueOf` makes use of the *Factory Pattern* to provide an object from a set of pre-cached values.  
+The Wrapper classes are generally instantiated implicitly through automatic Boxing (shown below). At times it can can be helpful to one's understanding to explicitly instantiate a wrapper class. There are several ways to explicitly convert from the primitive type to the wrapper class. Most approaches have the same result meaning that developers can choose their favorite. However, for performance reasons, it is not good to call `new Integer(value)`. This is because `new` will be slow as it goes through the entire process of allocating memory for a newly created object. Using `valueOf` makes use of the *Factory Pattern* to provide an object from a set of pre-cached values.  
 ```java
    // BAD: Slow and deprecated, but allowed. Do NOT use.
    Integer n1 = new Integer(7);
@@ -144,7 +144,7 @@ boolean present = list.contains(4);
 Boolean flag = Boolean.TRUE;
 ```
 
-Oracle's official documentation, and some technical resources, often reserve **Boxing** specifically for the *automatic* (or *implicit*) conversion done by the compiler. Oracle will not consider "Explict Boxing" as boxing at all. However, there is not concensus on this terminology.  
+Oracle's official documentation, and some technical resources, often reserve **Boxing** specifically for the *automatic* (or *implicit*) conversion done by the compiler. Oracle will not consider "Explicit Boxing" as boxing at all. However, there is no consensus on this terminology.  
 
 This site has chosen to declare that there are two ways to **Box** or **Unbox**:  
 * **Implicit** or **Automatic**: The compiler does it automatically for the developer.  
@@ -161,7 +161,7 @@ Things to remember:
     * If you want to store `int` values, use the wrapper class `Integer`  
     * Java will automatically **Box** and **Unbox** primitives for you   
 * Use `size()` to see how many elements are in the `ArrayList`  
-* The ArrayList will automaticall grow and shrink.  
+* The ArrayList will automatically grow and shrink.  
     * `list.remove(1);` // removes the element at index 1 and the other elements at index 2+ will slide into place.  
 
 
@@ -169,19 +169,19 @@ Things to remember:
 [1] The constructor for `ArrayList` can take an integer argument. Most students think that this is the size of the array, and to some degree they're right! It is the *initial* size of the underlying `array`, but it is not the count of elements currently in the `ArrayList` (the value returned by the method `size()`). It gets a bit complicated.  
 
 ```java
-    // create a list that can hold 101 dalmations
-    ArrayList<Dog> dalmations = new ArrayList<>(101);
+    // create a list that can hold 101 dalmatians
+    ArrayList<Dog> dalmatians = new ArrayList<>(101);
 
     // size() == 0.  The capacity of the list starts out as 101.
     // This prints: Count of dogs in the list is: 0
-    System.out.printf("Count of dogs in the list is: %d\n", dalmations.size()); 
+    System.out.printf("Count of dogs in the list is: %d\n", dalmatians.size()); 
 ```
 
-The `ArrayList` is implemented with an underlying `array` and the size of the underlying array is **not** the same as the `size()` of the ArrayList. The `size()` of an ArrayList is the count of elements that have been added to the array that can be safely indexed. When the user adds enough elements to exceed the size of the unerlying array, a new array needs to be constructed, and all the elements in the array need to be copied over. This process is expensive and work is done to minimize the occurance.  
+The `ArrayList` is implemented with an underlying `array` and the size of the underlying array is **not** the same as the `size()` of the ArrayList. The `size()` of an ArrayList is the count of elements that have been added to the array that can be safely indexed. When the user adds enough elements to exceed the size of the underlying array, a new array needs to be constructed, and all the elements in the array need to be copied over. This process is expensive and work is done to minimize the occurrence.  
 
 The `ArrayList` will start off with a default capacity of 10. When the 11th element is added, the ArrayList will double its size to 20. When the 21st element is added, it is doubled again to 40. So on and so forth until the size growth is beyond memory limits.  
 
-[2] `Arrays.asList` is a convient way to create a `List`. 
+[2] `Arrays.asList` is a convenient way to create a `List`. 
 ```java
 // Use the Arrays helper to create a list tht has a FIXED-SIZED.
 // In this List, elements cannot be added or removed.
