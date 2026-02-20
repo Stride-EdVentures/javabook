@@ -1,4 +1,4 @@
-# Interfaces 101
+# Lesson I1: Interfaces 101
 
 ```{admonition} Definition
 *Interface*: A contract that promises a specific behavior.

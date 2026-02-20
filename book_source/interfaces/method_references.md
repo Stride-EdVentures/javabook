@@ -1,4 +1,4 @@
-# Method References
+# Lesson I3: Method References
 
 Recall that arguments to a method can be:
 * A primitive type (e.g. `int`, `double`)  

@@ -1,4 +1,4 @@
-# Classes Fall Short
+# Lesson I2: Classes Fall Short
 
 This lesson is dedicated to showing that classes are pretty good at allowing us to customize the sort order of a list. However, classes are not good enough. Interfaces are needed to sort a generic list of objects that define their own sort order.  
 

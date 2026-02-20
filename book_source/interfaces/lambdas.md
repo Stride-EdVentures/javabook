@@ -1,4 +1,4 @@
-# Lambdas
+# Lesson I4: Lambdas
 
 In this lesson we will learn how to fulfill a Functional Interface with a Lambda Expression.
 And we will see how to practically apply lambdas in several ways.
