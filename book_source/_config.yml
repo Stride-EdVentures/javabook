@@ -59,5 +59,7 @@ sphinx:
     "custom_directives": "ext/"
     "setup_templating": "ext/"
   config:
+    html_js_files:
+      - "custom.js"
     suppress_warnings:
       - "myst.header"
