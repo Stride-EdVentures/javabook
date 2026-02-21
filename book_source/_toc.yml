@@ -10,6 +10,8 @@ chapters:
     - file: Topics/layout_managers
     - file: Topics/java_v_cpp
     - file: Topics/images
+    - url: https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching
+      title: Learn Git Branching
   - file: generics/index
     sections:
     - file: generics/array_list
@@ -60,5 +62,3 @@ chapters:
     - file: patterns/solid
     - file: patterns/design_patterns
     - file: patterns/principles  
-  - url: https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching
-    title: Learn Git Branching
