@@ -285,6 +285,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2"><a class="reference internal" href="maven.html">Maven</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Spring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mockito.html">Mockito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_mockito.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Mockito</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log4j.html">Log4j</a></li>
 </ul>
 </details></li>
@@ -517,6 +518,14 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beans">Beans</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#details-on-autowired">Details on <code class="docutils literal notranslate"><span class="pre">@Autowired</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-spring-knows-what-to-inject">How Spring knows what to inject</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-multiple-beans-share-the-same-interface">When multiple beans share the same interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-configuration-and-bean">Using <code class="docutils literal notranslate"><span class="pre">@Configuration</span></code> and <code class="docutils literal notranslate"><span class="pre">@Bean</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-configuration-and-testing">Spring Configuration and Testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#service-locator-pattern">Service Locator Pattern</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
@@ -630,6 +639,86 @@ document.write(`
 </pre></div>
 </div>
 <p>When the application starts, Spring creates one instance of ImageService (by default, beans are <a class="reference internal" href="../patterns/singleton.html"><span class="doc std std-doc">singletons</span></a>) and automatically injects it into ImageProcessor. The application code never includes <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">ImageService()</span></code> because Spring handles it all. However, when writing tests, one would want to explicitly instantiate services, real or mocked, to control the tests to make them predictable.</p>
+<p>temp</p>
+</section>
+<section id="details-on-autowired">
+<h2>Details on <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code><a class="headerlink" href="#details-on-autowired" title="Link to this heading">#</a></h2>
+<p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code></strong> is a Spring‑provided annotation that enables <strong>Dependency Injection (DI)</strong>. It tells Spring:</p>
+<p><em>“Find a bean of this type and inject it here.”</em></p>
+<p>You can place <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> on a <strong>constructor</strong>, <strong>setter</strong>, or <strong>field</strong>.</p>
+<blockquote>
+<div><p><strong>constructor injection</strong> is the recommended approach.</p>
+</div></blockquote>
+<section id="how-spring-knows-what-to-inject">
+<h3>How Spring knows what to inject<a class="headerlink" href="#how-spring-knows-what-to-inject" title="Link to this heading">#</a></h3>
+<p>To be injected, a class must be created and managed by the Spring <strong>IoC container</strong>. This happens when the class is annotated with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code></p></li>
+<li><p>or defined in a <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> class using a <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> method</p></li>
+</ul>
+<p>Spring scans the project for these annotations (component scanning) and creates singletons by default.</p>
+</section>
+<section id="when-multiple-beans-share-the-same-interface">
+<h3>When multiple beans share the same interface<a class="headerlink" href="#when-multiple-beans-share-the-same-interface" title="Link to this heading">#</a></h3>
+<p>If more than one bean implements the same interface, Spring cannot choose automatically. In that case you can:</p>
+<ul class="simple">
+<li><p><strong>Mark one bean as the default</strong> using <code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code></p></li>
+<li><p><strong>Select a specific bean by name</strong> using <code class="docutils literal notranslate"><span class="pre">&#64;Qualifier(&quot;beanName&quot;)</span></code></p></li>
+</ul>
+</section>
+<section id="using-configuration-and-bean">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code><a class="headerlink" href="#using-configuration-and-bean" title="Link to this heading">#</a></h3>
+<p>Instead of relying only on component scanning, you can also explicitly declare beans using:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span><span class="w">  </span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">	</span><span class="nd">@Bean</span><span class="p">(</span><span class="s">&quot;stripe&quot;</span><span class="p">)</span><span class="w">  </span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="nf">stripePaymentService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    	</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StripePaymentService</span><span class="p">();</span><span class="w">  </span>
+<span class="w">	</span><span class="p">}</span><span class="w">  </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This allows fine‑grained control over object creation—useful for setting constructor parameters, customizing objects, or injecting third‑party classes that you cannot annotate with <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code>.</p>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// A named Component</span>
+<span class="c1">// @Qualifier(&quot;paypal&quot;) // alternative way to name the component </span>
+<span class="nd">@Component</span><span class="p">(</span><span class="s">&quot;paypal&quot;</span><span class="p">)</span><span class="w">  </span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PaypalPaymentService</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="nd">@Autowired</span><span class="w"> </span><span class="c1">// field injection</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">CreditCardService</span><span class="w"> </span><span class="n">cardService</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">// this will be set via Setter Injection</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">InspectionService</span><span class="w"> </span><span class="n">inspectionService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span><span class="w"> </span><span class="c1">// Setting injection</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setInspectionService</span><span class="p">(</span><span class="n">InspectionService</span><span class="w"> </span><span class="n">inspectionService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Service</span><span class="w">  </span>
+<span class="nd">@Primary</span><span class="w">  </span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CheckoutService</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="n">paymentService</span><span class="p">;</span>
+
+<span class="w">	</span><span class="nd">@Autowired</span><span class="w">  </span><span class="c1">// constructor injection with qualifier</span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">CheckoutService</span><span class="p">(</span><span class="nd">@Qualifier</span><span class="p">(</span><span class="s">&quot;paypal&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="n">paymentService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    	</span><span class="k">this</span><span class="p">.</span><span class="na">paymentService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paymentService</span><span class="p">;</span><span class="w">  </span>
+<span class="w">	</span><span class="p">}</span><span class="w">  </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> injects dependencies managed by Spring.</p></li>
+<li><p>Spring finds injectable classes through <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code>/<code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code> or through <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> methods.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">&#64;Qualifier(&quot;name&quot;)</span></code> when multiple implementations exist.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code> to define a preferred default implementation.</p></li>
+</ul>
+</section>
 </section>
 <section id="spring-configuration-and-testing">
 <h2>Spring Configuration and Testing<a class="headerlink" href="#spring-configuration-and-testing" title="Link to this heading">#</a></h2>
@@ -815,6 +904,14 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beans">Beans</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#details-on-autowired">Details on <code class="docutils literal notranslate"><span class="pre">@Autowired</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-spring-knows-what-to-inject">How Spring knows what to inject</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-multiple-beans-share-the-same-interface">When multiple beans share the same interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-configuration-and-bean">Using <code class="docutils literal notranslate"><span class="pre">@Configuration</span></code> and <code class="docutils literal notranslate"><span class="pre">@Bean</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-configuration-and-testing">Spring Configuration and Testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#service-locator-pattern">Service Locator Pattern</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>

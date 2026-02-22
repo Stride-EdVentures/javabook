@@ -285,6 +285,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Maven</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spring.html">Spring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mockito.html">Mockito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_mockito.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Mockito</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log4j.html">Log4j</a></li>
 </ul>
 </details></li>
@@ -510,7 +511,6 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-maven">What is Maven?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pom-xml">POM.xml</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-file-structure">Project File Structure</a></li>
 </ul>
             </nav>
         </div>
@@ -574,6 +574,8 @@ document.write(`
 </div>
 <div class="dropdown admonition">
 <p class="admonition-title">XML Details</p>
+<p><strong>Details:</strong></p>
+</div>
 <p><project>:
 The root element of the pom.xml file. It defines the XML namespace and schema location.
 <modelVersion>:
@@ -592,12 +594,13 @@ Defines a single dependency. In this example, we have a dependency on JUnit, a p
 <artifactId>: The artifact ID of the dependency (e.g., junit).
 <version>: The version of the dependency (e.g., 4.13.2).
 <scope>: The scope of the dependency. In this case, test means the dependency is only used for testing.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="c1">## Project File Structure</span>
+<span class="n">Maven</span> <span class="n">follows</span> <span class="n">a</span> <span class="n">mandatory</span> <span class="ow">and</span> <span class="n">specific</span> <span class="n">directory</span> <span class="n">structure</span> <span class="n">to</span> <span class="n">maintain</span> <span class="n">consistency</span> <span class="ow">and</span> <span class="n">convention</span> <span class="n">across</span> <span class="n">projects</span><span class="o">.</span> <span class="n">Here</span><span class="s1">&#39;s an overview of the Maven project structure :</span>
+
+</pre></div>
 </div>
-</section>
-<section id="project-file-structure">
-<h2>Project File Structure<a class="headerlink" href="#project-file-structure" title="Link to this heading">#</a></h2>
-<p>Maven follows a mandatory and specific directory structure to maintain consistency and convention across projects. Here’s an overview of the Maven project structure :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my-app
+<p>my-app
 │
 ├── src
 │   ├── main
@@ -615,22 +618,26 @@ Defines a single dependency. In this example, we have a dependency on JUnit, a p
 │   │   ├── resources
 │   │   │   └── test-config.properties
 │
-├── pom.xml
+├── pom.xml</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+Here is an explanation of the above directory structure:    
+**src/main/java:**  
+  This directory contains your main application source code. The package structure should follow the standard Java package naming conventions (e.g., com.example).  
+**src/main/resources:**  
+  This directory is for non-Java resources required by your application, such as configuration files, property files, XML files, etc. These resources are included in the classpath when the project is built.
+**src/test/java:**  
+  This directory contains your test source code. It follows the same package structure as your main source code. Test classes are typically named with a Test suffix (e.g., AppTest.java).  
+**src/test/resources:**  
+  This directory is for resources needed by your tests, such as test configuration files, mock data, etc. These resources are also included in the classpath during the test phase.  
+**pom.xml:**  
+  The Project Object Model file that contains information about the project and configuration details used by Maven to build the project. It includes dependencies, plugins, build configurations, and more.
+
+
+In the `CSS 490: Multithreading in GUI Application` class, we have the following directory structure.
+
 </pre></div>
 </div>
-<p>Here is an explanation of the above.
-src/main/java:
-This directory contains your main application source code. The package structure should follow the standard Java package naming conventions (e.g., com.example).
-src/main/resources:
-This directory is for non-Java resources required by your application, such as configuration files, property files, XML files, etc. These resources are included in the classpath when the project is built.
-src/test/java:
-This directory contains your test source code. It follows the same package structure as your main source code. Test classes are typically named with a Test suffix (e.g., AppTest.java).
-src/test/resources:
-This directory is for resources needed by your tests, such as test configuration files, mock data, etc. These resources are also included in the classpath during the test phase.
-pom.xml:
-The Project Object Model file that contains information about the project and configuration details used by Maven to build the project. It includes dependencies, plugins, build configurations, and more.</p>
-<p>In the <code class="docutils literal notranslate"><span class="pre">CSS</span> <span class="pre">490:</span> <span class="pre">Multithreading</span> <span class="pre">in</span> <span class="pre">GUI</span> <span class="pre">Application</span></code> class, we have the following directory structure.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├───.mvn
+<p>├───.mvn
 │   └───wrapper
 ├───.vscode
 ├───lib
@@ -640,11 +647,10 @@ The Project Object Model file that contains information about the project and co
 │   │   ├───java
 │   │   │   └───com
 │   │   │       └───mrstride
-│   │   │           ├───console
+|   |   |           ├───entity
 │   │   │           ├───gui
 │   │   │           └───services
 │   │   └───resources
-│   │       ├───designs
 │   │       ├───images
 │   │       ├───levels
 │   │       └───playbacks
@@ -652,8 +658,11 @@ The Project Object Model file that contains information about the project and co
 │       └───java
 │           └───com
 │               └───mrstride
-└───target
-
+|                   ├───entity
+│                   ├───gui
+│                   └───services
+└───target</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </section>
@@ -725,7 +734,6 @@ The Project Object Model file that contains information about the project and co
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-maven">What is Maven?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pom-xml">POM.xml</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-file-structure">Project File Structure</a></li>
 </ul>
   </nav></div>
 

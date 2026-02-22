@@ -89,6 +89,86 @@ public class ImageProcessor {
 
 When the application starts, Spring creates one instance of ImageService (by default, beans are [singletons](../patterns/singleton)) and automatically injects it into ImageProcessor. The application code never includes `new ImageService()` because Spring handles it all. However, when writing tests, one would want to explicitly instantiate services, real or mocked, to control the tests to make them predictable.  
 
+temp
+
+## Details on `@Autowired`
+
+**`@Autowired`** is a Spring‑provided annotation that enables **Dependency Injection (DI)**. It tells Spring:
+
+*"Find a bean of this type and inject it here."*
+
+You can place `@Autowired` on a **constructor**, **setter**, or **field**.
+
+> **constructor injection** is the recommended approach.  
+
+### How Spring knows what to inject
+
+To be injected, a class must be created and managed by the Spring **IoC container**. This happens when the class is annotated with:
+
+* `@Component`  
+* `@Service`   
+* or defined in a `@Configuration` class using a `@Bean` method
+
+Spring scans the project for these annotations (component scanning) and creates singletons by default.
+
+### When multiple beans share the same interface
+
+If more than one bean implements the same interface, Spring cannot choose automatically. In that case you can:
+
+* **Mark one bean as the default** using `@Primary`  
+* **Select a specific bean by name** using `@Qualifier("beanName")`
+
+### Using `@Configuration` and `@Bean`
+
+Instead of relying only on component scanning, you can also explicitly declare beans using:
+```java
+@Configuration  
+public class AppConfig {  
+	@Bean("stripe")  
+	public PaymentService stripePaymentService() {  
+    	return new StripePaymentService();  
+	}  
+}
+```
+This allows fine‑grained control over object creation—useful for setting constructor parameters, customizing objects, or injecting third‑party classes that you cannot annotate with `@Component`.
+
+
+### Example
+```java
+// A named Component
+// @Qualifier("paypal") // alternative way to name the component 
+@Component("paypal")  
+public class PaypalPaymentService implements PaymentService { 
+    @Autowired // field injection
+    private CreditCardService cardService;
+    
+    // this will be set via Setter Injection
+    private InspectionService inspectionService;
+
+    @Autowired // Setting injection
+    public void setInspectionService(InspectionService inspectionService) { ... }
+}
+
+@Service  
+@Primary  
+public class CheckoutService {  
+	private final PaymentService paymentService;
+
+	@Autowired  // constructor injection with qualifier
+	public CheckoutService(@Qualifier("paypal") PaymentService paymentService) {  
+    	this.paymentService = paymentService;  
+	}  
+}
+```
+
+### Summary
+
+* `@Autowired` injects dependencies managed by Spring.  
+* Spring finds injectable classes through `@Component`/`@Service` or through `@Bean` methods.  
+* Use `@Qualifier("name")` when multiple implementations exist.  
+* Use `@Primary` to define a preferred default implementation.
+
+
 
 ## Spring Configuration and Testing
 Spring will look at the return type of methods annotated with `@Bean` and call these methods to instantiate beans.   
