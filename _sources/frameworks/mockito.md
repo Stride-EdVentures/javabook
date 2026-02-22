@@ -4,7 +4,7 @@ Mockito helps you create **mocks** so your unit tests can focus on a component i
 
 In Mockito, a **mocked object** is a *test double* whose behavior you control. If you don't specify behavior for a method (via *stubbing*), Mockito supplies a default return. 
 
-A developer can easily **stub out** simple behavior and then verify higher level interactions.  
+A developer can easily **stub out** simple behavior and then verify higher level interactions. Note that you can *stub out* methods only on mocks and spies.   
 
 ```{admonition} Good Practice
 :class: note
@@ -12,8 +12,6 @@ Keep unit tests fast by stubbing all **external I/O**.
 ```
 
 ## Quick Example
-  
-
 In code example below, the goal is to test the `UserService` implementation. It depends on the `UserRepository` to perform the action `findNameById`. Instead, we *stub* out *findNameById* to eliminate that dependency and to assure behavior.  
  
 
@@ -53,15 +51,27 @@ While tht test above may seem *dumb*, you need to zero in on the **concept**. We
 ```
    
 ## Annotations
+Mockito comes with a lot of annotations. In order for the annotations to work, the testing class must first be annotated as follows:  
+```java
+@ExtendWith(MockitoExtension.class)
+public class TestWithMockito {
+    @Mock // this now works
+    private MyDependency dep;
+    ...
+}
+```
+The `@ExtendWith` annotation bootstraps Mockito's annotation processing; it enables `@Mock`, `@Spy`, `@InjectMocks` and more.  
+
 Here are some common annotations and what they do:  
 
 | Annotation  | What It Does |
 | -------------- | -------- |
-| **`@Mock`**   | Creates and manages a mock instance for you. Mockito handles its lifecycle.  |
-| **`@InjectMocks`**  | Creates the class under test and injects the mocks into its constructor, fields, or setters. |
+| **`@Mock`**   | Creates and manages a mock instance for you. Mockito handles its lifecycle. You can *stub* a mocked object. |
+| **`@InjectMocks`**  | Creates a real instance and injects the mocks into its constructor, fields, or setters. Use this annotation to create the object you intend to test. This instance cannot be stubbed (spied).|
 | **`@Spy`** | Wraps a real instance; real methods run unless you explicitly stub them. Useful for partial mocking. |
 | **`@Captor`**  | Provides a type‑safe `ArgumentCaptor` for capturing method arguments during verification. |
-| **`@ExtendWith(MockitoExtension.class)`**| Bootstraps Mockito’s annotation processing (e.g., enables `@Mock`, `@Spy`, `@InjectMocks`).  |
+
+> Note: A lot of documentation will use the acronym `SUT` to refer to the `System Under Test`. This is the class or object you are testing. This is the *target* of your tests that you are isolating from dependencies.  
 
 ## Mocked but Unstubbed
 When an object is *mocked but unstubbed*, the method return the following default values:  
@@ -78,8 +88,9 @@ When an object is *mocked but unstubbed*, the method return the following defaul
 | **toString()**            | Returns a Mockito‑generated identifier such as: *Mock for MyService, hashCode: 123456*    |
 | **equals() / hashCode()** | Uses identity equality — the mock equals itself and has a stable identity‑based hash code |
 
-### Unstubbed but customized
-Mockito lets you change what **unstubbed** methods return by choosing a different *default answer*:
+<details><summary>**Extra: Customized Default Answers**
+</summary>
+Mockito lets you customize the return values of mocked, but **NOT stubbed**, methods. You can set a different *default answer*:
 
 1) **Smart nulls** — helpful failure messages  
 
@@ -113,8 +124,9 @@ Repo repo = mock(Repo.class, withSettings()
 ```
 
 You can program your own strategy for all unstubbed methods.
+</details>
 
-## Mock, Spy, InjectMocks, Captor
+## Mock, Spy, InjectMocks
 These annotations add greater power and flexibility in your testing.  
 
 Consider this example code:   
@@ -178,23 +190,44 @@ This says, *"Capture whatever argument was passed so I can assert on it later."*
 
 @Captor allows you verify impacts to arguments that were passed to a mocked method.  
 
-## Spies vs. Mocks (quick contrast)
-
+### Diagram of Dependencies
+Here is an ASCII Diagram
+```text
+                 (Test Class)
+                 ┌─────────────────────────────┐
+                 │ @Mock    MyDependency dep   │  ← Fake/spy-able dependency
+                 │ @Mock    OtherDep otherDep  │
+                 │ @Spy     AuditLogger logger │  ← Real obj (partial mock)
+                 │ @InjectMocks MyService sut  │  ← SUT (real instance)
+                 └──────────────┬──────────────┘
+                                │ injection (by @InjectMocks)
+                                ▼
+                          ┌───────────────┐
+                          │   MyService   │  ← SUT (real)
+                          ├───────────────┤
+ uses these deps  ──────> │ dep           │  ← mock (stub/verify allowed)
+ uses these deps  ──────> │ otherDep      │  ← mock (stub/verify allowed)
+ uses these deps  ──────> │ logger        │  ← spy (real + selective stubbing)
+                          └───────────────┘
+```
+```{admonition} Spies vs. Mocks
+:class: note
 **Mock**: all methods return defaults unless stubbed.  
 **Spy**: wraps a real instance; **real methods run** unless you stub them.    
 
-```{admonition} Good Practice
-:class: note
+**Good Practice:**  
 When stubbing spies, prefer `doReturn(...).when(spy).method(...)` to avoid invoking the real method during stubbing.
-```
 
+Here is code inside a test method that creates a Spy.  
 ```java
 MyComponent real = new MyComponent();
-MyComponent spy = spy(real);
+// invoke Mockito's spy method to create a spy of the real object
+MyComponent spyObj = org.mockito.Mockito.spy(real);
 
 // Override just one method; others stay real:
-doReturn(42).when(spy).compute(); 
+doReturn(42).when(spyObj).compute(); 
 ```
+
 ## What's so Important? ![Billy](../_static/whats_so_important.png)   
 * Mockito lets you isolate a class under test by replacing real dependencies with **mocks**, so tests run fast, deterministically, and without touching external systems.  
 * Mockito allows a developer to override specific methods during a test via **stubbing**. For example, `when(...).thenReturn(...)` lets you specify exactly what a mocked method should return, allowing you to test logic without relying on real dependency behavior.

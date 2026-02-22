@@ -511,12 +511,11 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-example">Quick Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations">Annotations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mocked-but-unstubbed">Mocked but Unstubbed</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unstubbed-but-customized">Unstubbed but customized</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mocked-but-unstubbed">Mocked but Unstubbed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mock-spy-injectmocks">Mock, Spy, InjectMocks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagram-of-dependencies">Diagram of Dependencies</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mock-spy-injectmocks-captor">Mock, Spy, InjectMocks, Captor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spies-vs-mocks-quick-contrast">Spies vs. Mocks (quick contrast)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
@@ -534,7 +533,7 @@ document.write(`
 <h1>Mockito<a class="headerlink" href="#mockito" title="Link to this heading">#</a></h1>
 <p>Mockito helps you create <strong>mocks</strong> so your unit tests can focus on a component in isolation. For example, it allows test code to run without requiring a real database, without making actual HTTP calls, and without waiting for slow dependencies to produce their lengthy results.</p>
 <p>In Mockito, a <strong>mocked object</strong> is a <em>test double</em> whose behavior you control. If you don’t specify behavior for a method (via <em>stubbing</em>), Mockito supplies a default return.</p>
-<p>A developer can easily <strong>stub out</strong> simple behavior and then verify higher level interactions.</p>
+<p>A developer can easily <strong>stub out</strong> simple behavior and then verify higher level interactions. Note that you can <em>stub out</em> methods only on mocks and spies.</p>
 <div class="note admonition">
 <p class="admonition-title">Good Practice</p>
 <p>Keep unit tests fast by stubbing all <strong>external I/O</strong>.</p>
@@ -579,6 +578,16 @@ document.write(`
 </section>
 <section id="annotations">
 <h2>Annotations<a class="headerlink" href="#annotations" title="Link to this heading">#</a></h2>
+<p>Mockito comes with a lot of annotations. In order for the annotations to work, the testing class must first be annotated as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestWithMockito</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Mock</span><span class="w"> </span><span class="c1">// this now works</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyDependency</span><span class="w"> </span><span class="n">dep</span><span class="p">;</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;ExtendWith</span></code> annotation bootstraps Mockito’s annotation processing; it enables <code class="docutils literal notranslate"><span class="pre">&#64;Mock</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;Spy</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;InjectMocks</span></code> and more.</p>
 <p>Here are some common annotations and what they do:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -588,10 +597,10 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Mock</span></code></strong></p></td>
-<td><p>Creates and manages a mock instance for you. Mockito handles its lifecycle.</p></td>
+<td><p>Creates and manages a mock instance for you. Mockito handles its lifecycle. You can <em>stub</em> a mocked object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;InjectMocks</span></code></strong></p></td>
-<td><p>Creates the class under test and injects the mocks into its constructor, fields, or setters.</p></td>
+<td><p>Creates a real instance and injects the mocks into its constructor, fields, or setters. Use this annotation to create the object you intend to test. This instance cannot be stubbed (spied).</p></td>
 </tr>
 <tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Spy</span></code></strong></p></td>
 <td><p>Wraps a real instance; real methods run unless you explicitly stub them. Useful for partial mocking.</p></td>
@@ -599,12 +608,12 @@ document.write(`
 <tr class="row-odd"><td><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Captor</span></code></strong></p></td>
 <td><p>Provides a type‑safe <code class="docutils literal notranslate"><span class="pre">ArgumentCaptor</span></code> for capturing method arguments during verification.</p></td>
 </tr>
-<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;ExtendWith(MockitoExtension.class)</span></code></strong></p></td>
-<td><p>Bootstraps Mockito’s annotation processing (e.g., enables <code class="docutils literal notranslate"><span class="pre">&#64;Mock</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;Spy</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;InjectMocks</span></code>).</p></td>
-</tr>
 </tbody>
 </table>
 </div>
+<blockquote>
+<div><p>Note: A lot of documentation will use the acronym <code class="docutils literal notranslate"><span class="pre">SUT</span></code> to refer to the <code class="docutils literal notranslate"><span class="pre">System</span> <span class="pre">Under</span> <span class="pre">Test</span></code>. This is the class or object you are testing. This is the <em>target</em> of your tests that you are isolating from dependencies.</p>
+</div></blockquote>
 </section>
 <section id="mocked-but-unstubbed">
 <h2>Mocked but Unstubbed<a class="headerlink" href="#mocked-but-unstubbed" title="Link to this heading">#</a></h2>
@@ -643,9 +652,9 @@ document.write(`
 </tbody>
 </table>
 </div>
-<section id="unstubbed-but-customized">
-<h3>Unstubbed but customized<a class="headerlink" href="#unstubbed-but-customized" title="Link to this heading">#</a></h3>
-<p>Mockito lets you change what <strong>unstubbed</strong> methods return by choosing a different <em>default answer</em>:</p>
+<details><summary>**Extra: Customized Default Answers**
+</summary>
+Mockito lets you customize the return values of mocked, but **NOT stubbed**, methods. You can set a different *default answer*:
 <ol class="arabic simple">
 <li><p><strong>Smart nulls</strong> — helpful failure messages</p></li>
 </ol>
@@ -676,10 +685,10 @@ document.write(`
 </pre></div>
 </div>
 <p>You can program your own strategy for all unstubbed methods.</p>
+</details>
 </section>
-</section>
-<section id="mock-spy-injectmocks-captor">
-<h2>Mock, Spy, InjectMocks, Captor<a class="headerlink" href="#mock-spy-injectmocks-captor" title="Link to this heading">#</a></h2>
+<section id="mock-spy-injectmocks">
+<h2>Mock, Spy, InjectMocks<a class="headerlink" href="#mock-spy-injectmocks" title="Link to this heading">#</a></h2>
 <p>These annotations add greater power and flexibility in your testing.</p>
 <p>Consider this example code:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
@@ -737,22 +746,44 @@ This says, <em>“Build an object for me and plug in all the mocks/spies it need
 <p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Captor</span></code></strong>:<br />
 This says, <em>“Capture whatever argument was passed so I can assert on it later.”</em></p>
 <p>&#64;Captor allows you verify impacts to arguments that were passed to a mocked method.</p>
-</section>
-<section id="spies-vs-mocks-quick-contrast">
-<h2>Spies vs. Mocks (quick contrast)<a class="headerlink" href="#spies-vs-mocks-quick-contrast" title="Link to this heading">#</a></h2>
-<p><strong>Mock</strong>: all methods return defaults unless stubbed.<br />
-<strong>Spy</strong>: wraps a real instance; <strong>real methods run</strong> unless you stub them.</p>
-<div class="note admonition">
-<p class="admonition-title">Good Practice</p>
-<p>When stubbing spies, prefer <code class="docutils literal notranslate"><span class="pre">doReturn(...).when(spy).method(...)</span></code> to avoid invoking the real method during stubbing.</p>
-</div>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">MyComponent</span><span class="w"> </span><span class="n">real</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyComponent</span><span class="p">();</span>
-<span class="n">MyComponent</span><span class="w"> </span><span class="n">spy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spy</span><span class="p">(</span><span class="n">real</span><span class="p">);</span>
-
-<span class="c1">// Override just one method; others stay real:</span>
-<span class="n">doReturn</span><span class="p">(</span><span class="mi">42</span><span class="p">).</span><span class="na">when</span><span class="p">(</span><span class="n">spy</span><span class="p">).</span><span class="na">compute</span><span class="p">();</span><span class="w"> </span>
+<section id="diagram-of-dependencies">
+<h3>Diagram of Dependencies<a class="headerlink" href="#diagram-of-dependencies" title="Link to this heading">#</a></h3>
+<p>Here is an ASCII Diagram</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                 (Test Class)
+                 ┌─────────────────────────────┐
+                 │ @Mock    MyDependency dep   │  ← Fake/spy-able dependency
+                 │ @Mock    OtherDep otherDep  │
+                 │ @Spy     AuditLogger logger │  ← Real obj (partial mock)
+                 │ @InjectMocks MyService sut  │  ← SUT (real instance)
+                 └──────────────┬──────────────┘
+                                │ injection (by @InjectMocks)
+                                ▼
+                          ┌───────────────┐
+                          │   MyService   │  ← SUT (real)
+                          ├───────────────┤
+ uses these deps  ──────&gt; │ dep           │  ← mock (stub/verify allowed)
+ uses these deps  ──────&gt; │ otherDep      │  ← mock (stub/verify allowed)
+ uses these deps  ──────&gt; │ logger        │  ← spy (real + selective stubbing)
+                          └───────────────┘
 </pre></div>
 </div>
+<div class="note admonition">
+<p class="admonition-title">Spies vs. Mocks</p>
+<p><strong>Mock</strong>: all methods return defaults unless stubbed.<br />
+<strong>Spy</strong>: wraps a real instance; <strong>real methods run</strong> unless you stub them.</p>
+<p><strong>Good Practice:</strong><br />
+When stubbing spies, prefer <code class="docutils literal notranslate"><span class="pre">doReturn(...).when(spy).method(...)</span></code> to avoid invoking the real method during stubbing.</p>
+<p>Here is code inside a test method that creates a Spy.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">MyComponent</span><span class="w"> </span><span class="n">real</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyComponent</span><span class="p">();</span>
+<span class="c1">// invoke Mockito&#39;s spy method to create a spy of the real object</span>
+<span class="n">MyComponent</span><span class="w"> </span><span class="n">spyObj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">mockito</span><span class="p">.</span><span class="na">Mockito</span><span class="p">.</span><span class="na">spy</span><span class="p">(</span><span class="n">real</span><span class="p">);</span>
+
+<span class="c1">// Override just one method; others stay real:</span>
+<span class="n">doReturn</span><span class="p">(</span><span class="mi">42</span><span class="p">).</span><span class="na">when</span><span class="p">(</span><span class="n">spyObj</span><span class="p">).</span><span class="na">compute</span><span class="p">();</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+</section>
 </section>
 <section id="what-s-so-important">
 <h2>What’s so Important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
@@ -854,12 +885,11 @@ This says, <em>“Capture whatever argument was passed so I can assert on it lat
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-example">Quick Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations">Annotations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mocked-but-unstubbed">Mocked but Unstubbed</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unstubbed-but-customized">Unstubbed but customized</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mocked-but-unstubbed">Mocked but Unstubbed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mock-spy-injectmocks">Mock, Spy, InjectMocks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagram-of-dependencies">Diagram of Dependencies</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mock-spy-injectmocks-captor">Mock, Spy, InjectMocks, Captor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spies-vs-mocks-quick-contrast">Spies vs. Mocks (quick contrast)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
