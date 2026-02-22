@@ -46,21 +46,22 @@ POM == Project Object Model
 
 ```{admonition} XML Details
 :class: dropdown
-
+**Details:**  
+```
 <project>:
-The root element of the pom.xml file. It defines the XML namespace and schema location.
+  The root element of the pom.xml file. It defines the XML namespace and schema location.
 <modelVersion>:
-Specifies the version of the POM model. For most projects, this will be 4.0.0.
+  Specifies the version of the POM model. For most projects, this will be 4.0.0.
 <groupId>:
-A unique identifier for your project group. It usually follows the reverse domain name convention (e.g., com.example).
+  A unique identifier for your project group. It usually follows the reverse domain name convention (e.g., com.example).
 <artifactId>:
-The name of your project. This is the name of the JAR file that will be generated (e.g., my-app).
+  The name of your project. This is the name of the JAR file that will be generated (e.g., my-app).
 <version>:
-The version of your project. This helps in managing different versions of the same project (e.g., 1.0.0).
+  The version of your project. This helps in managing different versions of the same project (e.g., 1.0.0).
 <dependencies>:
-A section where you define the dependencies your project needs. Each dependency is specified within a <dependency> element.
+  A section where you define the dependencies your project needs. Each dependency is specified within a <dependency> element.
 <dependency>:
-Defines a single dependency. In this example, we have a dependency on JUnit, a popular testing framework.
+  Defines a single dependency. In this example, we have a dependency on JUnit, a popular testing framework.
 <groupId>: The group ID of the dependency (e.g., junit).
 <artifactId>: The artifact ID of the dependency (e.g., junit).
 <version>: The version of the dependency (e.g., 4.13.2).
@@ -91,17 +92,18 @@ my-app
 │
 ├── pom.xml
 ```
-Here is an explanation of the above.
-src/main/java:
-This directory contains your main application source code. The package structure should follow the standard Java package naming conventions (e.g., com.example).
-src/main/resources:
-This directory is for non-Java resources required by your application, such as configuration files, property files, XML files, etc. These resources are included in the classpath when the project is built.
-src/test/java:
-This directory contains your test source code. It follows the same package structure as your main source code. Test classes are typically named with a Test suffix (e.g., AppTest.java).
-src/test/resources:
-This directory is for resources needed by your tests, such as test configuration files, mock data, etc. These resources are also included in the classpath during the test phase.
-pom.xml:
-The Project Object Model file that contains information about the project and configuration details used by Maven to build the project. It includes dependencies, plugins, build configurations, and more.
+
+Here is an explanation of the above directory structure:    
+**src/main/java:**  
+  This directory contains your main application source code. The package structure should follow the standard Java package naming conventions (e.g., com.example).  
+**src/main/resources:**  
+  This directory is for non-Java resources required by your application, such as configuration files, property files, XML files, etc. These resources are included in the classpath when the project is built.
+**src/test/java:**  
+  This directory contains your test source code. It follows the same package structure as your main source code. Test classes are typically named with a Test suffix (e.g., AppTest.java).  
+**src/test/resources:**  
+  This directory is for resources needed by your tests, such as test configuration files, mock data, etc. These resources are also included in the classpath during the test phase.  
+**pom.xml:**  
+  The Project Object Model file that contains information about the project and configuration details used by Maven to build the project. It includes dependencies, plugins, build configurations, and more.
 
 
 In the `CSS 490: Multithreading in GUI Application` class, we have the following directory structure.
@@ -117,11 +119,10 @@ In the `CSS 490: Multithreading in GUI Application` class, we have the following
 │   │   ├───java
 │   │   │   └───com
 │   │   │       └───mrstride
-│   │   │           ├───console
+|   |   |           ├───entity
 │   │   │           ├───gui
 │   │   │           └───services
 │   │   └───resources
-│   │       ├───designs
 │   │       ├───images
 │   │       ├───levels
 │   │       └───playbacks
@@ -129,6 +130,9 @@ In the `CSS 490: Multithreading in GUI Application` class, we have the following
 │       └───java
 │           └───com
 │               └───mrstride
+|                   ├───entity
+│                   ├───gui
+│                   └───services
 └───target
 
 ```
