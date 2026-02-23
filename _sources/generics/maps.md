@@ -83,7 +83,41 @@ Because the nodes are stored in a Binary Search Tree, we get the following chara
 * The keys can be enumerated in a predictable, sorted order.  
 
 ### LinkedHashMap
-In this...
+A `LinkedHashMap` is a special type of `HashMap` that **remembers the order in which entries were inserted**. Internally, it works just like a regular hash table, but each entry is also part of a **doubly linked list** that maintains an ordering of the keys.
+
+Here is an illustration of what a LinkedHashMap looks like. It is a HashTable with links between the nodes.    
+![LinkedHashMap](../_static/LinkedHashTable.png)  
+
+**How It Differs from `HashMap`**  
+
+| Feature        | `HashMap`                 | `LinkedHashMap`                |
+| -------------- | ------------------------- | ------------------------------ |
+| Ordering       | No guaranteed order       | Predictable order              |
+| Type of order  | None (effectively random) | **Insertion order** by default |
+| Under-the-hood | Hash table                | Hash table **+ linked list**   |
+
+Because of this linked list, when you iterate over a `LinkedHashMap`, you will see the keys in the *exact order they were added*. A regular `HashMap` makes *no such promise*.
+
+
+```java
+Map<String, Integer> map = new LinkedHashMap<>();
+map.put("Rishitha", 15);
+map.put("Zainab", 18);
+map.put("Prithu", 3);
+map.put("George", 4);
+
+// Iteration will print keys in this order:
+// Rishitha, Zainab, Prithu, George
+for (String name : map.keySet()) {
+    System.out.println(name + ": " + map.get(name));
+}
+```
+
+#### Performance Impact
+
+A `LinkedHashMap` has the same Big-O performance characteristics as a normal `HashMap`. It is still **O(1)** for `put()`, `get()`, and `remove()`. However, in practice it is *slightly* slower and uses a bit more memory because it must maintain an internal linked list of all entries. This means that each entry stores extra pointers for `next` and `prev`.  
+
+In practice, the difference is small enough that you should choose `LinkedHashMap` whenever you need **predictable iteration order**.
 
 ## Key Requirements
 There are some requirements for the Objects that act as keys in a Map. The requirements are **not** enforced so if a developer doesn't follow them then the behavior can get wild!  
