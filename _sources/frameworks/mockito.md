@@ -88,7 +88,7 @@ When an object is *mocked but unstubbed*, the method return the following defaul
 | **toString()**            | Returns a Mockito‑generated identifier such as: *Mock for MyService, hashCode: 123456*    |
 | **equals() / hashCode()** | Uses identity equality — the mock equals itself and has a stable identity‑based hash code |
 
-<details><summary>**Extra: Customized Default Answers**
+<details><summary>**Extra: Overriding Default Answers**
 </summary>
 Mockito lets you customize the return values of mocked, but **NOT stubbed**, methods. You can set a different *default answer*:
 

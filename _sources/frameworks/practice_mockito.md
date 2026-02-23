@@ -60,7 +60,7 @@ void test_using_manual_mock() {
 :class: tip dropdown
  
 **Why use `@Mock`:**  
-An object being tested (the *target* object) may have multiple dependencies that need to be injected. A suite of tests may require a mocked object to be created an used in many tests. Therefore, the use of `@Mock` can make tests cleaner as it provides automatic setup and automatic injection. It keeps tests cleaner and easier to read, especially when **multiple mocks** are involved.  However, using `@Mock` requires `@ExtendWith(MockitoExtension.class)` and is more heavy-handed.  
+An object being tested (the *target* object) may have multiple dependencies that need to be injected. A suite of tests may require a mocked object to be created and used in many tests. Therefore, the use of `@Mock` can make tests cleaner as it provides automatic setup and automatic injection. It keeps tests cleaner and easier to read, especially when **multiple mocks** are involved.  However, using `@Mock` requires `@ExtendWith(MockitoExtension.class)` and is more heavy-handed.  
 
 **Why use `mock()`:**  
 The `mock(Dependency.class)` API is useful for creating mocks inside a method where the mocked object is not a field of the testing class. It can be clearer in small, simple test classes. Directly mocking the object makes the code more explicit and transparent which can, at times, be helpful to a developer reading the code.  
