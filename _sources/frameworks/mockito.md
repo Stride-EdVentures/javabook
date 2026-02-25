@@ -190,6 +190,24 @@ This says, *"Capture whatever argument was passed so I can assert on it later."*
 
 @Captor allows you verify impacts to arguments that were passed to a mocked method.  
 
+```{admonition} Good Practice
+:class: note dropdown
+It is Mr. Stride's opinion that developers should limit Argument Captures and `InOrder` because they can be a *code smell*. When a test begins to rely upon verifying the impact to arguments, or how many times a method was called, or the order in which things were called, then there becomes a tight coupling between the specific implementation of the behavior being tested and the test itself. This means that if the implementation changes (e.g. to become more efficient, to use a different library, to accommodate extended capabilities) then the tests are likely to fail.  
+
+When a test fails even while the implementation is still correct, this illustrates test fragility that the developer must address. Repeated failures are annoying and are a waste of time because one is spending time correcting a test instead of improving the product's functionality. This can result in the developer choosing to overly simplify the test, or the developer turning the test off. Either way, now the tests are effectively dead weight, sucking up resources and adding no value.  
+
+In summary, when the act of improving implementation causes a test to fail, this can mean a bad test, or worse yet, a bad design. Argument Captors are good at testing the side effects of a method instead of its direct contribution. There is a time and a place where Argument Captors are appropriate. However, the design of a system should strive to minimize functionality that relies on side effects. Instead, a system should have modules & methods that are directly testable.  
+
+Argument Captors can be an indication of a bad design or the start of a fragile test. A developer should use these **practical heuristics**:  
+* **Can I assert the outcome instead of the path?** If yes, drop interaction verification.  
+* **Is the collaborator a boundary adapter where the output is the point?** If yes, captors are acceptable, but assert the contract, not incidental fields.  
+* **Is the order itself a business rule?** If yes, use InOrder; otherwise don’t.  
+* **Am I verifying something I can move into a pure function?<sup>[2]</sup>** If yes, extract and unit-test it.  
+* **Would a fake make this more robust?** If yes, prefer a fake.   
+
+In conclusion, `ArgumentCaptor` and `InOrder` are *sharp* tools; use them sparingly and intentionally. Overuse is a code smell (*too much behavior hidden in side effects*) and a test smell (*overspecification*). Favor *outcome-based* and *contract-based* assertions, pure function<sup>[2]</sup> extraction, and fakes/integration tests where they remove the need to police internal call choreography.
+```
+
 ### Diagram of Dependencies
 Here is an ASCII Diagram
 ```text
@@ -231,13 +249,13 @@ doReturn(42).when(spyObj).compute();
 ## What's so Important? ![Billy](../_static/whats_so_important.png)   
 * Mockito lets you isolate a class under test by replacing real dependencies with **mocks**, so tests run fast, deterministically, and without touching external systems.  
 * Mockito allows a developer to override specific methods during a test via **stubbing**. For example, `when(...).thenReturn(...)` lets you specify exactly what a mocked method should return, allowing you to test logic without relying on real dependency behavior.
-* Annotations simplify setup. Here are some annotation:  
+* Annotations simplify setup. Here are some annotations:  
     *   `@Mock` creates fake dependencies
     *   `@Spy` partially wraps real objects
     *   `@InjectMocks` wires mocks into the class under test
     *   `@Captor` captures arguments
     *   `@ExtendWith(MockitoExtension.class)` activates all of the above for JUnit 5
-* Mockito can test whether methods was called or not, and to inspect the arguments of a method.   
+* Mockito can test whether methods were called or not, and to inspect the arguments of a method.   
 
 ## Footnotes
 [1] A **fluent chain** (or *fluent interface*) is a style of method calling where each method returns an object that allows another method to be called immediately, forming a **chain** of calls that reads more like natural language.
@@ -255,3 +273,12 @@ MyService service = mock(MyService.class, RETURNS_DEEP_STUBS);
 // Now, fluent chains succeed because methods return a mock.
 ```
 
+[2] A **pure function** is a function that always gives the same output when given the same inputs and does nothing except compute and return a value. It does not read or modify external state, write to files, call databases, or change anything outside itself. Because a **pure function has no side effects**, it is predictable and easy to test: you simply check whether its return value is correct for a given set of inputs.
+
+For example, the function below is pure because it only depends on its parameters and returns a value without changing anything else:
+```java
+int square(int x) {
+    return x * x;
+}
+```
+Calling `square(5)` will *always* return `25`, and the call never affects the rest of the program, making it simple, reliable, and ideal for unit testing.

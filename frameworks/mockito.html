@@ -746,6 +746,21 @@ This says, <em>“Build an object for me and plug in all the mocks/spies it need
 <p><strong><code class="docutils literal notranslate"><span class="pre">&#64;Captor</span></code></strong>:<br />
 This says, <em>“Capture whatever argument was passed so I can assert on it later.”</em></p>
 <p>&#64;Captor allows you verify impacts to arguments that were passed to a mocked method.</p>
+<div class="note dropdown admonition">
+<p class="admonition-title">Good Practice</p>
+<p>It is Mr. Stride’s opinion that developers should limit Argument Captures and <code class="docutils literal notranslate"><span class="pre">InOrder</span></code> because they can be a <em>code smell</em>. When a test begins to rely upon verifying the impact to arguments, or how many times a method was called, or the order in which things were called, then there becomes a tight coupling between the specific implementation of the behavior being tested and the test itself. This means that if the implementation changes (e.g. to become more efficient, to use a different library, to accommodate extended capabilities) then the tests are likely to fail.</p>
+<p>When a test fails even while the implementation is still correct, this illustrates test fragility that the developer must address. Repeated failures are annoying and are a waste of time because one is spending time correcting a test instead of improving the product’s functionality. This can result in the developer choosing to overly simplify the test, or the developer turning the test off. Either way, now the tests are effectively dead weight, sucking up resources and adding no value.</p>
+<p>In summary, when the act of improving implementation causes a test to fail, this can mean a bad test, or worse yet, a bad design. Argument Captors are good at testing the side effects of a method instead of its direct contribution. There is a time and a place where Argument Captors are appropriate. However, the design of a system should strive to minimize functionality that relies on side effects. Instead, a system should have modules &amp; methods that are directly testable.</p>
+<p>Argument Captors can be an indication of a bad design or the start of a fragile test. A developer should use these <strong>practical heuristics</strong>:</p>
+<ul class="simple">
+<li><p><strong>Can I assert the outcome instead of the path?</strong> If yes, drop interaction verification.</p></li>
+<li><p><strong>Is the collaborator a boundary adapter where the output is the point?</strong> If yes, captors are acceptable, but assert the contract, not incidental fields.</p></li>
+<li><p><strong>Is the order itself a business rule?</strong> If yes, use InOrder; otherwise don’t.</p></li>
+<li><p><strong>Am I verifying something I can move into a pure function?<sup>[2]</sup></strong> If yes, extract and unit-test it.</p></li>
+<li><p><strong>Would a fake make this more robust?</strong> If yes, prefer a fake.</p></li>
+</ul>
+<p>In conclusion, <code class="docutils literal notranslate"><span class="pre">ArgumentCaptor</span></code> and <code class="docutils literal notranslate"><span class="pre">InOrder</span></code> are <em>sharp</em> tools; use them sparingly and intentionally. Overuse is a code smell (<em>too much behavior hidden in side effects</em>) and a test smell (<em>overspecification</em>). Favor <em>outcome-based</em> and <em>contract-based</em> assertions, pure function<sup>[2]</sup> extraction, and fakes/integration tests where they remove the need to police internal call choreography.</p>
+</div>
 <section id="diagram-of-dependencies">
 <h3>Diagram of Dependencies<a class="headerlink" href="#diagram-of-dependencies" title="Link to this heading">#</a></h3>
 <p>Here is an ASCII Diagram</p>
@@ -790,7 +805,7 @@ When stubbing spies, prefer <code class="docutils literal notranslate"><span cla
 <ul class="simple">
 <li><p>Mockito lets you isolate a class under test by replacing real dependencies with <strong>mocks</strong>, so tests run fast, deterministically, and without touching external systems.</p></li>
 <li><p>Mockito allows a developer to override specific methods during a test via <strong>stubbing</strong>. For example, <code class="docutils literal notranslate"><span class="pre">when(...).thenReturn(...)</span></code> lets you specify exactly what a mocked method should return, allowing you to test logic without relying on real dependency behavior.</p></li>
-<li><p>Annotations simplify setup. Here are some annotation:</p>
+<li><p>Annotations simplify setup. Here are some annotations:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;Mock</span></code> creates fake dependencies</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;Spy</span></code> partially wraps real objects</p></li>
@@ -799,7 +814,7 @@ When stubbing spies, prefer <code class="docutils literal notranslate"><span cla
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;ExtendWith(MockitoExtension.class)</span></code> activates all of the above for JUnit 5</p></li>
 </ul>
 </li>
-<li><p>Mockito can test whether methods was called or not, and to inspect the arguments of a method.</p></li>
+<li><p>Mockito can test whether methods were called or not, and to inspect the arguments of a method.</p></li>
 </ul>
 </section>
 <section id="footnotes">
@@ -816,6 +831,14 @@ When stubbing spies, prefer <code class="docutils literal notranslate"><span cla
 <span class="c1">// Now, fluent chains succeed because methods return a mock.</span>
 </pre></div>
 </div>
+<p>[2] A <strong>pure function</strong> is a function that always gives the same output when given the same inputs and does nothing except compute and return a value. It does not read or modify external state, write to files, call databases, or change anything outside itself. Because a <strong>pure function has no side effects</strong>, it is predictable and easy to test: you simply check whether its return value is correct for a given set of inputs.</p>
+<p>For example, the function below is pure because it only depends on its parameters and returns a value without changing anything else:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">square(5)</span></code> will <em>always</em> return <code class="docutils literal notranslate"><span class="pre">25</span></code>, and the call never affects the rest of the program, making it simple, reliable, and ideal for unit testing.</p>
 </section>
 </section>
 
