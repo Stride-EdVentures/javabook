@@ -1,11 +1,5 @@
 # Git
-
-It is important to know that `git != GitHub`. 
-
-In this topic, you will learn about both `git` and `GitHub`. You'll learn why and how git is used. This lesson will cover popular commands such as `pull` and `push`, and what a `branch` is. This lesson will discuss merge conflicts and how to resolve them.   
-
-**GitHub**  
-This lesson will cover some of the tools that GitHub offers above and beyond `git`.  
+In this topic, you will learn about both `git` and `GitHub`. You'll learn why and how git is used. This lesson will cover popular commands such as `pull` and `push`, and what a `branch` is. This lesson will discuss merge conflicts and how to resolve them.    
 
 ## What is Git?
 `git` is a Source Control Management tool. It offers:  
@@ -111,6 +105,8 @@ There are two general ways to resolve merge conflicts.
 2) **Resolve Using Tools** such as VS Code. In the UI, one can click buttons to resolve conflicts. Usually the GUI will provide a side-by-side presentation of the file before and after, highlighting the differences and conflicts. The developer can click a button to accept the current change, the incoming change, or both changes. Regardless, once resolved, the developer must be sure to `commit` and `push` the resolved files.  
 
 ## Git ≠ GitHub
+It is important to know that `git != GitHub`. 
+
 Although people often use the terms interchangeably, **Git** and **GitHub** are fundamentally different tools with different purposes.
 ```{admonition} It's simple
 :class: note
@@ -139,9 +135,9 @@ Here is an analogy: **Git** is like Microsoft Word: the application that creates
 
 ## What's so Important? ![Billy](../_static/whats_so_important.png)   
 * Git handles **version control**. GitHub handles **collaboration and hosting**.  
-* There are both remote and local repositories, both of which contain all the version information.  
+* There are both remote and local repositories, both of which contain complete copies of branches and version information.  
 * We create branches to isolate changes from one another.  
-* To avoid merge conflicts, keep your branch up to date by pulling and pushing frequently, and work in small, isolated branches so your changes don’t collide with someone else's.    
+* To avoid merge conflicts, keep your branch up to date by pulling and pushing frequently, and work in small, isolated branches so your changes don't collide with someone else's.    
 * Branches are often strategically created to help manage versions, hot fixes, and new feature work without disrupting the stability of the main codebase.  
 
 ## Footnotes
