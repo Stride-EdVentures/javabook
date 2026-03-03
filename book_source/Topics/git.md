@@ -25,6 +25,72 @@ Git is: complicated and console based
 
 ![Linus Torvalds](../_static/linus_torvalds.png)  
 
+### The Early Days: Manual Version Control
+To understand why Git exists, it helps to understand what developers were dealing with before it. Let's discuss the problem Git was built to solve.  
+
+Before dedicated tools existed, developers managed versions by hand. A developer might save files like `project_v1.c`, `project_v2.c`, `project_FINAL.c`, and `project_FINAL_real.c`. This works fine for a single developer working alone, but falls apart completely the moment a second person joins the project. Who has the latest version? Whose changes win? What changed between versions? Nobody knows.
+
+### Centralized Version Control
+The first real solution was **Centralized Version Control Systems (CVCS)**, such as CVS (1990) and Subversion, or SVN (2000). The idea was straightforward: one central server holds the authoritative copy of the code. Developers could check files out, make changes, and check them back in.
+
+```text
+        ┌─────────────────────────────┐
+        │       Central Server        │
+        │    (one copy of the repo)   │
+        └──────────────┬──────────────┘
+                       │
+        ┌──────────────┼──────────────┐
+        │              │              │
+   Developer 1    Developer 2    Developer 3
+  (working copy) (working copy) (working copy)
+```
+
+This was a big improvement, but it introduced new problems:
+
+* **Single point of failure**: If the central server went down, no one could commit, compare history, or collaborate. Work stopped.  
+* **No offline work**: Every meaningful operation (committing, viewing history, branching) required a live connection to the server. Since this was before the internet became ubiquitous, this was a huge productivity problem.  
+* **Slow operations**: Networking overhead made common operations sluggish.  
+* **Painful branching**: Branching was technically possible but notoriously slow and error-prone. In practice, most teams avoided it.  
+* **Lock-based conflicts**: Some tools used file locking, meaning only one developer could edit a file at a time. One developer working on a popular file could block everyone else.  
+
+### Why Git?
+By 2005, Linus Torvalds was managing the Linux kernel, one of the largest and most active open-source projects in the world with thousands of contributors across the globe. The version control solution he was using had a licensing dispute which forced the Linux community to stop using it. Linus looked at the available alternatives and found them all unacceptable. So he spent two weeks writing his own.
+
+Git was designed from the ground up to fix the specific frustrations of centralized systems.
+
+## Centralized vs. Distributed
+
+The key architectural difference between old systems and Git is this: in a **centralized** system, there is one real copy of the repository on a server. In a **distributed** system like Git, every developer has a complete, fully functional copy of the entire repository on their own machine including all history, all branches, and all versions.
+
+```text
+  Centralized (SVN)                     Distributed (Git)
+  ─────────────────                     ─────────────────
+
+  ┌──────────────┐                      ┌──────────────┐
+  │ Central Repo │                      │ Remote Repo  │  ← GitHub, etc.
+  │ (full history│                      │ (full history│
+  │  lives here) │                      │  + branches) │
+  └──────┬───────┘                      └──────┬───────┘
+         │                                     │
+  ┌──────┴──────┐                    ┌─────────┴──────────┐
+  │             │                    │                    │
+ Dev 1         Dev 2               Dev 1               Dev 2
+(working      (working           (full local         (full local
+ copy only)    copy only)         repo copy)          repo copy)
+```
+
+This distinction has practical consequences:
+
+| | Centralized (SVN) | Distributed (Git) |
+|---|---|---|
+| **Work offline?** | No | Yes. Commit, branch, and view history without internet |
+| **Server goes down?** | Work stops | Keep working; push when it's back |
+| **Branching** | Slow, avoided in practice | Fast, lightweight, encouraged |
+| **Backup** | One copy on server | Every developer's machine is a full backup |
+| **Speed** | Network-bound | Most operations are local and instant |
+
+Because every developer has a complete copy, there is no single point of failure. If the server disappears, any developer's machine can restore it. This is exactly what Linus needed for a globally distributed project like the Linux kernel, and it's why the model is called *distributed*.
+
 ## Git Definitions
 
 * **Repository**: A database that stores all the files along with full version history tracked by Git.  
@@ -87,6 +153,50 @@ Think of a Git branch as a separate workspace or a parallel timeline where you c
 In Git, branches are lightweight, easy to create, and easy to delete. Because they all share the same underlying history, switching between them is fast and smooth. 
 
 A branch keeps your work separate from everyone else's. Everyone on the team can create their own branch and no one's changes collide until they're ready to merge. Most teams treat the `main` branch as the clean, stable, *production-ready* version of the code. Branches protect this stability by keeping unfinished work out of the mainline until it's reviewed, approved, and tested.  
+
+### Branching Strategy
+Individual developers use branches to isolate their own work. But teams and companies take this further by using branches to organize the entire software development lifecycle. A **branching strategy** is a set of rules a team agrees on for how and when to create, name, and merge branches. It's not a Git feature; it's an engineering practice built on top of Git.
+
+The core idea is that different kinds of work — new features, bug fixes, releases, emergency patches — should never mix until they're ready. Branches make that separation possible and deliberate.
+
+A common strategy used in industry is called [**Git Flow**](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow). It defines a small set of long-lived branches, each with a specific purpose, and short-lived branches that feed into them.
+
+```text
+  time ──────────────────────────────────────────────────►
+
+  main        ──●──●───────●──────────────────●──────────►
+                |  |       ▲                  ▲
+                |  ▼       |                  |
+  hotfix        |  ●───────●                  |
+                │                             |  
+  release       │                      ●──────●─●──► 
+                │                      ▲        | 
+                │                      |        | 
+                │                      │        ▼ 
+  develop    ───●────●───●────────●────●────────●──►
+                  │  |   ▲        ▲        
+                  │  |   │        │         
+                  ▼  |   │        │ 
+  feature-A       ●──├───●        │ 
+                     ▼            │    
+  feature-B          ●────────────●     
+```
+
+Here is what each branch is for:
+
+* **`main`:** The production branch. This is the code that is live and running in the real world. It is *never* edited directly. Code only arrives here through a controlled merge, typically from `release` or `hotfix`. Every commit on `main` represents a version that was shipped to users.
+
+* **`develop`:** The integration branch. Completed features are merged here first. It represents the current state of work that is done but not yet released. Automated tests often run continuously against this branch.
+
+* **`feature` branches:** Short-lived branches created off `develop`, one per feature. A developer works on `feature-login` or `feature-payment` in isolation. When done, it's reviewed and merged back into `develop`. The branch is then deleted.
+
+* **`release` branches:** When `develop` has enough features for a release, a `release` branch is cut. Only bug fixes and release prep (version numbers, documentation) happen here — no new features. Once stable, it merges into both `main` and `develop`.
+
+* **`hotfix` branches:** Created directly off `main` when a critical bug is discovered in production and cannot wait for the normal release cycle. The fix is merged back into both `main` and `develop` so the fix is not lost.
+
+The key takeaway is that no single branch tries to do everything. Each branch has one job. This makes it easy to answer questions like: *"What's currently in production?"* (look at `main`), *"What's been finished but not shipped yet?"* (look at `develop`), or *"Is there an emergency fix in progress?"* (look for a `hotfix` branch).
+
+Not every team uses Git Flow exactly as described. Many teams use simpler or customized variations, but the underlying principle is universal: **branches are how software teams manage complexity at scale.**
 
 ## Merge Conflicts
 A merge conflict happens when Git cannot automatically combine changes from two branches because the same part of the same file was edited in different ways.

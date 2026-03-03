@@ -1,6 +1,21 @@
 # Maven
 
-## What is Maven?
+**Maven** is a **build automation tool** for Java projects. It handles the tedious parts of building software so developers don't have to.  Specifically, Maven manages three things that would otherwise be painful:
+
+* **Dependencies** — Your project needs external libraries (e.g., a library for reading JSON, or connecting to a database). Instead of hunting down `.jar` files and manually adding them to your project, you tell Maven what you need. It downloads the correct versions automatically from the internet and makes them available to your code.
+
+* **Build lifecycle** — Maven knows the standard steps to go from source code to a finished, runnable program: compile the code, run the tests, package everything into a `.jar` file. You run one command and Maven executes all of those steps in the right order.
+
+* **Consistency** — Every developer on the team builds the project the exact same way, on any machine. "It works on my computer" becomes much less of a problem.
+
+Maven is configured through a single file at the root of the project called `pom.xml` (Project Object Model). This file describes the project's name, version, dependencies, and how it should be built. When a new developer joins a project, they clone the repo and Maven takes care of the rest.
+
+```{admonition} The big idea
+:class: note
+Maven answers the question: *"How do we turn source code into working software, reliably, every time?"*
+```
+
+You can think of Maven like a recipe card for your project. The `pom.xml` is the recipe; it lists the ingredients (dependencies) and the steps (build lifecycle). Maven is the chef that follows it.
 
 **Pros:** 
 * Dependency Management  
@@ -47,25 +62,29 @@ POM == Project Object Model
 ```{admonition} XML Details
 :class: dropdown
 **Details:**  
-```
-<project>:
-  The root element of the pom.xml file. It defines the XML namespace and schema location.
-<modelVersion>:
-  Specifies the version of the POM model. For most projects, this will be 4.0.0.
-<groupId>:
-  A unique identifier for your project group. It usually follows the reverse domain name convention (e.g., com.example).
-<artifactId>:
-  The name of your project. This is the name of the JAR file that will be generated (e.g., my-app).
-<version>:
-  The version of your project. This helps in managing different versions of the same project (e.g., 1.0.0).
-<dependencies>:
-  A section where you define the dependencies your project needs. Each dependency is specified within a <dependency> element.
-<dependency>:
-  Defines a single dependency. In this example, we have a dependency on JUnit, a popular testing framework.
-<groupId>: The group ID of the dependency (e.g., junit).
-<artifactId>: The artifact ID of the dependency (e.g., junit).
-<version>: The version of the dependency (e.g., 4.13.2).
-<scope>: The scope of the dependency. In this case, test means the dependency is only used for testing.
+
+**&lt;project&gt;:**  
+    The root element of the pom.xml file. It defines the XML namespace and schema location.  
+**&lt;modelVersion&gt;:**  
+    Specifies the version of the POM model. For most projects, this will be 4.0.0.  
+**&lt;groupId&gt;:**  
+    A unique identifier for your project group. It usually follows the reverse domain name convention (e.g., com.example).  
+**&lt;artifactId&gt;:**  
+    The name of your project. This is the name of the JAR file that will be generated (e.g., my-app).  
+**&lt;version&gt;:**  
+    The version of your project. This helps in managing different versions of the same project (e.g., 1.0.0).  
+**&lt;dependencies&gt;:**  
+    A section where you define the dependencies your project needs. Each dependency is specified within a &lt;dependency&gt; element.  
+**&lt;dependency&gt;:**  
+    Defines a single dependency. In this example, we have a dependency on JUnit, a popular testing framework.  
+**&lt;groupId&gt;:**  
+    The group ID of the dependency (e.g., junit).  
+**&lt;artifactId&gt;:**  
+    The artifact ID of the dependency (e.g., junit).  
+**&lt;version&gt;:**  
+    The version of the dependency (e.g., 4.13.2).  
+**&lt;scope&gt;:**  
+    The scope of the dependency. In this case, test means the dependency is only used for testing.  
 ```
 
 ## Project File Structure
