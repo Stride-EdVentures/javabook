@@ -512,11 +512,18 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-git">What is Git?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-git">History of git</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linus-torvals">Linus Torvals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-early-days-manual-version-control">The Early Days: Manual Version Control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralized-version-control">Centralized Version Control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-git">Why Git?</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#centralized-vs-distributed">Centralized vs. Distributed</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-definitions">Git Definitions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-diagram">Sequence Diagram</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branches">Branches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branches">Branches</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#branching-strategy">Branching Strategy</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-conflicts">Merge Conflicts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-github">Git ≠ GitHub</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
@@ -572,6 +579,92 @@ Git is: complicated and console based</p>
 </div></blockquote>
 <p><img alt="Linus Torvalds" src="../_images/linus_torvalds.png" /></p>
 </section>
+<section id="the-early-days-manual-version-control">
+<h3>The Early Days: Manual Version Control<a class="headerlink" href="#the-early-days-manual-version-control" title="Link to this heading">#</a></h3>
+<p>To understand why Git exists, it helps to understand what developers were dealing with before it. Let’s discuss the problem Git was built to solve.</p>
+<p>Before dedicated tools existed, developers managed versions by hand. A developer might save files like <code class="docutils literal notranslate"><span class="pre">project_v1.c</span></code>, <code class="docutils literal notranslate"><span class="pre">project_v2.c</span></code>, <code class="docutils literal notranslate"><span class="pre">project_FINAL.c</span></code>, and <code class="docutils literal notranslate"><span class="pre">project_FINAL_real.c</span></code>. This works fine for a single developer working alone, but falls apart completely the moment a second person joins the project. Who has the latest version? Whose changes win? What changed between versions? Nobody knows.</p>
+</section>
+<section id="centralized-version-control">
+<h3>Centralized Version Control<a class="headerlink" href="#centralized-version-control" title="Link to this heading">#</a></h3>
+<p>The first real solution was <strong>Centralized Version Control Systems (CVCS)</strong>, such as CVS (1990) and Subversion, or SVN (2000). The idea was straightforward: one central server holds the authoritative copy of the code. Developers could check files out, make changes, and check them back in.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>        ┌─────────────────────────────┐
+        │       Central Server        │
+        │    (one copy of the repo)   │
+        └──────────────┬──────────────┘
+                       │
+        ┌──────────────┼──────────────┐
+        │              │              │
+   Developer 1    Developer 2    Developer 3
+  (working copy) (working copy) (working copy)
+</pre></div>
+</div>
+<p>This was a big improvement, but it introduced new problems:</p>
+<ul class="simple">
+<li><p><strong>Single point of failure</strong>: If the central server went down, no one could commit, compare history, or collaborate. Work stopped.</p></li>
+<li><p><strong>No offline work</strong>: Every meaningful operation (committing, viewing history, branching) required a live connection to the server. Since this was before the internet became ubiquitous, this was a huge productivity problem.</p></li>
+<li><p><strong>Slow operations</strong>: Networking overhead made common operations sluggish.</p></li>
+<li><p><strong>Painful branching</strong>: Branching was technically possible but notoriously slow and error-prone. In practice, most teams avoided it.</p></li>
+<li><p><strong>Lock-based conflicts</strong>: Some tools used file locking, meaning only one developer could edit a file at a time. One developer working on a popular file could block everyone else.</p></li>
+</ul>
+</section>
+<section id="why-git">
+<h3>Why Git?<a class="headerlink" href="#why-git" title="Link to this heading">#</a></h3>
+<p>By 2005, Linus Torvalds was managing the Linux kernel, one of the largest and most active open-source projects in the world with thousands of contributors across the globe. The version control solution he was using had a licensing dispute which forced the Linux community to stop using it. Linus looked at the available alternatives and found them all unacceptable. So he spent two weeks writing his own.</p>
+<p>Git was designed from the ground up to fix the specific frustrations of centralized systems.</p>
+</section>
+</section>
+<section id="centralized-vs-distributed">
+<h2>Centralized vs. Distributed<a class="headerlink" href="#centralized-vs-distributed" title="Link to this heading">#</a></h2>
+<p>The key architectural difference between old systems and Git is this: in a <strong>centralized</strong> system, there is one real copy of the repository on a server. In a <strong>distributed</strong> system like Git, every developer has a complete, fully functional copy of the entire repository on their own machine including all history, all branches, and all versions.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  Centralized (SVN)                     Distributed (Git)
+  ─────────────────                     ─────────────────
+
+  ┌──────────────┐                      ┌──────────────┐
+  │ Central Repo │                      │ Remote Repo  │  ← GitHub, etc.
+  │ (full history│                      │ (full history│
+  │  lives here) │                      │  + branches) │
+  └──────┬───────┘                      └──────┬───────┘
+         │                                     │
+  ┌──────┴──────┐                    ┌─────────┴──────────┐
+  │             │                    │                    │
+ Dev 1         Dev 2               Dev 1               Dev 2
+(working      (working           (full local         (full local
+ copy only)    copy only)         repo copy)          repo copy)
+</pre></div>
+</div>
+<p>This distinction has practical consequences:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Centralized (SVN)</p></th>
+<th class="head"><p>Distributed (Git)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Work offline?</strong></p></td>
+<td><p>No</p></td>
+<td><p>Yes. Commit, branch, and view history without internet</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Server goes down?</strong></p></td>
+<td><p>Work stops</p></td>
+<td><p>Keep working; push when it’s back</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Branching</strong></p></td>
+<td><p>Slow, avoided in practice</p></td>
+<td><p>Fast, lightweight, encouraged</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Backup</strong></p></td>
+<td><p>One copy on server</p></td>
+<td><p>Every developer’s machine is a full backup</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Speed</strong></p></td>
+<td><p>Network-bound</p></td>
+<td><p>Most operations are local and instant</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Because every developer has a complete copy, there is no single point of failure. If the server disappears, any developer’s machine can restore it. This is exactly what Linus needed for a globally distributed project like the Linux kernel, and it’s why the model is called <em>distributed</em>.</p>
 </section>
 <section id="git-definitions">
 <h2>Git Definitions<a class="headerlink" href="#git-definitions" title="Link to this heading">#</a></h2>
@@ -634,6 +727,42 @@ Git is: complicated and console based</p>
 <p>Think of a Git branch as a separate workspace or a parallel timeline where you can make changes without affecting the main project. A branch lets you explore new features, experiment, or fix bugs safely without breaking anything for other developers.</p>
 <p>In Git, branches are lightweight, easy to create, and easy to delete. Because they all share the same underlying history, switching between them is fast and smooth.</p>
 <p>A branch keeps your work separate from everyone else’s. Everyone on the team can create their own branch and no one’s changes collide until they’re ready to merge. Most teams treat the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch as the clean, stable, <em>production-ready</em> version of the code. Branches protect this stability by keeping unfinished work out of the mainline until it’s reviewed, approved, and tested.</p>
+<section id="branching-strategy">
+<h3>Branching Strategy<a class="headerlink" href="#branching-strategy" title="Link to this heading">#</a></h3>
+<p>Individual developers use branches to isolate their own work. But teams and companies take this further by using branches to organize the entire software development lifecycle. A <strong>branching strategy</strong> is a set of rules a team agrees on for how and when to create, name, and merge branches. It’s not a Git feature; it’s an engineering practice built on top of Git.</p>
+<p>The core idea is that different kinds of work — new features, bug fixes, releases, emergency patches — should never mix until they’re ready. Branches make that separation possible and deliberate.</p>
+<p>A common strategy used in industry is called <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow"><strong>Git Flow</strong></a>. It defines a small set of long-lived branches, each with a specific purpose, and short-lived branches that feed into them.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  time ──────────────────────────────────────────────────►
+
+  main        ──●──●───────●──────────────────●──────────►
+                |  |       ▲                  ▲
+                |  ▼       |                  |
+  hotfix        |  ●───────●                  |
+                │                             |  
+  release       │                      ●──────●─●──► 
+                │                      ▲        | 
+                │                      |        | 
+                │                      │        ▼ 
+  develop    ───●────●───●────────●────●────────●──►
+                  │  |   ▲        ▲        
+                  │  |   │        │         
+                  ▼  |   │        │ 
+  feature-A       ●──├───●        │ 
+                     ▼            │    
+  feature-B          ●────────────●     
+</pre></div>
+</div>
+<p>Here is what each branch is for:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">main</span></code>:</strong> The production branch. This is the code that is live and running in the real world. It is <em>never</em> edited directly. Code only arrives here through a controlled merge, typically from <code class="docutils literal notranslate"><span class="pre">release</span></code> or <code class="docutils literal notranslate"><span class="pre">hotfix</span></code>. Every commit on <code class="docutils literal notranslate"><span class="pre">main</span></code> represents a version that was shipped to users.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">develop</span></code>:</strong> The integration branch. Completed features are merged here first. It represents the current state of work that is done but not yet released. Automated tests often run continuously against this branch.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">feature</span></code> branches:</strong> Short-lived branches created off <code class="docutils literal notranslate"><span class="pre">develop</span></code>, one per feature. A developer works on <code class="docutils literal notranslate"><span class="pre">feature-login</span></code> or <code class="docutils literal notranslate"><span class="pre">feature-payment</span></code> in isolation. When done, it’s reviewed and merged back into <code class="docutils literal notranslate"><span class="pre">develop</span></code>. The branch is then deleted.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">release</span></code> branches:</strong> When <code class="docutils literal notranslate"><span class="pre">develop</span></code> has enough features for a release, a <code class="docutils literal notranslate"><span class="pre">release</span></code> branch is cut. Only bug fixes and release prep (version numbers, documentation) happen here — no new features. Once stable, it merges into both <code class="docutils literal notranslate"><span class="pre">main</span></code> and <code class="docutils literal notranslate"><span class="pre">develop</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">hotfix</span></code> branches:</strong> Created directly off <code class="docutils literal notranslate"><span class="pre">main</span></code> when a critical bug is discovered in production and cannot wait for the normal release cycle. The fix is merged back into both <code class="docutils literal notranslate"><span class="pre">main</span></code> and <code class="docutils literal notranslate"><span class="pre">develop</span></code> so the fix is not lost.</p></li>
+</ul>
+<p>The key takeaway is that no single branch tries to do everything. Each branch has one job. This makes it easy to answer questions like: <em>“What’s currently in production?”</em> (look at <code class="docutils literal notranslate"><span class="pre">main</span></code>), <em>“What’s been finished but not shipped yet?”</em> (look at <code class="docutils literal notranslate"><span class="pre">develop</span></code>), or <em>“Is there an emergency fix in progress?”</em> (look for a <code class="docutils literal notranslate"><span class="pre">hotfix</span></code> branch).</p>
+<p>Not every team uses Git Flow exactly as described. Many teams use simpler or customized variations, but the underlying principle is universal: <strong>branches are how software teams manage complexity at scale.</strong></p>
+</section>
 </section>
 <section id="merge-conflicts">
 <h2>Merge Conflicts<a class="headerlink" href="#merge-conflicts" title="Link to this heading">#</a></h2>
@@ -773,11 +902,18 @@ GitHub handles <strong>collaboration and hosting</strong>.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-git">What is Git?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-git">History of git</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linus-torvals">Linus Torvals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-early-days-manual-version-control">The Early Days: Manual Version Control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralized-version-control">Centralized Version Control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-git">Why Git?</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#centralized-vs-distributed">Centralized vs. Distributed</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-definitions">Git Definitions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-diagram">Sequence Diagram</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branches">Branches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branches">Branches</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#branching-strategy">Branching Strategy</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-conflicts">Merge Conflicts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-github">Git ≠ GitHub</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>

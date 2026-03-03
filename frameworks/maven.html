@@ -509,8 +509,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-maven">What is Maven?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pom-xml">POM.xml</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-file-structure">Project File Structure</a></li>
 </ul>
             </nav>
         </div>
@@ -524,8 +524,18 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="maven">
 <h1>Maven<a class="headerlink" href="#maven" title="Link to this heading">#</a></h1>
-<section id="what-is-maven">
-<h2>What is Maven?<a class="headerlink" href="#what-is-maven" title="Link to this heading">#</a></h2>
+<p><strong>Maven</strong> is a <strong>build automation tool</strong> for Java projects. It handles the tedious parts of building software so developers don’t have to.  Specifically, Maven manages three things that would otherwise be painful:</p>
+<ul class="simple">
+<li><p><strong>Dependencies</strong> — Your project needs external libraries (e.g., a library for reading JSON, or connecting to a database). Instead of hunting down <code class="docutils literal notranslate"><span class="pre">.jar</span></code> files and manually adding them to your project, you tell Maven what you need. It downloads the correct versions automatically from the internet and makes them available to your code.</p></li>
+<li><p><strong>Build lifecycle</strong> — Maven knows the standard steps to go from source code to a finished, runnable program: compile the code, run the tests, package everything into a <code class="docutils literal notranslate"><span class="pre">.jar</span></code> file. You run one command and Maven executes all of those steps in the right order.</p></li>
+<li><p><strong>Consistency</strong> — Every developer on the team builds the project the exact same way, on any machine. “It works on my computer” becomes much less of a problem.</p></li>
+</ul>
+<p>Maven is configured through a single file at the root of the project called <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> (Project Object Model). This file describes the project’s name, version, dependencies, and how it should be built. When a new developer joins a project, they clone the repo and Maven takes care of the rest.</p>
+<div class="note admonition">
+<p class="admonition-title">The big idea</p>
+<p>Maven answers the question: <em>“How do we turn source code into working software, reliably, every time?”</em></p>
+</div>
+<p>You can think of Maven like a recipe card for your project. The <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> is the recipe; it lists the ingredients (dependencies) and the steps (build lifecycle). Maven is the chef that follows it.</p>
 <p><strong>Pros:</strong></p>
 <ul class="simple">
 <li><p>Dependency Management</p></li>
@@ -542,7 +552,6 @@ document.write(`
 </ul>
 </li>
 </ul>
-</section>
 <section id="pom-xml">
 <h2>POM.xml<a class="headerlink" href="#pom-xml" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> (Project Object Model) file is the core of a Maven project. It contains information about the project and configuration details used by Maven to build the project. Here’s a basic example of a pom.xml file and an explanation of its components:</p>
@@ -575,32 +584,34 @@ document.write(`
 <div class="dropdown admonition">
 <p class="admonition-title">XML Details</p>
 <p><strong>Details:</strong></p>
+<p><strong>&lt;project&gt;:</strong><br />
+The root element of the pom.xml file. It defines the XML namespace and schema location.<br />
+<strong>&lt;modelVersion&gt;:</strong><br />
+Specifies the version of the POM model. For most projects, this will be 4.0.0.<br />
+<strong>&lt;groupId&gt;:</strong><br />
+A unique identifier for your project group. It usually follows the reverse domain name convention (e.g., com.example).<br />
+<strong>&lt;artifactId&gt;:</strong><br />
+The name of your project. This is the name of the JAR file that will be generated (e.g., my-app).<br />
+<strong>&lt;version&gt;:</strong><br />
+The version of your project. This helps in managing different versions of the same project (e.g., 1.0.0).<br />
+<strong>&lt;dependencies&gt;:</strong><br />
+A section where you define the dependencies your project needs. Each dependency is specified within a &lt;dependency&gt; element.<br />
+<strong>&lt;dependency&gt;:</strong><br />
+Defines a single dependency. In this example, we have a dependency on JUnit, a popular testing framework.<br />
+<strong>&lt;groupId&gt;:</strong><br />
+The group ID of the dependency (e.g., junit).<br />
+<strong>&lt;artifactId&gt;:</strong><br />
+The artifact ID of the dependency (e.g., junit).<br />
+<strong>&lt;version&gt;:</strong><br />
+The version of the dependency (e.g., 4.13.2).<br />
+<strong>&lt;scope&gt;:</strong><br />
+The scope of the dependency. In this case, test means the dependency is only used for testing.</p>
 </div>
-<p><project>:
-The root element of the pom.xml file. It defines the XML namespace and schema location.
-<modelVersion>:
-Specifies the version of the POM model. For most projects, this will be 4.0.0.
-<groupId>:
-A unique identifier for your project group. It usually follows the reverse domain name convention (e.g., com.example).
-<artifactId>:
-The name of your project. This is the name of the JAR file that will be generated (e.g., my-app).
-<version>:
-The version of your project. This helps in managing different versions of the same project (e.g., 1.0.0).
-<dependencies>:
-A section where you define the dependencies your project needs. Each dependency is specified within a <dependency> element.
-<dependency>:
-Defines a single dependency. In this example, we have a dependency on JUnit, a popular testing framework.
-<groupId>: The group ID of the dependency (e.g., junit).
-<artifactId>: The artifact ID of the dependency (e.g., junit).
-<version>: The version of the dependency (e.g., 4.13.2).
-<scope>: The scope of the dependency. In this case, test means the dependency is only used for testing.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-<span class="c1">## Project File Structure</span>
-<span class="n">Maven</span> <span class="n">follows</span> <span class="n">a</span> <span class="n">mandatory</span> <span class="ow">and</span> <span class="n">specific</span> <span class="n">directory</span> <span class="n">structure</span> <span class="n">to</span> <span class="n">maintain</span> <span class="n">consistency</span> <span class="ow">and</span> <span class="n">convention</span> <span class="n">across</span> <span class="n">projects</span><span class="o">.</span> <span class="n">Here</span><span class="s1">&#39;s an overview of the Maven project structure :</span>
-
-</pre></div>
-</div>
-<p>my-app
+</section>
+<section id="project-file-structure">
+<h2>Project File Structure<a class="headerlink" href="#project-file-structure" title="Link to this heading">#</a></h2>
+<p>Maven follows a mandatory and specific directory structure to maintain consistency and convention across projects. Here’s an overview of the Maven project structure :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my-app
 │
 ├── src
 │   ├── main
@@ -618,26 +629,22 @@ Defines a single dependency. In this example, we have a dependency on JUnit, a p
 │   │   ├── resources
 │   │   │   └── test-config.properties
 │
-├── pom.xml</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-Here is an explanation of the above directory structure:    
-**src/main/java:**  
-  This directory contains your main application source code. The package structure should follow the standard Java package naming conventions (e.g., com.example).  
-**src/main/resources:**  
-  This directory is for non-Java resources required by your application, such as configuration files, property files, XML files, etc. These resources are included in the classpath when the project is built.
-**src/test/java:**  
-  This directory contains your test source code. It follows the same package structure as your main source code. Test classes are typically named with a Test suffix (e.g., AppTest.java).  
-**src/test/resources:**  
-  This directory is for resources needed by your tests, such as test configuration files, mock data, etc. These resources are also included in the classpath during the test phase.  
-**pom.xml:**  
-  The Project Object Model file that contains information about the project and configuration details used by Maven to build the project. It includes dependencies, plugins, build configurations, and more.
-
-
-In the `CSS 490: Multithreading in GUI Application` class, we have the following directory structure.
-
+├── pom.xml
 </pre></div>
 </div>
-<p>├───.mvn
+<p>Here is an explanation of the above directory structure:<br />
+<strong>src/main/java:</strong><br />
+This directory contains your main application source code. The package structure should follow the standard Java package naming conventions (e.g., com.example).<br />
+<strong>src/main/resources:</strong><br />
+This directory is for non-Java resources required by your application, such as configuration files, property files, XML files, etc. These resources are included in the classpath when the project is built.
+<strong>src/test/java:</strong><br />
+This directory contains your test source code. It follows the same package structure as your main source code. Test classes are typically named with a Test suffix (e.g., AppTest.java).<br />
+<strong>src/test/resources:</strong><br />
+This directory is for resources needed by your tests, such as test configuration files, mock data, etc. These resources are also included in the classpath during the test phase.<br />
+<strong>pom.xml:</strong><br />
+The Project Object Model file that contains information about the project and configuration details used by Maven to build the project. It includes dependencies, plugins, build configurations, and more.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">CSS</span> <span class="pre">490:</span> <span class="pre">Multithreading</span> <span class="pre">in</span> <span class="pre">GUI</span> <span class="pre">Application</span></code> class, we have the following directory structure.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├───.mvn
 │   └───wrapper
 ├───.vscode
 ├───lib
@@ -661,8 +668,8 @@ In the `CSS 490: Multithreading in GUI Application` class, we have the following
 |                   ├───entity
 │                   ├───gui
 │                   └───services
-└───target</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+└───target
+
 </pre></div>
 </div>
 </section>
@@ -732,8 +739,8 @@ In the `CSS 490: Multithreading in GUI Application` class, we have the following
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-maven">What is Maven?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pom-xml">POM.xml</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-file-structure">Project File Structure</a></li>
 </ul>
   </nav></div>
 
