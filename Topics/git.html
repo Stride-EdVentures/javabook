@@ -511,7 +511,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-git">What is Git?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-git">History of git</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linus-torvals">Linus Torvals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linus-torvalds">Linus Torvalds</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-early-days-manual-version-control">The Early Days: Manual Version Control</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralized-version-control">Centralized Version Control</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-git">Why Git?</a></li>
@@ -572,10 +572,10 @@ The word “git” is a British slang term, which can refer to a silly, foolish,
 Linus said: Git is “the stupid tool that I made because I was fed up with other systems”.
 Git is: distributed, fast, powerful, reliable
 Git is: complicated and console based</p>
-<section id="linus-torvals">
-<h3>Linus Torvals<a class="headerlink" href="#linus-torvals" title="Link to this heading">#</a></h3>
+<section id="linus-torvalds">
+<h3>Linus Torvalds<a class="headerlink" href="#linus-torvalds" title="Link to this heading">#</a></h3>
 <blockquote>
-<div><p><em>I’m a bastard. I have absolutely no clue why people can ever think otherwise. Yet they do. People think I’m a nice guy, and the fact is that I’m a scheming, conniving bastard who doesn’t care for any hurt feelings or lost hours of work, if it just results in what I consider to be a better system. And I’m not just saying that. I’m really not a very nice person. I can say “I don’t care” with a straight face, and really mean it.</em></p>
+<div><p><em>I’m a bastard. I have absolutely no clue why people can ever think otherwise. Yet they do. People think I’m a nice guy, and the fact is that I’m a scheming, conniving bastard who doesn’t care for any hurt feelings or lost hours of work, if it just results in what I consider to be a better system. And I’m not just saying that. I’m really not a very nice person. I can say “I don’t care” with a straight face, and really mean it.</em>   <a href="#footnotes"><sup>[1]</sup></a></p>
 </div></blockquote>
 <p><img alt="Linus Torvalds" src="../_images/linus_torvalds.png" /></p>
 </section>
@@ -586,7 +586,7 @@ Git is: complicated and console based</p>
 </section>
 <section id="centralized-version-control">
 <h3>Centralized Version Control<a class="headerlink" href="#centralized-version-control" title="Link to this heading">#</a></h3>
-<p>The first real solution was <strong>Centralized Version Control Systems (CVCS)</strong>, such as CVS (1990) and Subversion, or SVN (2000). The idea was straightforward: one central server holds the authoritative copy of the code. Developers could check files out, make changes, and check them back in.</p>
+<p>The first real solution was <strong>Centralized Version Control Systems (CVCS)</strong>, such as CVS (1990) and Subversion (2000). The idea was straightforward: one central server holds the authoritative copy of the code. Developers could check files out, make changes, and check them back in.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>        ┌─────────────────────────────┐
         │       Central Server        │
         │    (one copy of the repo)   │
@@ -609,14 +609,14 @@ Git is: complicated and console based</p>
 </section>
 <section id="why-git">
 <h3>Why Git?<a class="headerlink" href="#why-git" title="Link to this heading">#</a></h3>
-<p>By 2005, Linus Torvalds was managing the Linux kernel, one of the largest and most active open-source projects in the world with thousands of contributors across the globe. The version control solution he was using had a licensing dispute which forced the Linux community to stop using it. Linus looked at the available alternatives and found them all unacceptable. So he spent two weeks writing his own.</p>
+<p>By 2005, Linus Torvalds was managing the Linux kernel, one of the largest and most active open-source projects in the world with thousands of contributors across the globe. The version control solution he was using had a licensing dispute<a href=#footnotes><sup>[2]</sup></a> which forced the Linux community to stop using it. Linus looked at the available alternatives and found them all unacceptable. So he spent two weeks writing his own.</p>
 <p>Git was designed from the ground up to fix the specific frustrations of centralized systems.</p>
 </section>
 </section>
 <section id="centralized-vs-distributed">
 <h2>Centralized vs. Distributed<a class="headerlink" href="#centralized-vs-distributed" title="Link to this heading">#</a></h2>
 <p>The key architectural difference between old systems and Git is this: in a <strong>centralized</strong> system, there is one real copy of the repository on a server. In a <strong>distributed</strong> system like Git, every developer has a complete, fully functional copy of the entire repository on their own machine including all history, all branches, and all versions.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  Centralized (SVN)                     Distributed (Git)
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    Centralized                         Distributed (Git)
   ─────────────────                     ─────────────────
 
   ┌──────────────┐                      ┌──────────────┐
@@ -636,7 +636,7 @@ Git is: complicated and console based</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p>Centralized (SVN)</p></th>
+<th class="head"><p>Centralized</p></th>
 <th class="head"><p>Distributed (Git)</p></th>
 </tr>
 </thead>
@@ -809,7 +809,7 @@ GitHub handles <strong>collaboration and hosting</strong>.</p>
 <li><p>Code reviews</p></li>
 <li><p>Issue tracking</p></li>
 <li><p>Permissions and access control</p></li>
-<li><p>Automation (or Actions) to preform CI/CD<a href="#footnotes">[1]</a></p></li>
+<li><p>Automation (or Actions) to preform CI/CD<a href="#footnotes"><sup>[3]</sup></a></p></li>
 <li><p>Project boards, wikis, release management tools</p></li>
 </ul>
 </li>
@@ -827,11 +827,13 @@ GitHub handles <strong>collaboration and hosting</strong>.</p>
 </section>
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
-<p>[1] CI/CD == Continuous Integration, Continuous Delivery (or Continuous Deployment)</p>
-<ul class="simple">
-<li><p>Developers frequently merge their code changes into a shared branch, and an automated system immediately builds the code, runs tests, and checks quality. Every successful build from CI is automatically prepared for release. Deployment can be triggered manually, but every successful build is automatically deployed to production with no manual approval, assuming all tests pass.</p></li>
-</ul>
+<p><strong>[1]</strong> Linus called himself a <em>“scheming, conniving bastard”</em> in an <a class="reference external" href="https://lkml.org/lkml/2000/9/6/65">email</a></p>
+<p><strong>[2]</strong> Linus Torvalds’ <a class="reference external" href="https://www.infoworld.com/article/2211030/linus-torvalds-bitkeeper-blunder.html">BitKeeper blunder</a></p>
+<p><strong>[3]</strong> CI/CD == Continuous Integration, Continuous Delivery (or Continuous Deployment)</p>
+<blockquote>
+<div><p>Developers frequently merge their code changes into a shared branch, and an automated system immediately builds the code, runs tests, and checks quality. Every successful build from CI is automatically prepared for release. Deployment can be triggered manually, but every successful build is automatically deployed to production with no manual approval, assuming all tests pass.</p>
 <p>CI/CD is a fundamental part of modern software engineering, ensuring that code is continuously tested, integrated, and delivered with automation and reliability.</p>
+</div></blockquote>
 </section>
 </section>
 
@@ -901,7 +903,7 @@ GitHub handles <strong>collaboration and hosting</strong>.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-git">What is Git?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-git">History of git</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linus-torvals">Linus Torvals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linus-torvalds">Linus Torvalds</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-early-days-manual-version-control">The Early Days: Manual Version Control</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralized-version-control">Centralized Version Control</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-git">Why Git?</a></li>

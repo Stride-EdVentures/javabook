@@ -20,8 +20,8 @@ Linus said: Git is "the stupid tool that I made because I was fed up with other 
 Git is: distributed, fast, powerful, reliable
 Git is: complicated and console based
 
-### Linus Torvals
-> *I'm a bastard. I have absolutely no clue why people can ever think otherwise. Yet they do. People think I'm a nice guy, and the fact is that I'm a scheming, conniving bastard who doesn't care for any hurt feelings or lost hours of work, if it just results in what I consider to be a better system. And I'm not just saying that. I'm really not a very nice person. I can say "I don't care" with a straight face, and really mean it.*   
+### Linus Torvalds
+> *I'm a bastard. I have absolutely no clue why people can ever think otherwise. Yet they do. People think I'm a nice guy, and the fact is that I'm a scheming, conniving bastard who doesn't care for any hurt feelings or lost hours of work, if it just results in what I consider to be a better system. And I'm not just saying that. I'm really not a very nice person. I can say "I don't care" with a straight face, and really mean it.*   <a href="#footnotes"><sup>[1]</sup></a> 
 
 ![Linus Torvalds](../_static/linus_torvalds.png)  
 
@@ -31,7 +31,7 @@ To understand why Git exists, it helps to understand what developers were dealin
 Before dedicated tools existed, developers managed versions by hand. A developer might save files like `project_v1.c`, `project_v2.c`, `project_FINAL.c`, and `project_FINAL_real.c`. This works fine for a single developer working alone, but falls apart completely the moment a second person joins the project. Who has the latest version? Whose changes win? What changed between versions? Nobody knows.
 
 ### Centralized Version Control
-The first real solution was **Centralized Version Control Systems (CVCS)**, such as CVS (1990) and Subversion, or SVN (2000). The idea was straightforward: one central server holds the authoritative copy of the code. Developers could check files out, make changes, and check them back in.
+The first real solution was **Centralized Version Control Systems (CVCS)**, such as CVS (1990) and Subversion (2000). The idea was straightforward: one central server holds the authoritative copy of the code. Developers could check files out, make changes, and check them back in.
 
 ```text
         ┌─────────────────────────────┐
@@ -54,7 +54,7 @@ This was a big improvement, but it introduced new problems:
 * **Lock-based conflicts**: Some tools used file locking, meaning only one developer could edit a file at a time. One developer working on a popular file could block everyone else.  
 
 ### Why Git?
-By 2005, Linus Torvalds was managing the Linux kernel, one of the largest and most active open-source projects in the world with thousands of contributors across the globe. The version control solution he was using had a licensing dispute which forced the Linux community to stop using it. Linus looked at the available alternatives and found them all unacceptable. So he spent two weeks writing his own.
+By 2005, Linus Torvalds was managing the Linux kernel, one of the largest and most active open-source projects in the world with thousands of contributors across the globe. The version control solution he was using had a licensing dispute<a href=#footnotes><sup>[2]</sup></a> which forced the Linux community to stop using it. Linus looked at the available alternatives and found them all unacceptable. So he spent two weeks writing his own.
 
 Git was designed from the ground up to fix the specific frustrations of centralized systems.
 
@@ -63,7 +63,7 @@ Git was designed from the ground up to fix the specific frustrations of centrali
 The key architectural difference between old systems and Git is this: in a **centralized** system, there is one real copy of the repository on a server. In a **distributed** system like Git, every developer has a complete, fully functional copy of the entire repository on their own machine including all history, all branches, and all versions.
 
 ```text
-  Centralized (SVN)                     Distributed (Git)
+    Centralized                         Distributed (Git)
   ─────────────────                     ─────────────────
 
   ┌──────────────┐                      ┌──────────────┐
@@ -81,7 +81,7 @@ The key architectural difference between old systems and Git is this: in a **cen
 
 This distinction has practical consequences:
 
-| | Centralized (SVN) | Distributed (Git) |
+| | Centralized  | Distributed (Git) |
 |---|---|---|
 | **Work offline?** | No | Yes. Commit, branch, and view history without internet |
 | **Server goes down?** | Work stops | Keep working; push when it's back |
@@ -240,7 +240,7 @@ Here is an analogy: **Git** is like Microsoft Word: the application that creates
     *   Code reviews  
     *   Issue tracking  
     *   Permissions and access control  
-    *   Automation (or Actions) to preform CI/CD<a href="#footnotes">[1]</a>   
+    *   Automation (or Actions) to preform CI/CD<a href="#footnotes"><sup>[3]</sup></a>   
     *   Project boards, wikis, release management tools  
 
 ## What's so Important? ![Billy](../_static/whats_so_important.png)   
@@ -251,7 +251,11 @@ Here is an analogy: **Git** is like Microsoft Word: the application that creates
 * Branches are often strategically created to help manage versions, hot fixes, and new feature work without disrupting the stability of the main codebase.  
 
 ## Footnotes
-[1] CI/CD == Continuous Integration, Continuous Delivery (or Continuous Deployment)  
-* Developers frequently merge their code changes into a shared branch, and an automated system immediately builds the code, runs tests, and checks quality. Every successful build from CI is automatically prepared for release. Deployment can be triggered manually, but every successful build is automatically deployed to production with no manual approval, assuming all tests pass.  
+**[1]** Linus called himself a *"scheming, conniving bastard"* in an [email](https://lkml.org/lkml/2000/9/6/65)  
 
-CI/CD is a fundamental part of modern software engineering, ensuring that code is continuously tested, integrated, and delivered with automation and reliability.  
+**[2]** Linus Torvalds' [BitKeeper blunder](https://www.infoworld.com/article/2211030/linus-torvalds-bitkeeper-blunder.html)  
+
+**[3]** CI/CD == Continuous Integration, Continuous Delivery (or Continuous Deployment)  
+> Developers frequently merge their code changes into a shared branch, and an automated system immediately builds the code, runs tests, and checks quality. Every successful build from CI is automatically prepared for release. Deployment can be triggered manually, but every successful build is automatically deployed to production with no manual approval, assuming all tests pass.  
+>
+> CI/CD is a fundamental part of modern software engineering, ensuring that code is continuously tested, integrated, and delivered with automation and reliability.   
