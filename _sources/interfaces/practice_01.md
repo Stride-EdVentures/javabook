@@ -61,13 +61,15 @@ if (person instanceof Golfer) {
 **Question #4:** Describe what the `IS-A` relationship means?  
 ```{admonition} Click to see answer
 :class: tip dropdown
-An `IS-A` relationship means that an object either *inherits* or *implements* something. For example, in the code beloce we can say all of the following:   
+An `IS-A` relationship means that an object either *inherits* or *implements* something. For example, the code below tells us that:   
 * `lunchItem` IS-A Fruit  
 * `lunchItem` IS-A Apple  
 * `lunchItem` IS-A Edible  
 
-Furthermore, because Apple IS-A Fruit, we don't need to explicitly cast the new Apple into a Fruit identifier.   
-```java
+Furthermore, because Apple IS-A Fruit, we don't need to explicitly cast the new Apple into a Fruit identifier (line 12 below).   
+```{code-block} java
+:linenos:
+:emphasize-lines: 8, 12
 public interface Edible {
     void eat();
 }

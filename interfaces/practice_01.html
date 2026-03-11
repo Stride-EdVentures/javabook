@@ -597,26 +597,26 @@ The differences between an interface and a class is summarized in this table wit
 <p><strong>Question #4:</strong> Describe what the <code class="docutils literal notranslate"><span class="pre">IS-A</span></code> relationship means?</p>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Click to see answer</p>
-<p>An <code class="docutils literal notranslate"><span class="pre">IS-A</span></code> relationship means that an object either <em>inherits</em> or <em>implements</em> something. For example, in the code beloce we can say all of the following:</p>
+<p>An <code class="docutils literal notranslate"><span class="pre">IS-A</span></code> relationship means that an object either <em>inherits</em> or <em>implements</em> something. For example, the code below tells us that:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">lunchItem</span></code> IS-A Fruit</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lunchItem</span></code> IS-A Apple</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lunchItem</span></code> IS-A Edible</p></li>
 </ul>
-<p>Furthermore, because Apple IS-A Fruit, we don’t need to explicitly cast the new Apple into a Fruit identifier.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Edible</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Fruit</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">juiceMe</span><span class="p">();</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">ripenOnCounter</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Apple</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Edible</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">slice</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Fruit</span><span class="w"> </span><span class="n">lunchItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">();</span>
-<span class="p">}</span>
+<p>Furthermore, because Apple IS-A Fruit, we don’t need to explicitly cast the new Apple into a Fruit identifier (line 12 below).</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Edible</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">();</span>
+<span class="linenos"> 3</span><span class="p">}</span>
+<span class="linenos"> 4</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Fruit</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">juiceMe</span><span class="p">();</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">ripenOnCounter</span><span class="p">();</span>
+<span class="linenos"> 7</span><span class="p">}</span>
+<span class="hll"><span class="linenos"> 8</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Apple</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Edible</span><span class="w"> </span><span class="p">{</span>
+</span><span class="linenos"> 9</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">slice</span><span class="p">();</span>
+<span class="linenos">10</span><span class="p">}</span>
+<span class="linenos">11</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="linenos">12</span><span class="w">    </span><span class="n">Fruit</span><span class="w"> </span><span class="n">lunchItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">();</span>
+</span><span class="linenos">13</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>

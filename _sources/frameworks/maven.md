@@ -155,3 +155,9 @@ In the `CSS 490: Multithreading in GUI Application` class, we have the following
 └───target
 
 ```
+
+## What's so important? ![Billy](../_static/whats_so_important.png)  
+* **Maven automates the entire build process**, handling compilation, testing, packaging, and dependency management so we don't waste time manually managing jar files or build steps.  
+* **The pom.xml is the single source of truth** for a project's configuration, letting any developer clone the repo and build instantly with consistent results.  
+* **Dependency management becomes effortless.** Maven automatically downloads and version‑controls libraries so projects stay organized and up‑to‑date.  
+* **Standard directory structure means fewer surprises** and makes it easier to navigate, share, and understand Java projects across courses and teams.  

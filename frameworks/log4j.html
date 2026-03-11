@@ -509,7 +509,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log4j2-spring-xml-example"><code class="docutils literal notranslate"><span class="pre">log4j2-spring.xml</span></code> Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-levels">Logging Levels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-format-with-patternlayout">Output Format with <strong>PatternLayout</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-example">Code Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
             </nav>
         </div>
@@ -523,10 +528,171 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="log4j">
 <h1>Log4j<a class="headerlink" href="#log4j" title="Link to this heading">#</a></h1>
+<p>Many real-world applications are difficult to debug because their failures emerge only under specific timing conditions such as unpredictable thread scheduling, variations in the environment, or user interactions that you can’t reliably reproduce. When stepping through code isn’t an option, detailed <strong>logs become the only way to understand</strong> what the system was doing at the moment things went wrong. Capturing state (threads, inputs, timing, and decisions) often provides the key insight needed to uncover the underlying issue.</p>
+<p>Logging also serves important <strong>business and operational needs</strong>. Websites may track which assets are used so they can correctly attribute costs or pay royalties (for example, when licensed images are displayed). Companies also analyze logs to understand usage patterns, measure performance, and compute Key Performance Indicators (<a class="reference external" href="https://www.forbes.com/advisor/business/what-is-a-kpi-definition-examples/">KPI</a>) that reveal whether the business is healthy.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Why Logging Matters</p>
+<p>Logging is vital because many real-world bugs don’t surface under a debugger—they happen under production timing, user behavior, or multi‑threaded interactions you can’t easily reproduce. Good logs provide a factual timeline of what the system was doing, letting developers diagnose issues long after they occurred.</p>
+<p>Logging also cleanly separates <strong>what the code reports</strong> from <strong>how it’s captured</strong>, allowing teams to change destinations, verbosity, or formats without touching business logic. This decoupling keeps systems maintainable and makes it easy to switch between quiet production logs and detailed debugging output simply by editing configuration.</p>
+<p>Beyond debugging, logs support observability and business needs: tracking performance, identifying usage patterns, detecting anomalies, and generating metrics or KPIs.</p>
+</div>
+<p><strong>Log4j</strong> is a popular Java logging framework. A developer writes to a log using a <strong>Logger</strong>, and the message can be directed to a myriad of destinations (files, console, or something custom<a href="#footnotes"><sup>[1]</sup></a>) via <strong>Appenders</strong>, and formatted with desired information. <a class="reference external" href="https://logging.apache.org/log4j/2.12.x/manual/configuration.html">Configuration</a> is typically done with an XML file.</p>
+<p>A <strong>configuration file</strong> declares <strong>what</strong> can be logged (<a href="#logging-levels">Logging Levels</a>), <strong>where</strong> it is logged (<code class="docutils literal notranslate"><span class="pre">Appenders</span></code>), and <strong>how</strong> it is formatted.</p>
+<p>The code can create a <code class="docutils literal notranslate"><span class="pre">Logger</span></code> and then attempt to log a message at a specific level as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// The name of the logger determines which Logger is created.</span>
+<span class="c1">// Each specific logger will target specific locations to send its messages.</span>
+<span class="c1">// Note that the XML file has &lt;Logger name=&quot;swing&quot;&gt;.</span>
+<span class="n">Logger</span><span class="w"> </span><span class="n">swingLogger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">&quot;swing&quot;</span><span class="p">);</span>
+
+<span class="c1">// Construct our message using a `formatted print`. Log4j offers a variable argument, </span>
+<span class="c1">// formatted print to more easily construct messages.  `{}` are placeholders for the</span>
+<span class="c1">// arguments that follow.</span>
+<span class="n">swingLogger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;My number = {} which is {}!&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dope&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>What</strong>:<br />
+In the code above, we determine <em>what</em> gets logged by setting the <em>Logging Level</em>. The XML file can set what level messages are filtered out and which make it to their destination. This allows the code to express the level of the message and the XML decides whether it worth logging or not, depending on the current configuration. The code above attempts to log a message at the <code class="docutils literal notranslate"><span class="pre">info</span></code> level by calling <code class="docutils literal notranslate"><span class="pre">swingLogger.info</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">XML</span></code> file sets what gets filtered. For example, <code class="docutils literal notranslate"><span class="pre">&lt;Logger</span> <span class="pre">level=&quot;info&quot;&gt;</span></code> would allow only message that are as important, or <em>more</em> important, than “info” to get logged. It filters out <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">trace</span></code> messages.</p>
+<p><strong>Where</strong>:<br />
+Each Logger has one or more specific targets such as the console, a file, or some custom target. The specific logger that is created is determined by the <code class="docutils literal notranslate"><span class="pre">XML</span></code> file. In the example XML below, the Logger with the name “swing” is created with the code <code class="docutils literal notranslate"><span class="pre">LogManager.getLogger(&quot;swing&quot;)</span></code>. We can see that the “swing” Logger has two <code class="docutils literal notranslate"><span class="pre">&lt;AppenderRef&gt;</span></code> tags meaning that there are <strong>two</strong> destinations for its messages. The Appenders with names are configured in the <code class="docutils literal notranslate"><span class="pre">&lt;Appenders&gt;</span></code> section of the XML.</p>
+<p><strong>How</strong>:<br />
+Each Appender has a <code class="docutils literal notranslate"><span class="pre">PatternLayout</span></code> that specifies a <em>template</em> for the message being logged. This is normally configured to provide a timestamp. It can also be configured to show the name or ID of the thread, the current Level, and/or the name of the logger. For details on the <em>template</em>, visit <a class="reference external" href="https://logging.apache.org/log4j/2.x/manual/pattern-layout.html">Apache’s Documentation</a>.</p>
+<section id="log4j2-spring-xml-example">
+<h2><code class="docutils literal notranslate"><span class="pre">log4j2-spring.xml</span></code> Example<a class="headerlink" href="#log4j2-spring-xml-example" title="Link to this heading">#</a></h2>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;Configuration</span><span class="w"> </span><span class="na">status=</span><span class="s">&quot;WARN&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Appenders&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- Custom GUI appender --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;SwingAppender</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;SwingAppender&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;PatternLayout</span><span class="w"> </span><span class="na">pattern=</span><span class="s">&quot;%d{mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/SwingAppender&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Console</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Console&quot;</span><span class="w"> </span><span class="na">target=</span><span class="s">&quot;SYSTEM_OUT&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;PatternLayout</span><span class="w"> </span><span class="na">pattern=</span><span class="s">&quot;%d{mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Console&gt;</span>
+<span class="w">    </span><span class="nt">&lt;File</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ThreadFile&quot;</span><span class="w"> </span><span class="na">fileName=</span><span class="s">&quot;logs/threading.log&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;PatternLayout</span><span class="w"> </span><span class="na">pattern=</span><span class="s">&quot;%d{HH:mm:ss.SSS} [%t]:  %msg%n&quot;</span><span class="nt">&gt;&lt;/PatternLayout&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/File&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Appenders&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Loggers&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Logger</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;swing&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;all&quot;</span><span class="w"> </span><span class="na">additivity=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;SwingAppender&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;ThreadFile&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Logger&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Logger</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;console&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;all&quot;</span><span class="w"> </span><span class="na">additivity=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;Console&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Logger&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Root</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;info&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;Console&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Root&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Loggers&gt;</span>
+<span class="nt">&lt;/Configuration&gt;</span>
+</pre></div>
+</div>
+<p>The XML above defines two different <code class="docutils literal notranslate"><span class="pre">Logger</span></code>s (<em>console</em> and <em>swing</em>), and three different <code class="docutils literal notranslate"><span class="pre">Appenders</span></code> (<em>SwingAppender</em>, <em>Console</em>, and a <em>File</em> with the name “threading.log”).</p>
+<p><strong>Logger:</strong></p>
+<ul class="simple">
+<li><p>Can have multiple Appenders</p></li>
+<li><p>There is a default <code class="docutils literal notranslate"><span class="pre">Root</span></code> logger</p></li>
+<li><p>Set the level that they filter messages</p></li>
+<li><p>Can <em>bubble</em> up events to its parent loggers. Parents are set with dot-separated hierarchies in their names.</p></li>
+</ul>
+<p><strong>Appenders:</strong></p>
+<ul class="simple">
+<li><p>The Appenders effectively say where the message go; they establish the targets for the messages.</p></li>
+<li><p>They can have a lot of <em>policies</em> set on them to establish whether a new file gets created at each run, the maximum size of a file, and more.</p></li>
+</ul>
+<p>There is a lot that can be configured on an Appender. <a class="reference external" href="https://howtodoinjava.com/log4j2/log4j2-xml-configuration-example/">Click here</a> for a configuration example with more details.</p>
+<p>In the above configuration, you’ll see that the <code class="docutils literal notranslate"><span class="pre">Logger</span></code> with the name <code class="docutils literal notranslate"><span class="pre">swing</span></code> is configured with <strong>TWO</strong> <code class="docutils literal notranslate"><span class="pre">&lt;AppenderRef&gt;</span></code> tags. This means that when the code uses the swing logger the message will be directed to both places: a file named <code class="docutils literal notranslate"><span class="pre">threading.log</span></code> and to the custom <code class="docutils literal notranslate"><span class="pre">SwingAppender</span></code><a href="#footnotes"><sup>[1]</sup></a> object.</p>
+</section>
+<section id="logging-levels">
+<h2>Logging Levels<a class="headerlink" href="#logging-levels" title="Link to this heading">#</a></h2>
+<p>Log4j defines levels that control verbosity and severity by filtering out messages at various levels.</p>
+<p>Here are the Levels (from least <em>severe</em> to most <em>severe</em>):</p>
+<ul class="simple">
+<li><p><strong>TRACE</strong> – very fine‑grained diagnostics (lowest, most verbose, often filtered out)</p></li>
+<li><p><strong>DEBUG</strong> – internal state/change tracking for debugging</p></li>
+<li><p><strong>INFO</strong> – normal application milestones/health</p></li>
+<li><p><strong>WARN</strong> – something looks off; attention may be needed (<strong>not</strong> filtered when <code class="docutils literal notranslate"><span class="pre">logger.info</span></code> is called.)</p></li>
+<li><p><strong>ERROR</strong> – an operation failed; functionality impacted</p></li>
+<li><p><strong>FATAL</strong> – unrecoverable; app may abort (never filtered)</p></li>
+</ul>
+<blockquote>
+<div><p>Effective level filtering means <em>“log this level <strong>and more severe</strong>.”</em></p>
+</div></blockquote>
+<p><strong>For example:</strong></p>
+<ul class="simple">
+<li><p>logger.warn(“gets logged when XML set at warn, info, debug, or trace.”)</p></li>
+<li><p>logger.fatal(“always gets logged.”)</p></li>
+<li><p>logger.trace(“gets logged ONLY when XML set at trace”)</p></li>
+</ul>
+<p><strong>When XML is set to:</strong></p>
+<ul class="simple">
+<li><p>level=”trace” : All messages are logged.</p></li>
+<li><p>level=”info” : Messages called with logger.info, logger.warn, logger.error, or logger.fatal <strong>will</strong> get logged.</p></li>
+</ul>
+</section>
+<section id="output-format-with-patternlayout">
+<h2>Output Format with <strong>PatternLayout</strong><a class="headerlink" href="#output-format-with-patternlayout" title="Link to this heading">#</a></h2>
+<p><strong><code class="docutils literal notranslate"><span class="pre">PatternLayout</span></code></strong> uses conversion specifiers to format each log line. Common ones:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">%d{...}</span></code> → date/time with custom pattern (e.g., <code class="docutils literal notranslate"><span class="pre">yyyy-MM-dd</span> <span class="pre">HH:mm:ss.SSS</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%t</span></code> / <code class="docutils literal notranslate"><span class="pre">%tn</span></code> / <code class="docutils literal notranslate"><span class="pre">%tid</span></code> → thread name; thread name and thread id (depending on pattern support)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%-5level</span></code> → padded level</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%logger{36}</span></code> / <code class="docutils literal notranslate"><span class="pre">%c{1}</span></code> → logger name (optionally abbreviate)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%m</span></code> → message; <code class="docutils literal notranslate"><span class="pre">%n</span></code> → newline</p></li>
+</ul>
+<p><strong>Thread context:</strong> You can include <strong>thread name</strong> and supported <strong>thread identifiers</strong> in the pattern to disentangle concurrent logs, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">d</span><span class="p">{</span><span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="o">.</span><span class="n">SSS</span><span class="p">}</span> <span class="p">[</span><span class="n">thread_id</span><span class="o">=</span><span class="s2">&quot;%tid&quot;</span> <span class="n">thread_name</span><span class="o">=</span><span class="s2">&quot;%tn&quot;</span><span class="p">]</span> <span class="o">%-</span><span class="mi">5</span><span class="n">level</span> <span class="o">%</span><span class="n">logger</span><span class="p">{</span><span class="mi">36</span><span class="p">}</span> <span class="o">-</span> <span class="o">%</span><span class="n">msg</span><span class="o">%</span><span class="n">n</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://logging.apache.org/log4j/2.x/manual/pattern-layout.html">More PatternLayout info.</a></p>
+</section>
+<section id="code-example">
+<h2>Code Example<a class="headerlink" href="#code-example" title="Link to this heading">#</a></h2>
+<p>This code will be specific to the example XML shown above. It will create a logger and write at different levels:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.logging.log4j.LogManager</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.logging.log4j.Logger</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">consoleLogger</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">swingLogger</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">MyClass</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">consoleLogger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">&quot;console&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">&quot;UserActionFile&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doWork</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">orderId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">consoleLogger</span><span class="p">.</span><span class="na">trace</span><span class="p">(</span><span class="s">&quot;Entering placeOrder id={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Validating {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Order {} placed successfully&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Slow response from payment provider for {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Failed to persist order {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">fatal</span><span class="p">(</span><span class="s">&quot;System is shutting down due to unrecoverable error&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 <section id="what-s-so-important">
 <h2>What’s so Important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Log lots!</p></li>
+<li><p>Logging makes <em>impossible-to-reproduce</em> bugs solvable by capturing timing, state, and thread context that you can’t get from a debugger.</p></li>
+<li><p>It decouples <strong>what your code logs</strong> from <strong>where the logs go</strong>, so you can change outputs (console, files, GUI components) <em>without touching the Java code</em>.</p></li>
+<li><p>Logging levels let you switch between <em>quiet</em> production logs and <em>chatty</em> debugging logs instantly by editing the XML—no recompilation needed.</p></li>
+<li><p>In multi-threaded or asynchronous systems, logs provide the <em>only</em> reliable timeline of what happened and in what order.</p></li>
+<li><p>Centralized, well-structured logs become useful for analytics, KPIs, performance trends, audit trails, and detecting unusual behavior.</p></li>
+</ul>
+</section>
+<section id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
+<p>[1] In the CSS 490 course, the <em>Console</em> project makes use of a <em>custom</em> logger named <code class="docutils literal notranslate"><span class="pre">SwingAppender</span></code>. This class pipes the message to the logging pane (the <code class="docutils literal notranslate"><span class="pre">JTextPane</span></code> that is visible front and center). This allows the user of the application to see the logs.<br />
+Here are some references:</p>
+<ul class="simple">
+<li><p><strong>Log4j 2 Configuration (official manual)</strong> – file formats, discovery order, examples: <a class="reference external" href="https://logging.apache.org/log4j/2.12.x/manual/configuration.html">Apache Log4j 2 Configuration</a></p></li>
+<li><p><strong>PatternLayout (official manual)</strong> – specifiers for timestamps, threads, levels, logger names, etc.: <a class="reference external" href="https://logging.apache.org/log4j/2.x/manual/pattern-layout.html">Pattern Layout</a></p></li>
+<li><p><strong>API usage (official manual)</strong> – <code class="docutils literal notranslate"><span class="pre">LogManager</span></code>, <code class="docutils literal notranslate"><span class="pre">Logger</span></code>, level methods: <a class="reference external" href="https://logging.apache.org/log4j/2.x/manual/api.html">Log4j API</a></p></li>
+<li><p><strong>Spring Boot + Log4j 2</strong> – how Boot picks up your config and naming guidance: <a class="reference external" href="https://docs.spring.io/spring-boot/reference/features/logging.html">Spring Boot Logging</a>, <a class="reference external" href="https://howtodoinjava.com/spring-boot/spring-boot-log4j2-config/">Boot + Log4j2 example</a></p></li>
 </ul>
 </section>
 </section>
@@ -595,7 +761,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log4j2-spring-xml-example"><code class="docutils literal notranslate"><span class="pre">log4j2-spring.xml</span></code> Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-levels">Logging Levels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-format-with-patternlayout">Output Format with <strong>PatternLayout</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-example">Code Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
 </ul>
   </nav></div>
 

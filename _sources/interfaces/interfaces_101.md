@@ -117,13 +117,13 @@ public class HandyGuy extends Person implements Electrician, Plumber  {
 ## instanceof
 Let's say that we have a program that wants to put various people to work. The method below `putPersonToWork` accepts any object that `is-a` `Person`. Perhaps this person has the certification to do the work of a Plumber or an Electrician. To determine this we need to ask the object `p` if it implements an interface using the keyword `instanceof`. 
 
-Below you'll see how we use `instanceof` to determine if we can ask an identifier to behave as a Plumber. It is important to note that we must first **cast** p into a Plumber before using any of the Plumber behaviors. The compiler will attempt to protect the programmer from misusing a Person by not allowing a Person idenfier to call any methods it does implement or inherit.  Without the cast at line 11, the compiler will fail at line 14 (`error: cannot find symbol`).   
+Below you'll see how we use `instanceof` to determine if we can ask an identifier to behave as a Plumber. It is important to note that we must first **cast** p into a Plumber before using any of the Plumber behaviors. The compiler will attempt to protect the programmer from misusing a Person by not allowing a Person identifier to call any methods it does implement or inherit.  Without the cast at line 11, the compiler will fail at line 14 (`error: cannot find symbol`).   
 
 The nice thing about this code is that it will work with any `Person` object. If the person is a Plumber, it will do plumber work. It the person is an electrician, it will do electrician work. In either case, we know that we can get the person's name.  
 
 ```{admonition} Dot Operator
 :class: note dropdown
-We can have idenfiers that references an `interface` or an instance of a `class`. In both cases, to invoke a method, we use the "dot operator".  
+We can have identifiers that references an `interface` or an instance of a `class`. In both cases, to invoke a method, we use the "dot operator".  
 
 For example:  
 Below we have `Person p`. If we wanted the name of the person, we would get access to it using: `p.getName();` Notice that the method `getName` is defined in the Person class. 
@@ -281,7 +281,7 @@ public void readFile(String filename) {
     * Methods are required to be `public` and are implicitly `public abstract`.  
     * Fields are required to be `public static final` (no instance fields).  
 * Classes can implement _many_ interfaces. This is one important property (of several) that makes interfaces powerful and popular.  
-* Interfaces retain the `IS-A` relationship. If a class implements `X`, than an instance of that class is-a `X`. Classes have the same behavior. If a class extends `A`, then an instance of that class is-a `A`.   
+* Interfaces retain the `IS-A` relationship. If a class implements `X`, then an instance of that class is-a `X`. Classes have the same behavior. If a class extends `A`, then an instance of that class is-a `A`.   
 * We can ask an object if it implements an interface by using the `instanceof` keyword.  
 
 ## Footnotes
