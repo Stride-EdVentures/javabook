@@ -267,8 +267,11 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 
 
 ## What's so Important? ![Billy](../_static/whats_so_important.png)   
-* Spring ...
+*   **Dependency Injection (DI)** : Spring automatically creates and wires your objects (beans), giving you loose coupling, cleaner code, and easier testing.  
+*   **Component Scanning & Annotations** : With annotations like `@Component`, `@Service`, and `@Controller`, Spring finds and manages your classes without manual setup. This also known as **Bean Management**.  
+*   **Test‑Friendly Configuration** : Features like `@Configuration`, `@Bean`, `@TestConfiguration`, and `@MockitoBean` let you override or mock dependencies cleanly during testing.  
+*   **AOP & Integration Support** : Spring makes cross‑cutting concerns (e.g. logging and security) and integration with tools like JUnit and Mockito easy and consistent.  
 
 ## Footnotes
 * *Def **idempotent***: An idempotent method is one that can be called multiple times with the same inputs and produces the same result, without causing *additional* side effects.  
-* `Bean`: This is ...
+* `AOP` is **Aspect Oriented Programming**. It is a way to modularize "cross-cutting" concerns and to apply them across the application more easily. [See more here](https://www.springboottutorial.com/introduction-to-aspect-oriented-programming-and-cross-cutting-concerns)  
