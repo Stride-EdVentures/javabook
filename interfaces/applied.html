@@ -51,7 +51,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
@@ -284,6 +284,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/maven.html">Maven</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/spring.html">Spring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/junit.html">JUnit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/mockito.html">Mockito</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/practice_mockito.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Mockito</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../frameworks/log4j.html">Log4j</a></li>
@@ -551,7 +552,7 @@ document.write(`
 <p>There are <strong>two questions</strong> we will answer:</p>
 <section id="how-does-the-for-each-work">
 <h3>How does the for-each work?<a class="headerlink" href="#how-does-the-for-each-work" title="Link to this heading">#</a></h3>
-<p>How is it that just because an object implements an interface that it can then be put into a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop? This woeks because the compiler will translate a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop into a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop in the following way:</p>
+<p>How is it that just because an object implements an interface that it can then be put into a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop? This works because the compiler will translate a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop into a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop in the following way:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Beforehand, the &quot;sugar&quot; code looks like this:</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
@@ -560,9 +561,9 @@ document.write(`
 <span class="c1">// The compiler verifies at compile time that `iter` is-a `Iterable&lt;T&gt;`.</span>
 <span class="c1">// If not, then the compiler will throw an error. </span>
 <span class="c1">// </span>
-<span class="c1">// If all is good, the &quot;unsugared&quot; code looks like this.</span>
+<span class="c1">// If all is good, the &quot;un-sugared&quot; code looks like this.</span>
 <span class="c1">// When running, this is the actual code that gets executed. </span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="na">hasNext</span><span class="p">();</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="na">hasNext</span><span class="p">();</span><span class="w"> </span><span class="cm">/* update in body */</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
 <span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
 <span class="p">}</span>
@@ -583,7 +584,7 @@ document.write(`
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>If the object didn’t have a way to request a fresh instance of <code class="docutils literal notranslate"><span class="pre">Iterator</span></code> then the code above would not behave like a nested loop at all. The nested iterator would not have the ability to maintain its own, independent state. This is because there is only one object implementing the itertor. The <code class="docutils literal notranslate"><span class="pre">unsugared</span></code> code would look like this <em>buggy</em> code:</p>
+<p>If the object didn’t have a way to request a fresh instance of <code class="docutils literal notranslate"><span class="pre">Iterator</span></code> then the code above would not behave like a nested loop at all. The nested iterator would not have the ability to maintain its own, independent state. This is because there is only one object implementing the iterator. The <code class="docutils literal notranslate"><span class="pre">un-sugared</span></code> code would look like this <em>buggy</em> code:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">iter</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Type</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">iter</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
@@ -643,7 +644,7 @@ document.write(`
 <li><p><strong>MouseListener:</strong> Handles mouse events like clicks, presses, releases, and entering/exiting a component.</p></li>
 <li><p><strong>MouseMotionListener:</strong> Deals with mouse movement events, such as dragging and moving the mouse.</p></li>
 <li><p><strong>KeyListener:</strong> Manages keyboard events, including key presses, releases, and typing.</p></li>
-<li><p><strong>WindowListener:</strong> Handles window events like opening, closing, iconifying (minimize), and deiconifying (restore) windows.</p></li>
+<li><p><strong>WindowListener:</strong> Handles window events like opening, closing, iconifying (minimize), and de-iconifying (restore) windows.</p></li>
 <li><p><strong>FocusListener:</strong> Manages focus events, such as gaining or losing focus on a component.</p></li>
 <li><p><strong>ItemListener:</strong> Used for handling item events, typically in components like checkboxes and radio buttons.</p></li>
 </ol>

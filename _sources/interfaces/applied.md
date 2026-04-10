@@ -23,7 +23,7 @@ The generic interface, `List` extends `Collection` (another interface) and there
 
 There are **two questions** we will answer:
 ### How does the for-each work?
-How is it that just because an object implements an interface that it can then be put into a `for-each` loop? This woeks because the compiler will translate a `for-each` loop into a `for` loop in the following way:
+How is it that just because an object implements an interface that it can then be put into a `for-each` loop? This works because the compiler will translate a `for-each` loop into a `for` loop in the following way:
 
 ```java
 // Beforehand, the "sugar" code looks like this:
@@ -34,9 +34,9 @@ for (Type t : iter) {
 // The compiler verifies at compile time that `iter` is-a `Iterable<T>`.
 // If not, then the compiler will throw an error. 
 // 
-// If all is good, the "unsugared" code looks like this.
+// If all is good, the "un-sugared" code looks like this.
 // When running, this is the actual code that gets executed. 
-for (Iterator<Type> it = iter.iterator(); it.hasNext(); ) {
+for (Iterator<Type> it = iter.iterator(); it.hasNext(); /* update in body */) {
     Type t = it.next();
     System.out.println(t);
 }
@@ -57,7 +57,7 @@ for (Type t : iter) {
     System.out.println("Outer: " + t);
 }
 ```
-If the object didn't have a way to request a fresh instance of `Iterator` then the code above would not behave like a nested loop at all. The nested iterator would not have the ability to maintain its own, independent state. This is because there is only one object implementing the itertor. The `unsugared` code would look like this _buggy_ code:
+If the object didn't have a way to request a fresh instance of `Iterator` then the code above would not behave like a nested loop at all. The nested iterator would not have the ability to maintain its own, independent state. This is because there is only one object implementing the iterator. The `un-sugared` code would look like this _buggy_ code:
 
 ```java
 while (iter.hasNext()) {
@@ -119,7 +119,7 @@ In Java GUI applications, several listener interfaces are commonly used to handl
 2. **MouseListener:** Handles mouse events like clicks, presses, releases, and entering/exiting a component.  
 3. **MouseMotionListener:** Deals with mouse movement events, such as dragging and moving the mouse.  
 4. **KeyListener:** Manages keyboard events, including key presses, releases, and typing.  
-5. **WindowListener:** Handles window events like opening, closing, iconifying (minimize), and deiconifying (restore) windows.  
+5. **WindowListener:** Handles window events like opening, closing, iconifying (minimize), and de-iconifying (restore) windows.  
 6. **FocusListener:** Manages focus events, such as gaining or losing focus on a component.  
 7. **ItemListener:** Used for handling item events, typically in components like checkboxes and radio buttons.  
 

@@ -274,4 +274,4 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 
 ## Footnotes
 * *Def **idempotent***: An idempotent method is one that can be called multiple times with the same inputs and produces the same result, without causing *additional* side effects.  
-* `AOP` is **Aspect Oriented Programming**. It is a way to modularize "cross-cutting" concerns and to apply them across the application more easily. [See more here](https://www.springboottutorial.com/introduction-to-aspect-oriented-programming-and-cross-cutting-concerns)  
+* `` is **Aspect Oriented Programming**. It is a way to modularize "cross-cutting" concerns and to apply them across the application more easily. [See more here](https://www.springboottutorial.com/introduction-to-aspect-oriented-programming-and-cross-cutting-concerns)  

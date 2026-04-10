@@ -1,0 +1,1111 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>JUnit &#8212; Practical Java </title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6c3db60c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "Stride-EdVentures/javabook");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "preferred-color-scheme");
+    script.setAttribute("label", "💬 Comments");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'frameworks/junit';</script>
+    <script src="../_static/custom.js?v=540a9731"></script>
+    <link rel="icon" href="../_static/peanut head.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mockito" href="mockito.html" />
+    <link rel="prev" title="Spring" href="spring.html" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DW6SHVPBYV"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DW6SHVPBYV');
+    </script>
+
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Practical Java  - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Practical Java  - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    <i class="fas fa-hand-sparkles fa-fw"></i> Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Topics/index.html"><i class="fas fa-book fa-fw"></i> Miscellaneous</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/java_conventions.html">Code Quality Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/installing_jgrasp.html">Installing jGrasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/problem_solving.html">Problem Solving</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Topics/git.html">Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/java_v_cpp.html">Java &lt;–&gt; C++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/images.html">Images</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching">Learn Git Branching</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../generics/index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../generics/array_list.html">Lesson G1: ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/stack_queue.html">Lesson G2: Stack &amp; Queue</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://java.mrstride.com/_static/html/postfix_visualizer.html">Postfix Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/shuntingyard.html">Lesson G3: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://java.mrstride.com/_static/html/shunting_yard.html">Shunting Yard Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/maps.html">Lesson G4: Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_maps.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/collections.html">Lesson G5: Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/generics.html">Lesson G6: Generics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/constraint_typing.html">Lesson G7: Constraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_ct.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Contraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/type_erasure.html">Lesson G8: Type Erasure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interfaces/index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/interfaces_101.html">Lesson I1: Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/classes_fall_short.html">Lesson I2: Classes Fall Short</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/method_references.html">Lesson I3: Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/lambdas.html">Lesson I4: Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_03.html"><i class="fas fa-pen-square fa-fw"></i> Practice Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/applied.html">Lesson I5: Applied Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/anonymous_classes.html">Lesson I6: Anonymous Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/default_methods.html">Lesson I7: Default Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/full_review.html">Lesson I8: Full Review</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="maven.html">Maven</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spring.html">Spring</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">JUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mockito.html">Mockito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_mockito.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Mockito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log4j.html">Log4j</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../patterns/index.html"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/singleton.html">Singleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/dependency_injection.html">Dependency Injection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/solid.html">SOLID principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/design_patterns.html">Design Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/principles.html">Principles</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/frameworks/junit.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fframeworks/junit.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/frameworks/junit.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>JUnit</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-practices">Testing Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-unit-tests">Quality Unit Tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-structure">Basic Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-names">Test Names</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-vs-quantity">Quality vs Quantity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anti-patterns">Anti-Patterns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">JUnit</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-assertions">Common Assertions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-lifecycle-and-annotations">Test Lifecycle and Annotations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#junit-integrations">JUnit Integrations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-results-and-reporting-in-vs-code">Test Results and Reporting in VS Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-coverage">Code Coverage</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-boot-integration">Spring Boot Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <style>
+#quality-vs-quantity > blockquote:nth-child(3) {
+    background-color: rgba(255, 209, 209, 0.5) !important;
+}
+#quality-vs-quantity > blockquote:nth-child(5) {
+    background-color: rgba(209, 255, 211, 0.5) !important; /* Light green */
+}
+div.red-fill blockquote {
+    background-color: rgba(255, 209, 209, 0.5) !important;
+}
+div.good-code div pre {
+    background-color: rgba(209, 255, 211, 0.5) !important; /* Light green */
+}
+div.bad-code div pre {
+    background-color: rgba(255, 209, 209, 0.5) !important;
+}
+div.okay-code div pre {
+    background-color: rgba(253, 255, 201, 0.5) !important;
+}
+</style>
+<section class="tex2jax_ignore mathjax_ignore" id="junit">
+<h1>JUnit<a class="headerlink" href="#junit" title="Link to this heading">#</a></h1>
+<p>JUnit is a widely-adopted testing framework for Java that allows developers to write and run automated unit tests. A <strong>unit test</strong> is a small, focused test that verifies the correctness of a single unit of code—typically a method or a small class. JUnit provides a structured way to organize tests, make assertions about expected behavior, and gain confidence that your code works correctly.</p>
+<p>In this lesson we will be discussing <strong>JUnit 5</strong> (also called <strong>Jupiter</strong>), the modern standard for Java testing.</p>
+<section id="testing-practices">
+<h2>Testing Practices<a class="headerlink" href="#testing-practices" title="Link to this heading">#</a></h2>
+<p>Before we dive into <code class="docutils literal notranslate"><span class="pre">JUnit</span></code> specifically, let’s discuss <strong>Unit Testing</strong> in general.</p>
+<section id="quality-unit-tests">
+<h3>Quality Unit Tests<a class="headerlink" href="#quality-unit-tests" title="Link to this heading">#</a></h3>
+<p>Unit Tests should have characteristics make them effective and maintainable. The following help to ensure that tests provide value and don’t become a burden.</p>
+<ul class="simple">
+<li><p><strong>Independent:</strong> Each test should run in isolation without depending on other tests or shared state. Tests should be able to execute in any order without affecting each other. This prevents cascading failures and makes debugging easier.</p></li>
+<li><p><strong>Quick:</strong> Tests should execute rapidly (ideally in milliseconds). Slow tests discourage developers from running them frequently, reducing their effectiveness as a safety net during development. A full suite of Unit Tests<a href="#footnotes"><sup>[1]</sup></a> should take at most a few minutes.</p></li>
+<li><p><strong>Reliable:</strong> Tests should consistently pass when the code is correct and fail when it’s not. Flaky tests that pass or fail unpredictably erode confidence in the test suite.</p></li>
+<li><p><strong>Repeatable:</strong> Running the same test multiple times should produce the same result. Tests shouldn’t depend external factors like network connectivity, file system state, or random number generation.</p></li>
+<li><p><strong>Understandable:</strong> Test code should be clear and self-documenting. Method names should describe what is being tested and why. Complex setup or assertions should be well-commented.</p></li>
+<li><p><strong>Targeted:</strong> Each test should focus on one specific piece of functionality. When a test fails, you should immediately know what behavior is broken, making debugging straightforward and preventing the need to investigate multiple potential issues.</p></li>
+</ul>
+<p><strong>To achieve the above:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Test Behavior, Not Implementation:</strong> Focus on what the code should <em>do</em>, not <em>how</em> it does it. This makes tests more resilient to refactoring.</p></li>
+<li><p><strong>Use Meaningful Assertions:</strong> Don’t just assert that something isn’t null. Assert the specific values or conditions you care about.</p></li>
+<li><p><strong>Mock External Dependencies:</strong> This is perhaps the biggest win as it promotes speed, isolation, reliability, and repeatable tests. Use <a class="reference internal" href="mockito.html"><span class="std std-doc">Mockito</span></a> to isolate the code you’re testing from unreliable, slow or external dependencies like databases, APIs, or file systems.</p></li>
+<li><p><strong>Test more than just the Happy Path:</strong> Write tests for normal usage, but also test boundary conditions, null inputs, and error scenarios.</p></li>
+</ol>
+<p>Following these principles leads to a test suite that developers trust and use regularly. When a test fails, you can be confident it’s indicating a real problem in the code, not a flaw in the test itself.</p>
+<div class="warning admonition">
+<p class="admonition-title">Bad Tests Get Turned Off</p>
+<p>When a test fails too often, or inconsistently, or is too difficult to fix, developers take the shortcut of just turning it off.</p>
+</div>
+</section>
+<section id="basic-structure">
+<h3>Basic Structure<a class="headerlink" href="#basic-structure" title="Link to this heading">#</a></h3>
+<p>Every JUnit test follows a predictable structure:</p>
+<ol class="arabic simple">
+<li><p><strong>Arrange:</strong> Set up the objects and state needed for the test.</p></li>
+<li><p><strong>Act:</strong> Call the method or behavior you’re testing.</p></li>
+<li><p><strong>Assert:</strong> Check that the result matches your expectation.</p></li>
+</ol>
+<p>Here’s a simple example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.*</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CalculatorTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testAddition</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Arrange: Create the object to test</span>
+<span class="w">        </span><span class="n">Calculator</span><span class="w"> </span><span class="n">calc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Calculator</span><span class="p">();</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="c1">// Act: Perform the action</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="c1">// Assert: Verify the result</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="test-names">
+<h3>Test Names<a class="headerlink" href="#test-names" title="Link to this heading">#</a></h3>
+<p>Test class names typically end with <code class="docutils literal notranslate"><span class="pre">Test</span></code>. Test method names should clearly describe what is being tested, often following the pattern <code class="docutils literal notranslate"><span class="pre">test[MethodName][Scenario][ExpectedResult]</span></code>.</p>
+<p>Clear names like these make it easy to understand what each test validates and why it might fail.</p>
+<div class="note admonition">
+<p class="admonition-title">Good Practice</p>
+<p>Each test method should test exactly one behavior or scenario. If you need to test multiple related scenarios, create separate test methods. This makes failures more informative and tests more maintainable.</p>
+</div>
+<div class="good-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Good: Clear, focused, tests behavior</span>
+<span class="nd">@Test</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">testBankTransfer_insufficientFunds_throwsException</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">BankAccount</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BankAccount</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BankAccount</span><span class="w"> </span><span class="kd">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BankAccount</span><span class="p">();</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">InsufficientFundsException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">BankService</span><span class="p">.</span><span class="na">transfer</span><span class="p">(</span><span class="n">from</span><span class="p">,</span><span class="w"> </span><span class="kd">to</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Avoid: Too broad, unclear intent</span>
+<span class="nd">@Test</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">testTransfer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">BankAccount</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BankAccount</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BankAccount</span><span class="w"> </span><span class="kd">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BankAccount</span><span class="p">();</span>
+<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="kd">to</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// ... unclear assertions ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Testing with Dependency Injection</p>
+<p>JUnit works seamlessly with <a class="reference internal" href="../patterns/dependency_injection.html"><span class="doc std std-doc">Dependency Injection</span></a>. The best practice is to use <strong>constructor injection</strong> in your production code, which makes dependency wiring explicit and makes tests easier to write without requiring Spring.</p>
+<p>For a detailed discussion on dependency isolation techniques, see <a class="reference internal" href="mockito.html"><span class="std std-doc">Mockito</span></a>.</p>
+</div>
+</section>
+<section id="quality-vs-quantity">
+<h3>Quality vs Quantity<a class="headerlink" href="#quality-vs-quantity" title="Link to this heading">#</a></h3>
+<p>While a poorly written test should be deleted, it is <strong>wrong</strong> to state:</p>
+<blockquote>
+<div><p>Quality over Quantity</p>
+</div></blockquote>
+<p>Developers are already reluctant to write tests. The vague slogan, “quality over quantity,” can inadvertently justify stopping early. The reality is that good <a href="#code-coverage">code coverage</a> genuinely requires a lot of tests, one per behavior, one per edge case, one per error scenario.<br />
+<strong>The proper slogan:</strong></p>
+<blockquote>
+<div><p>Quantity, done right, is quality.</p>
+</div></blockquote>
+<p>The trick here is to know what “done right” means. Let’s dive into that a bit by looking at some anti-patterns.</p>
+</section>
+<section id="anti-patterns">
+<h3>Anti-Patterns<a class="headerlink" href="#anti-patterns" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>assertNotNull(object)</strong>: Creating an object and then asserting that it is not null is a test that asserts almost nothing. (These are written often in pursuit of code coverage.) A test that only checks “I got something back” won’t catch bugs in the actual data. Assert the specific values you care about.</p></li>
+<li><p><strong>Testing Multiple Behaviors in One Test</strong>: Cramming several assertions about unrelated things into a single test method makes failures hard to diagnose and violates the “one test per behavior” rule.</p></li>
+<li><p><strong>Testing Getters/Setters</strong>: Generally not worth it. These tests are a good example of where “quantity over quality” actually does apply. Time is better spent testing code that actually makes decisions such as conditionals, calculations, validation, and error handling. If the method has no branch or calculation in it, a test probably isn’t adding value.</p></li>
+</ol>
+<div class="note admonition">
+<p class="admonition-title">Done Right</p>
+<p><strong>Test where bugs live.</strong></p>
+</div>
+</section>
+</section>
+<section id="id1">
+<h2>JUnit<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="common-assertions">
+<h3>Common Assertions<a class="headerlink" href="#common-assertions" title="Link to this heading">#</a></h3>
+<p>JUnit provides a rich set of assertion methods to validate the code. Here are the most commonly used:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Assertion</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">assertEquals(expected,</span> <span class="pre">actual)</span></code></strong></p></td>
+<td><p>Verifies that two values are equal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><code class="docutils literal notranslate"><span class="pre">assertNotEquals(unexpected,</span> <span class="pre">actual)</span></code></strong></p></td>
+<td><p>Verifies that two values are not equal.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">assertTrue(condition)</span></code></strong></p></td>
+<td><p>Verifies that a condition is true.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><code class="docutils literal notranslate"><span class="pre">assertFalse(condition)</span></code></strong></p></td>
+<td><p>Verifies that a condition is false.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">assertNull(object)</span></code></strong></p></td>
+<td><p>Verifies that an object is null.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><code class="docutils literal notranslate"><span class="pre">assertNotNull(object)</span></code></strong></p></td>
+<td><p>Verifies that an object is not null.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">assertThrows(Exception.class,</span> <span class="pre">executable)</span></code></strong></p></td>
+<td><p>Verifies that an executable throws a specific exception.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><code class="docutils literal notranslate"><span class="pre">assertDoesNotThrow(executable)</span></code></strong></p></td>
+<td><p>Verifies that an executable does not throw an exception.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">fail(message)</span></code></strong></p></td>
+<td><p>Explicitly fails the test with an optional message.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Example using various assertions:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Test</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">testUserCreation</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
+<span class="w">    </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">user</span><span class="p">);</span><span class="w">                    </span><span class="c1">// somewhat useless test</span>
+<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">isAdult</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="nd">@Test</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">testInvalidAgeThrowsException</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// Negative age should throw</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="test-lifecycle-and-annotations">
+<h3>Test Lifecycle and Annotations<a class="headerlink" href="#test-lifecycle-and-annotations" title="Link to this heading">#</a></h3>
+<p>JUnit provides several annotations to run code at specific points in a test’s lifecycle and to mark which methods are tests.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserServiceTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserService</span><span class="w"> </span><span class="n">service</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="n">repository</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@BeforeEach</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setUp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// This runs before each test method</span>
+<span class="w">        </span><span class="n">repository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserRepository</span><span class="p">();</span>
+<span class="w">        </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserService</span><span class="p">(</span><span class="n">repository</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@AfterEach</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">tearDown</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// This runs after each test method</span>
+<span class="w">        </span><span class="n">repository</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@BeforeAll</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setupAll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// This runs once before any tests in this class</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Starting UserServiceTest suite&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@AfterAll</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">tearDownAll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// This runs once after all tests in this class</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Completed UserServiceTest suite&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testCreateUser</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">service</span><span class="p">.</span><span class="na">createUser</span><span class="p">(</span><span class="s">&quot;Charlie&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testFindUser</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">service</span><span class="p">.</span><span class="na">createUser</span><span class="p">(</span><span class="s">&quot;Diana&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">service</span><span class="p">.</span><span class="na">findUserByName</span><span class="p">(</span><span class="s">&quot;Diana&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">found</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Annotation</p></th>
+<th class="head"><p>Frequency</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;BeforeEach</span></code></strong></p></td>
+<td><p>Multiple times</p></td>
+<td><p>Runs before each test method; use for setup.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;AfterEach</span></code></strong></p></td>
+<td><p>Multiple times</p></td>
+<td><p>Runs after each test method; use for cleanup.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;BeforeAll</span></code></strong></p></td>
+<td><p>Once</p></td>
+<td><p>Runs once before any test in the class; must be static.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><code class="docutils literal notranslate"><span class="pre">&#64;AfterAll</span></code></strong></p></td>
+<td><p>Once</p></td>
+<td><p>Runs once after all tests in the class; must be static.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;Test</span></code> annotation is the key marker that tells JUnit which methods to execute. JUnit will automatically discover those methods, so you do not need to register them manually. It scans the classpath for test classes and then identifies <code class="docutils literal notranslate"><span class="pre">&#64;Test</span></code> methods at runtime.</p>
+<div class="note admonition">
+<p class="admonition-title">Good Practice</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">&#64;BeforeEach</span></code> for test-specific setup. Use <code class="docutils literal notranslate"><span class="pre">&#64;BeforeAll</span></code> sparingly—only for expensive, shared initialization. Keep tests independent so one failure does not create hidden dependencies for the next test.</p>
+</div>
+</section>
+</section>
+<section id="junit-integrations">
+<h2>JUnit Integrations<a class="headerlink" href="#junit-integrations" title="Link to this heading">#</a></h2>
+<p>In <strong>VS Code</strong>, JUnit tests are most easily run using the Java Extension Pack and the Java Test Runner extension. These tools provide a Test Explorer sidebar, run/debug icons in the editor gutter, and a clean workflow for executing individual tests, classes, or entire suites.</p>
+<ul class="simple">
+<li><p>Open the Test Explorer to browse discovered tests.</p></li>
+<li><p>Use the run/debug icons next to <code class="docutils literal notranslate"><span class="pre">&#64;Test</span></code> methods and test classes.</p></li>
+<li><p>Re-run failed tests directly from the dashboard.</p></li>
+</ul>
+<p>JUnit discovers tests by finding methods annotated with <code class="docutils literal notranslate"><span class="pre">&#64;Test</span></code>. VS Code shows those methods in the Test Explorer, and clicking a failed test will usually jump you directly to the failing assertion.</p>
+<section id="test-results-and-reporting-in-vs-code">
+<h3>Test Results and Reporting in VS Code<a class="headerlink" href="#test-results-and-reporting-in-vs-code" title="Link to this heading">#</a></h3>
+<p>The VS Code test dashboard shows:</p>
+<ul class="simple">
+<li><p><strong>Pass/Fail summary:</strong> Counts of passed, failed, and skipped tests.</p></li>
+<li><p><strong>Execution time:</strong> How long each test and the entire suite took.</p></li>
+<li><p><strong>Failure details:</strong> Stack traces and error messages for failed tests.</p></li>
+<li><p><strong>Status icons:</strong> Green checks for passes and red X’s for failures.</p></li>
+</ul>
+<section id="code-coverage">
+<h4>Code Coverage<a class="headerlink" href="#code-coverage" title="Link to this heading">#</a></h4>
+<p>Code coverage measures how much of your production code is exercised by your tests. In VS Code, coverage can be visualized by going to the Testing Dashboard.</p>
+<p>Coverage reports typically show:</p>
+<ul class="simple">
+<li><p><strong>Line Coverage:</strong> Percentage of executable lines executed during testing.</p></li>
+<li><p><strong>Class/Method Coverage:</strong> Which classes and methods are covered.</p></li>
+<li><p><strong>Branch Coverage:</strong> Percentage of decision points tested.</p></li>
+</ul>
+<p><img alt="JUnit Dashboard" src="../_images/Junit-dashboard.png" /><br />
+The above shows a Dashboard of Unit Tests for a project in VS Code. The top part shows a hierarchical organization of the tests by file along with the amount of time the tests took. At the top are some icons that allow you to execute the tests, debug the tests, and to run code coverage. The bottom part shows the Test Coverage for the files in the application (not just the Test File) and how many lines, methods, and branches are covered in that file.</p>
+</section>
+</section>
+<section id="spring-boot-integration">
+<h3>Spring Boot Integration<a class="headerlink" href="#spring-boot-integration" title="Link to this heading">#</a></h3>
+<p>While unit tests should typically avoid Spring for speed and simplicity, sometimes you need Spring Boot to verify component wiring and configuration. In those cases, use <code class="docutils literal notranslate"><span class="pre">&#64;SpringBootTest</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&#64;SpringBootTest</span></code> tells Spring Boot to start a full application context for your test. That means:</p>
+<ul class="simple">
+<li><p>Spring Boot auto-configuration is applied.</p></li>
+<li><p>Component scanning registers real beans such as <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> can inject real beans into the test.</p></li>
+<li><p>Configuration properties and custom <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> classes are loaded.</p></li>
+<li><p>Spring-managed features like AOP[2] become available.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@SpringBootTest</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RepositoryIntegrationTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSaveAndRetrieveUser</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&quot;Eve&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">28</span><span class="p">);</span>
+<span class="w">        </span><span class="n">userRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">retrieved</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;Eve&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">retrieved</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">&#64;SpringBootTest</span></code> only when you genuinely need the full Spring context. For most unit tests, avoid it to keep tests fast and isolated.</p>
+</section>
+</section>
+<section id="what-s-so-important">
+<h2>What’s so Important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A well-written unit test should be <strong>independent</strong>, <strong>fast</strong>, <strong>reliable</strong>, <strong>repeatable</strong>, <strong>understandable</strong>, and <strong>targeted</strong>.</p></li>
+<li><p>Use <strong>mocking</strong> to remove external dependencies and to promote a quality test.</p></li>
+<li><p>Follow the prescribed structure of a test: <strong>arrange</strong>, <strong>act</strong>, <strong>assert</strong>.</p></li>
+<li><p>Create quality tests, but note that <strong>Quantity, done right, is quality</strong>. To achieve “<em>done right</em>,”  <strong>test where bugs live</strong>.</p></li>
+<li><p>Annotate your test methods with <code class="docutils literal notranslate"><span class="pre">&#64;Test</span></code>.</p></li>
+</ul>
+</section>
+<section id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
+<p>[1]  <strong>Types of Testing</strong><br />
+There are different levels of testing. These levels go from testing small units of code to testing an entire application from the user’s perspective.</p>
+<ol class="arabic simple">
+<li><p><strong>Unit Testing:</strong> Tests individual methods or classes in isolation to verify their correctness.</p></li>
+<li><p><strong>Functional Testing:</strong> The focus is on specifications and features. These tests validate <strong>features</strong> (functions) of the application against the requirements.</p></li>
+<li><p><strong>Integration Testing:</strong> The focus is on assuring that different components or modules <strong>work together</strong> properly when combined. Mocking is not used here because the point is to verify that two or more components work together.</p></li>
+<li><p><strong>System Testing:</strong> Tests an entire system as a whole to verify it meets all specified requirements.</p></li>
+<li><p><strong>User Acceptance Testing:</strong> Confirms the system meets user needs and is ready for production deployment.</p></li>
+</ol>
+<p>[2] <strong>Aspect-Oriented Programming (AOP)</strong><br />
+AOP enables features to be sprinkled across classes horizontally instead of vertically. (Note that “horizontal” means across many unrelated classes, in contrast to inheritance which chains “vertically.”) We call these <em>cross-cutting features</em>. <a class="reference external" href="https://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a> requires a framework such as Spring or AspectJ to manage classes and to “weave” the cross-cutting features into the classes using annotations. These features are implemented as reusable modules called <strong>aspects</strong>, each combining a <strong>pointcut</strong> (which declares <em>where</em> to apply the behavior) and <strong>advice</strong> (which declares <em>what</em> to do).</p>
+<blockquote>
+<div><p>AOP allows us to give a class additional functionality without inheritance.</p>
+</div></blockquote>
+<p>Here is an example:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create an Annotation that will tag code we want to be enhanced with our cross-cutting feature</span>
+<span class="nd">@Target</span><span class="p">(</span><span class="n">ElementType</span><span class="p">.</span><span class="na">METHOD</span><span class="p">)</span>
+<span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">LogExecutionTime</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">useMs</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Create an Aspect that implements the functionality </span>
+<span class="nd">@Aspect</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExecutionTimeAspect</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Around</span><span class="p">(</span><span class="s">&quot;@annotation(LogExecutionTime)&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">logExecutionTime</span><span class="p">(</span><span class="n">ProceedingJoinPoint</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">&quot;PerformanceFile&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MethodSignature</span><span class="w"> </span><span class="n">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">MethodSignature</span><span class="p">)</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getSignature</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Method</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">signature</span><span class="p">.</span><span class="na">getMethod</span><span class="p">();</span>
+<span class="w">        </span><span class="n">LogExecutionTime</span><span class="w"> </span><span class="n">logExecutionTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method</span><span class="p">.</span><span class="na">getAnnotation</span><span class="p">(</span><span class="n">LogExecutionTime</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">useMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logExecutionTime</span><span class="p">.</span><span class="na">useMs</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// capture start and end times using the preferred units</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">useMs</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// This will execute the method we are timing</span>
+<span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">proceed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">proceed</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">useMs</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">();</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">executionTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;{} executed in {} {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getSignature</span><span class="p">(),</span><span class="w"> </span><span class="n">executionTime</span><span class="p">,</span><span class="w"> </span><span class="n">useMs</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;ms&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nanoseconds&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">proceed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsesTimer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@LogExecutionTime</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doWork</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="c1">// execution time will be measured and logged</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./frameworks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="spring.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Spring</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mockito.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mockito</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-practices">Testing Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-unit-tests">Quality Unit Tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-structure">Basic Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-names">Test Names</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-vs-quantity">Quality vs Quantity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anti-patterns">Anti-Patterns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">JUnit</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-assertions">Common Assertions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-lifecycle-and-annotations">Test Lifecycle and Annotations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#junit-integrations">JUnit Integrations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-results-and-reporting-in-vs-code">Test Results and Reporting in VS Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-coverage">Code Coverage</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-boot-integration">Spring Boot Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so Important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeff Stride
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="https://java.mrstride.com/acknowledgements.html">Sources</a>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

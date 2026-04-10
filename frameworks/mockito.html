@@ -51,7 +51,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
@@ -98,7 +98,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Practice: Mockito" href="practice_mockito.html" />
-    <link rel="prev" title="Spring" href="spring.html" />
+    <link rel="prev" title="JUnit" href="junit.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -284,6 +284,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="maven.html">Maven</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spring.html">Spring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="junit.html">JUnit</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Mockito</a></li>
 <li class="toctree-l2"><a class="reference internal" href="practice_mockito.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Mockito</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log4j.html">Log4j</a></li>
@@ -547,17 +548,20 @@ document.write(`
 <span class="kd">class</span> <span class="nc">UserServiceTest</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nd">@Test</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">getsUserName_fromRepositoryMock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// quick mock of a UserRepository. No stubbing. </span>
+<span class="w">        </span><span class="c1">// Arrange (set up necessary to conduct our test)</span>
+<span class="w">        </span><span class="c1">// Create a mock of a UserRepository. No stubbing. </span>
 <span class="w">        </span><span class="n">UserRepository</span><span class="w"> </span><span class="n">repo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mock</span><span class="p">(</span><span class="n">UserRepository</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"> </span>
 
-<span class="w">        </span><span class="c1">// quick stub with a canned result, &quot;Ada&quot;</span>
+<span class="w">        </span><span class="c1">// Create a stub with a canned result, &quot;Ada&quot;</span>
 <span class="w">        </span><span class="n">when</span><span class="p">(</span><span class="n">repo</span><span class="p">.</span><span class="na">findNameById</span><span class="p">(</span><span class="mi">42L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="s">&quot;Ada&quot;</span><span class="p">);</span>
 
+<span class="w">        </span><span class="c1">// Act (This is the code we are testing)</span>
 <span class="w">        </span><span class="c1">// The UserService depends on the UserRepository.</span>
 <span class="w">        </span><span class="c1">// Here we directly inject the dependency with a Constructor Injection</span>
 <span class="w">        </span><span class="n">UserService</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserService</span><span class="p">(</span><span class="n">repo</span><span class="p">);</span><span class="w"> </span>
 <span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">service</span><span class="p">.</span><span class="na">getUserName</span><span class="p">(</span><span class="mi">42L</span><span class="p">);</span>
 
+<span class="w">        </span><span class="c1">// Assert</span>
 <span class="w">        </span><span class="c1">// No DB calls actually happen because of the stub.</span>
 <span class="w">        </span><span class="c1">// With the stub, the behavior is deterministic and quick.</span>
 <span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;Ada&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
@@ -873,12 +877,12 @@ When stubbing spies, prefer <code class="docutils literal notranslate"><span cla
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="spring.html"
+       href="junit.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Spring</p>
+        <p class="prev-next-title">JUnit</p>
       </div>
     </a>
     <a class="right-next"
