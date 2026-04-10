@@ -115,8 +115,8 @@ Spring scans the project for these annotations (component scanning) and creates 
 
 If more than one bean implements the same interface, Spring cannot choose automatically. In that case you can:
 
-* **Mark one bean as the default** using `@Primary`  
-* **Select a specific bean by name** using `@Qualifier("beanName")`
+* Mark one bean as the *default* using `@Primary`  
+* Select a specific bean by *name* using `@Qualifier("beanName")`
 
 ### Using `@Configuration` and `@Bean`
 
@@ -124,14 +124,19 @@ Instead of relying only on component scanning, you can also explicitly declare b
 ```java
 @Configuration  
 public class AppConfig {  
-	@Bean("stripe")  
-	public PaymentService stripePaymentService() {  
-    	return new StripePaymentService();  
-	}  
+    @Bean("stripe")  
+    public PaymentService stripePaymentService() {
+        // Set a required constructor argument
+        StripePaymentService sps = new StripePaymentService(Service.STRIPE_SERVICE);  
+
+        // Customize the object further with some post-creation initialization.
+        // PaymentHelper is an external library and cannot be injected because
+        // it cannot be annotated with @Component.
+        sps.setPrimaryHelper(new PaymentHelper());
+    }  
 }
 ```
-This allows fine‑grained control over object creation—useful for setting constructor parameters, customizing objects, or injecting third‑party classes that you cannot annotate with `@Component`.
-
+This allows fine‑grained control over object creation which is useful for setting constructor parameters, or customizing the objects with some extra initialization (as shown above). 
 
 ### Example
 ```java

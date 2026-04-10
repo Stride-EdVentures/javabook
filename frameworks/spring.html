@@ -664,8 +664,8 @@ document.write(`
 <h3>When multiple beans share the same interface<a class="headerlink" href="#when-multiple-beans-share-the-same-interface" title="Link to this heading">#</a></h3>
 <p>If more than one bean implements the same interface, Spring cannot choose automatically. In that case you can:</p>
 <ul class="simple">
-<li><p><strong>Mark one bean as the default</strong> using <code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code></p></li>
-<li><p><strong>Select a specific bean by name</strong> using <code class="docutils literal notranslate"><span class="pre">&#64;Qualifier(&quot;beanName&quot;)</span></code></p></li>
+<li><p>Mark one bean as the <em>default</em> using <code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code></p></li>
+<li><p>Select a specific bean by <em>name</em> using <code class="docutils literal notranslate"><span class="pre">&#64;Qualifier(&quot;beanName&quot;)</span></code></p></li>
 </ul>
 </section>
 <section id="using-configuration-and-bean">
@@ -673,14 +673,20 @@ document.write(`
 <p>Instead of relying only on component scanning, you can also explicitly declare beans using:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span><span class="w">  </span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
-<span class="w">	</span><span class="nd">@Bean</span><span class="p">(</span><span class="s">&quot;stripe&quot;</span><span class="p">)</span><span class="w">  </span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="nf">stripePaymentService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
-<span class="w">    	</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StripePaymentService</span><span class="p">();</span><span class="w">  </span>
-<span class="w">	</span><span class="p">}</span><span class="w">  </span>
+<span class="w">    </span><span class="nd">@Bean</span><span class="p">(</span><span class="s">&quot;stripe&quot;</span><span class="p">)</span><span class="w">  </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="nf">stripePaymentService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Set a required constructor argument</span>
+<span class="w">        </span><span class="n">StripePaymentService</span><span class="w"> </span><span class="n">sps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StripePaymentService</span><span class="p">(</span><span class="n">Service</span><span class="p">.</span><span class="na">STRIPE_SERVICE</span><span class="p">);</span><span class="w">  </span>
+
+<span class="w">        </span><span class="c1">// Customize the object further with some post-creation initialization.</span>
+<span class="w">        </span><span class="c1">// PaymentHelper is an external library and cannot be injected because</span>
+<span class="w">        </span><span class="c1">// it cannot be annotated with @Component.</span>
+<span class="w">        </span><span class="n">sps</span><span class="p">.</span><span class="na">setPrimaryHelper</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PaymentHelper</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>This allows fine‑grained control over object creation—useful for setting constructor parameters, customizing objects, or injecting third‑party classes that you cannot annotate with <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code>.</p>
+<p>This allows fine‑grained control over object creation which is useful for setting constructor parameters, or customizing the objects with some extra initialization (as shown above).</p>
 </section>
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
