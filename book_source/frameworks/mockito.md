@@ -22,17 +22,20 @@ import org.junit.jupiter.api.Test;
 class UserServiceTest {
     @Test
     void getsUserName_fromRepositoryMock() {
-        // quick mock of a UserRepository. No stubbing. 
+        // Arrange (set up necessary to conduct our test)
+        // Create a mock of a UserRepository. No stubbing. 
         UserRepository repo = mock(UserRepository.class); 
 
-        // quick stub with a canned result, "Ada"
+        // Create a stub with a canned result, "Ada"
         when(repo.findNameById(42L)).thenReturn("Ada");
 
+        // Act (This is the code we are testing)
         // The UserService depends on the UserRepository.
         // Here we directly inject the dependency with a Constructor Injection
         UserService service = new UserService(repo); 
         String result = service.getUserName(42L);
 
+        // Assert
         // No DB calls actually happen because of the stub.
         // With the stub, the behavior is deterministic and quick.
         assertEquals("Ada", result);
