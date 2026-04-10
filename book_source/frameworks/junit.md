@@ -1,28 +1,18 @@
 <style>
-#quality-vs-quantity > blockquote:nth-child(3) {
-    background-color: rgba(255, 209, 209, 0.5) !important;
-}
-#quality-vs-quantity > blockquote:nth-child(5) {
-    background-color: rgba(209, 255, 211, 0.5) !important; /* Light green */
-}
-div.red-fill blockquote {
-    background-color: rgba(255, 209, 209, 0.5) !important;
-}
-div.good-code div pre {
-    background-color: rgba(209, 255, 211, 0.5) !important; /* Light green */
-}
+#quality-vs-quantity > blockquote:nth-child(3),
 div.bad-code div pre {
     background-color: rgba(255, 209, 209, 0.5) !important;
 }
-div.okay-code div pre {
-    background-color: rgba(253, 255, 201, 0.5) !important;
+#quality-vs-quantity > blockquote:nth-child(5),
+div.good-code div pre {
+    background-color: rgba(209, 255, 211, 0.5) !important; /* Light green */
 }
 </style>
 # JUnit
 
-JUnit is a widely-adopted testing framework for Java that allows developers to write and run automated unit tests. A **unit test** is a small, focused test that verifies the correctness of a single unit of code—typically a method or a small class. JUnit provides a structured way to organize tests, make assertions about expected behavior, and gain confidence that your code works correctly.
+JUnit is a widely-adopted testing framework for Java that allows developers to write and run automated unit tests. A **unit test** is a small, focused test that verifies the correctness of a single unit of code. JUnit provides a structured way to organize tests, make assertions about expected behavior, and gain confidence that your code works correctly.
 
-In this lesson we will be discussing **JUnit 5** (also called **Jupiter**), the modern standard for Java testing.
+In this lesson we will be discussing **JUnit 5** (also called **Jupiter**), the modern Java standard.
 
 ## Testing Practices
 Before we dive into `JUnit` specifically, let's discuss **Unit Testing** in general.  
@@ -129,11 +119,13 @@ void testTransfer() {
 ```
 
 ```{admonition} Testing with Dependency Injection
-:class: note
+:class: seealso
 
 JUnit works seamlessly with [Dependency Injection](../patterns/dependency_injection). The best practice is to use **constructor injection** in your production code, which makes dependency wiring explicit and makes tests easier to write without requiring Spring.
 
-For a detailed discussion on dependency isolation techniques, see [Mockito](mockito.md).
+For Spring-specific dependency injection in tests, see the [Spring Boot lesson](spring.md).
+
+For a detailed discussion on dependency isolation techniques, see the [Mockito lesson](mockito.md).
 ```
 
 ### Quality vs Quantity
@@ -388,3 +380,4 @@ public class UsesTimer {
     }
 }
 ```
+[See more here](https://www.springboottutorial.com/introduction-to-aspect-oriented-programming-and-cross-cutting-concerns)  
