@@ -53,6 +53,7 @@ chapters:
     sections:
     - file: frameworks/maven
     - file: frameworks/spring
+    - file: frameworks/junit
     - file: frameworks/mockito
     - file: frameworks/practice_mockito
     - file: frameworks/log4j
