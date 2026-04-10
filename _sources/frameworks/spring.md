@@ -172,6 +172,7 @@ public class CheckoutService {
 
 ## Spring Configuration and Testing
 Spring will look at the return type of methods annotated with `@Bean` and call these methods to instantiate beans.   
+
 ```java
 @Configuration
 public class AppConfig {
@@ -233,6 +234,12 @@ public class MyTest {
     }
 }
 ```
+```{admonition} See Also
+:class: seealso
+For basic JUnit setup, assertions, and test lifecycle, see the [JUnit lesson](junit.md).  
+
+For detailed Mockito usage and mocking techniques, see the [Mockito lesson](mockito.md).
+```
 
 ## Service Locator Pattern
 Another IoC style is the Service Locator pattern. It is **NOT** recommended as it is often considered an anti-pattern. That said, the above Configuration code does allow one to explicitly provide the dependencies in Test code.  
@@ -274,4 +281,4 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 
 ## Footnotes
 * *Def **idempotent***: An idempotent method is one that can be called multiple times with the same inputs and produces the same result, without causing *additional* side effects.  
-* `` is **Aspect Oriented Programming**. It is a way to modularize "cross-cutting" concerns and to apply them across the application more easily. [See more here](https://www.springboottutorial.com/introduction-to-aspect-oriented-programming-and-cross-cutting-concerns)  
+* `AOP` is **Aspect Oriented Programming**. Learn more <a href="junit.html#footnotes">here</a>.    
