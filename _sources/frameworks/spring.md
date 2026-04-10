@@ -2,16 +2,21 @@
 
 The core goals of Spring are:
 
-* **Dependency Injection (DI):** Promotes loose coupling by managing object creation and wiring.  
-* **Aspect-Oriented Programming (AOP):** Helps separate cross-cutting concerns like logging, security, and transactions.  
-* **Simplified Configuration:** Reduces boilerplate code via annotations and XML configuration. This helps one create *microservices*.   
+* **Dependency Injection (DI):** Promotes loose coupling by managing object creation and wiring. This makes testing significantly better.   
+* **Aspect-Oriented Programming (AOP):** Helps separate cross-cutting concerns.<a href="#footnotes"><sup>[2]</sup></a>  
+* **Simplified Configuration:** Spring reduces boilerplate code through annotations and Java-based configuration, letting developers focus on business logic rather than setup.      
 * **Integration Support:** Easily integrates with other frameworks like JUnit and Mockito, making it easier for developers to write clean, maintainable, and testable code.
-* **Web Development:** Spring MVC provides a powerful way to   build web applications.  
-* **Security:** Spring Security offers robust authentication and authorization mechanisms.    
+* **Web Development:** Spring MVC provides a powerful way to build web applications.  
+    
 
 While Spring is mostly for Web Development, we will be focusing on the features beneficial to a **client** application. In particular, we will look at how it helps us create services and supports [Dependency Injection](../patterns/dependency_injection).  
 
-> Note: We will be using **Spring Boot** which is a modernized and lite weight version of its predecessor.  
+```{admonition} Spring vs Spring Boot
+:class: note
+**Spring** is a large framework with many modules: dependency injection, AOP, data access, web, security, and more. The problem is that wiring all of these together traditionally required a significant amount of configuration. Developers spent considerable time writing XML files or Java configuration classes just to get a basic application running before writing any real business logic.  
+
+**Spring Boot** is not a replacement for Spring, it's *Spring with the setup done for you*. It was introduced to eliminate that configuration burden through three key ideas.<a href="#footnotes"><sup>[4]</sup></a>
+```
 
 ## Services
 A service should be stateless, thread-safe, and idempotent<a href="#footnotes"><sup>[1]</sup></a>. With these qualities we can create a **Singleton** object, one and only instance of the service to field all the requests.  
@@ -92,7 +97,6 @@ When the application starts, Spring creates one instance of ImageService (by def
 temp
 
 ## Details on `@Autowired`
-
 **`@Autowired`** is a Spring‑provided annotation that enables **Dependency Injection (DI)**. It tells Spring:
 
 *"Find a bean of this type and inject it here."*
@@ -102,24 +106,21 @@ You can place `@Autowired` on a **constructor**, **setter**, or **field**.
 > **constructor injection** is the recommended approach.  
 
 ### How Spring knows what to inject
-
 To be injected, a class must be created and managed by the Spring **IoC container**. This happens when the class is annotated with:
 
 * `@Component`  
 * `@Service`   
 * or defined in a `@Configuration` class using a `@Bean` method
 
-Spring scans the project for these annotations (component scanning) and creates singletons by default.
+Spring scans the project for these annotations (component scanning) and creates singletons by default. <a href="#footnotes"><sup>[3]</sup></a>
 
 ### When multiple beans share the same interface
-
 If more than one bean implements the same interface, Spring cannot choose automatically. In that case you can:
 
 * Mark one bean as the *default* using `@Primary`  
 * Select a specific bean by *name* using `@Qualifier("beanName")`
 
 ### Using `@Configuration` and `@Bean`
-
 Instead of relying only on component scanning, you can also explicitly declare beans using:
 ```java
 @Configuration  
@@ -136,7 +137,7 @@ public class AppConfig {
     }  
 }
 ```
-This allows fine‑grained control over object creation which is useful for setting constructor parameters, or customizing the objects with some extra initialization (as shown above). 
+This allows fine‑grained control over object creation which is useful for setting constructor parameters, or customizing the objects with some extra initialization (as shown above). This configuration code is leveraged in the <a href="#service-locator-pattern">Service Locator Pattern</a> discussed below.
 
 ### Example
 ```java
@@ -166,14 +167,11 @@ public class CheckoutService {
 }
 ```
 
-### Summary
+### Quick Recap
 
 * `@Autowired` injects dependencies managed by Spring.  
 * Spring finds injectable classes through `@Component`/`@Service` or through `@Bean` methods.  
-* Use `@Qualifier("name")` when multiple implementations exist.  
-* Use `@Primary` to define a preferred default implementation.
-
-
+* Use `@Qualifier("name")` when multiple implementations exist. Or, use `@Primary` to define the preferred implementation.
 
 ## Spring Configuration and Testing
 Spring will look at the return type of methods annotated with `@Bean` and call these methods to instantiate beans.   
@@ -247,9 +245,9 @@ For detailed Mockito usage and mocking techniques, see the [Mockito lesson](mock
 ```
 
 ## Service Locator Pattern
-Another IoC style is the Service Locator pattern. It is **NOT** recommended as it is often considered an anti-pattern. That said, the above Configuration code does allow one to explicitly provide the dependencies in Test code.  
+Another IoC style is the Service Locator pattern. It is **NOT** recommended as it is often considered an **anti-pattern**. The way it works it to have an `ApplicationContextProvider` class that is accessed via a `Singleton` pattern. It will locate and invoke `@Configuration` code that has defined `@Beans`.    
 
-Here is a class that one would add to a Spring project to create a Service Locator:  
+Here is a sample code that creates a Service Locator object:  
 ```java
 /**
  * This is a Singleton Pattern. This is a Component that will get automatically
@@ -277,13 +275,38 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 }
 ```
 
-
 ## What's so Important? ![Billy](../_static/whats_so_important.png)   
 *   **Dependency Injection (DI)** : Spring automatically creates and wires your objects (beans), giving you loose coupling, cleaner code, and easier testing.  
 *   **Component Scanning & Annotations** : With annotations like `@Component`, `@Service`, and `@Controller`, Spring finds and manages your classes without manual setup. This also known as **Bean Management**.  
 *   **Test‑Friendly Configuration** : Features like `@Configuration`, `@Bean`, `@TestConfiguration`, and `@MockitoBean` let you override or mock dependencies cleanly during testing.  
+*   **Beans are Singletons** : By default, when a Spring application starts up, it will instantiate all the Beans it discovers, and only **one** instance of that Bean. This means that every `@Component` and `@Service` is created exactly once.<a href="#footnotes"><sup>[3]</sup></a>   
 *   **AOP & Integration Support** : Spring makes cross‑cutting concerns (e.g. logging and security) and integration with tools like JUnit and Mockito easy and consistent.  
 
 ## Footnotes
-* *Def **idempotent***: An idempotent method is one that can be called multiple times with the same inputs and produces the same result, without causing *additional* side effects.  
-* `AOP` is **Aspect Oriented Programming**. Learn more <a href="junit.html#footnotes">here</a>.    
+[1] *Def **idempotent***:  
+> An idempotent method is one that can be called multiple times with the same inputs and produces the same result, without causing *additional* side effects.  
+
+[2] `AOP` is **Aspect Oriented Programming**. Learn more <a href="junit.html#footnotes">here</a>.  
+
+[3] **Beans and Singletons**:  
+By default, when a Spring application starts up, it will instantiate all the Beans it discovers, creating only **one** instance of each. However, this behavior can be altered by specifying a different scope.  
+
+If multiple instances are desired, one can annotate the component with `@Scope("prototype")` to create a new instance every time the bean is requested. 
+```java
+@Component
+@Scope("prototype")
+public class ReportGenerator {
+    // a new instance is created every time this bean is requested or injected
+}
+```
+
+[4] **Spring vs Spring Boot**  
+Spring Boot is not a replacement for Spring, it's Spring with the setup done for you. It was introduced to eliminate configuration burden through three key ideas:  
+1) **Auto-configuration:**  Spring Boot looks at your dependencies and makes sensible default configuration decisions automatically. If it sees you've added a database driver, it configures a data source. If it sees a web dependency, it sets up a web server.  
+2) **Starter dependencies:** Instead of hunting down a compatible set of libraries, Spring Boot provides curated "starters"; it pulls in everything you need for a given feature.  
+3) **Embedded server:** Traditional Spring applications were packaged and deployed to an external server. Spring Boot embeds the server directly in your application, so you run it like any ordinary Java program.  
+
+**A useful analogy:**   
+> Spring is like all the ingredients and appliances in a professional kitchen. Spring Boot is like a meal kit. Everything is pre-measured and the instructions are straightforward, but the same kitchen is doing the cooking.  
+
+In practice today, almost nobody starts a new Spring project without Spring Boot. 

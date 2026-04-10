@@ -524,7 +524,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-multiple-beans-share-the-same-interface">When multiple beans share the same interface</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-configuration-and-bean">Using <code class="docutils literal notranslate"><span class="pre">@Configuration</span></code> and <code class="docutils literal notranslate"><span class="pre">@Bean</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-recap">Quick Recap</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-configuration-and-testing">Spring Configuration and Testing</a></li>
@@ -546,17 +546,18 @@ document.write(`
 <h1>Spring<a class="headerlink" href="#spring" title="Link to this heading">#</a></h1>
 <p>The core goals of Spring are:</p>
 <ul class="simple">
-<li><p><strong>Dependency Injection (DI):</strong> Promotes loose coupling by managing object creation and wiring.</p></li>
-<li><p><strong>Aspect-Oriented Programming (AOP):</strong> Helps separate cross-cutting concerns like logging, security, and transactions.</p></li>
-<li><p><strong>Simplified Configuration:</strong> Reduces boilerplate code via annotations and XML configuration. This helps one create <em>microservices</em>.</p></li>
+<li><p><strong>Dependency Injection (DI):</strong> Promotes loose coupling by managing object creation and wiring. This makes testing significantly better.</p></li>
+<li><p><strong>Aspect-Oriented Programming (AOP):</strong> Helps separate cross-cutting concerns.<a href="#footnotes"><sup>[2]</sup></a></p></li>
+<li><p><strong>Simplified Configuration:</strong> Spring reduces boilerplate code through annotations and Java-based configuration, letting developers focus on business logic rather than setup.</p></li>
 <li><p><strong>Integration Support:</strong> Easily integrates with other frameworks like JUnit and Mockito, making it easier for developers to write clean, maintainable, and testable code.</p></li>
-<li><p><strong>Web Development:</strong> Spring MVC provides a powerful way to   build web applications.</p></li>
-<li><p><strong>Security:</strong> Spring Security offers robust authentication and authorization mechanisms.</p></li>
+<li><p><strong>Web Development:</strong> Spring MVC provides a powerful way to build web applications.</p></li>
 </ul>
 <p>While Spring is mostly for Web Development, we will be focusing on the features beneficial to a <strong>client</strong> application. In particular, we will look at how it helps us create services and supports <a class="reference internal" href="../patterns/dependency_injection.html"><span class="doc std std-doc">Dependency Injection</span></a>.</p>
-<blockquote>
-<div><p>Note: We will be using <strong>Spring Boot</strong> which is a modernized and lite weight version of its predecessor.</p>
-</div></blockquote>
+<div class="note admonition">
+<p class="admonition-title">Spring vs Spring Boot</p>
+<p><strong>Spring</strong> is a large framework with many modules: dependency injection, AOP, data access, web, security, and more. The problem is that wiring all of these together traditionally required a significant amount of configuration. Developers spent considerable time writing XML files or Java configuration classes just to get a basic application running before writing any real business logic.</p>
+<p><strong>Spring Boot</strong> is not a replacement for Spring, it’s <em>Spring with the setup done for you</em>. It was introduced to eliminate that configuration burden through three key ideas.<a href="#footnotes"><sup>[4]</sup></a></p>
+</div>
 <section id="services">
 <h2>Services<a class="headerlink" href="#services" title="Link to this heading">#</a></h2>
 <p>A service should be stateless, thread-safe, and idempotent<a href="#footnotes"><sup>[1]</sup></a>. With these qualities we can create a <strong>Singleton</strong> object, one and only instance of the service to field all the requests.</p>
@@ -658,7 +659,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code></p></li>
 <li><p>or defined in a <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> class using a <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> method</p></li>
 </ul>
-<p>Spring scans the project for these annotations (component scanning) and creates singletons by default.</p>
+<p>Spring scans the project for these annotations (component scanning) and creates singletons by default. <a href="#footnotes"><sup>[3]</sup></a></p>
 </section>
 <section id="when-multiple-beans-share-the-same-interface">
 <h3>When multiple beans share the same interface<a class="headerlink" href="#when-multiple-beans-share-the-same-interface" title="Link to this heading">#</a></h3>
@@ -686,7 +687,7 @@ document.write(`
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>This allows fine‑grained control over object creation which is useful for setting constructor parameters, or customizing the objects with some extra initialization (as shown above).</p>
+<p>This allows fine‑grained control over object creation which is useful for setting constructor parameters, or customizing the objects with some extra initialization (as shown above). This configuration code is leveraged in the <a href="#service-locator-pattern">Service Locator Pattern</a> discussed below.</p>
 </section>
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
@@ -717,13 +718,12 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<section id="quick-recap">
+<h3>Quick Recap<a class="headerlink" href="#quick-recap" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> injects dependencies managed by Spring.</p></li>
 <li><p>Spring finds injectable classes through <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code>/<code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code> or through <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code> methods.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">&#64;Qualifier(&quot;name&quot;)</span></code> when multiple implementations exist.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code> to define a preferred default implementation.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">&#64;Qualifier(&quot;name&quot;)</span></code> when multiple implementations exist. Or, use <code class="docutils literal notranslate"><span class="pre">&#64;Primary</span></code> to define the preferred implementation.</p></li>
 </ul>
 </section>
 </section>
@@ -799,8 +799,8 @@ document.write(`
 </section>
 <section id="service-locator-pattern">
 <h2>Service Locator Pattern<a class="headerlink" href="#service-locator-pattern" title="Link to this heading">#</a></h2>
-<p>Another IoC style is the Service Locator pattern. It is <strong>NOT</strong> recommended as it is often considered an anti-pattern. That said, the above Configuration code does allow one to explicitly provide the dependencies in Test code.</p>
-<p>Here is a class that one would add to a Spring project to create a Service Locator:</p>
+<p>Another IoC style is the Service Locator pattern. It is <strong>NOT</strong> recommended as it is often considered an <strong>anti-pattern</strong>. The way it works it to have an <code class="docutils literal notranslate"><span class="pre">ApplicationContextProvider</span></code> class that is accessed via a <code class="docutils literal notranslate"><span class="pre">Singleton</span></code> pattern. It will locate and invoke <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> code that has defined <code class="docutils literal notranslate"><span class="pre">&#64;Beans</span></code>.</p>
+<p>Here is a sample code that creates a Service Locator object:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * This is a Singleton Pattern. This is a Component that will get automatically</span>
 <span class="cm"> * registered by the IoC SpringBoot framework. The ApplicationContext object</span>
@@ -834,15 +834,39 @@ document.write(`
 <li><p><strong>Dependency Injection (DI)</strong> : Spring automatically creates and wires your objects (beans), giving you loose coupling, cleaner code, and easier testing.</p></li>
 <li><p><strong>Component Scanning &amp; Annotations</strong> : With annotations like <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;Controller</span></code>, Spring finds and manages your classes without manual setup. This also known as <strong>Bean Management</strong>.</p></li>
 <li><p><strong>Test‑Friendly Configuration</strong> : Features like <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;Bean</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;TestConfiguration</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;MockitoBean</span></code> let you override or mock dependencies cleanly during testing.</p></li>
+<li><p><strong>Beans are Singletons</strong> : By default, when a Spring application starts up, it will instantiate all the Beans it discovers, and only <strong>one</strong> instance of that Bean. This means that every <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code> is created exactly once.<a href="#footnotes"><sup>[3]</sup></a></p></li>
 <li><p><strong>AOP &amp; Integration Support</strong> : Spring makes cross‑cutting concerns (e.g. logging and security) and integration with tools like JUnit and Mockito easy and consistent.</p></li>
 </ul>
 </section>
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><em>Def <strong>idempotent</strong></em>: An idempotent method is one that can be called multiple times with the same inputs and produces the same result, without causing <em>additional</em> side effects.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">AOP</span></code> is <strong>Aspect Oriented Programming</strong>. Learn more <a href="junit.html#footnotes">here</a>.</p></li>
-</ul>
+<p>[1] <em>Def <strong>idempotent</strong></em>:</p>
+<blockquote>
+<div><p>An idempotent method is one that can be called multiple times with the same inputs and produces the same result, without causing <em>additional</em> side effects.</p>
+</div></blockquote>
+<p>[2] <code class="docutils literal notranslate"><span class="pre">AOP</span></code> is <strong>Aspect Oriented Programming</strong>. Learn more <a href="junit.html#footnotes">here</a>.</p>
+<p>[3] <strong>Beans and Singletons</strong>:<br />
+By default, when a Spring application starts up, it will instantiate all the Beans it discovers, creating only <strong>one</strong> instance of each. However, this behavior can be altered by specifying a different scope.</p>
+<p>If multiple instances are desired, one can annotate the component with <code class="docutils literal notranslate"><span class="pre">&#64;Scope(&quot;prototype&quot;)</span></code> to create a new instance every time the bean is requested.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Component</span>
+<span class="nd">@Scope</span><span class="p">(</span><span class="s">&quot;prototype&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReportGenerator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// a new instance is created every time this bean is requested or injected</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>[4] <strong>Spring vs Spring Boot</strong><br />
+Spring Boot is not a replacement for Spring, it’s Spring with the setup done for you. It was introduced to eliminate configuration burden through three key ideas:</p>
+<ol class="arabic simple">
+<li><p><strong>Auto-configuration:</strong>  Spring Boot looks at your dependencies and makes sensible default configuration decisions automatically. If it sees you’ve added a database driver, it configures a data source. If it sees a web dependency, it sets up a web server.</p></li>
+<li><p><strong>Starter dependencies:</strong> Instead of hunting down a compatible set of libraries, Spring Boot provides curated “starters”; it pulls in everything you need for a given feature.</p></li>
+<li><p><strong>Embedded server:</strong> Traditional Spring applications were packaged and deployed to an external server. Spring Boot embeds the server directly in your application, so you run it like any ordinary Java program.</p></li>
+</ol>
+<p><strong>A useful analogy:</strong></p>
+<blockquote>
+<div><p>Spring is like all the ingredients and appliances in a professional kitchen. Spring Boot is like a meal kit. Everything is pre-measured and the instructions are straightforward, but the same kitchen is doing the cooking.</p>
+</div></blockquote>
+<p>In practice today, almost nobody starts a new Spring project without Spring Boot.</p>
 </section>
 </section>
 
@@ -924,7 +948,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-multiple-beans-share-the-same-interface">When multiple beans share the same interface</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-configuration-and-bean">Using <code class="docutils literal notranslate"><span class="pre">@Configuration</span></code> and <code class="docutils literal notranslate"><span class="pre">@Bean</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-recap">Quick Recap</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-configuration-and-testing">Spring Configuration and Testing</a></li>
