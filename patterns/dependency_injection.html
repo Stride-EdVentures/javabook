@@ -533,32 +533,57 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dependency-injection">
 <h1>Dependency Injection<a class="headerlink" href="#dependency-injection" title="Link to this heading">#</a></h1>
-<p>Dependency Injection (DI) helps address several problems that developers encounter by giving an object its dependencies from the outside rather than having the object construct them internally. This reduces coupling, enables easier testing through mocking, reduces the number of changes necessary to swap in a new implementation for a dependency, and increases interoperability in different contexts (e.g. production vs local).</p>
-<div class="admonition-di-and-ioc admonition">
-<p class="admonition-title">DI and IoC</p>
-<p><strong>Inversion of Control (IoC)</strong> is the general principle.  Instead of the code controlling the flow, another framework or container controls it.</p>
-<p>DI is the most common way to achieve IoC.<br />
-<strong>Summary:</strong></p>
-<ul class="simple">
-<li><p>Inversion of Control (IoC) is the broad principle: a class doesn’t control how its collaborators are created or obtained; that control is inverted to something else (a framework, a factory, or the calling code).</p></li>
-<li><p>Dependency Injection (DI) is a specific way to achieve IoC: one inject the dependencies (typically via constructors, setters, or method parameters) rather than constructing them internally with new.</p></li>
-</ul>
-<ul class="simple">
-<li><p>IoC container is a tool that can automate DI and manage lifecycle. But once can do DI without a container—this is often called manual DI.</p></li>
-</ul>
+<p>Dependency Injection (DI) helps address several problems that developers encounter by giving an object its dependencies from the outside rather than having the object construct them internally. This reduces coupling, enables easier testing through mocking, reduces the number of changes necessary to swap in a new implementation for a dependency, and increases interoperability in different contexts (e.g. production vs testing, online vs local).</p>
+<div class="admonition-inversion-of-control admonition">
+<p class="admonition-title">Inversion of Control</p>
+<p><strong>Inversion of Control (IoC)</strong> is a general principle. Instead of an object controlling it’s own dependencies and flow, control is inverted to something else (e.g. Framework).</p>
+<blockquote>
+<div><p><strong>IoC means</strong> that an object does not control how its dependencies are created or selected.<br />
+<strong>IoC means</strong> that an object does not fully determine its own behavior. Some control over what it does, when it does it, or how it does it is delegated to external code.</p>
+</div></blockquote>
 </div>
-<p>A container (like Spring) builds objects, manages them, and <em>“injects”</em> them where needed. This makes code more modular, testable, and flexible.</p>
+<p><strong>Two Patterns of Inversion of Control:</strong></p>
+<ul class="simple">
+<li><p><strong>Dependency Injection (DI)</strong></p>
+<ul>
+<li><p>Dependencies are <em>supplied</em> to an object by an external container</p></li>
+<li><p>Object does not create or locate its dependencies</p></li>
+<li><p>Dependencies are explicit (constructors, setters, fields)</p></li>
+</ul>
+</li>
+<li><p><strong>Service Locator</strong></p>
+<ul>
+<li><p>Object <em>asks</em> a central registry for its dependencies</p></li>
+<li><p>Object knows about the locator and how to use it</p></li>
+<li><p>Dependencies are hidden in implementation</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>More Patterns of Inversion of Control:</strong><br />
+There are other ways to achieve IoC that we will not discuss. We list a few more here to illustrate the various ways to delegate dependency resolution (or functionality) to an external entity/function. There are many ways that external code determines behavior.</p>
+<ul class="simple">
+<li><p><strong>Framework / Container Callbacks</strong>: A Framework controls the execution flow and the user code is called at predefined lifecycle points. This is common in web servers, GUI frameworks, test frameworks.</p></li>
+<li><p><strong>Template Method</strong>: The base class defines the algorithm, and subclasses fill in customizable steps. The base class controls the flow.</p></li>
+<li><p><strong>Observer/Event Listener/Callback</strong>: Objects react to events via callbacks/listeners rather than polling. This is common in GUI and event-driven systems.</p></li>
+<li><p><strong>Plugin / Extension Architecture</strong>: An application discovers and invokes external components such as plugins where the plugins do not control their own lifecycle or execution. This is common in IDEs, browsers, and game engines.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Dependency Injection (DI)</p>
+<p>Dependency Injection is the most common way to achieve IoC.</p>
+<p>External code will control the specific implementation for a dependency and when &amp; how it gets created. The object does not decide the class; the object does not internally construct the dependency with <code class="docutils literal notranslate"><span class="pre">new</span></code>.</p>
+</div>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>Dependency Injection can happen only for <strong>Beans</strong>, objects that are controlled by the framework. The classes must be annotated with either <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code>. All of these classes will be instantiated at the start of the application and there will be only one instance. If there is a need to create multiple objects, then special care is necessary.</p>
+<p>In the Spring framework, Dependency Injection can happen only for <strong>Beans</strong>, objects that are controlled by the framework. Spring builds objects, manages them, and <em>“injects”</em> them where needed. This makes code more modular, testable, and flexible. The classes that implement the dependencies must be annotated with either <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code>. All of these dependencies will be instantiated at the start of the application, and there will be only one instance. If there is a need to create multiple objects, then special care is necessary.</p>
 <p><strong>How are dependencies resolved?</strong><br />
-Spring has several ways to resolve the dependencies. It can all feel <em>magical</em> and if the developer doesn’t follow good practices, the code can end up poorly organized and fragile. Dependencies need to be annotated with <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> so that Spring can identify them.</p>
-<p>The best practice is to annotate classes with <code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;Service</span></code>, to use <strong>Constructor Injection</strong>, and allow Spring to manage it all. Nothing else needs to be done. However, a developer may create a <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code> class to control which objects are instantiated to fulfill a dependency.</p>
+Spring has several ways to resolve the dependencies. It can all feel <em>magical</em>. If the developer doesn’t follow good practices, the code can end up poorly organized and fragile. An object requesting the dependencies needs to annotate its code with <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> so that Spring can identify when and where to inject them. Managing dependencies and testing flexibility becomes breeze with Spring when you properly annotate.</p>
+<p>The best practice is to use <strong>Constructor Injection</strong> for several reasons <a href="#footnotes"><sup>[1]</sup></a>. The primary reason is that constructor injection gives the developer more options and greater control.</p>
+<p>There are more details on how Spring manages IoC <a class="reference internal" href="../frameworks/spring.html"><span class="std std-doc">here.</span></a></p>
 </section>
 <section id="three-forms-of-di">
 <h2>Three Forms of DI<a class="headerlink" href="#three-forms-of-di" title="Link to this heading">#</a></h2>
 <p>There are three ways to inject dependencies.<br />
-1. Constructor Injection <strong>(Recommended)</strong>
+1. Constructor Injection <strong>(Recommended)</strong><br />
 2. Field Injection (Harder to test. Not recommended.)<br />
 3. Setter Injection (For optional dependencies)</p>
 <section id="constructor-injection">
@@ -566,10 +591,14 @@ Spring has several ways to resolve the dependencies. It can all feel <em>magical
 <p>The Constructor Injection method enables one to easily to see what dependencies are required, supports immutability (dependencies are <code class="docutils literal notranslate"><span class="pre">final</span></code>), and works well with unit tests.</p>
 <p>This is the preferred approach in modern Java. It becomes very easy to create the service in a test using the desired dependencies because Spring can be completely excluded from the process. When Spring is excluded then the tests can run faster with less <em>magic</em>.</p>
 <p>In the code below, Spring will automatically create exactly one instance of OrderService and automatically provide the PaymentProcessor dependency. This means that PaymentProcessor must also be a bean.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Component</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Depencency Injection is best done with objects managed by Spring.</span>
+<span class="c1">// We need to annotate with Component/Service to make it managed by Spring.</span>
+<span class="nd">@Component</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// PaymentProcess is the dependency that Spring supplies</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PaymentProcessor</span><span class="w"> </span><span class="n">payment</span><span class="p">;</span>
 
+<span class="w">    </span><span class="c1">// This autowired annotation tells Spring to inject the constructor&#39;s arguments</span>
 <span class="w">    </span><span class="nd">@Autowired</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">OrderService</span><span class="p">(</span><span class="n">PaymentProcessor</span><span class="w"> </span><span class="n">payment</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">payment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">payment</span><span class="p">;</span>
@@ -580,6 +609,7 @@ Spring has several ways to resolve the dependencies. It can all feel <em>magical
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyTest</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nd">@Test</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testOrderService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// In this Test, we &quot;manually&quot; create/mock the dependency</span>
 <span class="w">        </span><span class="n">PaymentProcessor</span><span class="w"> </span><span class="n">mockPayment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mockito</span><span class="p">.</span><span class="na">mock</span><span class="p">(</span><span class="n">PaymentProcessor</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 <span class="w">        </span><span class="n">OrderService</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OrderService</span><span class="p">(</span><span class="n">mockPayment</span><span class="p">);</span>
 
@@ -591,21 +621,24 @@ Spring has several ways to resolve the dependencies. It can all feel <em>magical
 </section>
 <section id="field-injection">
 <h3>Field Injection<a class="headerlink" href="#field-injection" title="Link to this heading">#</a></h3>
-<p>Field Injection is very short and convenient. This style of injection is attractive, but can become problematic during testing. It breaks encapsulation, hides dependencies, and does not work outside of the framework providing the IoC. This means that the framework, and all its overhead, needs to be included in the tests. In fact, field injection is considered an <a href="#footnotes">anti-pattern</a><sup>[1]</sup> in most cases.</p>
-<p>Here is a short example:</p>
+<p>Field Injection is very short and convenient. This style of injection is attractive, but can become problematic during testing. It breaks encapsulation, hides dependencies, and does not work outside of the framework providing the IoC. This means that the framework, and all its overhead, needs to be included in the tests. In fact, field injection is considered an <a href="#footnotes">anti-pattern<sup>[2]</sup></a> in most cases.</p>
+<p>Here is a short example of field injection. Note that the <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> is attached to the fields. There are no constructor arguments.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Service</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nd">@Autowired</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PaymentProcessor</span><span class="w"> </span><span class="n">payment</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">OrderService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">OrderService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="c1">// Dependencies (payment) is NOT available yet.</span>
+<span class="w">        </span><span class="c1">// Injection happens AFTER construction of this object.</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="setter-injection">
 <h3>Setter Injection<a class="headerlink" href="#setter-injection" title="Link to this heading">#</a></h3>
-<p>A Setter Injection allows one to optionally provide dependencies after construction. It can lead to anb invalid state, is less safe, and it is less test-friendly.</p>
+<p>A Setter Injection allows one to optionally provide dependencies after construction. It can lead to an invalid state, is less safe, and it is less test-friendly.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PaymentProcessor</span><span class="w"> </span><span class="n">payment</span><span class="p">;</span>
 
@@ -620,11 +653,15 @@ Spring has several ways to resolve the dependencies. It can all feel <em>magical
 </section>
 <section id="post-construction-di">
 <h2>Post Construction DI<a class="headerlink" href="#post-construction-di" title="Link to this heading">#</a></h2>
-<p>In the case that a class has dependencies that cannot be injected normally, the object can have the dependencies injected after construction. Normally, this would be a good time to use the Setter Injection, but there might be other circumstances at play. Spring offers another way.</p>
+<p>In the case that a class has dependencies that cannot be injected normally, the object can have the dependencies injected after construction. Normally, this would be a good time to use the Setter Injection, but there might be other circumstances at play. Spring offers other ways.</p>
+<p><strong>AutowireCapableBeanFactory</strong><br />
+If you want Spring to decide the implementation for the dependencies, you can use a Spring specific class <code class="docutils literal notranslate"><span class="pre">AutowireCapableBeanFactory</span></code>. This class offers the ability to examine objects and their &#64;Autowired annotations and to inject dependencies.</p>
 <blockquote>
 <div><p>This should be considered an <em>anti-pattern</em>.</p>
 </div></blockquote>
-<p>The basic idea would be to create a Factory class as follows:</p>
+<p><strong>Manual Injection</strong><br />
+The developer can create a Factory that determines the dependencies and then sets them after construction. This can also be done in a <code class="docutils literal notranslate"><span class="pre">&#64;Configuration</span></code>.</p>
+<p>Here is an example Factory class that injects dependencies determined by Spring:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Service</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyClassFactory</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AutowireCapableBeanFactory</span><span class="w"> </span><span class="n">beanFactory</span><span class="p">;</span>
@@ -663,6 +700,13 @@ Spring has several ways to resolve the dependencies. It can all feel <em>magical
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
+<li><p><strong>Constructor Injection</strong>: This is the preferred method of injection because it:</p>
+<ul class="simple">
+<li><p>Makes dependencies explicit and visible at class creation time. The constructor has access to the dependencies.</p></li>
+<li><p>Guarantees the object is fully initialized. Multi-step object creation is best done with a Factory or Builder pattern which are fine, but those methods add code. Less code is simpler.</p></li>
+<li><p>Improves testability by allowing direct construction with mocks or fakes. See <a class="reference internal" href="../frameworks/junit.html"><span class="std std-doc">JUnit</span></a> and <a class="reference internal" href="../frameworks/mockito.html"><span class="std std-doc">Mockito</span></a>.</p></li>
+</ul>
+</li>
 <li><p><strong>Anti-Pattern</strong>: An anti-pattern is a common approach to solving a problem that seems reasonable at first but actually leads to poor outcomes in practice.
 It’s essentially a “bad habit” or flawed solution that developers repeatedly fall into, often because it seems like the obvious or easiest choice. Unlike design patterns (which are proven good solutions), anti-patterns are solutions you should avoid.
 <strong>Examples:</strong></p></li>
