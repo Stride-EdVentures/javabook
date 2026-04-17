@@ -70,7 +70,7 @@ public interface Comparator<T> {
     }
 }
 ```
-The above code can be daunting. This is largely due to all the fancy generic typing. Let's examing the code piece-by-piece.  
+The above code can be daunting. This is largely due to all the fancy generic typing. Let's examine the code piece-by-piece.  
 
 ### reversed()
 This method simply wraps up the `Collections.reverseOrder` method. It allows the developer to write shorter, more readable code. It returns another `Comparator` interface.  
