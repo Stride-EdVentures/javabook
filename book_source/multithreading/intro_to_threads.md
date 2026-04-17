@@ -1,11 +1,30 @@
 # Introduction to Threads
+**First, an analogy.**  
+
+Let's think of a program as simply a long list of instructions that you are following. There is only one set of instructions written down on paper, and you start at the top and may bounce around to different pages depending on the situation. You would be considered the the `main` **thread** executing the instructions of this program.  
+
+Now let's have the program include the following instructions:  
+> Get a friend to follow the instructions on page 4. You will continue to the next instruction below.  
+In this new situation, the friend is reading the same set instructions but is on a different page. Furthermore, the friend will work at the same time as you. Your friend is a new **thread**.  When your friend is done with his portion of work, he can go home.  
+
+Let's get a little more specific about the type of work being done. Let's say that you're building a house where the instructions you're reading address you as the general contractor responsible for hiring all the workers and coordinating the entire project. You'll have to assure that some tasks fully complete before another begins. For example, the foundation is complete before the walls go up, and all the external walls are standing before the roof is built. 
+
+Each contractor will be reading their own version of instructions, but they are all found in your "program." The workers independently act as if they're the only ones reading the instructions.  
+
+There will be times when the workers are working at the same time. In some situations, there can be many workers on the same task. For example, we can have many workers engaged with framing the walls of the house. You can even have two workers working on the very same wall at the same time. When the framers are done with their job, they go home, never to return. Different workers come to the job site to continue new work.  
+
+These workers have materials that are shared. There is a palette of wood used for framing. There is a limited supply of drills, hammers and nails. The access to these resources need to be controlled so that two workers don't fight over the same hammer or nail. The construction project doesn't work well if two workers simultaneously grab the same piece of wood and attempt to drag it in opposite directions. Synchronization of the workers' access to resources is required.   
+
+In an uncontrolled workspace, it is possible that one worker grabs all the nails and then seeks a hammer, but no hammers are available. Another worker has a hammer but refuses to give it up until his wall is done. But he can't finish his work because he has no nails. The worker with the nails refuses to give up his nails until he can finish his task, but he has no hammer to work with. The two workers come to a halt. This is called a `deadlock`.  
+
+Each worker can be thought of as a `thread` running in a program. The issues they face are the exact kind of issues a multi-threaded program encounters. In this chapter, we will learn of ways to coordinate the worker threads: create new workers, control access to resources, notify workers of important information, and to avoid deadlocks. We will discuss ways to optimize this orchestration (e.g. reuse existing workers instead of taking the extra time to hire new ones).  
 
 ## What is a thread?
-A thread is like a small, lightweight process that runs within a larger program. Think of it as a single path of execution through your program. Multiple threads can run at the same time, allowing your program to perform multiple tasks simultaneously.  
+A thread is like a small, lightweight process that runs within a larger program. It is a worker focused on a single path of execution through your program. Multiple threads can run at the same time, allowing your program to perform multiple tasks simultaneously.  
 
-A thread has its own “context”. It has its own stack. It started somewhere unique, has its own local variables, and will end in its own unique way.  
+A thread has its own "context". It has its own stack<a href="#footnotes"><sup>[1]</sup></a>. It started somewhere unique, has its own local variables, and will end in its own unique way.  
 
-A thread shares the memory space with the rest of the process. Many threads can access the same objects simultaneously.  
+A thread shares the the same memory space with the rest of the process. Many threads can access shared resources simultaneously. This can cause contention and deadlocks. The best way to avoid problems is to avoid sharing by using local variables and having exclusive access to their own copies of resources where possible. This is called `mutual exclusion`.   
 
 Multiple threads does NOT necessarily mean faster execution. It depends on the specific task, resource contention, and the count of CPU cores.  
 
@@ -103,3 +122,10 @@ A: We simply need to call `t1.join();`
 
 ## What's so important? ![Billy](../_static/whats_so_important.png)
 * TODO: ...
+
+## Footnotes
+[1] Stack: **The stack** is a region of memory used primarily to manage **function (method) calls** and local execution state. It follows a *last‑in, first‑out (LIFO)* discipline: when a method is called, a stack frame is pushed onto the stack containing that method’s parameters, local variables, and return address; when the method returns, its frame is popped off.  
+
+The stack is utilized automatically by the runtime during program execution, especially for **control flow and scoping**. It enables fast allocation and cleanup of short‑lived data, enforces method call order, and supports features such as recursion and exception handling.  
+
+Each thread has its own stack. In Java (and most modern runtimes), every thread is allocated a **private call stack** that stores that thread's method calls, local variables, and intermediate execution state. Because stacks are not shared, threads do not see or interfere with each other's local variables, which is a key reason local variables are inherently thread‑safe. When a thread terminates, its stack is discarded.  
