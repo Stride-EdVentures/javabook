@@ -1,34 +1,32 @@
 # Introduction to Threads
 **First, an analogy.**  
 
-Let's think of a program as simply a long list of instructions that you are following. There is only one set of instructions written down on paper, and you start at the top and may bounce around to different pages depending on the situation. You would be considered the the `main` **thread** executing the instructions of this program.  
+Let's think of a program as a long list of instructions that you are following. There is only one set of instructions written down on paper, and you start at the top and may jump around to different pages depending on the situation. You would be the `main` **thread** executing the instructions of this program.  
 
-Now let's have the program include the following instructions:  
+Now imagine the program includes the following instruction:  
 > Get a friend to follow the instructions on page 4. You will continue to the next instruction below.  
-In this new situation, the friend is reading the same set instructions but is on a different page. Furthermore, the friend will work at the same time as you. Your friend is a new **thread**.  When your friend is done with his portion of work, he can go home.  
+In this new situation, the friend is following the same instructions on a different page. The friend works at the same time as you. That friend represents a new **thread**. When the friend is done with their portion of work, they go home.  
 
-Let's get a little more specific about the type of work being done. Let's say that you're building a house where the instructions you're reading address you as the general contractor responsible for hiring all the workers and coordinating the entire project. You'll have to assure that some tasks fully complete before another begins. For example, the foundation is complete before the walls go up, and all the external walls are standing before the roof is built. 
+Let's get more specific by thinking about building a house. You are the general contractor responsible for hiring workers and coordinating the entire project. Some tasks must finish before others begin. For example, the foundation must be complete before the walls go up, and the external walls must be standing before the roof is built.  
 
-Each contractor will be reading their own version of instructions, but they are all found in your "program." The workers independently act as if they're the only ones reading the instructions.  
+Each contractor has their own set of instructions, but all of those instructions are part of the same overall project. The workers act as if they're the only ones reading their instructions.  
 
-There will be times when the workers are working at the same time. In some situations, there can be many workers on the same task. For example, we can have many workers engaged with framing the walls of the house. You can even have two workers working on the very same wall at the same time. When the framers are done with their job, they go home, never to return. Different workers come to the job site to continue new work.  
+There will be times when workers are active at the same time. In some situations, many workers can be on the same task. For example, several workers may frame the same wall together. When the framers finish their job, they go home, and new workers arrive later to continue the work.  
 
-These workers have materials that are shared. There is a palette of wood used for framing. There is a limited supply of drills, hammers and nails. The access to these resources need to be controlled so that two workers don't fight over the same hammer or nail. The construction project doesn't work well if two workers simultaneously grab the same piece of wood and attempt to drag it in opposite directions. Synchronization of the workers' access to resources is required.   
+These workers share materials: a pile of wood used for framing and a limited supply of drills, hammers, and nails. Access to these resources needs to be controlled so two workers do not fight over the same hammer or nail. The construction project breaks if two workers simultaneously grab the same piece of wood and pull in opposite directions. Synchronization of the workers' access to shared resources is required.   
 
-In an uncontrolled workspace, it is possible that one worker grabs all the nails and then seeks a hammer, but no hammers are available. Another worker has a hammer but refuses to give it up until his wall is done. But he can't finish his work because he has no nails. The worker with the nails refuses to give up his nails until he can finish his task, but he has no hammer to work with. The two workers come to a halt. This is called a `deadlock`.  
+In an uncontrolled workspace, one worker may grab all the nails and then look for a hammer, but no hammers are available. Another worker has a hammer but refuses to give it up until their wall is done. That worker cannot finish without nails. The first worker will not release the nails until they can finish their task, but they have no hammer. Both workers come to a halt. This is called a `deadlock`.  
 
-Each worker can be thought of as a `thread` running in a program. The issues they face are the exact kind of issues a multi-threaded program encounters. In this chapter, we will learn of ways to coordinate the worker threads: create new workers, control access to resources, notify workers of important information, and to avoid deadlocks. We will discuss ways to optimize this orchestration (e.g. reuse existing workers instead of taking the extra time to hire new ones).  
+Each worker can be thought of as a `thread` running in a program. The issues they face are the same kinds of issues a multi-threaded program encounters. In this chapter, we will learn how to coordinate worker threads: create new workers, control access to resources, notify workers of important information, and avoid deadlocks. We will also discuss ways to optimize this orchestration, such as reusing existing workers instead of taking extra time to hire new ones.  
 
 ## What is a thread?
-A thread is like a small, lightweight process that runs within a larger program. It is a worker focused on a single path of execution through your program. Multiple threads can run at the same time, allowing your program to perform multiple tasks simultaneously.  
+A thread is like a small, lightweight process that runs within a larger program. It focuses on a single path of execution through your program. Multiple threads can run at the same time, allowing your program to perform multiple tasks simultaneously.  
 
-A thread has its own "context". It has its own stack<a href="#footnotes"><sup>[1]</sup></a>. It started somewhere unique, has its own local variables, and will end in its own unique way.  
+A thread has its own "context." It has its own stack<a href="#footnotes"><sup>[1]</sup></a>. It starts somewhere unique, has its own local variables, and ends in its own unique way.  
 
-A thread shares the the same memory space with the rest of the process. Many threads can access shared resources simultaneously. This can cause contention and deadlocks. The best way to avoid problems is to avoid sharing by using local variables and having exclusive access to their own copies of resources where possible. This is called `mutual exclusion`.   
+A thread shares the same memory space with the rest of the process. Many threads can access shared resources simultaneously. This can cause contention and deadlocks. The best way to avoid problems is to limit sharing by using local variables and having exclusive access to their own copies of resources where possible. This is called `mutual exclusion`.   
 
-Multiple threads does NOT necessarily mean faster execution. It depends on the specific task, resource contention, and the count of CPU cores.  
-
-A process will consist of one or more threads.  
+Multiple threads do NOT necessarily mean faster execution. It depends on the specific task, resource contention, and the number of CPU cores.  
 
 ```{admonition} Definition
 :class: note

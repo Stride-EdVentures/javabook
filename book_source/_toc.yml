@@ -43,6 +43,7 @@ chapters:
     - file: interfaces/anonymous_classes
     - file: interfaces/default_methods
     - file: interfaces/full_review
+    - file: interfaces/case_study
   - file: multithreading/index
     sections:
     - file: multithreading/intro_to_threads

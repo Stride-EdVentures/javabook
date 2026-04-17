@@ -162,8 +162,8 @@ public class MyClassFactory {
 2. **Anti-Pattern**: An anti-pattern is a common approach to solving a problem that seems reasonable at first but actually leads to poor outcomes in practice.
 It's essentially a "bad habit" or flawed solution that developers repeatedly fall into, often because it seems like the obvious or easiest choice. Unlike design patterns (which are proven good solutions), anti-patterns are solutions you should avoid.
 **Examples:**  
-- **God Object** - One massive class that does everything, making code hard to maintain and test.  
-- **Spaghetti Code** - Tangled, unstructured code with complex control flow that's nearly impossible to follow  
-- **Golden Hammer** - Using the same familiar tool or pattern for every problem ("when all you have is a hammer, everything looks like a nail")  
-- **Copy-Paste Programming** - Duplicating code everywhere instead of extracting reusable methods or classes  
+    - **God Object** - One massive class that does everything, making code hard to maintain and test.  
+    - **Spaghetti Code** - Tangled, unstructured code with complex control flow that's nearly impossible to follow  
+    - **Golden Hammer** - Using the same familiar tool or pattern for every problem ("when all you have is a hammer, everything looks like a nail")  
+    - **Copy-Paste Programming** - Duplicating code everywhere instead of extracting reusable methods or classes  
 
