@@ -1,0 +1,946 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lesson I9: Case Study &#8212; Practical Java </title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6c3db60c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "Stride-EdVentures/javabook");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "preferred-color-scheme");
+    script.setAttribute("label", "💬 Comments");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'interfaces/case_study';</script>
+    <script src="../_static/custom.js?v=540a9731"></script>
+    <link rel="icon" href="../_static/peanut head.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Multithreading" href="../multithreading/index.html" />
+    <link rel="prev" title="Lesson I8: Full Review" href="full_review.html" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DW6SHVPBYV"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DW6SHVPBYV');
+    </script>
+
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Practical Java  - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Practical Java  - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    <i class="fas fa-hand-sparkles fa-fw"></i> Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Topics/index.html"><i class="fas fa-book fa-fw"></i> Miscellaneous</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/java_conventions.html">Code Quality Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/installing_jgrasp.html">Installing jGrasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/problem_solving.html">Problem Solving</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Topics/git.html">Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/java_v_cpp.html">Java &lt;–&gt; C++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/images.html">Images</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching">Learn Git Branching</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../generics/index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../generics/array_list.html">Lesson G1: ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/stack_queue.html">Lesson G2: Stack &amp; Queue</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://java.mrstride.com/_static/html/postfix_visualizer.html">Postfix Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/shuntingyard.html">Lesson G3: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://java.mrstride.com/_static/html/shunting_yard.html">Shunting Yard Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/maps.html">Lesson G4: Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_maps.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/collections.html">Lesson G5: Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/generics.html">Lesson G6: Generics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/constraint_typing.html">Lesson G7: Constraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_ct.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Contraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/type_erasure.html">Lesson G8: Type Erasure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="interfaces_101.html">Lesson I1: Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes_fall_short.html">Lesson I2: Classes Fall Short</a></li>
+<li class="toctree-l2"><a class="reference internal" href="method_references.html">Lesson I3: Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lambdas.html">Lesson I4: Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice_03.html"><i class="fas fa-pen-square fa-fw"></i> Practice Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applied.html">Lesson I5: Applied Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anonymous_classes.html">Lesson I6: Anonymous Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_methods.html">Lesson I7: Default Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="full_review.html">Lesson I8: Full Review</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Lesson I9: Case Study</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/maven.html">Maven</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/spring.html">Spring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/junit.html">JUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/mockito.html">Mockito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/practice_mockito.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Mockito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/log4j.html">Log4j</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../patterns/index.html"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/singleton.html">Singleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/dependency_injection.html">Dependency Injection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/solid.html">SOLID principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/design_patterns.html">Design Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/principles.html">Principles</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/interfaces/case_study.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Finterfaces/case_study.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/interfaces/case_study.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lesson I9: Case Study</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-chaining">Method Chaining</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-functional-programming">Adding Functional Programming</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-comparator">Implementing the Comparator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposing-the-comparator">Decomposing the Comparator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lesson-i9-case-study">
+<h1>Lesson I9: Case Study<a class="headerlink" href="#lesson-i9-case-study" title="Link to this heading">#</a></h1>
+<p>In this lesson, we will examine a <code class="docutils literal notranslate"><span class="pre">default</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> interface. The implementation and syntax is overwhelming. We will start off by exploring how the <code class="docutils literal notranslate"><span class="pre">String</span></code> class can have a sequence of methods chained together. We’ll then introduce some functional programming into the example. Lastly, we’ll extend beyond the String class to the Comparator. By the end of this lesson, you should:</p>
+<ol class="arabic simple">
+<li><p>Have the skills necessary to develop understanding of complicated code.</p></li>
+<li><p>Be able to explain the <code class="docutils literal notranslate"><span class="pre">thenComparing</span></code> method.</p></li>
+</ol>
+<div class="admonition-the-goal admonition">
+<p class="admonition-title">The Goal</p>
+<p>The goal is to understand this terse code. It might look relatively simple, but it can be hard to explain. Furthermore, the <code class="docutils literal notranslate"><span class="pre">thenComparing</span></code> implementation looks quite complex. We aim to understand all of it.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Compose a comparator using primary, secondary and tertiary comparisons</span>
+<span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">primary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i2</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primary</span>
+<span class="w">        </span><span class="p">.</span><span class="na">thenComparing</span><span class="p">((</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i2</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">thenComparing</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">compare</span><span class="p">);</span>
+<span class="c1">// now sort with our composed comparator</span>
+<span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">comparator</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<section id="method-chaining">
+<h2>Method Chaining<a class="headerlink" href="#method-chaining" title="Link to this heading">#</a></h2>
+<p>Consider the following code.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// one line at a time</span>
+<span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;example&quot;</span><span class="p">;</span>
+<span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+<span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
+
+<span class="c1">// chained together</span>
+<span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;example&quot;</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">).</span><span class="na">toUpperCase</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Because <code class="docutils literal notranslate"><span class="pre">substring</span></code> returns a string, we can dereference it directly on the same line.</p>
+<p>The purpose of the above code is to illustrate that many of the String methods return a String object which can be directly referenced on the same line of code. This shortens the code and can often make things more readable.</p>
+<section id="adding-functional-programming">
+<h3>Adding Functional Programming<a class="headerlink" href="#adding-functional-programming" title="Link to this heading">#</a></h3>
+<p>The above String code is pretty simple. Let’s add some more method calls. The following code is not practical; it is used for illustration purposes only.</p>
+<p>In the first method <code class="docutils literal notranslate"><span class="pre">noChain</span></code>, the code will convert a string to upper case, then invoke the method <code class="docutils literal notranslate"><span class="pre">removeMirror</span></code>, and then replaces all <code class="docutils literal notranslate"><span class="pre">&quot;A&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;X&quot;</span></code>. Lastly, it takes only the first 3 characters of the string if the string is long enough.</p>
+<p>The second implementation <code class="docutils literal notranslate"><span class="pre">chainEm</span></code> does exactly the same thing in one statement. For readability, each <em>link</em> in the chain is put on its own line. This is common practice. Since each method returns a string, we can continue to use the <code class="docutils literal notranslate"><span class="pre">dot</span></code> operator to create a <em>chain.</em></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">noChain</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
+<span class="w">      </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">removeMirror</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+<span class="w">      </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;X&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">length</span><span class="p">()));</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">chainEm</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">EggsAmple1</span><span class="p">::</span><span class="n">removeMirror</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">())));</span>
+<span class="w">   </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">transform</span></code> method has a single argument, a <code class="docutils literal notranslate"><span class="pre">Function&lt;&gt;</span></code> interface. In our example, the interface is a <em>functional interface</em> that is fulfilled with a method that takes a String and returns a String. We give it a method pointer to the static method implemented in the EggsAmple1 class. Then we chain some more.</p>
+<p>The last call to <code class="docutils literal notranslate"><span class="pre">transform</span></code> uses a Lambda Expression to fulfill the interface. This isn’t necessary and it is overkill. We do it simply to illustrate that the argument to transform is an interface that can fulfilled in more than one way.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">transform</span></code> method is what introduces <em>functional</em> programming because its argument is a function.</p>
+</section>
+</section>
+<section id="implementing-the-comparator">
+<h2>Implementing the Comparator<a class="headerlink" href="#implementing-the-comparator" title="Link to this heading">#</a></h2>
+<p>Let’s start off by attempting to implement the <code class="docutils literal notranslate"><span class="pre">thenComparing</span></code> method. Then we’ll compare our implementation to the actual code in the <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> interface.</p>
+<p>We want to support <em>chaining</em>, meaning that we want to return a <code class="docutils literal notranslate"><span class="pre">Comparator</span></code> in the same way that the String methods above returned a String.</p>
+<p>We are first going to simplify our problem by treating Comparator as a class that works only with Integers. Then we’ll convert it to an interface, and then to a generic interface.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// implemented as a class</span>
+<span class="linenos"> 2</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Comparator</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i2</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Comparator</span><span class="w"> </span><span class="nf">thenComparing</span><span class="p">(</span><span class="n">Comparator</span><span class="w"> </span><span class="n">secondary</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="c1">// Use primary comparison. i1 and i2 are not defined. This won&#39;t work!</span>
+<span class="hll"><span class="linenos"> 7</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">);</span>
+</span><span class="linenos"> 8</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">            </span><span class="c1">// use secondary comparison</span>
+<span class="linenos">10</span><span class="w">            </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">secondary</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">);</span>
+<span class="linenos">11</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">12</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="linenos">13</span><span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The above code won’t work for two reasons:</p>
+<ol class="arabic simple">
+<li><p>In line 7 we need two integer values, and we have no way to get them!</p></li>
+<li><p>On line 12, we are returning an <code class="docutils literal notranslate"><span class="pre">int</span></code> type, but the method prototype expects us to return a Comparator!</p></li>
+</ol>
+<p>Let’s ignore this for a second to first understand the attempted functionality.</p>
+<p>The code first compares two Integers. If they are the same, it proceeds to to compare them using a secondary comparison implementation.</p>
+<p><strong>Attempt #1 to Fix</strong><br />
+In order to get line 7 to work, we need to get access to <code class="docutils literal notranslate"><span class="pre">i1</span></code> and <code class="docutils literal notranslate"><span class="pre">i2</span></code>. To illustrate how this is done, we will make up some syntax that is invalid in hopes that it acts like a bridge to the final solution. Let’s alter the code as follows:</p>
+<div class="error admonition">
+<p class="admonition-title">Invalid Code</p>
+<p>The following code is bad. Java does not allow one to declare a method inside another method like this.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// implemented as a class</span>
+<span class="linenos"> 2</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Comparator</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i2</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Comparator</span><span class="w"> </span><span class="nf">thenComparing</span><span class="p">(</span><span class="n">Comparator</span><span class="w"> </span><span class="n">secondary</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="linenos"> 6</span><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">composedCompare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="linenos"> 7</span><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">);</span>
+<span class="linenos"> 8</span><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">                </span><span class="c1">// use secondary comparison</span>
+<span class="linenos">10</span><span class="w">                </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">secondary</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">);</span>
+<span class="linenos">11</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">12</span><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="linenos">13</span><span class="w">        </span><span class="p">}</span>
+<span class="hll"><span class="linenos">14</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Comparator</span><span class="p">(</span><span class="n">composedCompare</span><span class="p">);</span>
+</span><span class="linenos">15</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">16</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Comparator</span><span class="w"> </span><span class="p">(</span><span class="n">CompareMethod</span><span class="w"> </span><span class="n">method</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>It is obvious that we now have access to <em>i1</em> and <em>i2</em> because they are arguments to our nested method <code class="docutils literal notranslate"><span class="pre">composedCompare</span></code>.</p>
+<p>We have now also created a <code class="docutils literal notranslate"><span class="pre">new</span></code> Comparator object to return. We <em>imagined</em> a constructor that takes a <em>method</em> to be used as its <code class="docutils literal notranslate"><span class="pre">compare</span></code> method instead of the one coded on line 3. While this syntax does not work, the idea is sound. We created and returned an object with an altered version of the compare method.</p>
+<p>How do we fix the syntax?</p>
+<p><strong>Attempt #2 to Fix</strong><br />
+To fix the syntax, we need to use <strong>interfaces</strong>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Comparator</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="c1">// abstract method provided the by implementer</span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">);</span>
+<span class="linenos"> 4</span>
+<span class="hll"><span class="linenos"> 5</span><span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="n">Comparator</span><span class="w"> </span><span class="nf">thenComparing</span><span class="p">(</span><span class="n">Comparator</span><span class="w"> </span><span class="n">secondary</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="linenos"> 6</span><span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">Comparator</span><span class="w"> </span><span class="n">primary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="c1">// create a Comparator using Anonymous Inner Class syntax</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="n">Comparator</span><span class="w"> </span><span class="n">composed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Comparator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">            </span><span class="nd">@Override</span>
+<span class="linenos">10</span><span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">11</span><span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primary</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">);</span>
+<span class="linenos">12</span><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">13</span><span class="w">                    </span><span class="c1">// use secondary comparison</span>
+<span class="linenos">14</span><span class="w">                    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">secondary</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">);</span>
+<span class="linenos">15</span><span class="w">                </span><span class="p">}</span>
+<span class="linenos">16</span><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="linenos">17</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">18</span><span class="w">        </span><span class="p">};</span>
+<span class="linenos">19</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">composed</span><span class="p">;</span>
+<span class="linenos">20</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">21</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The above code will now compile!! We had to introduce the <code class="docutils literal notranslate"><span class="pre">default</span></code> keyword to the method <code class="docutils literal notranslate"><span class="pre">thenComparing</span></code>. We chose to use an <em>Anonymous Inner Class</em> syntax to create an instance of a Comparator with the abstract method implemented.</p>
+<p><strong>Attempt #3: Using Lambdas and Generics</strong><br />
+Let’s now rewrite the code another time using a Lambda Expression and as a Generic.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// abstract method provided the by implementer</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">i2</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">thenComparing</span><span class="p">(</span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">secondary</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// create a Comparator using a lambda</span>
+<span class="w">        </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">composed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// use secondary comparison</span>
+<span class="w">                </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">secondary</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">composed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We added the <code class="docutils literal notranslate"><span class="pre">&lt;T&gt;</span></code> so that it will work with any type, not just Integers. The code became a little shorter using the lambda expression. We also eliminated the identifier <code class="docutils literal notranslate"><span class="pre">primary</span></code> and, instead, just referenced <code class="docutils literal notranslate"><span class="pre">this</span></code> directly. This implementation is very close Java’s implementation.</p>
+<p>In the Java final implementation, it:</p>
+<ol class="arabic simple">
+<li><p>Uses <em>Constraint Typing</em> to make the Generic typing more <em>extensive</em> (<em>inclusive</em>).</p></li>
+<li><p>Checks that the argument passed in is not null.</p></li>
+<li><p>Directly returns the lambda expression, avoiding the creation of a local variable.</p></li>
+<li><p>Explicitly casts the lambda expression so that also implements <code class="docutils literal notranslate"><span class="pre">Serializable</span></code>.<a href="#footnotes"><sup>[3]</sup></a></p></li>
+<li><p>Uses a ternary operator to eliminate the if-statement, making the code even shorter.</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">thenComparing</span><span class="p">(</span><span class="n">Comparator</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">other</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Serializable</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">compare</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">);</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="decomposing-the-comparator">
+<h2>Decomposing the Comparator<a class="headerlink" href="#decomposing-the-comparator" title="Link to this heading">#</a></h2>
+<p>Let’s look at an even more complex implementation of <code class="docutils literal notranslate"><span class="pre">thenComparing</span></code>. In this implementation, the idea is very similar to the above. We want to allow chaining of Comparators. However, we want to sort Objects by some field. Java accomplishes this in two steps: first it overloads <code class="docutils literal notranslate"><span class="pre">thenComparing</span></code> with an implementation that calls a helper method <code class="docutils literal notranslate"><span class="pre">comparing</span></code>. Let’s look a the unsimplified code first.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">comparing</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Function</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keyExtractor</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Comparator</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keyComparator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">keyExtractor</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">keyComparator</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Serializable</span><span class="p">)</span>
+<span class="w">        </span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">keyComparator</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">keyExtractor</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">c1</span><span class="p">),</span>
+<span class="w">                                            </span><span class="n">keyExtractor</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">c2</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="k">default</span><span class="w"> </span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">thenComparing</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Function</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keyExtractor</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Comparator</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keyComparator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">thenComparing</span><span class="p">(</span><span class="n">comparing</span><span class="p">(</span><span class="n">keyExtractor</span><span class="p">,</span><span class="w"> </span><span class="n">keyComparator</span><span class="p">));</span>
+<span class="p">}</span><span class="w">    </span>
+</pre></div>
+</div>
+<p>The primary source of confusing comes from all the Generic Typing. So let’s simplify that first by specifying the Generics and adding some comments. Below we have modified the code in a number of ways:</p>
+<ol class="arabic simple">
+<li><p>Replace <strong>T</strong> with <code class="docutils literal notranslate"><span class="pre">Dog</span></code></p></li>
+<li><p>Replace <strong>U</strong> with <code class="docutils literal notranslate"><span class="pre">Bark</span></code> (a field or “key” of the Dog class)</p></li>
+<li><p>Rename <code class="docutils literal notranslate"><span class="pre">keyExtractor</span></code> to <code class="docutils literal notranslate"><span class="pre">getsBark</span></code></p></li>
+<li><p>Rename <code class="docutils literal notranslate"><span class="pre">keyComparer</span></code> to <code class="docutils literal notranslate"><span class="pre">comparesBarks</span></code></p></li>
+<li><p>Delete  validation code (checking for null)</p></li>
+<li><p>Separating the return and lambda lines</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// this will get a comparator that compares two Dogs by their Bark.</span>
+<span class="c1">// It needs two helpers:</span>
+<span class="c1">//    1) A method to get the Bark from the Dog  (keyExtractor)</span>
+<span class="c1">//    2) A Comparator that knows how to compare Barks  (keyComparator)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">comparing</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Dog</span><span class="p">,</span><span class="w"> </span><span class="n">Bark</span><span class="o">&gt;</span><span class="w"> </span><span class="n">getsBark</span><span class="p">,</span><span class="w">     </span><span class="c1">// a function that gets the Bark from the Dog</span>
+<span class="w">        </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Bark</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparesBarks</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// a Comparator that compares Barks</span>
+
+<span class="w">    </span><span class="c1">// to compare Dogs, actually compare their barks. Both Comparators return `int`</span>
+<span class="w">    </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">d1</span><span class="p">,</span><span class="w"> </span><span class="n">d2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">comparesBarks</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">getsBark</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">d1</span><span class="p">),</span><span class="w">  </span><span class="n">getsBark</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">d2</span><span class="p">));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// This is an overload of thenComparing </span>
+<span class="k">default</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Bark</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">thenComparing</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Dog</span><span class="p">,</span><span class="w"> </span><span class="n">Bark</span><span class="o">&gt;</span><span class="w"> </span><span class="n">getsBark</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Bark</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparesBarks</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// call static method to get our Dog Comparator</span>
+<span class="w">    </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dogComparator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">comparing</span><span class="p">(</span><span class="n">getsBark</span><span class="p">,</span><span class="w"> </span><span class="n">comparesBarks</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">// Call our earlier implementation of thenComparing that</span>
+<span class="w">    </span><span class="c1">// takes a single Comparator Argument</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">thenComparing</span><span class="p">(</span><span class="n">dogComparator</span><span class="p">);</span>
+<span class="p">}</span><span class="w">    </span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">getsBark</span></code> is of type <code class="docutils literal notranslate"><span class="pre">Function&lt;T,</span> <span class="pre">R&gt;</span></code>. This means that it is an interface and we must invoke the abstract method <code class="docutils literal notranslate"><span class="pre">apply</span></code>.</p>
+<p>Look at the revision. Is it easier to read? I hope so!</p>
+<p>Can you now explain the details of what is happening in the following code?</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Compose a comparator using primary, secondary and tertiary comparisons</span>
+<span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">primary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i2</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primary</span>
+<span class="w">        </span><span class="p">.</span><span class="na">thenComparing</span><span class="p">((</span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i2</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">thenComparing</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">compare</span><span class="p">);</span>
+<span class="c1">// now sort with our composed comparator</span>
+<span class="n">list</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">comparator</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="what-s-so-important">
+<h2>What’s so important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
+<p>Here is how you can simplify code so that you better understand it:</p>
+<ul class="simple">
+<li><p>Because generics make code hard to read, first eliminate all the <code class="docutils literal notranslate"><span class="pre">extends</span></code> and <code class="docutils literal notranslate"><span class="pre">super</span></code></p></li>
+<li><p>Break up single lines into multiple lines (e.g. temporary assignment then return)</p></li>
+<li><p>Rename Generics to something common (e.g. Dog and Bark)</p>
+<ul>
+<li><p>This requires an understanding of their relationship, which can be hard.</p></li>
+</ul>
+</li>
+<li><p>Consider eliminating the Generic altogether and hard-coding to Integer</p></li>
+</ul>
+</section>
+<section id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
+<p>[1] <em>Fluent Interface</em><br />
+<strong>Fluent interface</strong> is the practice of calling multiple methods in one expression is known as <strong>method chaining</strong>.</p>
+<p>More specifically, when a method returns a reference to the same object (typically <code class="docutils literal notranslate"><span class="pre">this</span></code>) so that subsequent method calls can be chained, the class is said to use a <em>fluent interface</em> style. This approach is commonly used in APIs, builders, and configuration objects to create readable, expressive code.
+[2] <strong>Ternary Operator</strong><br />
+A <em>ternary operator</em> is a compact conditional expression that chooses between two values based on a boolean condition. In Java, it has the form:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// generic form</span>
+<span class="n">Result</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">valueIfTrue</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">valueIfFalse</span><span class="p">;</span>
+<span class="c1">// example</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The condition is evaluated first; if it is <code class="docutils literal notranslate"><span class="pre">true</span></code>, the expression yields the first value, otherwise it yields the second. Because the ternary operator is an expression (not a statement), it produces a value and can be used directly in assignments or method arguments.</p>
+<p>It is often used as a concise alternative to a simple <code class="docutils literal notranslate"><span class="pre">if–else</span></code> statement. While ternary expressions can make code shorter and clearer for simple decisions, they should be used sparingly. Overly complex or nested ternary expressions can reduce readability.</p>
+<p>[3] <strong>Serializable</strong><br />
+When you see a lambda cast as <strong><code class="docutils literal notranslate"><span class="pre">(Comparator&lt;T&gt;</span> <span class="pre">&amp;</span> <span class="pre">Serializable)</span></code></strong>, Java is being told that the <strong>same lambda object should implement more than one interface</strong>. By default, a lambda only implements a <em>single functional interface</em>—in this case, <code class="docutils literal notranslate"><span class="pre">Comparator&lt;T&gt;</span></code>. Adding <code class="docutils literal notranslate"><span class="pre">&amp;</span> <span class="pre">Serializable</span></code> explicitly marks the lambda as also implementing <code class="docutils literal notranslate"><span class="pre">Serializable</span></code>, which means the resulting object can be <strong>serialized</strong> (converted into a byte stream for storage or transmission).</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">Serializable</span></code></strong> is a <em>marker interface</em> in Java (it has no methods) that signals to the JVM and libraries that an object is allowed to be serialized—for example, written to a file, cached, or sent over a network. Lambdas are <em>not serializable by default</em>, even if the functional interface is, so this intersection cast is required when a framework or API expects a serializable object. In short, <code class="docutils literal notranslate"><span class="pre">(Comparator&lt;T&gt;</span> <span class="pre">&amp;</span> <span class="pre">Serializable)</span></code> ensures the lambda can be used in contexts that require both comparison behavior <strong>and</strong> safe persistence or transport.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./interfaces"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="full_review.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lesson I8: Full Review</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../multithreading/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><i class="fas fa-book fa-fw"></i> Multithreading</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-chaining">Method Chaining</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-functional-programming">Adding Functional Programming</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-comparator">Implementing the Comparator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposing-the-comparator">Decomposing the Comparator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeff Stride
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="https://java.mrstride.com/acknowledgements.html">Sources</a>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
