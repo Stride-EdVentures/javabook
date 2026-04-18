@@ -85,7 +85,7 @@ The `repaint` call behaves the same as when using a dedicated thread. The timer 
 In both approaches (Dedicated Thread, Timer) the program needs to be aware that repainting can happen at the same time as the update. This can introduce contention for resources. To assure that update and painting happen at different times, we can put the timer on the Event Dispatch Thread by using the Swing Timer.  
 
 ### Using a Swing Timer
-A `javax.swing.Timer` does not create a free‑running worker thread like the `java.util.Timer` examples above. Instead, it schedules **small pieces of work** to run *on the EDT* at regular intervals.  
+A `javax.swing.Timer` does not create a free‑running worker thread like the `java.util.Timer` examples above. Instead, it schedules **small pieces of work** to run *on the EDT* at regular intervals.<a href="#footnotes"><sup>[1]</sup></a>     
 
 This next example code uses a Swing Timer to do Animation.  
 ```java
@@ -104,7 +104,7 @@ public void start() {
 }
 ```
 It would seem that the above Swing Timer code solves some issues. **But issues still remain.**  
-1. The request to repaint can still be ignored so that two updates can happen before the painting. To assure that a paint happens for every update, we would need to make the painting be *synchronous* as professional games do. Doing synchronous painting can introduce other problems and complexity which is outside the scope of these lessons.<a href="#footnotes"><sup>[1]</sup></a>   
+1. The request to repaint can still be ignored so that two updates can happen before the painting. To assure that a paint happens for every update, we would need to make the painting be *synchronous* as professional games do. Doing synchronous painting can introduce other problems and complexity which is outside the scope of these lessons.<a href="#footnotes"><sup>[2]</sup></a>   
 2. If there is too much work done on the EDT, repainting can be sluggish and unresponsive.  
 
 For now, we will live with imperfect animation.  
@@ -189,6 +189,17 @@ Timers are fundamentally about **controlling execution across threads**, not jus
 
 
 ## Footnotes
-[1] **Synchronous Painting**
+[1] **TimerQueue Thread**  
+Swing actually has one dedicated thread for **all** Swing Timers whose job it is to *watch the clock*. This thread is called *TimerQueue*. When it is time, this TimerQueue thread will tell the EDT to execute the task at its *earliest convenience*. This thread watches the clock by using multithreading synchronization mechanisms. It waits on a `lock` with a timeout. If it gets notified, its *sleep is interrupted* so that it can respond accordingly.  
+
+*"Earliest Convenience"*: This involves the following:  
+*   The TimerQueue thread posts an event to the EDT's event queue.  
+*   The EDT executes the action when it dequeues that event, in FIFO order with other UI events.  
+
+*"sleep is interrupted"*: More accurately stated, this means that its timed wait terminates early. The term *interrupt* is overloaded. In this situation:  
+*   There is **no** ["hardware interrupt"](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_for_real_time/7/html/reference_guide/chap-hardware_interrupts).  
+*   The thread is **not** ["interrupted"](https://www.geeksforgeeks.org/java/interrupting-a-thread-in-java/) using the API `interrupt`.  
+
+[2] **Synchronous Painting**
 
 > Synchronous painting introduces complexity because GUI frameworks manage component hierarchies, buffering, and repaint scheduling automatically. Forcing immediate painting can interfere with child components, require manual **double buffering** to avoid **flicker** and **tearing**, and demand careful coordination of rendering and state updates, which is why professional systems use specialized rendering loops instead.   
