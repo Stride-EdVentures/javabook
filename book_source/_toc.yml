@@ -47,6 +47,7 @@ chapters:
   - file: multithreading/index
     sections:
     - file: multithreading/intro_to_threads
+    - file: multithreading/timers
     - file: multithreading/conc_synch
     - file: multithreading/tasks
     - file: multithreading/parallel_streams

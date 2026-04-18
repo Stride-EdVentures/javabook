@@ -5,7 +5,8 @@ Let's think of a program as a long list of instructions that you are following. 
 
 Now imagine the program includes the following instruction:  
 > Get a friend to follow the instructions on page 4. You will continue to the next instruction below.  
-In this new situation, the friend is following the same instructions on a different page. The friend works at the same time as you. That friend represents a new **thread**. When the friend is done with their portion of work, they go home.  
+
+In this situation, the friend is following the instructions found on a different page. The friend works at the same time as you and represents a new **thread**. When the friend is done with their portion of work, they go home.  
 
 Let's get more specific by thinking about building a house. You are the general contractor responsible for hiring workers and coordinating the entire project. Some tasks must finish before others begin. For example, the foundation must be complete before the walls go up, and the external walls must be standing before the roof is built.  
 
@@ -73,22 +74,46 @@ Watch the following video. As you watch, takes notes on the following:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/r_MbozD32eo?si=5hTdi9iOCo59CI28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
 </iframe>
 
-```{admonition} Video Q & A
-:class: dropdown
-**Q: How do we create a Thread?**  
+***
+
+<details><summary>Click here for important Q & A on Video</summary>  
+
+**Q: How do we create a Thread?**   
 **A:** There is a Thread object, which is different from a "thread of execution." 
-The easiest way to create a thread is to:  
+Here are two easy ways to create and start thread:  
 
-    Thread t = new Thread() {
+```java
+    // Anonymous Inner Class used to override the `run` method
+    Thread t1 = new Thread() {
         @Override
-        public void run() { }
+        public void run() { System.out.println("Running in a thread"); }
     };
-    t.start();
+    t1.start();
 
-Other ways to create threads are:  
-* Create a thread by creating a `Timer()`.  
-* Call `SwingUtilities.invokeLater()`.  
-* Use other libraries or Frameworks like the `ForkJoin Framework`.  
+    // Using a Lambda Expression to pass in a Runnable interface
+    Thread t2 = new Thread(() -> {
+        System.out.println("Running in a thread");
+    });
+    t2.start();
+```
+Another way to create a thread is to write a class that implements Runnable.
+```java
+    class MyTask implements Runnable {
+        @Override
+        public void run() {
+            System.out.println("Running in a thread");
+        }
+    }
+
+    // Create a thread using the constructor that takes a `Runnable` interface
+    Thread t = new Thread(new MyTask());
+    t.start();
+```
+
+Other ways to create threads are:   
+*   Create a thread by creating a `Timer()`.  
+*   Call `SwingUtilities.invokeLater()`.  
+*   Use other libraries or Frameworks like the `ForkJoin Framework`.  
 
 **Q: What is the difference between creating and starting a thread?**  
 **A:** A Thread object can be created, but that doesn’t actually create a “thread of execution”.
@@ -100,26 +125,38 @@ A suspended thread can be restarted.
 
 **Q: Which API are (a)synchronous?**  
 **A:**  
-Synchronous:  
-
-    Thread t1 = New Thread();  
+ 
+```java
+    // Synchronous: Fully complete before the next line begins
+    Thread t1 = new Thread();  
     t1.run();  
     t1.join();  
 
-Asynchronous:  
-
+    // Asynchronous: May not complete. There is no waiting! 
     t1.start();
-
+```
 **Q: How to wait for a thread to complete?**  
 A: We simply need to call `t1.join();`  
 
 **Q: How are interfaces used?**  
 **A:** The Thread constructor takes a `Runnable` interface.
-```
+</details>
 
+***
 
 ## What's so important? ![Billy](../_static/whats_so_important.png)
-* TODO: ...
+The following reinforce *what threads are*, *why they matter*, and *what students should be careful about* as they move forward into concurrency and synchronization.  
+
+*   A thread is **a separate path of execution within a program**, with its own call stack and local variables, while still sharing the same memory space as other threads.
+
+*   Threads **enable multitasking and responsiveness**, allowing programs to perform long‑running work (like downloads or calculations) without freezing other tasks such as user interfaces.
+
+*   **Multiple threads do not automatically mean faster programs**. Performance depends on CPU cores, task independence, and how much shared data must be coordinated.
+
+*   **Shared resources introduce risk**, including race conditions, deadlocks, and contention, which is why controlling access to shared data (synchronization and mutual exclusion) is essential.
+
+*   **Creating and starting threads are distinct actions**, and understanding how threads are created, started, coordinated, and waited on is foundational to safe and effective multithreaded programming.
+
 
 ## Footnotes
 [1] Stack: **The stack** is a region of memory used primarily to manage **function (method) calls** and local execution state. It follows a *last‑in, first‑out (LIFO)* discipline: when a method is called, a stack frame is pushed onto the stack containing that method’s parameters, local variables, and return address; when the method returns, its frame is popped off.  

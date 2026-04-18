@@ -28,7 +28,7 @@ str = str.toUpperCase();
 // chained together
 String str = "example".substring(0, 4).toUpperCase();
 ```
-Because `substring` returns a string, we can dereference it directly on the same line.  
+Because `substring` returns a `String`, we can immediately call another method on the returned object on the same line. This technique is called *method chaining*. APIs designed to support this style are said to provide a *Fluent Interface*.<a href="#footnotes"><sup>[1]</sup></a> 
 
 The purpose of the above code is to illustrate that many of the String methods return a String object which can be directly referenced on the same line of code. This shortens the code and can often make things more readable.   
 
@@ -271,10 +271,17 @@ Here is how you can simplify code so that you better understand it:
 * Consider eliminating the Generic altogether and hard-coding to Integer  
 
 ## Footnotes
-[1] *Fluent Interface*  
-**Fluent interface** is the practice of calling multiple methods in one expression is known as **method chaining**.  
+[1] **Fluent Interface**  
+*Fluent interface* is the practice of designing APIs so that method calls can be chained together, usually by having methods return the current object (or `this`, or another suitable object), resulting in code that reads naturally and expresses intent clearly.
 
-More specifically, when a method returns a reference to the same object (typically `this`) so that subsequent method calls can be chained, the class is said to use a *fluent interface* style. This approach is commonly used in APIs, builders, and configuration objects to create readable, expressive code.
+```java
+    // In this example, each `set` method returns `this`
+    Person p = new Person()
+        .setName("Alex")
+        .setAge(21)
+        .setCity("Seattle");
+```
+
 [2] **Ternary Operator**  
 A *ternary operator* is a compact conditional expression that chooses between two values based on a boolean condition. In Java, it has the form:  
 ```java
