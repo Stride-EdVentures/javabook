@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Timers and Threads &#8212; Practical Java </title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6c3db60c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "Stride-EdVentures/javabook");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "preferred-color-scheme");
+    script.setAttribute("label", "💬 Comments");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'multithreading/timers';</script>
+    <script src="../_static/custom.js?v=540a9731"></script>
+    <link rel="icon" href="../_static/peanut head.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Concurrency &amp; Synchronization" href="conc_synch.html" />
+    <link rel="prev" title="Introduction to Threads" href="intro_to_threads.html" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DW6SHVPBYV"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DW6SHVPBYV');
+    </script>
+
+
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Practical Java  - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Practical Java  - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    <i class="fas fa-hand-sparkles fa-fw"></i> Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Topics/index.html"><i class="fas fa-book fa-fw"></i> Miscellaneous</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/java_conventions.html">Code Quality Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/installing_jgrasp.html">Installing jGrasp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/problem_solving.html">Problem Solving</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Topics/git.html">Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/layout_managers.html">Layout Managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/java_v_cpp.html">Java &lt;–&gt; C++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Topics/images.html">Images</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://nchs-cs.github.io/idp/static/gitbranching/learnGitBranching">Learn Git Branching</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../generics/index.html"><i class="fas fa-book fa-fw"></i> Generics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../generics/array_list.html">Lesson G1: ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_arraylist.html"><i class="fas fa-pen-square fa-fw"></i> Practice: ArrayList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/stack_queue.html">Lesson G2: Stack &amp; Queue</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://java.mrstride.com/_static/html/postfix_visualizer.html">Postfix Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/shuntingyard.html">Lesson G3: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://java.mrstride.com/_static/html/shunting_yard.html">Shunting Yard Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_shunting.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Shunting Yard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/maps.html">Lesson G4: Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_maps.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/collections.html">Lesson G5: Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/generics.html">Lesson G6: Generics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/constraint_typing.html">Lesson G7: Constraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/practice_ct.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Contraint Typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generics/type_erasure.html">Lesson G8: Type Erasure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interfaces/index.html"><i class="fas fa-book fa-fw"></i> Interfaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/interfaces_101.html">Lesson I1: Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_01.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Interfaces 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/classes_fall_short.html">Lesson I2: Classes Fall Short</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/method_references.html">Lesson I3: Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_02.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Method References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/lambdas.html">Lesson I4: Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/practice_03.html"><i class="fas fa-pen-square fa-fw"></i> Practice Lambdas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/applied.html">Lesson I5: Applied Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/anonymous_classes.html">Lesson I6: Anonymous Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/default_methods.html">Lesson I7: Default Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/full_review.html">Lesson I8: Full Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfaces/case_study.html">Lesson I9: Case Study</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Timers and Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conc_synch.html">Concurrency &amp; Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks in Parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_streams.html">Parallel Streams</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../frameworks/index.html"><i class="fas fa-book fa-fw"></i> Frameworks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/maven.html">Maven</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/spring.html">Spring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/junit.html">JUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/mockito.html">Mockito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/practice_mockito.html"><i class="fas fa-pen-square fa-fw"></i> Practice: Mockito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frameworks/log4j.html">Log4j</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../patterns/index.html"><i class="fas fa-book fa-fw"></i> Patterns &amp; Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/singleton.html">Singleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/dependency_injection.html">Dependency Injection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/solid.html">SOLID principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/design_patterns.html">Design Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../patterns/principles.html">Principles</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook/edit/main/book_source/multithreading/timers.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Stride-EdVentures/javabook/issues/new?title=Issue%20on%20page%20%2Fmultithreading/timers.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/multithreading/timers.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Timers and Threads</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animation">Animation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dedicated-thread">Dedicated Thread</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-timer">Using a Timer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-swing-timer">Using a Swing Timer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-the-two-approaches">Comparing the Two Approaches</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-bar">Progress Bar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="timers-and-threads">
+<h1>Timers and Threads<a class="headerlink" href="#timers-and-threads" title="Link to this heading">#</a></h1>
+<p>So far, we have talked about threads as independent workers that can execute instructions at the same time. A thread can run in a tight loop, pause, wake up, and continue working, all without stopping the rest of the program. Timers build directly on this idea. They exist to help us run code <strong>later</strong> or <strong>repeatedly</strong>, without blocking the main flow of execution.</p>
+<p>Timers do <strong>not</strong> remove the need for threads, nor do they actively manage a thread’s execution. Instead, they provide a mechanism for scheduling <strong>when</strong> code should run, typically by arranging for that code to be executed at fixed times (aka intervals). Depending on the type of timer, the scheduled code may run on a newly created background thread or be dispatched onto an existing thread, such as Swing’s Event Dispatch Thread. Understanding this distinction is especially important when working with animation and user interfaces.</p>
+<section id="animation">
+<h2>Animation<a class="headerlink" href="#animation" title="Link to this heading">#</a></h2>
+<p>Before we begin, it is important to know that Swing has a <strong>dedicated thread</strong> called the <em>Event Dispatch Thread (EDT)</em> that is responsible for:</p>
+<ul class="simple">
+<li><p>Handling user input</p></li>
+<li><p>Updating UI components</p></li>
+<li><p>Repainting the screen</p></li>
+</ul>
+<p>Animated programs need to coordinate with the EDT. The repainting part is especially tricky.</p>
+<p>Now let’s look at two very simple ways to do Animation.</p>
+<ol class="arabic simple">
+<li><p>The first uses a dedicated thread.</p></li>
+<li><p>The second uses a Timer.</p></li>
+</ol>
+<section id="dedicated-thread">
+<h3>Dedicated Thread<a class="headerlink" href="#dedicated-thread" title="Link to this heading">#</a></h3>
+<p>Let’s start with a very direct approach. The following code will create a dedicated worker thread that controls its timing using <code class="docutils literal notranslate"><span class="pre">Thread.sleep</span></code>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// create a thread that sleeps between calling update/paint.</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">sleepThread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">done</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">update</span><span class="p">();</span><span class="w">       </span><span class="c1">// synchronous: update objects</span>
+<span class="w">            </span><span class="n">repaint</span><span class="p">();</span><span class="w">      </span><span class="c1">// asynchronous: request a repaint</span>
+<span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">AnimationPanel</span><span class="p">.</span><span class="na">PHYSICS_DELAY</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// when done is false, we exit our thread</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">sleepThread</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Think of this thread as a dedicated animation worker. It is a <strong>drummer</strong> that sets the tempo for how fast animation is to update. Its entire job is to repeatedly:</p>
+<ol class="arabic simple">
+<li><p>Synchronously update the objects within the game</p></li>
+<li><p>Asynchronously trigger or <em>request</em> a <code class="docutils literal notranslate"><span class="pre">repaint</span></code></p></li>
+<li><p>Pause for a short, fixed amount of time</p></li>
+</ol>
+<p>The call to <code class="docutils literal notranslate"><span class="pre">Thread.sleep(...)</span></code> controls how fast the animation <em>should</em> run. Without it, this thread would run as fast as the CPU allows, consuming resources and producing unpredictable results.</p>
+<p>Several important thread concepts appear here:</p>
+<ul class="simple">
+<li><p>The update of the objects runs <em>synchronously</em> on <em>this</em> thread. It won’t request a repaint until all objects have been updated.</p></li>
+<li><p>The <em>request</em> to repaint is <strong>asynchronous</strong>. This means that the current thread does not do any painting. Instead it makes a cross-thread communication to the Event Dispatch Thread. It says, “<em>Hey, EDT, when you get time, would you mind repainting everything, please.</em>”</p></li>
+<li><p>Regardless of how long it takes to complete the update, the thread will still sleep by the same amount.</p></li>
+<li><p>Sleeping pauses <em>this thread only</em>. Other threads continue running.</p></li>
+<li><p>A shared variable <code class="docutils literal notranslate"><span class="pre">done</span></code> is used to tell the thread when to stop. Other threads would set this value to <code class="docutils literal notranslate"><span class="pre">false</span></code> to stop the animation. This can be dangerous due to the <code class="docutils literal notranslate"><span class="pre">visibility</span></code> property of concurrency. This is discussed in a different lesson on concurrency.</p></li>
+</ul>
+<p>This approach is simple and generally good enough. Here are some problems:</p>
+<ul class="simple">
+<li><p>There is no guarantee that repainting will happen regularly. The <em>request</em> may go unanswered for <em>quite some time</em>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">sleep</span></code> is not guaranteed to pause for the exact duration requested. The actual time spent sleeping could be longer.</p></li>
+<li><p>It does not consider how long it took to <code class="docutils literal notranslate"><span class="pre">udpate</span></code>. Let’s say that we want to repaint about every 16 ms, and we set the sleep duration to 15 ms because we assume the update will take about 1 ms. It is entirely possible that during one <em>drum beat</em> the update took 14 ms. The sleep time will be unchanged at 15 ms.</p></li>
+</ul>
+<p>All of the above problems can result in janky animation.</p>
+</section>
+<hr class="docutils" />
+<section id="using-a-timer">
+<h3>Using a Timer<a class="headerlink" href="#using-a-timer" title="Link to this heading">#</a></h3>
+<p>Let’s use a Timer instead of a <code class="docutils literal notranslate"><span class="pre">sleep</span></code> in hopes of improving the animation. This will <strong>not</strong> solve all our threading problems.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ScheduleAtFixedRate will invoke run() at a regular interval regardless of how</span>
+<span class="w">        </span><span class="c1">// long the previous call to update() took.       </span>
+<span class="w">        </span><span class="n">paintTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Timer</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// This is an Asynchronous call. Timer is started.</span>
+<span class="w">        </span><span class="n">paintTimer</span><span class="p">.</span><span class="na">scheduleAtFixedRate</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TimerTask</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">                    </span><span class="n">update</span><span class="p">();</span><span class="w">       </span><span class="c1">// synchronous</span>
+<span class="w">                    </span><span class="n">repaint</span><span class="p">();</span><span class="w">      </span><span class="c1">// asynchronous</span>
+<span class="w">                    </span><span class="c1">// no sleeping. run() is called on a fixed interval.</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span>
+<span class="w">            </span><span class="p">},</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">PHYSICS_DELAY</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>To stop the animation, another thread would have to call <code class="docutils literal notranslate"><span class="pre">paintTimer.cancel()</span></code>.<br />
+The <code class="docutils literal notranslate"><span class="pre">repaint</span></code> call behaves the same as when using a dedicated thread. The timer thread will communicate with the EDT and kindly ask it to repaint when it has time. The EDT is a completely separate thread and the repainting can happen at any time.</p>
+<p>In both approaches (Dedicated Thread, Timer) the program needs to be aware that repainting can happen at the same time as the update. This can introduce contention for resources. To assure that update and painting happen at different times, we can put the timer on the Event Dispatch Thread by using the Swing Timer.</p>
+</section>
+<section id="using-a-swing-timer">
+<h3>Using a Swing Timer<a class="headerlink" href="#using-a-swing-timer" title="Link to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">javax.swing.Timer</span></code> does not create a free‑running worker thread like the <code class="docutils literal notranslate"><span class="pre">java.util.Timer</span></code> examples above. Instead, it schedules <strong>small pieces of work</strong> to run <em>on the EDT</em> at regular intervals.</p>
+<p>This next example code uses a Swing Timer to do Animation.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// A Swing Timer fires ActionEvents at a fixed interval.</span>
+<span class="w">    </span><span class="c1">// The actionPerformed() method is invoked on the</span>
+<span class="w">    </span><span class="c1">// Event Dispatch Thread (EDT).</span>
+<span class="w">    </span><span class="n">paintTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">Timer</span><span class="p">(</span><span class="n">PHYSICS_DELAY</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">update</span><span class="p">();</span><span class="w">   </span><span class="c1">// runs on the EDT</span>
+<span class="w">        </span><span class="n">repaint</span><span class="p">();</span><span class="w">  </span><span class="c1">// requests a repaint on the EDT (this very same thread)</span>
+<span class="w">        </span><span class="c1">// no sleeping; the timer controls when this code runs</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="c1">// Start the timer now</span>
+<span class="w">    </span><span class="n">paintTimer</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It would seem that the above Swing Timer code solves some issues. <strong>But issues still remain.</strong></p>
+<ol class="arabic simple">
+<li><p>The request to repaint can still be ignored so that two updates can happen before the painting. To assure that a paint happens for every update, we would need to make the painting be <em>synchronous</em> as professional games do. Doing synchronous painting can introduce other problems and complexity which is outside the scope of these lessons.<a href="#footnotes"><sup>[1]</sup></a></p></li>
+<li><p>If there is too much work done on the EDT, repainting can be sluggish and unresponsive.</p></li>
+</ol>
+<p>For now, we will live with imperfect animation.</p>
+</section>
+<section id="comparing-the-two-approaches">
+<h3>Comparing the Two Approaches<a class="headerlink" href="#comparing-the-two-approaches" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Manual Thread + Sleep</p></th>
+<th class="head"><p>Swing Timer</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>You manage the thread</p></td>
+<td><p>Swing manages timing</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runs on background thread</p></td>
+<td><p>Runs on EDT</p></td>
+</tr>
+<tr class="row-even"><td><p>Okay for animation and simulations</p></td>
+<td><p>Good for updating UI Components</p></td>
+</tr>
+<tr class="row-odd"><td><p>Risky for Swing components</p></td>
+<td><p>Safe for Swing Components</p></td>
+</tr>
+<tr class="row-even"><td><p>Good if tasks take a long time</p></td>
+<td><p>Bad if tasks take a long time because it could interfere with UI responsiveness.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Both approaches are valid, but for <strong>different jobs</strong>.</p>
+</section>
+</section>
+<section id="progress-bar">
+<h2>Progress Bar<a class="headerlink" href="#progress-bar" title="Link to this heading">#</a></h2>
+<p>There are situations in a program when a large task need to be executed while the user waits. While the task is executing, we still want the UI to be receptive to user actions (e.g. clicking cancel). Furthermore, it is a much better user experience if the user can be informed of the progress and when the task is expected to end. This section will demonstrate how a Swing Timer can be used to update a Progress Bar. We will not demonstrate how to cancel the background task.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">triggerWork</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// create a thread to do a lot of work.</span>
+<span class="w">    </span><span class="n">HugeTask</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HugeTask</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// create a progress bar that updates</span>
+<span class="w">    </span><span class="n">showProgress</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">showProgress</span><span class="p">(</span><span class="n">HugeTask</span><span class="w"> </span><span class="n">task</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">JProgressBar</span><span class="w"> </span><span class="n">progressBar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createProgressBar</span><span class="p">();</span><span class="w">     </span><span class="c1">// code not shown</span>
+<span class="w">    </span><span class="n">JDialog</span><span class="w"> </span><span class="n">dialog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createProgressDialog</span><span class="p">(</span><span class="n">progressBar</span><span class="p">);</span><span class="w"> </span><span class="c1">// code not shown</span>
+
+<span class="w">    </span><span class="c1">// IMPORTANT:</span>
+<span class="w">    </span><span class="c1">// Because the JDialog a modal dialog, setVisible(true) is a synchronous call.</span>
+<span class="w">    </span><span class="c1">// It will initiate a call to pump/dispatch messages synchronously and it</span>
+<span class="w">    </span><span class="c1">// will not return until the dialog is dismissed. The dialog won&#39;t get dismissed </span>
+<span class="w">    </span><span class="c1">// until the huge task completes and the timer ends. To avoid this chicken-and-the-egg</span>
+<span class="w">    </span><span class="c1">// problem, we asynchronously request that the EDT invoke `setVisible` when</span>
+<span class="w">    </span><span class="c1">// the thread has &quot;an opportunity.&quot;</span>
+<span class="w">    </span><span class="n">SwingUtilities</span><span class="p">.</span><span class="na">invokeLater</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">dialog</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// This timer polls the HugeTask to see how much of the work is done.</span>
+<span class="w">    </span><span class="c1">// When the work is done, getProgress will return 10.</span>
+<span class="w">    </span><span class="n">Timer</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Timer</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="p">.</span><span class="na">getProgress</span><span class="p">();</span><span class="w"> </span><span class="c1">// value 1-10</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">progressBar</span><span class="p">.</span><span class="na">setValue</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">((</span><span class="n">Timer</span><span class="p">)</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getSource</span><span class="p">()).</span><span class="na">stop</span><span class="p">();</span>
+<span class="w">            </span><span class="n">dialog</span><span class="p">.</span><span class="na">dispose</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="n">timer</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This timer fires every 500 milliseconds. Each time it fires, Swing places a task onto the EDT’s event queue. When the EDT is ready, it executes that task.</p>
+<p>Key observations:</p>
+<ul class="simple">
+<li><p>No explicit threads are created when creating the Timer</p></li>
+<li><p>No sleeping is required</p></li>
+<li><p>UI updates happen on the EDT–the <em>correct</em> thread</p></li>
+<li><p>Updates happen when the EDT has an opportunity</p></li>
+</ul>
+<p>In other words, the timer acts like a scheduler telling the EDT:</p>
+<blockquote>
+<div><p>“As close as you can to this time interval, run this code for me.”</p>
+</div></blockquote>
+</section>
+<section id="what-s-so-important">
+<h2>What’s so important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
+<p>Timers are fundamentally about <strong>controlling execution across threads</strong>, not just about “waiting” or “delaying” code.</p>
+<ul class="simple">
+<li><p>Timers are a way to <strong>schedule work without blocking execution</strong>, allowing programs to update, animate, or respond periodically while other code continues to run.</p></li>
+<li><p>Timers <strong>do not replace threads</strong>. Timers are enabled by and execute on different threads.</p></li>
+<li><p><strong>Swing Timers</strong> run on the Event Dispatch Thread which makes it easy to update the GUI directly. There is no need to call <code class="docutils literal notranslate"><span class="pre">SwingUtilties.invokeLater</span></code> to assure that components update safely.</p></li>
+<li><p><strong>Understanding timers requires understanding threads first</strong>, including execution flow, shared state, and coordination between independently running pieces of code.</p></li>
+</ul>
+</section>
+<section id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
+<p>[1] <strong>Synchronous Painting</strong></p>
+<blockquote>
+<div><p>Synchronous painting introduces complexity because GUI frameworks manage component hierarchies, buffering, and repaint scheduling automatically. Forcing immediate painting can interfere with child components, require manual <strong>double buffering</strong> to avoid <strong>flicker</strong> and <strong>tearing</strong>, and demand careful coordination of rendering and state updates, which is why professional systems use specialized rendering loops instead.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./multithreading"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro_to_threads.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Threads</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="conc_synch.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Concurrency &amp; Synchronization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animation">Animation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dedicated-thread">Dedicated Thread</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-timer">Using a Timer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-swing-timer">Using a Swing Timer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-the-two-approaches">Comparing the Two Approaches</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-bar">Progress Bar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-so-important">What’s so important? </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#footnotes">Footnotes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeff Stride
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="https://java.mrstride.com/acknowledgements.html">Sources</a>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

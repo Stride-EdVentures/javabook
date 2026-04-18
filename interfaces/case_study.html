@@ -277,6 +277,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../multithreading/index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/intro_to_threads.html">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multithreading/timers.html">Timers and Threads</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/conc_synch.html">Concurrency &amp; Synchronization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/tasks.html">Tasks in Parallel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multithreading/parallel_streams.html">Parallel Streams</a></li>
@@ -562,7 +563,7 @@ document.write(`
 <span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;example&quot;</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">).</span><span class="na">toUpperCase</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>Because <code class="docutils literal notranslate"><span class="pre">substring</span></code> returns a string, we can dereference it directly on the same line.</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">substring</span></code> returns a <code class="docutils literal notranslate"><span class="pre">String</span></code>, we can immediately call another method on the returned object on the same line. This technique is called <em>method chaining</em>. APIs designed to support this style are said to provide a <em>Fluent Interface</em>.<a href="#footnotes"><sup>[1]</sup></a></p>
 <p>The purpose of the above code is to illustrate that many of the String methods return a String object which can be directly referenced on the same line of code. This shortens the code and can often make things more readable.</p>
 <section id="adding-functional-programming">
 <h3>Adding Functional Programming<a class="headerlink" href="#adding-functional-programming" title="Link to this heading">#</a></h3>
@@ -795,10 +796,16 @@ Let’s now rewrite the code another time using a Lambda Expression and as a Gen
 </section>
 <section id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading">#</a></h2>
-<p>[1] <em>Fluent Interface</em><br />
-<strong>Fluent interface</strong> is the practice of calling multiple methods in one expression is known as <strong>method chaining</strong>.</p>
-<p>More specifically, when a method returns a reference to the same object (typically <code class="docutils literal notranslate"><span class="pre">this</span></code>) so that subsequent method calls can be chained, the class is said to use a <em>fluent interface</em> style. This approach is commonly used in APIs, builders, and configuration objects to create readable, expressive code.
-[2] <strong>Ternary Operator</strong><br />
+<p>[1] <strong>Fluent Interface</strong><br />
+<em>Fluent interface</em> is the practice of designing APIs so that method calls can be chained together, usually by having methods return the current object (or <code class="docutils literal notranslate"><span class="pre">this</span></code>, or another suitable object), resulting in code that reads naturally and expresses intent clearly.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// In this example, each `set` method returns `this`</span>
+<span class="w">    </span><span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Alex&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">setCity</span><span class="p">(</span><span class="s">&quot;Seattle&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>[2] <strong>Ternary Operator</strong><br />
 A <em>ternary operator</em> is a compact conditional expression that chooses between two values based on a boolean condition. In Java, it has the form:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// generic form</span>
 <span class="n">Result</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">valueIfTrue</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">valueIfFalse</span><span class="p">;</span>

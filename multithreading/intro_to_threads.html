@@ -97,7 +97,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="icon" href="../_static/peanut head.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Concurrency &amp; Synchronization" href="conc_synch.html" />
+    <link rel="next" title="Timers and Threads" href="timers.html" />
     <link rel="prev" title="Multithreading" href="index.html" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -277,6 +277,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html"><i class="fas fa-book fa-fw"></i> Multithreading</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Introduction to Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timers.html">Timers and Threads</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conc_synch.html">Concurrency &amp; Synchronization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks in Parallel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel_streams.html">Parallel Streams</a></li>
@@ -533,9 +534,9 @@ document.write(`
 <p>Let’s think of a program as a long list of instructions that you are following. There is only one set of instructions written down on paper, and you start at the top and may jump around to different pages depending on the situation. You would be the <code class="docutils literal notranslate"><span class="pre">main</span></code> <strong>thread</strong> executing the instructions of this program.</p>
 <p>Now imagine the program includes the following instruction:</p>
 <blockquote>
-<div><p>Get a friend to follow the instructions on page 4. You will continue to the next instruction below.<br />
-In this new situation, the friend is following the same instructions on a different page. The friend works at the same time as you. That friend represents a new <strong>thread</strong>. When the friend is done with their portion of work, they go home.</p>
+<div><p>Get a friend to follow the instructions on page 4. You will continue to the next instruction below.</p>
 </div></blockquote>
+<p>In this situation, the friend is following the instructions found on a different page. The friend works at the same time as you and represents a new <strong>thread</strong>. When the friend is done with their portion of work, they go home.</p>
 <p>Let’s get more specific by thinking about building a house. You are the general contractor responsible for hiring workers and coordinating the entire project. Some tasks must finish before others begin. For example, the foundation must be complete before the walls go up, and the external walls must be standing before the roof is built.</p>
 <p>Each contractor has their own set of instructions, but all of those instructions are part of the same overall project. The workers act as if they’re the only ones reading their instructions.</p>
 <p>There will be times when workers are active at the same time. In some situations, many workers can be on the same task. For example, several workers may frame the same wall together. When the framers finish their job, they go home, and new workers arrive later to continue the work.</p>
@@ -596,16 +597,36 @@ Here’s a basic example of creating and starting a thread in Java:</p>
 </ul>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/r_MbozD32eo?si=5hTdi9iOCo59CI28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
 </iframe>
-<div class="dropdown admonition">
-<p class="admonition-title">Video Q &amp; A</p>
+<hr class="docutils" />
+<details><summary>Click here for important Q & A on Video</summary>  
 <p><strong>Q: How do we create a Thread?</strong><br />
 <strong>A:</strong> There is a Thread object, which is different from a “thread of execution.”
-The easiest way to create a thread is to:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Thread t = new Thread() {
-    @Override
-    public void run() { }
-};
-t.start();
+Here are two easy ways to create and start thread:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// Anonymous Inner Class used to override the `run` method</span>
+<span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Running in a thread&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Using a Lambda Expression to pass in a Runnable interface</span>
+<span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Running in a thread&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Another way to create a thread is to write a class that implements Runnable.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">class</span> <span class="nc">MyTask</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Running in a thread&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Create a thread using the constructor that takes a `Runnable` interface</span>
+<span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MyTask</span><span class="p">());</span>
+<span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>Other ways to create threads are:</p>
@@ -620,27 +641,32 @@ The “thread of execution” is created when we call <code class="docutils lite
 <p>Once a thread is created, it can also be suspended. (see below <strong>TODO</strong>)
 A suspended thread can be restarted.</p>
 <p><strong>Q: Which API are (a)synchronous?</strong><br />
-<strong>A:</strong><br />
-Synchronous:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Thread t1 = New Thread();  
-t1.run();  
-t1.join();  
-</pre></div>
-</div>
-<p>Asynchronous:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>t1.start();
+<strong>A:</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// Synchronous: Fully complete before the next line begins</span>
+<span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">();</span><span class="w">  </span>
+<span class="w">    </span><span class="n">t1</span><span class="p">.</span><span class="na">run</span><span class="p">();</span><span class="w">  </span>
+<span class="w">    </span><span class="n">t1</span><span class="p">.</span><span class="na">join</span><span class="p">();</span><span class="w">  </span>
+
+<span class="w">    </span><span class="c1">// Asynchronous: May not complete. There is no waiting! </span>
+<span class="w">    </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 </pre></div>
 </div>
 <p><strong>Q: How to wait for a thread to complete?</strong><br />
 A: We simply need to call <code class="docutils literal notranslate"><span class="pre">t1.join();</span></code></p>
 <p><strong>Q: How are interfaces used?</strong><br />
 <strong>A:</strong> The Thread constructor takes a <code class="docutils literal notranslate"><span class="pre">Runnable</span></code> interface.</p>
-</div>
+</details>
 </section>
+<hr class="docutils" />
 <section id="what-s-so-important">
 <h2>What’s so important? <img alt="Billy" src="../_images/whats_so_important.png" /><a class="headerlink" href="#what-s-so-important" title="Link to this heading">#</a></h2>
+<p>The following reinforce <em>what threads are</em>, <em>why they matter</em>, and <em>what students should be careful about</em> as they move forward into concurrency and synchronization.</p>
 <ul class="simple">
-<li><p>TODO: …</p></li>
+<li><p>A thread is <strong>a separate path of execution within a program</strong>, with its own call stack and local variables, while still sharing the same memory space as other threads.</p></li>
+<li><p>Threads <strong>enable multitasking and responsiveness</strong>, allowing programs to perform long‑running work (like downloads or calculations) without freezing other tasks such as user interfaces.</p></li>
+<li><p><strong>Multiple threads do not automatically mean faster programs</strong>. Performance depends on CPU cores, task independence, and how much shared data must be coordinated.</p></li>
+<li><p><strong>Shared resources introduce risk</strong>, including race conditions, deadlocks, and contention, which is why controlling access to shared data (synchronization and mutual exclusion) is essential.</p></li>
+<li><p><strong>Creating and starting threads are distinct actions</strong>, and understanding how threads are created, started, coordinated, and waited on is foundational to safe and effective multithreaded programming.</p></li>
 </ul>
 </section>
 <section id="footnotes">
@@ -691,11 +717,11 @@ A: We simply need to call <code class="docutils literal notranslate"><span class
       </div>
     </a>
     <a class="right-next"
-       href="conc_synch.html"
+       href="timers.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Concurrency &amp; Synchronization</p>
+        <p class="prev-next-title">Timers and Threads</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
