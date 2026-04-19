@@ -1,18 +1,18 @@
 <style>
-    #detailed-test-guidelines > table > thead > tr > th:first-child {
+    table > thead > tr > th:first-child {
         background-color: #d4edda;
     }
-    #detailed-test-guidelines > table > thead > tr > th:nth-child(2) {
+    table > thead > tr > th:nth-child(2) {
         background-color: #f8d7da;
     }
-    #detailed-test-guidelines > table > tbody > tr > td:nth-child(1) {
+    table > tbody > tr > td:nth-child(1) {
         background-color: #f9fffa;
     }
-    #detailed-test-guidelines > table > tbody > tr > td:nth-child(2) {
+    table > tbody > tr > td:nth-child(2) {
         background-color: #fff9f9;
     }
 </style>
-# Good Test Guidelines
+# <i class="fas fa-pen-square fa-fw"></i> Practice: Test Guidelines
 
 Good JUnit tests verify externally observable behavior, protect meaningful rules, and remain stable under refactoring. Bad tests add volume without value: they test implementation details, trivial accessors, object existence, or repeat the code under test. When reviewing AI‑generated tests, prefer cases that catch real bugs, use descriptive names, and remain valid after reasonable refactoring.
 
