@@ -141,9 +141,9 @@ Guideline: One test per behavior, not per method.
 :header-rows: 1
 * - Good Test names
   - ❌ Bad Test names
-* - testWithdraw_throwsException_whenBalanceIsInsufficient
-  - testWithdraw1
-* - testPasswordMeetComplexityRequirements
+* - withdraw_whenBalanceIsInsufficient_throwsException
+  - withdraw1
+* - passwordMeetsComplexityRequirements
   - shouldWork
 ```
 A strong test explains why the behavior exists.  

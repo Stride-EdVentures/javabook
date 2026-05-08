@@ -82,9 +82,9 @@ public class CalculatorTest {
 
 ### Test Names
 
-Test class names typically end with `Test`. Test method names should clearly describe what is being tested, often following the pattern `test[MethodName][Scenario][ExpectedResult]`.
+Test class names typically end with `Test`. Test method names should clearly describe what is being tested, often following the pattern `[Action]_when[Condition]_[ExpectedResult]`.
 
-Clear names like these make it easy to understand what each test validates and why it might fail.
+Clear names like these make it easy to understand what each test validates and why it might fail. Don't fret over any rigid structure. Focus on readability and clarity.  
 
 ```{admonition} Good Practice
 :class: note
@@ -95,7 +95,8 @@ Each test method should test exactly one behavior or scenario. If you need to te
 :class: good-code
 // Good: Clear, focused, tests behavior
 @Test
-void testBankTransfer_insufficientFunds_throwsException() {
+@DisplayName("Bank transfer throws an exception when there are insufficient funds.")
+void transfer_whenInsufficientFunds_throwsException() {
     BankAccount from = new BankAccount(50);
     BankAccount to = new BankAccount();
     

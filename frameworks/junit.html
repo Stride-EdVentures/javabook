@@ -619,15 +619,16 @@ div.good-code div pre {
 </section>
 <section id="test-names">
 <h3>Test Names<a class="headerlink" href="#test-names" title="Link to this heading">#</a></h3>
-<p>Test class names typically end with <code class="docutils literal notranslate"><span class="pre">Test</span></code>. Test method names should clearly describe what is being tested, often following the pattern <code class="docutils literal notranslate"><span class="pre">test[MethodName][Scenario][ExpectedResult]</span></code>.</p>
-<p>Clear names like these make it easy to understand what each test validates and why it might fail.</p>
+<p>Test class names typically end with <code class="docutils literal notranslate"><span class="pre">Test</span></code>. Test method names should clearly describe what is being tested, often following the pattern <code class="docutils literal notranslate"><span class="pre">[Action]_when[Condition]_[ExpectedResult]</span></code>.</p>
+<p>Clear names like these make it easy to understand what each test validates and why it might fail. Don’t fret over any rigid structure. Focus on readability and clarity.</p>
 <div class="note admonition">
 <p class="admonition-title">Good Practice</p>
 <p>Each test method should test exactly one behavior or scenario. If you need to test multiple related scenarios, create separate test methods. This makes failures more informative and tests more maintainable.</p>
 </div>
 <div class="good-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Good: Clear, focused, tests behavior</span>
 <span class="nd">@Test</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">testBankTransfer_insufficientFunds_throwsException</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;Bank transfer throws an exception when there are insufficient funds.&quot;</span><span class="p">)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">transfer_whenInsufficientFunds_throwsException</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">BankAccount</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BankAccount</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
 <span class="w">    </span><span class="n">BankAccount</span><span class="w"> </span><span class="kd">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BankAccount</span><span class="p">();</span>
 <span class="w">    </span>
