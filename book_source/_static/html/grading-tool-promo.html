@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Marginal — Grading, without the grind</title>
+<title>SLICE — Stride's Language Integrated Code Evaluator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -214,8 +214,13 @@
     box-shadow:0 24px 48px -24px rgba(34,39,31,.25);
   }
   .mock-card .cap{font-family:var(--mono);font-size:.7rem;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;}
+  .product-shot{
+    display:block;width:100%;height:auto;
+    border:1px solid var(--paper-line);border-radius:7px;
+  }
+  .shot-card{padding:10px;}
 
-  /* mock 1: annotated essay */
+  /* reusable mock-card treatments */
   .mock1 .row{height:10px;background:var(--paper-line);border-radius:2px;margin-bottom:12px;}
   .mock1 .row.short{width:60%;}
   .mock1 .comment{
@@ -281,8 +286,8 @@
 <body>
 
 <nav>
-  <span class="wordmark">Marginal<em>.</em></span>
-  <a class="nav-cta" href="#start">Try it free</a>
+  <span class="wordmark">SLICE<em>.</em></span>
+  <a class="nav-cta" href="#features">Explore features</a>
 </nav>
 
 <!-- HERO -->
@@ -296,19 +301,19 @@
 
   <div class="hero-inner">
     <div class="hero-copy">
-      <p class="eyebrow">Grading software for teachers</p>
-      <h1>Feedback that fits in the <span class="mark">margins</span>, not a spreadsheet</h1>
-      <p>Marginal turns your rubric into a grading assistant — scoring consistently, drafting feedback in your voice, and handing you back the hours you used to spend on the stack of papers on your desk.</p>
+      <p class="eyebrow">Grading software for programming courses</p>
+      <h1>Spend less time managing files. <span class="mark">More time giving feedback.</span></h1>
+      <p>SLICE — Stride's Language Integrated Code Evaluator — brings submissions, builds, tests, rubrics, and reusable comments into one focused grading workflow.</p>
       <div class="hero-actions">
-        <a class="btn-primary" href="#start">Start grading faster</a>
-        <a class="btn-ghost" href="#features">See how it works</a>
+        <a class="btn-primary" href="#features">See what SLICE does</a>
+        <a class="btn-ghost" href="#automated">View the interface</a>
       </div>
     </div>
 
     <div class="grade-card" data-parallax="-0.25">
       <div class="gc-head">
-        <span class="gc-title">essay_04_moreno.docx</span>
-        <span class="gc-score">92<span style="font-size:.9rem;color:var(--text-muted);">/100</span></span>
+        <span class="gc-title">FractionsV1 / Main.java</span>
+        <span class="gc-score">25<span style="font-size:.9rem;color:var(--text-muted);">/25</span></span>
       </div>
       <div class="gc-lines">
         <span></span><span></span><span></span><span></span>
@@ -321,7 +326,7 @@
       </svg>
       <div class="gc-note">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
-        Strong thesis — tighten the second paragraph's evidence.
+        Reuse a precise comment and connect it to the student's code.
       </div>
     </div>
   </div>
@@ -332,23 +337,21 @@
 <!-- FEATURES -->
 <section id="features">
 
-  <article class="feature">
+  <article class="feature" id="automated">
     <div class="feature-inner">
       <div class="feature-copy">
-        <p class="eyebrow">Feedback</p>
-        <h2>Comments that sound like you, not a template</h2>
-        <p>Marginal drafts specific, rubric-linked feedback for every submission, then leaves it for you to approve, tweak, or rewrite — so students get more than a number, and you don't spend your evening typing the same sentence forty times.</p>
+        <p class="eyebrow">Automated</p>
+        <h2>From submitted code to completed rubric, faster</h2>
+        <p>SLICE handles the repetitive parts of programming-assignment grading: downloading submissions, building or compiling projects, running your tests, and capturing the results. You stay in control of the grade while moving quickly through the class.</p>
         <ul class="feature-list">
-          <li>Learns your tone from feedback you've already written</li>
-          <li>Flags claims that need a citation or a stronger example</li>
-          <li>One click to accept, edit, or regenerate any comment</li>
+          <li>Reuse common comments and reference specific student code</li>
+          <li>Summarize scores in a local CSV file</li>
+          <li>Email completed rubrics and comments to students</li>
         </ul>
       </div>
       <div class="mock mock1" data-parallax="0.08">
-        <div class="mock-card">
-          <div class="cap">Draft feedback</div>
-          <div class="row"></div><div class="row"></div><div class="row short"></div>
-          <div class="comment">"Good use of primary sources here — consider addressing the counterargument before your conclusion."</div>
+        <div class="mock-card shot-card">
+          <img class="product-shot" src="../promo/Full_screen.png" alt="SLICE desktop interface showing assignments and students, rubric scores, and a syntax-highlighted Java source file">
         </div>
       </div>
     </div>
@@ -357,13 +360,13 @@
   <article class="feature">
     <div class="feature-inner">
       <div class="feature-copy">
-        <p class="eyebrow">Rubrics</p>
-        <h2>Built from the rubric you already trust</h2>
-        <p>Upload your existing rubric or build one in minutes. Marginal scores against your criteria — not a generic standard — and shows you exactly which line drove each point, so grading stays defensible and consistent across every section.</p>
+        <p class="eyebrow">Customizable</p>
+        <h2>Shape the workflow around each assignment</h2>
+        <p>Configure the rubric, build and run flags, supporting files, test inputs, expected outputs, timeouts, and the student files an assignment requires. SLICE adapts to the way you teach instead of forcing every project into one template.</p>
         <ul class="feature-list">
-          <li>Weighted criteria, custom scales, partial credit — all supported</li>
-          <li>Consistent scoring across TAs and course sections</li>
-          <li>Every score traces back to a specific rubric line</li>
+          <li>Create assignment-specific scoring categories and reusable comments</li>
+          <li>Compare captured test output against your expected results</li>
+          <li>Edit small submission errors without leaving the grading environment</li>
         </ul>
       </div>
       <div class="mock" data-parallax="0.08">
@@ -384,13 +387,13 @@
   <article class="feature">
     <div class="feature-inner">
       <div class="feature-copy">
-        <p class="eyebrow">Insights</p>
-        <h2>See where the whole class got stuck</h2>
-        <p>Marginal rolls every graded assignment into a class-level view, so a pattern that would take hours to spot by hand — half the room missing the same rubric line — shows up before your next lecture.</p>
+        <p class="eyebrow">Multiple Languages</p>
+        <h2>Grade Java, Python, and C++ in one tool</h2>
+        <p>Use the same familiar grading workflow across multiple programming languages. Each assignment can define its own compiler or interpreter commands, build flags, run flags, entry points, and supporting files.</p>
         <ul class="feature-list">
-          <li>Per-criterion breakdowns across the whole roster</li>
-          <li>Flags students trending toward a grade change</li>
-          <li>Exportable reports for advisors and department chairs</li>
+          <li>Compile and run Java and C++ submissions</li>
+          <li>Run Python assignments with configurable commands</li>
+          <li>Keep rubrics and grading habits consistent across courses</li>
         </ul>
       </div>
       <div class="mock" data-parallax="0.08">
@@ -412,21 +415,44 @@
   <article class="feature">
     <div class="feature-inner">
       <div class="feature-copy">
-        <p class="eyebrow">Sync</p>
-        <h2>Grades land where your students already look</h2>
-        <p>Push finished grades and feedback straight to your LMS gradebook — no export spreadsheets, no re-typing scores, no students emailing to ask if grading is done.</p>
+        <p class="eyebrow">FERPA</p>
+        <h2>Keep sensitive grading work under your control</h2>
+        <p>SLICE uses a local grading workspace for downloaded submissions, rubrics, comments, and score summaries. That gives instructors direct control over where student work is stored and how completed feedback is distributed.</p>
         <ul class="feature-list">
-          <li>Two-way sync with major LMS gradebooks</li>
-          <li>Batch-push an entire section in one action</li>
-          <li>Full audit trail if a grade is ever questioned</li>
+          <li>Store grading files and the score CSV locally</li>
+          <li>Restrict submissions to the files an assignment requires</li>
+          <li>Use authenticated, class-restricted submissions with CSS.MrStride.com</li>
         </ul>
       </div>
       <div class="mock" data-parallax="0.08">
         <div class="mock-card">
-          <div class="cap">Sync status</div>
-          <div class="sync-row"><span>Canvas — Section 01</span><span class="sync-dot"></span></div>
-          <div class="sync-row"><span>Canvas — Section 02</span><span class="sync-dot"></span></div>
-          <div class="sync-row"><span>Blackboard — Section 03</span><span class="sync-dot" style="background:var(--paper-line);"></span></div>
+          <div class="cap">Local grading workspace</div>
+          <div class="sync-row"><span>Student submissions</span><span class="sync-dot"></span></div>
+          <div class="sync-row"><span>Completed rubrics</span><span class="sync-dot"></span></div>
+          <div class="sync-row"><span>Score summary CSV</span><span class="sync-dot"></span></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="feature">
+    <div class="feature-inner">
+      <div class="feature-copy">
+        <p class="eyebrow">Submission Options</p>
+        <h2>Collect code through the service that fits your class</h2>
+        <p>Configure submission handling per assignment. Use the full classroom workflow at CSS.MrStride.com, import a Canvas submission ZIP, or download from a class Dropbox folder.</p>
+        <ul class="feature-list">
+          <li>Validate filenames, required files, versions, and submission times online</li>
+          <li>Filter Canvas ZIP imports and identify late submissions</li>
+          <li>Track Dropbox submission versions and timestamps</li>
+        </ul>
+      </div>
+      <div class="mock" data-parallax="0.08">
+        <div class="mock-card">
+          <div class="cap">Configured per assignment</div>
+          <div class="sync-row"><span>CSS.MrStride.com</span><span class="sync-dot"></span></div>
+          <div class="sync-row"><span>Canvas ZIP import</span><span class="sync-dot"></span></div>
+          <div class="sync-row"><span>Dropbox</span><span class="sync-dot"></span></div>
         </div>
       </div>
     </div>
@@ -437,13 +463,13 @@
 <!-- CLOSING -->
 <section class="closing" id="start">
   <div class="hero-lines" data-parallax="0.12" style="position:absolute;"></div>
-  <h2>Give every student a margin note again — <em>without losing your weekend</em></h2>
-  <p>Set up your first rubric in under ten minutes. No credit card, no IT ticket.</p>
+  <h2>Let SLICE handle the repetitive work — <em>you make the grading decisions</em></h2>
+  <p>One workspace for collecting code, running tests, applying rubrics, and returning useful feedback.</p>
   <div class="hero-actions">
-    <a class="btn-primary" href="#">Start grading faster</a>
-    <a class="btn-ghost" href="#">Book a 15-minute demo</a>
+    <a class="btn-primary" href="#features">Explore the features</a>
+    <a class="btn-ghost" href="#automated">See SLICE in action</a>
   </div>
-  <footer>Marginal — grading software for educators · Placeholder copy, ready for your content</footer>
+  <footer>SLICE · Stride's Language Integrated Code Evaluator</footer>
 </section>
 
 <script>
