@@ -17,6 +17,7 @@
     --crimson:#B23A2E;
     --crimson-soft:#c96155;
     --gold:#A9843C;
+    --success:#2F7D4A;
     --text-dark:#22271F;
     --text-muted:#5C6358;
     --text-light:#E9E7DC;
@@ -148,6 +149,17 @@
     border-bottom:1px solid var(--paper-line);padding-bottom:14px;margin-bottom:16px;
   }
   .gc-head .gc-title{font-family:var(--mono);font-size:.78rem;color:var(--text-muted);}
+  .gc-file{display:flex;flex-direction:column;gap:12px;}
+  .gc-complete{
+    display:flex;align-items:center;gap:7px;
+    font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--text-dark);
+  }
+  .gc-checkbox{
+    width:16px;height:16px;border:1px solid var(--success);border-radius:3px;
+    display:inline-flex;align-items:center;justify-content:center;
+    background:rgba(47,125,74,.08);color:var(--success);
+    font-family:var(--sans);font-size:.75rem;font-weight:700;line-height:1;
+  }
   .gc-score{
     font-family:var(--serif);font-weight:700;font-size:1.5rem;color:var(--crimson);
     position:relative;
@@ -165,7 +177,6 @@
   }
   .gc-note svg{flex-shrink:0;margin-top:2px;width:16px;height:16px;stroke:var(--crimson);}
   .gc-annot{position:absolute;stroke:var(--crimson);fill:none;stroke-width:2.5;stroke-linecap:round;}
-  .gc-circle{top:22px;right:78px;width:70px;height:44px;}
   .gc-underline{bottom:64px;left:32px;width:60%;height:14px;}
   .draw{stroke-dasharray:220;stroke-dashoffset:220;animation:draw 1.1s .6s ease-out forwards;}
   @keyframes draw{to{stroke-dashoffset:0;}}
@@ -219,6 +230,9 @@
     border:1px solid var(--paper-line);border-radius:7px;
   }
   .shot-card{padding:10px;}
+  .automated-feature{min-height:105vh;padding-bottom:70px;}
+  .automated-feature .feature-inner{align-items:start;min-height:calc(105vh - 190px);}
+  .automated-visual{position:sticky;top:18vh;}
 
   /* reusable mock-card treatments */
   .mock1 .row{height:10px;background:var(--paper-line);border-radius:2px;margin-bottom:12px;}
@@ -273,12 +287,18 @@
     .feature{padding:80px 20px;}
     .feature-inner > *:first-child{order:2;}
     .feature-inner > *:last-child{order:1;}
+    .automated-feature{min-height:0;padding-bottom:80px;}
+    .automated-feature .feature-inner{min-height:0;}
+    .automated-visual{position:relative;top:auto;}
   }
 
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
     .draw{animation:none;stroke-dashoffset:0;}
     .mock{transition:none;}
+    .automated-feature{min-height:0;}
+    .automated-feature .feature-inner{min-height:0;}
+    .automated-visual{position:relative;top:auto;transform:none !important;}
     * {will-change:auto !important;}
   }
 </style>
@@ -286,7 +306,7 @@
 <body>
 
 <nav>
-  <span class="wordmark">SLICE<em>.</em></span>
+  <span class="wordmark">SLICE</span>
   <a class="nav-cta" href="#features">Explore features</a>
 </nav>
 
@@ -312,15 +332,15 @@
 
     <div class="grade-card" data-parallax="-0.25">
       <div class="gc-head">
-        <span class="gc-title">FractionsV1 / Main.java</span>
+        <div class="gc-file">
+          <span class="gc-title">FractionsV1 / Main.java</span>
+          <span class="gc-complete"><span class="gc-checkbox" aria-hidden="true">✓</span>Is Complete</span>
+        </div>
         <span class="gc-score">25<span style="font-size:.9rem;color:var(--text-muted);">/25</span></span>
       </div>
       <div class="gc-lines">
         <span></span><span></span><span></span><span></span>
       </div>
-      <svg class="gc-annot gc-circle draw" style="position:absolute;" viewBox="0 0 70 44" width="70" height="44">
-        <ellipse cx="35" cy="22" rx="32" ry="19"/>
-      </svg>
       <svg class="gc-annot gc-underline draw" style="position:absolute;" viewBox="0 0 160 14" width="160" height="14">
         <path d="M2 8 Q20 2 40 8 T80 8 T120 8 T158 8"/>
       </svg>
@@ -337,19 +357,24 @@
 <!-- FEATURES -->
 <section id="features">
 
-  <article class="feature" id="automated">
+  <article class="feature automated-feature" id="automated">
     <div class="feature-inner">
       <div class="feature-copy">
         <p class="eyebrow">Automated</p>
         <h2>From submitted code to completed rubric, faster</h2>
         <p>SLICE handles the repetitive parts of grading: downloading submissions, building or compiling projects, running your tests, and capturing the results. You stay in control of the feedback and score while moving quickly through the students.</p>
         <ul class="feature-list">
+          <li>Download all student submissions quickly &amp; simultaneously</li>
+          <li>Build, run, capture and view all output with a single click</li>
+          <li>Visually spot broken or late code</li>
           <li>Reuse common comments and reference specific student code</li>
-          <li>Summarize scores in a local CSV file</li>
-          <li>Email completed rubrics and comments to students</li>
+          <li>Scores summarized in a local CSV file</li>
+          <li>Email completed rubrics with all comments to students</li>
+          <li>View diff files of resubmissions</li>
+          <li>Edit small submission errors without leaving the grading environment</li>
         </ul>
       </div>
-      <div class="mock mock1" data-parallax="0.08">
+      <div class="mock mock1 automated-visual" data-sticky-flight>
         <div class="mock-card shot-card">
           <img class="product-shot" src="../promo/Full_screen.png" alt="SLICE desktop interface showing assignments and students, rubric scores, and a syntax-highlighted Java source file">
         </div>
@@ -364,21 +389,16 @@
         <h2>Shape the workflow around each assignment</h2>
         <p>Configure the rubric, build and run flags, supporting files, test inputs, expected outputs, timeouts, and the student files an assignment requires. SLICE adapts to the way you teach instead of forcing every project into one template.</p>
         <ul class="feature-list">
-          <li>Create assignment-specific scoring categories and reusable comments</li>
+          <li>Create assignment-specific scoring categories, points, and reusable comments</li>
           <li>Compare captured test output against your expected results</li>
-          <li>Edit small submission errors without leaving the grading environment</li>
+          <li>Choose between running Unit Tests, or capturing the output from multiple inputs</li>
+          <li>Create new assignments with user friendly UI</li>
+          <li>Score using customizable ESNU specifications grading scale</li>
         </ul>
       </div>
       <div class="mock" data-parallax="0.08">
-        <div class="mock-card">
-          <div class="cap">Rubric breakdown</div>
-          <div class="rubric-grid">
-            <div class="head">Criterion</div><div class="head">1</div><div class="head">2</div><div class="head">3</div><div class="head">4</div>
-            <div>Thesis</div><div></div><div></div><div class="hit">✓</div><div></div>
-            <div>Evidence</div><div></div><div></div><div></div><div class="hit">✓</div>
-            <div>Structure</div><div></div><div class="hit">✓</div><div></div><div></div>
-            <div>Mechanics</div><div></div><div></div><div class="hit">✓</div><div></div>
-          </div>
+        <div class="mock-card shot-card">
+          <img class="product-shot" src="../promo/edit_categories.png" alt="SLICE Edit Rubric Categories dialog with customizable category names, maximum scores, and ordering controls">
         </div>
       </div>
     </div>
@@ -477,6 +497,8 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isSmall = window.innerWidth < 860;
   var parallaxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+  var stickyFlight = document.querySelector('[data-sticky-flight]');
+  var stickyFlightNext = stickyFlight ? stickyFlight.closest('.feature').nextElementSibling : null;
   var ticking = false;
 
   function update(){
@@ -486,6 +508,13 @@
       if (isSmall) factor *= 0.4; // gentler on phones
       el.style.transform = 'translateY(' + (y * factor) + 'px)';
     });
+    if (stickyFlight && stickyFlightNext && !isSmall){
+      // Hold the screenshot in place, then lift it rapidly as the next section arrives.
+      var stickyTop = window.innerHeight * 0.18;
+      var collisionPoint = stickyTop + stickyFlight.offsetHeight + 48;
+      var overlap = Math.max(0, collisionPoint - stickyFlightNext.getBoundingClientRect().top);
+      stickyFlight.style.transform = 'translateY(' + (-overlap * 1.85) + 'px)';
+    }
     ticking = false;
   }
 
