@@ -528,12 +528,9 @@
           </div></li>
         </ul>
       </div>
-      <div class="mock">
-        <div class="mock-card">
-          <div class="cap">Configured per assignment</div>
-          <div class="sync-row"><span>CSS.MrStride.com</span><span class="sync-dot"></span></div>
-          <div class="sync-row"><span>Canvas ZIP import</span><span class="sync-dot"></span></div>
-          <div class="sync-row"><span>Dropbox</span><span class="sync-dot"></span></div>
+      <div class="mock" data-center-fade>
+        <div class="mock-card shot-card">
+          <img class="product-shot" src="../promo/css_site.png" alt="CSS.MrStride.com assignment submission page">
         </div>
       </div>
     </div>
@@ -645,8 +642,7 @@
   var isSmall = window.innerWidth < 860;
   var parallaxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
   var stickyFlights = Array.prototype.slice.call(document.querySelectorAll('[data-sticky-flight]'));
-  var centerFade = document.querySelector('[data-center-fade]');
-  var centerFadeSection = centerFade ? centerFade.closest('.feature') : null;
+  var centerFades = Array.prototype.slice.call(document.querySelectorAll('[data-center-fade]'));
   var ticking = false;
 
   function update(){
@@ -666,15 +662,17 @@
       var overlap = Math.max(0, collisionPoint - stickyFlightNext.getBoundingClientRect().top);
       stickyFlight.style.transform = 'translateY(' + (-overlap * speed) + 'px)';
     });
-    if (centerFade && centerFadeSection && !isSmall){
-      var sectionRect = centerFadeSection.getBoundingClientRect();
-      var sectionCenter = sectionRect.top + sectionRect.height / 2;
-      var distance = Math.abs(sectionCenter - window.innerHeight / 2);
-      var fadeRange = window.innerHeight * 0.72;
-      var opacity = Math.max(0, Math.min(1, 1 - distance / fadeRange));
-      // Smooth the fade while preserving zero and full opacity at the endpoints.
-      opacity = opacity * opacity * (3 - 2 * opacity);
-      centerFade.style.opacity = opacity.toFixed(3);
+    if (!isSmall){
+      centerFades.forEach(function(centerFade){
+        var sectionRect = centerFade.closest('.feature').getBoundingClientRect();
+        var sectionCenter = sectionRect.top + sectionRect.height / 2;
+        var distance = Math.abs(sectionCenter - window.innerHeight / 2);
+        var fadeRange = window.innerHeight * 0.72;
+        var opacity = Math.max(0, Math.min(1, 1 - distance / fadeRange));
+        // Smooth the fade while preserving zero and full opacity at the endpoints.
+        opacity = opacity * opacity * (3 - 2 * opacity);
+        centerFade.style.opacity = opacity.toFixed(3);
+      });
     }
     ticking = false;
   }
