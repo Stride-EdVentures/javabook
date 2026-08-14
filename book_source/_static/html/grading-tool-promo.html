@@ -65,9 +65,24 @@
   }
   .wordmark em{font-style:normal;color:var(--crimson-soft);}
   .nav-cta{
+    position:relative;
     font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
     color:var(--text-light);border:1px solid var(--text-light);
     padding:9px 16px;border-radius:100px;text-decoration:none;
+  }
+  .nav-cta::after{
+    content:attr(data-tooltip);
+    position:absolute;top:calc(100% + 12px);right:0;width:min(310px,calc(100vw - 40px));
+    padding:11px 13px;border-radius:6px;
+    background:var(--paper-card);color:var(--text-dark);
+    border:1px solid var(--paper-line);box-shadow:0 12px 30px rgba(0,0,0,.24);
+    font:500 .72rem/1.45 var(--sans);letter-spacing:0;text-transform:none;
+    opacity:0;visibility:hidden;transform:translateY(-5px);
+    transition:opacity .18s ease,transform .18s ease,visibility .18s;
+    pointer-events:none;
+  }
+  .nav-cta:hover::after,.nav-cta:focus-visible::after{
+    opacity:1;visibility:visible;transform:translateY(0);
   }
 
   /* ---------- HERO ---------- */
@@ -363,7 +378,10 @@
 
 <nav>
   <span class="wordmark">SLICE</span>
-  <a class="nav-cta" href="#features">Explore features</a>
+  <a class="nav-cta"
+     href="mailto:jstride@uw.edu?subject=SLICE%20GitHub%20Access%20Request&amp;body=Hi%20Jeff%2C%0A%0AI%27d%20like%20to%20request%20access%20to%20the%20private%20SLICE%20GitHub%20repository%3A%0Ahttps%3A%2F%2Fgithub.com%2FStride-EdVentures%2Fautograder-client%0A%0AThanks%21"
+     data-tooltip="SLICE is hosted in a private GitHub repository. Click to email jstride@uw.edu and request access: github.com/Stride-EdVentures/autograder-client"
+     aria-label="Request access — email jstride@uw.edu to request access to the private SLICE GitHub repository">Request access</a>
 </nav>
 
 <!-- HERO -->
@@ -382,7 +400,7 @@
       <p>SLICE — Stride's Language Integrated Code Evaluator — brings submissions, builds, tests, rubrics, and reusable comments into one focused grading workflow.</p>
       <div class="hero-actions">
         <a class="btn-primary" href="#features">See what SLICE does</a>
-        <a class="btn-ghost" href="#automated">View the interface</a>
+        <a class="btn-ghost" href="#customizable">View customizations</a>
       </div>
     </div>
 
@@ -438,7 +456,7 @@
     </div>
   </article>
 
-  <article class="feature customizable-feature">
+  <article class="feature customizable-feature" id="customizable">
     <div class="feature-inner">
       <div class="feature-copy">
         <p class="eyebrow">Customizable</p>
