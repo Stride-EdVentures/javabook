@@ -233,6 +233,9 @@
   .automated-feature{min-height:105vh;padding-bottom:70px;}
   .automated-feature .feature-inner{align-items:start;min-height:calc(105vh - 190px);}
   .automated-visual{position:sticky;top:18vh;}
+  .customizable-feature{min-height:112vh;padding-bottom:70px;}
+  .customizable-feature .feature-inner{align-items:start;min-height:calc(112vh - 190px);}
+  .customizable-visual{position:sticky;top:16vh;}
 
   /* reusable mock-card treatments */
   .mock1 .row{height:10px;background:var(--paper-line);border-radius:2px;margin-bottom:12px;}
@@ -290,6 +293,9 @@
     .automated-feature{min-height:0;padding-bottom:80px;}
     .automated-feature .feature-inner{min-height:0;}
     .automated-visual{position:relative;top:auto;}
+    .customizable-feature{min-height:0;padding-bottom:80px;}
+    .customizable-feature .feature-inner{min-height:0;}
+    .customizable-visual{position:relative;top:auto;}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -299,6 +305,9 @@
     .automated-feature{min-height:0;}
     .automated-feature .feature-inner{min-height:0;}
     .automated-visual{position:relative;top:auto;transform:none !important;}
+    .customizable-feature{min-height:0;}
+    .customizable-feature .feature-inner{min-height:0;}
+    .customizable-visual{position:relative;top:auto;transform:none !important;}
     * {will-change:auto !important;}
   }
 </style>
@@ -382,7 +391,7 @@
     </div>
   </article>
 
-  <article class="feature">
+  <article class="feature customizable-feature">
     <div class="feature-inner">
       <div class="feature-copy">
         <p class="eyebrow">Customizable</p>
@@ -396,7 +405,7 @@
           <li>Score using customizable ESNU specifications grading scale</li>
         </ul>
       </div>
-      <div class="mock" data-parallax="0.08">
+      <div class="mock customizable-visual" data-sticky-flight data-flight-speed="2.5" data-sticky-top="0.16">
         <div class="mock-card shot-card">
           <img class="product-shot" src="../promo/edit_categories.png" alt="SLICE Edit Rubric Categories dialog with customizable category names, maximum scores, and ordering controls">
         </div>
@@ -497,8 +506,7 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isSmall = window.innerWidth < 860;
   var parallaxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
-  var stickyFlight = document.querySelector('[data-sticky-flight]');
-  var stickyFlightNext = stickyFlight ? stickyFlight.closest('.feature').nextElementSibling : null;
+  var stickyFlights = Array.prototype.slice.call(document.querySelectorAll('[data-sticky-flight]'));
   var ticking = false;
 
   function update(){
@@ -508,13 +516,16 @@
       if (isSmall) factor *= 0.4; // gentler on phones
       el.style.transform = 'translateY(' + (y * factor) + 'px)';
     });
-    if (stickyFlight && stickyFlightNext && !isSmall){
-      // Hold the screenshot in place, then lift it rapidly as the next section arrives.
-      var stickyTop = window.innerHeight * 0.18;
+    stickyFlights.forEach(function(stickyFlight){
+      var stickyFlightNext = stickyFlight.closest('.feature').nextElementSibling;
+      if (!stickyFlightNext || isSmall) return;
+      // Hold each screenshot in place, then lift it rapidly as the next section arrives.
+      var stickyTop = window.innerHeight * (parseFloat(stickyFlight.getAttribute('data-sticky-top')) || 0.18);
+      var speed = parseFloat(stickyFlight.getAttribute('data-flight-speed')) || 1.85;
       var collisionPoint = stickyTop + stickyFlight.offsetHeight + 48;
       var overlap = Math.max(0, collisionPoint - stickyFlightNext.getBoundingClientRect().top);
-      stickyFlight.style.transform = 'translateY(' + (-overlap * 1.85) + 'px)';
-    }
+      stickyFlight.style.transform = 'translateY(' + (-overlap * speed) + 'px)';
+    });
     ticking = false;
   }
 
