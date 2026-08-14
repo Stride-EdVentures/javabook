@@ -241,6 +241,11 @@
     transition:opacity .7s ease, transform .7s ease;
   }
   .mock.is-visible{opacity:1;transform:translateY(0);}
+  .mock.language-visual{
+    position:sticky;top:50vh;
+    opacity:0;transform:translateY(-50%);
+    transition:opacity .12s linear;
+  }
   .mock-card{
     background:var(--paper-card);
     border:1px solid var(--paper-line);
@@ -357,6 +362,7 @@
     .customizable-feature .feature-inner{min-height:0;}
     .customizable-visual{position:relative;top:auto;}
     .languages-feature{min-height:0;padding-bottom:110px;}
+    .mock.language-visual{position:relative;top:auto;opacity:1;transform:none;}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -370,6 +376,7 @@
     .customizable-feature .feature-inner{min-height:0;}
     .customizable-visual{position:relative;top:auto;transform:none !important;}
     .languages-feature{min-height:0;padding-bottom:120px;}
+    .mock.language-visual{position:relative;top:auto;opacity:1;transform:none;transition:none;}
     * {will-change:auto !important;}
   }
 </style>
@@ -506,7 +513,7 @@
           </div></li>
         </ul>
       </div>
-      <div class="mock" data-parallax="0.08">
+      <div class="mock">
         <div class="mock-card">
           <div class="cap">Configured per assignment</div>
           <div class="sync-row"><span>CSS.MrStride.com</span><span class="sync-dot"></span></div>
@@ -528,7 +535,7 @@
           <li>Keep rubrics and grading habits consistent across courses</li>
         </ul>
       </div>
-      <div class="mock" data-parallax="0.08">
+      <div class="mock language-visual" data-center-fade>
         <div class="mock-card">
           <div class="cap">Language targets — build · run · evaluate</div>
           <div class="code-editor">
@@ -575,7 +582,7 @@
           <li>Email only those students who gave permission</li>
         </ul>
       </div>
-      <div class="mock" data-parallax="0.08">
+      <div class="mock">
         <div class="mock-card">
           <div class="cap">Local grading workspace</div>
           <div class="sync-row"><span>Student submissions</span><span class="sync-dot"></span></div>
@@ -605,6 +612,8 @@
   var isSmall = window.innerWidth < 860;
   var parallaxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
   var stickyFlights = Array.prototype.slice.call(document.querySelectorAll('[data-sticky-flight]'));
+  var centerFade = document.querySelector('[data-center-fade]');
+  var centerFadeSection = centerFade ? centerFade.closest('.feature') : null;
   var ticking = false;
 
   function update(){
@@ -624,6 +633,16 @@
       var overlap = Math.max(0, collisionPoint - stickyFlightNext.getBoundingClientRect().top);
       stickyFlight.style.transform = 'translateY(' + (-overlap * speed) + 'px)';
     });
+    if (centerFade && centerFadeSection && !isSmall){
+      var sectionRect = centerFadeSection.getBoundingClientRect();
+      var sectionCenter = sectionRect.top + sectionRect.height / 2;
+      var distance = Math.abs(sectionCenter - window.innerHeight / 2);
+      var fadeRange = window.innerHeight * 0.72;
+      var opacity = Math.max(0, Math.min(1, 1 - distance / fadeRange));
+      // Smooth the fade while preserving zero and full opacity at the endpoints.
+      opacity = opacity * opacity * (3 - 2 * opacity);
+      centerFade.style.opacity = opacity.toFixed(3);
+    }
     ticking = false;
   }
 
