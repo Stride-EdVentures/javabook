@@ -259,6 +259,7 @@
     border:1px solid var(--paper-line);border-radius:7px;
   }
   .shot-card{padding:10px;}
+  .submission-shot + .submission-shot{margin-top:18px;}
   .automated-feature{min-height:105vh;padding-bottom:70px;}
   .automated-feature .feature-inner{align-items:start;min-height:calc(105vh - 190px);}
   .automated-visual{position:sticky;top:18vh;}
@@ -528,9 +529,12 @@
           </div></li>
         </ul>
       </div>
-      <div class="mock" data-center-fade>
-        <div class="mock-card shot-card">
+      <div class="mock">
+        <div class="mock-card shot-card submission-shot" data-center-fade>
           <img class="product-shot" src="../promo/css_site.png" alt="CSS.MrStride.com assignment submission page">
+        </div>
+        <div class="mock-card shot-card submission-shot" data-center-fade data-center-fade-offset="0.18">
+          <img class="product-shot" src="../promo/css_student_view.png" alt="CSS.MrStride.com student submission view">
         </div>
       </div>
     </div>
@@ -666,7 +670,8 @@
       centerFades.forEach(function(centerFade){
         var sectionRect = centerFade.closest('.feature').getBoundingClientRect();
         var sectionCenter = sectionRect.top + sectionRect.height / 2;
-        var distance = Math.abs(sectionCenter - window.innerHeight / 2);
+        var fadeOffset = window.innerHeight * (parseFloat(centerFade.getAttribute('data-center-fade-offset')) || 0);
+        var distance = Math.abs(sectionCenter - window.innerHeight / 2 + fadeOffset);
         var fadeRange = window.innerHeight * 0.72;
         var opacity = Math.max(0, Math.min(1, 1 - distance / fadeRange));
         // Smooth the fade while preserving zero and full opacity at the endpoints.
