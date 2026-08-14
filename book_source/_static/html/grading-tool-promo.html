@@ -205,10 +205,19 @@
   .feature-copy h2{font-size:clamp(1.7rem,3vw,2.5rem);color:var(--text-dark);letter-spacing:-.01em;}
   .feature-copy p{margin-top:18px;font-size:1.02rem;max-width:44ch;}
   .feature-list{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column;gap:12px;}
-  .feature-list li{
+  .feature-list > li{
     display:flex;gap:10px;font-size:.95rem;color:var(--text-dark);
   }
-  .feature-list li::before{content:'—';color:var(--crimson);flex-shrink:0;}
+  .feature-list > li::before{content:'—';color:var(--crimson);flex-shrink:0;}
+  .feature-list strong{font-weight:600;}
+  .feature-sublist{
+    margin:8px 0 2px;padding-left:18px;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .feature-sublist li{
+    color:var(--text-muted);font-size:.88rem;line-height:1.45;
+  }
+  .feature-sublist li::marker{color:var(--gold);}
 
   .mock{
     position:relative;
@@ -416,6 +425,44 @@
   <article class="feature">
     <div class="feature-inner">
       <div class="feature-copy">
+        <p class="eyebrow">Submission Options</p>
+        <h2>Collect code through the service that fits your class</h2>
+        <p>Configure submission handling per assignment. Use the full classroom workflow at CSS.MrStride.com, import a Canvas submission ZIP, or download from a class Dropbox folder.</p>
+        <ul class="feature-list">
+          <li><div><strong>Canvas</strong>
+            <ul class="feature-sublist">
+              <li>Quickly import student files from a Canvas submission ZIP</li>
+              <li>Filter imported files and identify late submissions</li>
+            </ul>
+          </div></li>
+          <li><div><strong>CSS.MrStride.com</strong>
+            <ul class="feature-sublist">
+              <li>Use authenticated submissions restricted to enrolled students</li>
+              <li>Validate filenames, required files, versions, and submission times online</li>
+              <li>Restrict submissions to the files an assignment requires</li>
+            </ul>
+          </div></li>
+          <li><div><strong>Dropbox</strong>
+            <ul class="feature-sublist">
+              <li>Download submissions from a class Dropbox folder</li>
+              <li>Track submission versions and timestamps</li>
+            </ul>
+          </div></li>
+        </ul>
+      </div>
+      <div class="mock" data-parallax="0.08">
+        <div class="mock-card">
+          <div class="cap">Configured per assignment</div>
+          <div class="sync-row"><span>CSS.MrStride.com</span><span class="sync-dot"></span></div>
+          <div class="sync-row"><span>Canvas ZIP import</span><span class="sync-dot"></span></div>
+          <div class="sync-row"><span>Dropbox</span><span class="sync-dot"></span></div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <article class="feature">
+    <div class="feature-inner">
+      <div class="feature-copy">
         <p class="eyebrow">Multiple Languages</p>
         <h2>Grade Java, Python, and C++ in one tool</h2>
         <p>Use the same familiar grading workflow across multiple programming languages. Each assignment can define its own compiler or interpreter commands, build flags, run flags, entry points, and supporting files.</p>
@@ -440,7 +487,6 @@
       </div>
     </div>
   </article>
-
   <article class="feature">
     <div class="feature-inner">
       <div class="feature-copy">
@@ -448,9 +494,8 @@
         <h2>Keep sensitive grading work under your control</h2>
         <p>SLICE uses a local grading workspace for downloaded submissions, rubrics, comments, and score summaries. That gives instructors direct control over where student work is stored and how completed feedback is distributed.</p>
         <ul class="feature-list">
-          <li>Store grading files and the score CSV locally</li>
-          <li>Restrict submissions to the files an assignment requires</li>
-          <li>Use authenticated, class-restricted submissions with CSS.MrStride.com</li>
+          <li>All student information is kept local</li>
+          <li>Email only those students who gave permission</li>
         </ul>
       </div>
       <div class="mock" data-parallax="0.08">
@@ -463,30 +508,6 @@
       </div>
     </div>
   </article>
-
-  <article class="feature">
-    <div class="feature-inner">
-      <div class="feature-copy">
-        <p class="eyebrow">Submission Options</p>
-        <h2>Collect code through the service that fits your class</h2>
-        <p>Configure submission handling per assignment. Use the full classroom workflow at CSS.MrStride.com, import a Canvas submission ZIP, or download from a class Dropbox folder.</p>
-        <ul class="feature-list">
-          <li>Validate filenames, required files, versions, and submission times online</li>
-          <li>Filter Canvas ZIP imports and identify late submissions</li>
-          <li>Track Dropbox submission versions and timestamps</li>
-        </ul>
-      </div>
-      <div class="mock" data-parallax="0.08">
-        <div class="mock-card">
-          <div class="cap">Configured per assignment</div>
-          <div class="sync-row"><span>CSS.MrStride.com</span><span class="sync-dot"></span></div>
-          <div class="sync-row"><span>Canvas ZIP import</span><span class="sync-dot"></span></div>
-          <div class="sync-row"><span>Dropbox</span><span class="sync-dot"></span></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
 </section>
 
 <!-- CLOSING -->
