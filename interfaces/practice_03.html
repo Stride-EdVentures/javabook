@@ -533,7 +533,7 @@ document.write(`
 <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">consumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
 
 <span class="c1">// invoke the method on the interface</span>
-<span class="n">consumer</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="s">&quot;This will get printed.&quot;</span><span class="p">);</span>
+<span class="n">consumer</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="s">"This will get printed."</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -558,10 +558,10 @@ document.write(`
 <span class="w">    </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fn1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSum</span><span class="p">();</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="c1">// Need to invoke `apply` to excute the parseInt code</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fn1</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&quot;50&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// outputs 150</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fn1</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">"50"</span><span class="p">));</span><span class="w"> </span><span class="c1">// outputs 150</span>
 
 <span class="w">    </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fn2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSumN</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fn2</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&quot;60&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// outputs 64</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fn2</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">"60"</span><span class="p">));</span><span class="w"> </span><span class="c1">// outputs 64</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -588,20 +588,20 @@ document.write(`
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloDialog</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JPanel</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ActionListener</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nd">@Override</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actionPerformed</span><span class="p">(</span><span class="n">ActionEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Button %s was pressed!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getActionCommand</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">"Button %s was pressed!"</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getActionCommand</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">HelloDialog</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btnHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btnHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">btnHello</span><span class="p">);</span>
-<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btnSecond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">&quot;Surprise!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btnSecond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">"Surprise!"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">btnSecond</span><span class="p">;)</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1">// use a lambda expression to fulfill the ActionListener interface.</span>
 <span class="w">        </span><span class="c1">// The method accepts an ActionEvent object that we ignore.</span>
-<span class="w">        </span><span class="n">btnHello</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">btnHello</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">));</span>
 
-<span class="w">        </span><span class="c1">// use a reference to &quot;this&quot; dialog that implements ActionListener</span>
+<span class="w">        </span><span class="c1">// use a reference to "this" dialog that implements ActionListener</span>
 <span class="w">        </span><span class="n">btnSecond</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"> </span>
 <span class="w">    </span><span class="p">}</span>

@@ -557,7 +557,7 @@ document.write(`
 <section id="how-does-the-for-each-work">
 <h3>How does the for-each work?<a class="headerlink" href="#how-does-the-for-each-work" title="Link to this heading">#</a></h3>
 <p>How is it that just because an object implements an interface that it can then be put into a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop? This works because the compiler will translate a <code class="docutils literal notranslate"><span class="pre">for-each</span></code> loop into a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop in the following way:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Beforehand, the &quot;sugar&quot; code looks like this:</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Beforehand, the "sugar" code looks like this:</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
 <span class="p">}</span>
@@ -565,7 +565,7 @@ document.write(`
 <span class="c1">// The compiler verifies at compile time that `iter` is-a `Iterable&lt;T&gt;`.</span>
 <span class="c1">// If not, then the compiler will throw an error. </span>
 <span class="c1">// </span>
-<span class="c1">// If all is good, the &quot;un-sugared&quot; code looks like this.</span>
+<span class="c1">// If all is good, the "un-sugared" code looks like this.</span>
 <span class="c1">// When running, this is the actual code that gets executed. </span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="na">hasNext</span><span class="p">();</span><span class="w"> </span><span class="cm">/* update in body */</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
@@ -582,9 +582,9 @@ document.write(`
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// This inner loop has no dependency on the outer loop</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Inner: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Inner: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Outer: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Outer: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -593,9 +593,9 @@ document.write(`
 <span class="w">    </span><span class="n">Type</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">iter</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">Type</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Inner: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t2</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Inner: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t2</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Outer: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Outer: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t1</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -606,15 +606,15 @@ document.write(`
 <h2>AutoCloseable<a class="headerlink" href="#autocloseable" title="Link to this heading">#</a></h2>
 <p>Recall a <code class="docutils literal notranslate"><span class="pre">try-with-resources</span></code> where we add parentheses to the <code class="docutils literal notranslate"><span class="pre">try</span></code> portion. Inside the parentheses, we instantiate a resource object that needs to have <code class="docutils literal notranslate"><span class="pre">closed</span></code> called on it when we’re all done using it. Closing it help keep the system clean and responsive.</p>
 <p><strong>In short:</strong> A <code class="docutils literal notranslate"><span class="pre">try(Resource</span> <span class="pre">res)</span></code> will guarantee that <code class="docutils literal notranslate"><span class="pre">res.close()</span></code> is called.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Scanner</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&quot;missing.txt&quot;</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Scanner</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">"missing.txt"</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// the parser object is scoped to this block of code</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Never reached&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Never reached"</span><span class="p">);</span>
 <span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="c1">// Good practice says we ought to do something here</span>
 <span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Finally blocks are always called&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Finally blocks are always called"</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">// This next line is VERY BAD! Parser is out of scope. </span>
-<span class="w">    </span><span class="c1">// Closing is &quot;redundant&quot; anyway. parser is closed for us!</span>
+<span class="w">    </span><span class="c1">// Closing is "redundant" anyway. parser is closed for us!</span>
 <span class="w">    </span><span class="n">parser</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"> </span>
 <span class="p">}</span>
 </pre></div>
@@ -624,14 +624,14 @@ document.write(`
 
 <span class="w">    </span><span class="nd">@Override</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">close</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;I&#39;m closing myself now. Saul Goodman.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"I'm closing myself now. Saul Goodman."</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doWork</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">CloseableWork</span><span class="w"> </span><span class="n">cw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CloseableWork</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;I&#39;m working. But, wait, I feel sick. I think I&#39;m going to throw!&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">// Throw an UnChecked exception so that we don&#39;t have to catch it.</span>
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Not really unexpected&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"I'm working. But, wait, I feel sick. I think I'm going to throw!"</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// Throw an UnChecked exception so that we don't have to catch it.</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">"Not really unexpected"</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -655,20 +655,20 @@ document.write(`
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloDialog</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JPanel</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ActionListener</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nd">@Override</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actionPerformed</span><span class="p">(</span><span class="n">ActionEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Button %s was pressed!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getActionCommand</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">"Button %s was pressed!"</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getActionCommand</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">HelloDialog</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btnHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btnHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">btnHello</span><span class="p">);</span>
-<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btnSecond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">&quot;Surprise!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">JButton</span><span class="w"> </span><span class="n">btnSecond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">"Surprise!"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">btnSecond</span><span class="p">;)</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1">// use a lambda expression to fulfill the ActionListener interface.</span>
 <span class="w">        </span><span class="c1">// The method accepts an ActionEvent object that we ignore.</span>
-<span class="w">        </span><span class="n">btnHello</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">btnHello</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="n">e</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">));</span>
 
-<span class="w">        </span><span class="c1">// use a reference to &quot;this&quot; dialog that implements ActionListener</span>
+<span class="w">        </span><span class="c1">// use a reference to "this" dialog that implements ActionListener</span>
 <span class="w">        </span><span class="n">btnSecond</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"> </span>
 <span class="w">    </span><span class="p">}</span>

@@ -612,7 +612,7 @@ When an argument is an <code class="docutils literal notranslate"><span class="p
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TempClass</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;n = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="s">"n = "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -640,7 +640,7 @@ When an argument is an <code class="docutils literal notranslate"><span class="p
 </span><span class="linenos"> 8</span><span class="w">  </span><span class="p">}</span>
 <span class="linenos"> 9</span>
 <span class="hll"><span class="linenos">10</span><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getStringFromInt</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span class="linenos">11</span><span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;n = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+</span><span class="linenos">11</span><span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="s">"n = "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
 <span class="linenos">12</span><span class="w">  </span><span class="p">}</span>
 <span class="linenos">13</span><span class="p">}</span>
 </pre></div>
@@ -794,7 +794,7 @@ The supplied function must match the arguments and return types as defined in th
 <span class="p">}</span>
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Dad</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// Let&#39;s implement the sorting method directly to see how it works internally.</span>
+<span class="w">  </span><span class="c1">// Let's implement the sorting method directly to see how it works internally.</span>
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortKids</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kids</span><span class="p">,</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kids</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">index</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="c1">// slide the nth kid into the correct place</span>
@@ -825,11 +825,11 @@ The supplied function must match the arguments and return types as defined in th
 <span class="w">  </span><span class="c1">// sort the list of kids in 4 different ways</span>
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sortList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Kid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Sort as Dad wants to, by cuteness.</span>
-<span class="w">    </span><span class="c1">// &quot;this&quot; IS-A comparator&lt;Kid&gt;. i.e. Dad implements Comparator&lt;Kid&gt;.</span>
-<span class="w">    </span><span class="c1">// By passing in &quot;this&quot;, we are passing in the Comparator implemented by &quot;this&quot;.</span>
+<span class="w">    </span><span class="c1">// "this" IS-A comparator&lt;Kid&gt;. i.e. Dad implements Comparator&lt;Kid&gt;.</span>
+<span class="w">    </span><span class="c1">// By passing in "this", we are passing in the Comparator implemented by "this".</span>
 <span class="w">    </span><span class="n">sortKids</span><span class="p">(</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// Passing in null signals that we want to sort in the Kid&#39;s natural order (by age).</span>
+<span class="w">    </span><span class="c1">// Passing in null signals that we want to sort in the Kid's natural order (by age).</span>
 <span class="w">    </span><span class="n">sortKids</span><span class="p">(</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// Sort by height. Using an instance method reference.</span>
@@ -844,13 +844,13 @@ The supplied function must match the arguments and return types as defined in th
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">useWhineyThenCuteness</span><span class="p">(</span><span class="n">Kid</span><span class="w"> </span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">Kid</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Primarily, have the whiney Kid be &quot;less than&quot;</span>
+<span class="w">    </span><span class="c1">// Primarily, have the whiney Kid be "less than"</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k1</span><span class="p">.</span><span class="na">whinesTooMuch</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k2</span><span class="p">.</span><span class="na">whinesTooMuch</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="c1">// They both whine or both don&#39;t whine.</span>
+<span class="w">      </span><span class="c1">// They both whine or both don't whine.</span>
 <span class="w">      </span><span class="c1">// cannot determine by whineyness. Use Cuteness.</span>
 <span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">k1</span><span class="p">.</span><span class="na">cuteness</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">k2</span><span class="p">.</span><span class="na">cuteness</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k1</span><span class="p">.</span><span class="na">whinesTooMuch</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="c1">// k1 is whiney and therefore &quot;less than&quot; k2.</span>
+<span class="w">      </span><span class="c1">// k1 is whiney and therefore "less than" k2.</span>
 <span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
@@ -947,7 +947,7 @@ The supplied function must match the arguments and return types as defined in th
 
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="nf">callIt</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// This will output the integer value: 125</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fn</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fn</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">"123"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -970,14 +970,14 @@ The supplied function must match the arguments and return types as defined in th
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
 <span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="c1">// Note that `example` is an instance method. &quot;this&quot; exists.</span>
+<span class="w">  </span><span class="c1">// Note that `example` is an instance method. "this" exists.</span>
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">example</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">    </span><span class="n">Example</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Example</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w">    </span><span class="c1">// create another instance of Example</span>
 
-<span class="w">    </span><span class="c1">// reference &quot;this&quot; instance and the instance `ex`.</span>
-<span class="w">    </span><span class="n">callIt</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">convert</span><span class="p">);</span><span class="w">          </span><span class="c1">// prints &quot;Sum is 21&quot;</span>
-<span class="w">    </span><span class="n">callIt</span><span class="p">(</span><span class="n">ex</span><span class="p">::</span><span class="n">convert</span><span class="p">);</span><span class="w">            </span><span class="c1">// prints &quot;Sum is 25&quot;</span>
+<span class="w">    </span><span class="c1">// reference "this" instance and the instance `ex`.</span>
+<span class="w">    </span><span class="n">callIt</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">convert</span><span class="p">);</span><span class="w">          </span><span class="c1">// prints "Sum is 21"</span>
+<span class="w">    </span><span class="n">callIt</span><span class="p">(</span><span class="n">ex</span><span class="p">::</span><span class="n">convert</span><span class="p">);</span><span class="w">            </span><span class="c1">// prints "Sum is 25"</span>
 
 <span class="w">    </span><span class="c1">// `out` is a static field of PrintStream on the System class.</span>
 <span class="w">    </span><span class="c1">// Therefore, System.out::println references an instance method.</span>
@@ -985,7 +985,7 @@ The supplied function must match the arguments and return types as defined in th
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="nf">consumeIt</span><span class="p">(</span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">fn</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="s">&quot;In our example, this will be printed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fn</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="s">"In our example, this will be printed"</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="nf">callIt</span><span class="p">(</span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -993,8 +993,8 @@ The supplied function must match the arguments and return types as defined in th
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// add the argument to &quot;this&quot; instance&#39;s n-value</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Sum is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">n</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// add the argument to "this" instance's n-value</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">"Sum is "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">n</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>

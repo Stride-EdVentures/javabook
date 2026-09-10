@@ -547,12 +547,12 @@ document.write(`
 <span class="c1">// The constructor must have &lt;&gt;. </span>
 <span class="c1">// As all constructors must have, the constructor also has ().</span>
 <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">()</span><span class="o">|</span>
-<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;At index 0&quot;</span><span class="p">);</span>
-<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;At index 1&quot;</span><span class="p">);</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">"At index 0"</span><span class="p">);</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">"At index 1"</span><span class="p">);</span>
 
 <span class="c1">// arrays use `.length`. ArrayList uses `.size()`</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;The size of our list is %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;The first item in our list is %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">"The size of our list is %d\n"</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">"The first item in our list is %s\n"</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>A few things to note:</p>
@@ -619,18 +619,18 @@ document.write(`
 <section id="practical-exploration">
 <h2>Practical Exploration<a class="headerlink" href="#practical-exploration" title="Link to this heading">#</a></h2>
 <p>Here are just a few ways create an <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code>.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// repeat the object type in the constructor&#39;s &lt;angle brackets&gt;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// repeat the object type in the constructor's &lt;angle brackets&gt;</span>
 <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
 
 <span class="c1">// allow the compiler to infer the object type</span>
 <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 
 <span class="c1">// Assign the ArrayList to the List interface.</span>
-<span class="c1">// Set ArrayList&#39;s initial capacity to 100.</span>
+<span class="c1">// Set ArrayList's initial capacity to 100.</span>
 <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
 
 <span class="c1">// Pass in a fixed-size list into the ArrayList constructor</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World!&quot;</span><span class="p">));</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">,</span><span class="w"> </span><span class="s">"World!"</span><span class="p">));</span>
 </pre></div>
 </div>
 </section>
@@ -705,7 +705,7 @@ document.write(`
 
 <span class="c1">// Explicit Boxing</span>
 <span class="n">Integer</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-<span class="n">Character</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Character</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">);</span>
+<span class="n">Character</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Character</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="sc">'A'</span><span class="p">);</span>
 <span class="n">Double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Double</span><span class="p">)</span><span class="w"> </span><span class="mf">3.141</span><span class="p">;</span>
 
 <span class="c1">// Explicit Unboxing</span>
@@ -769,7 +769,7 @@ document.write(`
 
 <span class="w">    </span><span class="c1">// size() == 0.  The capacity of the list starts out as 101.</span>
 <span class="w">    </span><span class="c1">// This prints: Count of dogs in the list is: 0</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Count of dogs in the list is: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dalmatians</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w"> </span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">"Count of dogs in the list is: %d\n"</span><span class="p">,</span><span class="w"> </span><span class="n">dalmatians</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w"> </span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">ArrayList</span></code> is implemented with an underlying <code class="docutils literal notranslate"><span class="pre">array</span></code> and the size of the underlying array is <strong>not</strong> the same as the <code class="docutils literal notranslate"><span class="pre">size()</span></code> of the ArrayList. The <code class="docutils literal notranslate"><span class="pre">size()</span></code> of an ArrayList is the count of elements that have been added to the array that can be safely indexed. When the user adds enough elements to exceed the size of the underlying array, a new array needs to be constructed, and all the elements in the array need to be copied over. This process is expensive and work is done to minimize the occurrence.</p>
@@ -778,8 +778,8 @@ document.write(`
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Use the Arrays helper to create a list tht has a FIXED-SIZED.</span>
 <span class="c1">// In this List, elements cannot be added or removed.</span>
 <span class="c1">// This is not an ArrayList. It is a limited List.</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World!&quot;</span><span class="p">);</span>
-<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Illegal&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// ❌ throws UnsupportedOperationException</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">,</span><span class="w"> </span><span class="s">"World!"</span><span class="p">);</span>
+<span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">"Illegal"</span><span class="p">);</span><span class="w"> </span><span class="c1">// ❌ throws UnsupportedOperationException</span>
 </pre></div>
 </div>
 </section>

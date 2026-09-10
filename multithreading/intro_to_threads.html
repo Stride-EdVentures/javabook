@@ -574,7 +574,7 @@ This way, the progress bar can update in real-time while the file is being downl
 Here’s a basic example of creating and starting a thread in Java:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">MyTask</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Thread is running...&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Thread is running..."</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
@@ -607,13 +607,13 @@ Here are two easy ways to create and start thread:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// Anonymous Inner Class used to override the `run` method</span>
 <span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nd">@Override</span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Running in a thread&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Running in a thread"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="w">    </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 
 <span class="w">    </span><span class="c1">// Using a Lambda Expression to pass in a Runnable interface</span>
 <span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Running in a thread&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Running in a thread"</span><span class="p">);</span>
 <span class="w">    </span><span class="p">});</span>
 <span class="w">    </span><span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 </pre></div>
@@ -622,7 +622,7 @@ Here are two easy ways to create and start thread:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kd">class</span> <span class="nc">MyTask</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nd">@Override</span>
 <span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Running in a thread&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Running in a thread"</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 

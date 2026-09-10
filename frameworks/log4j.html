@@ -546,13 +546,13 @@ document.write(`
 <p>The code can create a <code class="docutils literal notranslate"><span class="pre">Logger</span></code> and then attempt to log a message at a specific level as follows:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// The name of the logger determines which Logger is created.</span>
 <span class="c1">// Each specific logger will target specific locations to send its messages.</span>
-<span class="c1">// Note that the XML file has &lt;Logger name=&quot;swing&quot;&gt;.</span>
-<span class="n">Logger</span><span class="w"> </span><span class="n">swingLogger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">&quot;swing&quot;</span><span class="p">);</span>
+<span class="c1">// Note that the XML file has &lt;Logger name="swing"&gt;.</span>
+<span class="n">Logger</span><span class="w"> </span><span class="n">swingLogger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">"swing"</span><span class="p">);</span>
 
 <span class="c1">// Construct our message using a `formatted print`. Log4j offers a variable argument, </span>
 <span class="c1">// formatted print to more easily construct messages.  `{}` are placeholders for the</span>
 <span class="c1">// arguments that follow.</span>
-<span class="n">swingLogger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;My number = {} which is {}!&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dope&quot;</span><span class="p">);</span>
+<span class="n">swingLogger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"My number = {} which is {}!"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="s">"dope"</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><strong>What</strong>:<br />
@@ -564,30 +564,30 @@ Each Logger has one or more specific targets such as the console, a file, or som
 Each Appender has a <code class="docutils literal notranslate"><span class="pre">PatternLayout</span></code> that specifies a <em>template</em> for the message being logged. This is normally configured to provide a timestamp. It can also be configured to show the name or ID of the thread, the current Level, and/or the name of the logger. For details on the <em>template</em>, visit <a class="reference external" href="https://logging.apache.org/log4j/2.x/manual/pattern-layout.html">Apache’s Documentation</a>.</p>
 <section id="log4j2-spring-xml-example">
 <h2><code class="docutils literal notranslate"><span class="pre">log4j2-spring.xml</span></code> Example<a class="headerlink" href="#log4j2-spring-xml-example" title="Link to this heading">#</a></h2>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="nt">&lt;Configuration</span><span class="w"> </span><span class="na">status=</span><span class="s">&quot;WARN&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;Configuration</span><span class="w"> </span><span class="na">status=</span><span class="s">"WARN"</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;Appenders&gt;</span>
 <span class="w">    </span><span class="cm">&lt;!-- Custom GUI appender --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;SwingAppender</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;SwingAppender&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span><span class="nt">&lt;PatternLayout</span><span class="w"> </span><span class="na">pattern=</span><span class="s">&quot;%d{mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;SwingAppender</span><span class="w"> </span><span class="na">name=</span><span class="s">"SwingAppender"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;PatternLayout</span><span class="w"> </span><span class="na">pattern=</span><span class="s">"%d{mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/SwingAppender&gt;</span>
-<span class="w">    </span><span class="nt">&lt;Console</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Console&quot;</span><span class="w"> </span><span class="na">target=</span><span class="s">&quot;SYSTEM_OUT&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;PatternLayout</span><span class="w"> </span><span class="na">pattern=</span><span class="s">&quot;%d{mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Console</span><span class="w"> </span><span class="na">name=</span><span class="s">"Console"</span><span class="w"> </span><span class="na">target=</span><span class="s">"SYSTEM_OUT"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;PatternLayout</span><span class="w"> </span><span class="na">pattern=</span><span class="s">"%d{mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/Console&gt;</span>
-<span class="w">    </span><span class="nt">&lt;File</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ThreadFile&quot;</span><span class="w"> </span><span class="na">fileName=</span><span class="s">&quot;logs/threading.log&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;PatternLayout</span><span class="w"> </span><span class="na">pattern=</span><span class="s">&quot;%d{HH:mm:ss.SSS} [%t]:  %msg%n&quot;</span><span class="nt">&gt;&lt;/PatternLayout&gt;</span>
+<span class="w">    </span><span class="nt">&lt;File</span><span class="w"> </span><span class="na">name=</span><span class="s">"ThreadFile"</span><span class="w"> </span><span class="na">fileName=</span><span class="s">"logs/threading.log"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;PatternLayout</span><span class="w"> </span><span class="na">pattern=</span><span class="s">"%d{HH:mm:ss.SSS} [%t]:  %msg%n"</span><span class="nt">&gt;&lt;/PatternLayout&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/File&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/Appenders&gt;</span>
 <span class="w">  </span><span class="nt">&lt;Loggers&gt;</span>
-<span class="w">    </span><span class="nt">&lt;Logger</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;swing&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;all&quot;</span><span class="w"> </span><span class="na">additivity=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;SwingAppender&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;ThreadFile&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Logger</span><span class="w"> </span><span class="na">name=</span><span class="s">"swing"</span><span class="w"> </span><span class="na">level=</span><span class="s">"all"</span><span class="w"> </span><span class="na">additivity=</span><span class="s">"false"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">"SwingAppender"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">"ThreadFile"</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/Logger&gt;</span>
-<span class="w">    </span><span class="nt">&lt;Logger</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;console&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;all&quot;</span><span class="w"> </span><span class="na">additivity=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;Console&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Logger</span><span class="w"> </span><span class="na">name=</span><span class="s">"console"</span><span class="w"> </span><span class="na">level=</span><span class="s">"all"</span><span class="w"> </span><span class="na">additivity=</span><span class="s">"false"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">"Console"</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/Logger&gt;</span>
-<span class="w">    </span><span class="nt">&lt;Root</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;info&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;Console&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Root</span><span class="w"> </span><span class="na">level=</span><span class="s">"info"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;AppenderRef</span><span class="w"> </span><span class="na">ref=</span><span class="s">"Console"</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/Root&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/Loggers&gt;</span>
 <span class="nt">&lt;/Configuration&gt;</span>
@@ -647,7 +647,7 @@ Each Appender has a <code class="docutils literal notranslate"><span class="pre"
 <li><p><code class="docutils literal notranslate"><span class="pre">%m</span></code> → message; <code class="docutils literal notranslate"><span class="pre">%n</span></code> → newline</p></li>
 </ul>
 <p><strong>Thread context:</strong> You can include <strong>thread name</strong> and supported <strong>thread identifiers</strong> in the pattern to disentangle concurrent logs, for example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">d</span><span class="p">{</span><span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="o">.</span><span class="n">SSS</span><span class="p">}</span> <span class="p">[</span><span class="n">thread_id</span><span class="o">=</span><span class="s2">&quot;%tid&quot;</span> <span class="n">thread_name</span><span class="o">=</span><span class="s2">&quot;%tn&quot;</span><span class="p">]</span> <span class="o">%-</span><span class="mi">5</span><span class="n">level</span> <span class="o">%</span><span class="n">logger</span><span class="p">{</span><span class="mi">36</span><span class="p">}</span> <span class="o">-</span> <span class="o">%</span><span class="n">msg</span><span class="o">%</span><span class="n">n</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">d</span><span class="p">{</span><span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="o">.</span><span class="n">SSS</span><span class="p">}</span> <span class="p">[</span><span class="n">thread_id</span><span class="o">=</span><span class="s2">"%tid"</span> <span class="n">thread_name</span><span class="o">=</span><span class="s2">"%tn"</span><span class="p">]</span> <span class="o">%-</span><span class="mi">5</span><span class="n">level</span> <span class="o">%</span><span class="n">logger</span><span class="p">{</span><span class="mi">36</span><span class="p">}</span> <span class="o">-</span> <span class="o">%</span><span class="n">msg</span><span class="o">%</span><span class="n">n</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="https://logging.apache.org/log4j/2.x/manual/pattern-layout.html">More PatternLayout info.</a></p>
@@ -663,17 +663,17 @@ Each Appender has a <code class="docutils literal notranslate"><span class="pre"
 <span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">swingLogger</span><span class="p">;</span>
 
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">MyClass</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">consoleLogger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">&quot;console&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">swingLogger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">&quot;UserActionFile&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">consoleLogger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">"console"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogManager</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="s">"UserActionFile"</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doWork</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">orderId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">consoleLogger</span><span class="p">.</span><span class="na">trace</span><span class="p">(</span><span class="s">&quot;Entering placeOrder id={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
-<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Validating {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
-<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Order {} placed successfully&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
-<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Slow response from payment provider for {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
-<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Failed to persist order {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
-<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">fatal</span><span class="p">(</span><span class="s">&quot;System is shutting down due to unrecoverable error&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">consoleLogger</span><span class="p">.</span><span class="na">trace</span><span class="p">(</span><span class="s">"Entering placeOrder id={}"</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">"Validating {}"</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"Order {} placed successfully"</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">"Slow response from payment provider for {}"</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">"Failed to persist order {}"</span><span class="p">,</span><span class="w"> </span><span class="n">orderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">swingLogger</span><span class="p">.</span><span class="na">fatal</span><span class="p">(</span><span class="s">"System is shutting down due to unrecoverable error"</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>

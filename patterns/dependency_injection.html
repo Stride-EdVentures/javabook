@@ -602,7 +602,7 @@ Spring has several ways to resolve the dependencies. It can all feel <em>magical
 <span class="w">    </span><span class="c1">// PaymentProcess is the dependency that Spring supplies</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PaymentProcessor</span><span class="w"> </span><span class="n">payment</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// This autowired annotation tells Spring to inject the constructor&#39;s arguments</span>
+<span class="w">    </span><span class="c1">// This autowired annotation tells Spring to inject the constructor's arguments</span>
 <span class="w">    </span><span class="nd">@Autowired</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">OrderService</span><span class="p">(</span><span class="n">PaymentProcessor</span><span class="w"> </span><span class="n">payment</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">payment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">payment</span><span class="p">;</span>
@@ -613,7 +613,7 @@ Spring has several ways to resolve the dependencies. It can all feel <em>magical
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyTest</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nd">@Test</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testOrderService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// In this Test, we &quot;manually&quot; create/mock the dependency</span>
+<span class="w">        </span><span class="c1">// In this Test, we "manually" create/mock the dependency</span>
 <span class="w">        </span><span class="n">PaymentProcessor</span><span class="w"> </span><span class="n">mockPayment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mockito</span><span class="p">.</span><span class="na">mock</span><span class="p">(</span><span class="n">PaymentProcessor</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 <span class="w">        </span><span class="n">OrderService</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OrderService</span><span class="p">(</span><span class="n">mockPayment</span><span class="p">);</span>
 

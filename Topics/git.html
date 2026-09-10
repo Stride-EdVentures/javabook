@@ -595,12 +595,18 @@ Git is: complicated and console based</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>        ┌─────────────────────────────┐
         │       Central Server        │
         │    (one copy of the repo)   │
-        └──────────────┬──────────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        │              │              │
-   Developer 1    Developer 2    Developer 3
-  (working copy) (working copy) (working copy)
+        └─────────────────────────────┘
+              ^         ^         ^
+              |         |         |
+          Commit     Commit     Commit
+          Update     Update     Update
+              |         |         |
+              v         v         v
+     +---------+  +---------+  +---------+
+     |Developer|  |Developer|  |Developer|
+     | Working |  | Working |  | Working |
+     |  Copy   |  |  Copy   |  |  Copy   |
+     +---------+  +---------+  +---------+
 </pre></div>
 </div>
 <p>This was a big improvement, but it introduced new problems:</p>
@@ -620,21 +626,30 @@ Git is: complicated and console based</p>
 </section>
 <section id="centralized-vs-distributed">
 <h2>Centralized vs. Distributed<a class="headerlink" href="#centralized-vs-distributed" title="Link to this heading">#</a></h2>
-<p>The key architectural difference between old systems and Git is this: in a <strong>centralized</strong> system, there is one real copy of the repository on a server. In a <strong>distributed</strong> system like Git, every developer has a complete, fully functional copy of the entire repository on their own machine including all history, all branches, and all versions.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    Centralized                         Distributed (Git)
-  ─────────────────                     ─────────────────
-
-  ┌──────────────┐                      ┌──────────────┐
-  │ Central Repo │                      │ Remote Repo  │  ← GitHub, etc.
-  │ (full history│                      │ (full history│
-  │  lives here) │                      │  + branches) │
-  └──────┬───────┘                      └──────┬───────┘
-         │                                     │
-  ┌──────┴──────┐                    ┌─────────┴──────────┐
-  │             │                    │                    │
- Dev 1         Dev 2               Dev 1               Dev 2
-(working      (working           (full local         (full local
- copy only)    copy only)         repo copy)          repo copy)
+<p>The key architectural difference between old systems and Git is this: in a <strong>centralized</strong> system, there is one real copy of the repository on a server. In a <strong>distributed</strong> system like Git, every developer has a complete, fully functional copy of the entire repository on their own machine including all history, all branches, and all versions. They also have their local working copy with all the changes that they intend to make. These are first made to the local repository and then pushed up to the remote repository.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>        ┌─────────────────────────────┐
+        │       Remote Repository     │
+        └─────────────────────────────┘
+              ^         ^            ^
+              |         |            |
+            Push      Push         Push
+             Pull      Pull         Pull
+              |         |            |
+              v         v            v
+  +------------+  +------------+  +------------+
+  |Local       |  |Local       |  |Local       |
+  | Repository |  | Repository |  | Repository |
+  | Full Copy A|  | Full Copy B|  | Full Copy C|
+  +------------+  +------------+  +------------+
+     ^      |         ^     |         ^     | 
+     |      |         |     |         |     |
+    commit update   commit update   commit update
+     |      |         |     |         |     |
+     |      V         |     V         |     V    
+    +---------+    +---------+     +---------+
+    |Working  |    |Working  |     |Working  |
+    | Copy    |    | Copy    |     | Copy    |
+    +---------+    +---------+     +---------+
 </pre></div>
 </div>
 <p>This distinction has practical consequences:</p>

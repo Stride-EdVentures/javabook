@@ -560,18 +560,18 @@ document.write(`
 
 <span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">          </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">lock1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">              </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Thread 1: Holding lock 1...&quot;</span><span class="p">);</span>
+<span class="w">              </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Thread 1: Holding lock 1..."</span><span class="p">);</span>
 <span class="w">              </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">lock2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Thread 1: Holding lock 2...&quot;</span><span class="p">);</span>
+<span class="w">                  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Thread 1: Holding lock 2..."</span><span class="p">);</span>
 <span class="w">              </span><span class="p">}</span>
 <span class="w">          </span><span class="p">}</span>
 <span class="w">      </span><span class="p">}</span>
 
 <span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">          </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">lock2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">              </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Thread 2: Holding lock 2...&quot;</span><span class="p">);</span>
+<span class="w">              </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Thread 2: Holding lock 2..."</span><span class="p">);</span>
 <span class="w">              </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">lock1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Thread 2: Holding lock 1...&quot;</span><span class="p">);</span>
+<span class="w">                  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Thread 2: Holding lock 1..."</span><span class="p">);</span>
 <span class="w">              </span><span class="p">}</span>
 <span class="w">          </span><span class="p">}</span>
 <span class="w">      </span><span class="p">}</span>

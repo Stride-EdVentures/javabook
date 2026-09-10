@@ -648,7 +648,7 @@ itself at the same level of indentation as the line with the opening
 curly brace.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloWorld</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Hello World!"</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -668,7 +668,7 @@ your tab in your compiler. The jGrasp default is 3 spaces</p>
 <div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Hello world!"</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="p">}</span>
 <span class="p">}</span>
@@ -679,7 +679,7 @@ Now look at the second method below:</p>
 <div class="good-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Hello world"</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -730,8 +730,8 @@ the first line, like so:</p></li>
 </ol>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Because the String to be printed is so long, it gets wrapped to the next line</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">printReallyLongLine</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;wow this line is so long it&#39;s like unreasonably long like&quot;</span><span class="w"> </span><span class="o">+</span>
-<span class="w">            </span><span class="s">&quot;honestly it&#39;s so long why even&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"wow this line is so long it's like unreasonably long like"</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="s">"honestly it's so long why even"</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -878,7 +878,7 @@ improve readability and reduce bugs.</p>
 <div class="good-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="mi">10</span><span class="o">][</span><span class="mi">12</span><span class="o">]</span><span class="p">;</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">matrix</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">row</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">]</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">col</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;matrix[%d][%d] = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">"matrix[%d][%d] = %d\n"</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -906,7 +906,7 @@ improve readability and reduce bugs.</p>
 <div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// i looks an aweful lot like j</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;This loop never ends!&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"This loop never ends!"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -946,9 +946,9 @@ probably worth)).</p>
 <label class="sd-tab-label" for="sd-tab-item-2">
 Non-Semantic Loops</label><div class="sd-tab-content docutils">
 <p>There are times when we simply need to iterate and there is nothing semantic about the loop at all. In these cases, using <code class="docutils literal notranslate"><span class="pre">i</span></code> is good.</p>
-<div class="good-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Nothing semantic to attach to &#39;i&#39;</span>
+<div class="good-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Nothing semantic to attach to 'i'</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"*"</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1160,9 +1160,9 @@ repetitions, you should not include that code in the loop, because it’s
 not actually repeating. For example:</p>
 <div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Bad Example</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"*"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot; done&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">" done"</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1171,9 +1171,9 @@ not actually repeating. For example:</p>
 iteration, so they should just pull that out of the loop, like this:</p>
 <div class="good-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Good Example</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"*"</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot; done&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">" done"</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Always make sure you are using the right kind of loop. <code class="docutils literal notranslate"><span class="pre">for</span></code> loops should be used when you
@@ -1200,13 +1200,13 @@ instance, take the following program:</p>
 <div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Bad Example</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// range from -2 to 2</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;positive number generated&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"positive number generated"</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;negative generated&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"negative generated"</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;0 generated&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"0 generated"</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1217,11 +1217,11 @@ like so:</p>
 <div class="okay-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Okay Example</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;positive number generated&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"positive number generated"</span><span class="p">);</span>
 <span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;negative number generated&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"negative number generated"</span><span class="p">);</span>
 <span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;0 generated&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"0 generated"</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1233,11 +1233,11 @@ write a conditional structure that goes into exactly 1 branch:</p>
 <div class="good-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Good Example</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;positive number generated&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"positive number generated"</span><span class="p">);</span>
 <span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;negative number generated&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"negative number generated"</span><span class="p">);</span>
 <span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// x == 0</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;0 generated&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"0 generated"</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1253,11 +1253,11 @@ good example of this. Remember, every conditional doesn’t need to have
 an else if or else branch; you should only write these branches when
 they’re needed. Take the following code:</p>
 <div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Bad Example</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;How many numbers? &quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"How many numbers? "</span><span class="p">);</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Input a positive integer: &quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"Input a positive integer: "</span><span class="p">);</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">console</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
@@ -1309,10 +1309,10 @@ then that means that that code should be executed regardless of the
 condition. Take the following code:</p>
 <div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Your number was even.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Your number was even."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
 <span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Your number was odd.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Your number was odd."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -1323,9 +1323,9 @@ printed statement, so that is all that should be inside the conditional.
 The redundant code should be factored out below the conditional:</p>
 <div class="good-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Your number was even.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Your number was even."</span><span class="p">);</span>
 <span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Your number was odd.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Your number was odd."</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="k">return</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
 </pre></div>
@@ -1477,11 +1477,11 @@ great responsibility. Arrays should be used to store related values.
 They should not be used to store multiple independent values. For
 instance:</p>
 <div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">;</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;What day of the month is it (1-31)? &quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"What day of the month is it (1-31)? "</span><span class="p">);</span>
 <span class="n">numbers</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;What is the temperature today? &quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"What is the temperature today? "</span><span class="p">);</span>
 <span class="n">numbers</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;How old are you? &quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"How old are you? "</span><span class="p">);</span>
 <span class="n">numbers</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">console</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -1513,8 +1513,8 @@ array’s elements!</p>
 <span class="n">avgTemp1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">avgTemp</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">temperatures</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
 </pre></div>
 </div>
-<div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Also a bad approach. Even though it&#39;s all in one line,</span>
-<span class="c1">// it&#39;s still manually unrolling the array and therefore inflexible</span>
+<div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Also a bad approach. Even though it's all in one line,</span>
+<span class="c1">// it's still manually unrolling the array and therefore inflexible</span>
 <span class="kt">double</span><span class="w"> </span><span class="n">avgTemp2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temperatures</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">temperatures</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">temperatures</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">temperatures</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">;</span>
 <span class="n">avgTemp2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">avgTemp2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">temperatures</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
 </pre></div>
@@ -1608,7 +1608,7 @@ to stick with one or the other for consistency.</p>
 <div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// Side-Comments get ugly. Avoid them.</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">workHard</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">grit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grit</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">grit</span><span class="p">;</span><span class="w"> </span><span class="c1">// squaring grit is a good style</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">sqrt</span><span class="p">(</span><span class="n">style</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">);</span><span class="w"> </span><span class="c1">// comments don&#39;t align nicely and they often go long</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">sqrt</span><span class="p">(</span><span class="n">style</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">);</span><span class="w"> </span><span class="c1">// comments don't align nicely and they often go long</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">style</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// check the case where we have no style</span>
 <span class="w">            </span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// one is the minimum allowed for foo</span>
 <span class="w">        </span><span class="p">}</span>
@@ -1627,7 +1627,7 @@ to stick with one or the other for consistency.</p>
 <span class="w">        </span><span class="c1">// Check if we have no style.</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">style</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// Comments inside the if-block describe how we got here.</span>
-<span class="w">            </span><span class="c1">// We&#39;ve got no style!</span>
+<span class="w">            </span><span class="c1">// We've got no style!</span>
 <span class="w">            </span><span class="c1">// One is the minimum allowed for foo</span>
 <span class="w">            </span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
@@ -1648,8 +1648,8 @@ the industry and VS Code will event highlight these comments in the editor.</p>
 <p class="admonition-title">Delete TODOs</p>
 <p>Once a task has been done and the <strong>TODO</strong> is no longer something that is
 necessary to be done, delete the TODO comment!</p>
-<div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: If you leave this comment in, you&#39;ll lose points!</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Turn in clean code.&quot;</span><span class="p">);</span>
+<div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: If you leave this comment in, you'll lose points!</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Turn in clean code."</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1694,7 +1694,7 @@ documentation. An example of a good class header could be:</p>
 <p><a class="reference external" href="https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html">JavaDoc commenting</a> is rarely required. You will know when it is required. However, you
 are welcome to use it at anytime.</p>
 <div class="good-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Comment what this method does here. Don&#39;t say how!</span>
+<span class="cm">     * Comment what this method does here. Don't say how!</span>
 <span class="cm">     *</span>
 <span class="cm">     * @param questionIndex The index into the question we want the answer for.</span>
 <span class="cm">     * @param jitter How much randomization to provide in the answer.</span>
@@ -1733,7 +1733,7 @@ Documentation</strong>. You can learn more about Javadoc documentation
 </pre></div>
 </div>
 <div class="bad-code highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// These comments just repeat what the code says. They don’t add insight.</span>
-<span class="c1">// Don&#39;t comment the obvious. Let the code speak for itself.</span>
+<span class="c1">// Don't comment the obvious. Let the code speak for itself.</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">InterestCalculator</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/**</span>

@@ -564,7 +564,7 @@ This lesson will explain some advanced features of generics and their benefits. 
 <span class="p">}</span>
 
 <span class="c1">// If we wanted to print all the strings in a List&lt;String&gt;,</span>
-<span class="c1">// the above &quot;template&quot; is **conceptually** rewritten to be:</span>
+<span class="c1">// the above "template" is **conceptually** rewritten to be:</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">printItem</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
@@ -589,7 +589,7 @@ This lesson will explain some advanced features of generics and their benefits. 
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Example</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Box</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Box</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Box</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Box</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
 <span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">box</span><span class="p">.</span><span class="na">getItem</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>

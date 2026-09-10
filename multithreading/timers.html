@@ -696,10 +696,10 @@ The <code class="docutils literal notranslate"><span class="pre">repaint</span><
 <span class="w">    </span><span class="c1">// IMPORTANT:</span>
 <span class="w">    </span><span class="c1">// Because the JDialog a modal dialog, setVisible(true) is a synchronous call.</span>
 <span class="w">    </span><span class="c1">// It will initiate a call to pump/dispatch messages synchronously and it</span>
-<span class="w">    </span><span class="c1">// will not return until the dialog is dismissed. The dialog won&#39;t get dismissed </span>
+<span class="w">    </span><span class="c1">// will not return until the dialog is dismissed. The dialog won't get dismissed </span>
 <span class="w">    </span><span class="c1">// until the huge task completes and the timer ends. To avoid this chicken-and-the-egg</span>
 <span class="w">    </span><span class="c1">// problem, we asynchronously request that the EDT invoke `setVisible` when</span>
-<span class="w">    </span><span class="c1">// the thread has &quot;an opportunity.&quot;</span>
+<span class="w">    </span><span class="c1">// the thread has "an opportunity."</span>
 <span class="w">    </span><span class="n">SwingUtilities</span><span class="p">.</span><span class="na">invokeLater</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">dialog</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
 
 <span class="w">    </span><span class="c1">// This timer polls the HugeTask to see how much of the work is done.</span>

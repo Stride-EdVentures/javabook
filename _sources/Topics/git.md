@@ -37,12 +37,18 @@ The first real solution was **Centralized Version Control Systems (CVCS)**, such
         ┌─────────────────────────────┐
         │       Central Server        │
         │    (one copy of the repo)   │
-        └──────────────┬──────────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        │              │              │
-   Developer 1    Developer 2    Developer 3
-  (working copy) (working copy) (working copy)
+        └─────────────────────────────┘
+              ^         ^         ^
+              |         |         |
+          Commit     Commit     Commit
+          Update     Update     Update
+              |         |         |
+              v         v         v
+     +---------+  +---------+  +---------+
+     |Developer|  |Developer|  |Developer|
+     | Working |  | Working |  | Working |
+     |  Copy   |  |  Copy   |  |  Copy   |
+     +---------+  +---------+  +---------+
 ```
 
 This was a big improvement, but it introduced new problems:
@@ -60,23 +66,32 @@ Git was designed from the ground up to fix the specific frustrations of centrali
 
 ## Centralized vs. Distributed
 
-The key architectural difference between old systems and Git is this: in a **centralized** system, there is one real copy of the repository on a server. In a **distributed** system like Git, every developer has a complete, fully functional copy of the entire repository on their own machine including all history, all branches, and all versions.
+The key architectural difference between old systems and Git is this: in a **centralized** system, there is one real copy of the repository on a server. In a **distributed** system like Git, every developer has a complete, fully functional copy of the entire repository on their own machine including all history, all branches, and all versions. They also have their local working copy with all the changes that they intend to make. These are first made to the local repository and then pushed up to the remote repository.  
 
 ```text
-    Centralized                         Distributed (Git)
-  ─────────────────                     ─────────────────
-
-  ┌──────────────┐                      ┌──────────────┐
-  │ Central Repo │                      │ Remote Repo  │  ← GitHub, etc.
-  │ (full history│                      │ (full history│
-  │  lives here) │                      │  + branches) │
-  └──────┬───────┘                      └──────┬───────┘
-         │                                     │
-  ┌──────┴──────┐                    ┌─────────┴──────────┐
-  │             │                    │                    │
- Dev 1         Dev 2               Dev 1               Dev 2
-(working      (working           (full local         (full local
- copy only)    copy only)         repo copy)          repo copy)
+        ┌─────────────────────────────┐
+        │       Remote Repository     │
+        └─────────────────────────────┘
+              ^         ^            ^
+              |         |            |
+            Push      Push         Push
+             Pull      Pull         Pull
+              |         |            |
+              v         v            v
+  +------------+  +------------+  +------------+
+  |Local       |  |Local       |  |Local       |
+  | Repository |  | Repository |  | Repository |
+  | Full Copy A|  | Full Copy B|  | Full Copy C|
+  +------------+  +------------+  +------------+
+     ^      |         ^     |         ^     | 
+     |      |         |     |         |     |
+    commit update   commit update   commit update
+     |      |         |     |         |     |
+     |      V         |     V         |     V    
+    +---------+    +---------+     +---------+
+    |Working  |    |Working  |     |Working  |
+    | Copy    |    | Copy    |     | Copy    |
+    +---------+    +---------+     +---------+
 ```
 
 This distinction has practical consequences:

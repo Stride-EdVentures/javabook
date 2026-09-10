@@ -552,18 +552,18 @@ document.write(`
 <li><p><strong>Functional Programming:</strong> It is powerful to pass around functions as arguments or to have functions return functions.</p></li>
 </ul>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cherry&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;watermelon&quot;</span><span class="w"> </span><span class="p">};</span>
-<span class="w">    </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">behavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getBehavior</span><span class="p">(</span><span class="s">&quot;I have a&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"apple"</span><span class="p">,</span><span class="w"> </span><span class="s">"cherry"</span><span class="p">,</span><span class="w"> </span><span class="s">"watermelon"</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">behavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getBehavior</span><span class="p">(</span><span class="s">"I have a"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">actOnEach</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">fruit</span><span class="p">),</span><span class="w"> </span><span class="n">behavior</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * Return a Consumable function that prints out the argument using</span>
-<span class="cm"> * a given prefix. This makes use of a concept called &quot;closures&quot;. </span>
+<span class="cm"> * a given prefix. This makes use of a concept called "closures". </span>
 <span class="cm"> */</span>
 <span class="kd">public</span><span class="w"> </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getBehavior</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">prefix</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// create a function using the Lambda syntax</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">"%s %s\n"</span><span class="p">,</span><span class="w"> </span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actOnEach</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">Consumable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">consumer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -582,8 +582,8 @@ document.write(`
 <span class="w">    </span><span class="n">JMenuBar</span><span class="w"> </span><span class="n">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenuBar</span><span class="p">();</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">setJMenuBar</span><span class="p">(</span><span class="n">bar</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">JMenu</span><span class="w"> </span><span class="n">menu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenu</span><span class="p">(</span><span class="s">&quot;Options&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">JMenu</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenuItem</span><span class="p">(</span><span class="s">&quot;Tickle&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">JMenu</span><span class="w"> </span><span class="n">menu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenu</span><span class="p">(</span><span class="s">"Options"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">JMenu</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JMenuItem</span><span class="p">(</span><span class="s">"Tickle"</span><span class="p">,</span><span class="w"> </span><span class="sc">'T'</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// Use a method pointer to fulfill the ActionListener interface</span>
 <span class="w">    </span><span class="n">item</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">myCallback</span><span class="p">);</span>
@@ -591,7 +591,7 @@ document.write(`
 <span class="w">    </span><span class="n">bar</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">menu</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">myCallback</span><span class="p">(</span><span class="n">ActionEvent</span><span class="w"> </span><span class="n">ae</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;That tickles!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"That tickles!"</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -599,7 +599,7 @@ document.write(`
 <li><p>We can <strong>Customize functionality</strong> such as how a list is sorted. We have a lesson dedicated to this activity.</p></li>
 </ul>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cherry&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;watermelon&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"apple"</span><span class="p">,</span><span class="w"> </span><span class="s">"cherry"</span><span class="p">,</span><span class="w"> </span><span class="s">"watermelon"</span><span class="w"> </span><span class="p">};</span>
 <span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">fruit</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// get a Comparator from the Collections class to allow us</span>
@@ -614,7 +614,7 @@ document.write(`
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dogs</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">// Return the iterator provided by the List&lt;Dog&gt; object.</span>
-<span class="w">    </span><span class="c1">// We don&#39;t need to implement it directly. Whew!</span>
+<span class="w">    </span><span class="c1">// We don't need to implement it directly. Whew!</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Dog</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">iterator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dogs</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
@@ -638,7 +638,7 @@ document.write(`
 <span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">parser</span><span class="p">.</span><span class="na">next</span><span class="p">());</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
-<span class="w">        </span><span class="c1">// Let the user know the file wasn&#39;t found</span>
+<span class="w">        </span><span class="c1">// Let the user know the file wasn't found</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -662,7 +662,7 @@ This will only work when the object on which the method is called is the first p
 <span class="w">        </span><span class="c1">// `toUpperCase` requires an instance object, and the method takes zero arguments.</span>
 <span class="w">        </span><span class="c1">// Function&lt;String, String&gt; will provide one argument which gets turned into the instance.</span>
 <span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toUpperCase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">::</span><span class="n">toUpperCase</span><span class="p">;</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">toUpperCase</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// Output: HELLO</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">toUpperCase</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">"hello"</span><span class="p">));</span><span class="w"> </span><span class="c1">// Output: HELLO</span>
 
 <span class="w">        </span><span class="c1">// List has a method named `sort` that takes a Comparator.</span>
 <span class="w">        </span><span class="c1">// The Kid class implements Comparable&lt;Kid&gt;, not Comparator.</span>
@@ -676,7 +676,7 @@ This will only work when the object on which the method is called is the first p
 </pre></div>
 </div>
 <p>In the first example above, the string <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code> is the argument passed into <code class="docutils literal notranslate"><span class="pre">apply</span></code>. When <code class="docutils literal notranslate"><span class="pre">apply</span></code> is called, Java is effectively making the following call.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;hello&quot;</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="s">"hello"</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>This type of method reference works only when the first argument to the method defined in the interface matches the object type needed. In our example, <code class="docutils literal notranslate"><span class="pre">String::toUpperCase</span></code> is an instance method on the <code class="docutils literal notranslate"><span class="pre">String</span></code> class. Therefore, the signature must accept a <code class="docutils literal notranslate"><span class="pre">String</span></code> as the first argument.</p>
@@ -699,8 +699,8 @@ Java will allow us to write an instance method prototype that will explicitly id
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">ExplicitThis</span><span class="w"> </span><span class="n">et</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExplicitThis</span><span class="p">();</span>
-<span class="w">        </span><span class="n">et</span><span class="p">.</span><span class="na">implicitPrint</span><span class="p">(</span><span class="s">&quot;This makes sense.&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">et</span><span class="p">.</span><span class="na">printMsg</span><span class="p">(</span><span class="s">&quot;How does this work?!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">et</span><span class="p">.</span><span class="na">implicitPrint</span><span class="p">(</span><span class="s">"This makes sense."</span><span class="p">);</span>
+<span class="w">        </span><span class="n">et</span><span class="p">.</span><span class="na">printMsg</span><span class="p">(</span><span class="s">"How does this work?!"</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">printMsg</span><span class="p">(</span><span class="n">ExplicitThis</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -726,7 +726,7 @@ Java will allow us to write an instance method prototype that will explicitly id
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">StringBuilder</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createStringBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">::</span><span class="k">new</span><span class="p">;</span>
 <span class="w">        </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">sb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createStringBuilder</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;Hello, Constructor Reference!&quot;</span><span class="p">));</span><span class="w"> </span><span class="c1">// Output: Hello, Constructor Reference!</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">"Hello, Constructor Reference!"</span><span class="p">));</span><span class="w"> </span><span class="c1">// Output: Hello, Constructor Reference!</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -877,13 +877,13 @@ Java will allow us to write an instance method prototype that will explicitly id
 <p><strong>For example:</strong></p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">interface</span> <span class="nc">Interface1</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">display</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Interface1&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Interface1"</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">interface</span> <span class="nc">Interface2</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">display</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Interface2&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Interface2"</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
@@ -891,14 +891,14 @@ Java will allow us to write an instance method prototype that will explicitly id
 <span class="w">  </span><span class="c1">// It is required to override to resolve the conflict</span>
 <span class="w">  </span><span class="nd">@Override</span>
 <span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">display</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// we are allowed to use the Interface&#39;s version.</span>
+<span class="w">    </span><span class="c1">// we are allowed to use the Interface's version.</span>
 <span class="w">    </span><span class="c1">// Explicitly call using this special syntax.</span>
 <span class="w">    </span><span class="n">Interface1</span><span class="p">.</span><span class="na">super</span><span class="p">.</span><span class="na">display</span><span class="p">();</span><span class="w"> </span>
 
 <span class="w">    </span><span class="c1">// we can call both if we, but it is not required</span>
 <span class="w">    </span><span class="n">Interface2</span><span class="p">.</span><span class="na">super</span><span class="p">.</span><span class="na">display</span><span class="p">();</span>
 
-<span class="w">    </span><span class="c1">// Interface1.display() won&#39;t work!!</span>
+<span class="w">    </span><span class="c1">// Interface1.display() won't work!!</span>
 <span class="w">    </span><span class="c1">// Without `super` the syntax would be indicating that the </span>
 <span class="w">    </span><span class="c1">// display() method is static, which it is not.</span>
 <span class="w">  </span><span class="p">}</span>

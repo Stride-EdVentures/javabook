@@ -672,7 +672,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 <p>We cast <code class="docutils literal notranslate"><span class="pre">p</span></code> into a <code class="docutils literal notranslate"><span class="pre">Plumber</span></code> (an interface) with <code class="docutils literal notranslate"><span class="pre">Plumber</span> <span class="pre">joe</span> <span class="pre">=</span> <span class="pre">(Plumber)</span> <span class="pre">p</span></code>. To call any of the interface’s methods, we similarly use the “dot operator”. For example: <code class="docutils literal notranslate"><span class="pre">joe.fixLeak();</span></code></p>
 </div>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos"> 2</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Mr. Stride&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">};</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"Mr. Stride"</span><span class="p">;</span><span class="w"> </span><span class="p">};</span>
 <span class="linenos"> 3</span><span class="p">}</span>
 <span class="linenos"> 4</span>
 <span class="linenos"> 5</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConstructionSite</span><span class="w"> </span><span class="p">{</span>
@@ -688,7 +688,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 </span><span class="linenos">15</span><span class="w">            </span><span class="n">joe</span><span class="p">.</span><span class="na">installFaucet</span><span class="p">();</span>
 <span class="linenos">16</span><span class="w">            </span><span class="n">joe</span><span class="p">.</span><span class="na">installDishwasher</span><span class="p">();</span>
 <span class="linenos">17</span>
-<span class="linenos">18</span><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s did Plumber work!\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="linenos">18</span><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">"%s did Plumber work!\n"</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
 <span class="linenos">19</span><span class="w">        </span><span class="p">}</span>
 <span class="linenos">20</span>
 <span class="linenos">21</span><span class="w">        </span><span class="c1">// ask the person if she can act like an Electrician</span>
@@ -700,7 +700,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 <span class="linenos">27</span><span class="w">            </span><span class="n">victor</span><span class="p">.</span><span class="na">fixLightSwitch</span><span class="p">(</span><span class="mi">23</span><span class="p">);</span>
 <span class="linenos">28</span><span class="w">            </span><span class="n">victor</span><span class="p">.</span><span class="na">installLights</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="linenos">29</span>
-<span class="linenos">30</span><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s did Electrician work!\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="linenos">30</span><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">"%s did Electrician work!\n"</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
 <span class="linenos">31</span><span class="w">        </span><span class="p">}</span>
 <span class="linenos">32</span><span class="w">    </span><span class="p">}</span>
 <span class="linenos">33</span><span class="p">}</span>
@@ -830,7 +830,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 <span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">parser</span><span class="p">.</span><span class="na">next</span><span class="p">());</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
-<span class="w">        </span><span class="c1">// Let the user know the file wasn&#39;t found</span>
+<span class="w">        </span><span class="c1">// Let the user know the file wasn't found</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -870,7 +870,7 @@ Below we have <code class="docutils literal notranslate"><span class="pre">Perso
 
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ActualElectrician</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractElectrician</span><span class="w"> </span><span class="p">{</span>
 <span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">chargeOverpricedServiceFee</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* code not shown */</span><span class="w"> </span><span class="p">}</span>
-<span class="w">   </span><span class="cm">/* Now that we&#39;ve fully implemented all the abstract methods in the</span>
+<span class="w">   </span><span class="cm">/* Now that we've fully implemented all the abstract methods in the</span>
 <span class="cm">    * Electrician interface, this class can be instantiated. */</span>
 <span class="p">}</span>
 </pre></div>

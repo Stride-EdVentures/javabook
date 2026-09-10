@@ -678,7 +678,7 @@ document.write(`
 <p>Instead of relying only on component scanning, you can also explicitly declare beans using:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span><span class="w">  </span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
-<span class="w">    </span><span class="nd">@Bean</span><span class="p">(</span><span class="s">&quot;stripe&quot;</span><span class="p">)</span><span class="w">  </span>
+<span class="w">    </span><span class="nd">@Bean</span><span class="p">(</span><span class="s">"stripe"</span><span class="p">)</span><span class="w">  </span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="nf">stripePaymentService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Set a required constructor argument</span>
 <span class="w">        </span><span class="n">StripePaymentService</span><span class="w"> </span><span class="n">sps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StripePaymentService</span><span class="p">(</span><span class="n">Service</span><span class="p">.</span><span class="na">STRIPE_SERVICE</span><span class="p">);</span><span class="w">  </span>
@@ -696,8 +696,8 @@ document.write(`
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// A named Component</span>
-<span class="c1">// @Qualifier(&quot;paypal&quot;) // alternative way to name the component </span>
-<span class="nd">@Component</span><span class="p">(</span><span class="s">&quot;paypal&quot;</span><span class="p">)</span><span class="w">  </span>
+<span class="c1">// @Qualifier("paypal") // alternative way to name the component </span>
+<span class="nd">@Component</span><span class="p">(</span><span class="s">"paypal"</span><span class="p">)</span><span class="w">  </span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PaypalPaymentService</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
 <span class="w">    </span><span class="nd">@Autowired</span><span class="w"> </span><span class="c1">// field injection</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">CreditCardService</span><span class="w"> </span><span class="n">cardService</span><span class="p">;</span>
@@ -715,7 +715,7 @@ document.write(`
 <span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="n">paymentService</span><span class="p">;</span>
 
 <span class="w">	</span><span class="nd">@Autowired</span><span class="w">  </span><span class="c1">// constructor injection with qualifier</span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">CheckoutService</span><span class="p">(</span><span class="nd">@Qualifier</span><span class="p">(</span><span class="s">&quot;paypal&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="n">paymentService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">CheckoutService</span><span class="p">(</span><span class="nd">@Qualifier</span><span class="p">(</span><span class="s">"paypal"</span><span class="p">)</span><span class="w"> </span><span class="n">PaymentService</span><span class="w"> </span><span class="n">paymentService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
 <span class="w">    	</span><span class="k">this</span><span class="p">.</span><span class="na">paymentService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paymentService</span><span class="p">;</span><span class="w">  </span>
 <span class="w">	</span><span class="p">}</span><span class="w">  </span>
 <span class="p">}</span>
@@ -853,7 +853,7 @@ document.write(`
 By default, when a Spring application starts up, it will instantiate all the Beans it discovers, creating only <strong>one</strong> instance of each. However, this behavior can be altered by specifying a different scope.</p>
 <p>If multiple instances are desired, one can annotate the component with <code class="docutils literal notranslate"><span class="pre">&#64;Scope(&quot;prototype&quot;)</span></code> to create a new instance every time the bean is requested.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Component</span>
-<span class="nd">@Scope</span><span class="p">(</span><span class="s">&quot;prototype&quot;</span><span class="p">)</span>
+<span class="nd">@Scope</span><span class="p">(</span><span class="s">"prototype"</span><span class="p">)</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReportGenerator</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// a new instance is created every time this bean is requested or injected</span>
 <span class="p">}</span>
